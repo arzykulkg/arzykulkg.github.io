@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Арзыкуловтордун тукум дарагы</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1b12;
+    --bg2: #122019;
+    --gold: #c9a84c;
+    --gold2: #e8c87a;
+    --green: #2d6a4f;
+    --green2: #40916c;
+    --green3: #74c69d;
+    --leaf: #52b788;
+    --text: #e8f5e9;
+    --muted: #a8c5b0;
+    --card: #1a2e1f;
+    --card2: #1e3525;
+    --border: #2d5a3d;
+    --shadow: rgba(0,0,0,0.6);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background leaves */
+  .bg-pattern {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; opacity: 0.06;
+  }
+  .bg-pattern svg { width: 100%; height: 100%; }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding: 40px 20px 24px;
+    position: relative; z-index: 10;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0a1510 0%, transparent 100%);
+  }
+  .tree-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--gold2);
+    letter-spacing: 0.02em;
+  }
+  header p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* Breadcrumb trail */
+  #breadcrumb {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 4px 2px;
+    padding: 14px 24px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--muted);
+    position: sticky; top: 0; z-index: 20;
+    min-height: 44px;
+  }
+  .crumb {
+    cursor: pointer; color: var(--green3);
+    transition: color .15s;
+    white-space: nowrap;
+  }
+  .crumb:hover { color: var(--gold2); }
+  .crumb-sep { color: var(--border); margin: 0 2px; }
+  .crumb-current { color: var(--gold); font-weight: 700; }
+
+  /* Main view */
+  #view {
+    position: relative; z-index: 5;
+    max-width: 960px; margin: 0 auto;
+    padding: 32px 20px 60px;
+    animation: fadeIn .3s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  /* Ancestor card at top */
+  .ancestor-card {
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 36px;
+  }
+  .ancestor-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--gold2);
+    background: var(--card);
+    border: 1.5px solid var(--gold);
+    border-radius: 12px;
+    padding: 14px 36px;
+    text-align: center;
+    box-shadow: 0 0 32px rgba(201,168,76,0.15);
+    position: relative;
+  }
+  .ancestor-name::after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 36px;
+    background: var(--gold);
+    margin: 0 auto;
+    position: absolute; bottom: -38px; left: 50%;
+    transform: translateX(-50%);
+  }
+  .level-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Children grid */
+  .children-label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  .children-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
+  }
+
+  /* Child card */
+  .child-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 14px 14px;
+    cursor: pointer;
+    transition: transform .18s, border-color .18s, box-shadow .18s, background .18s;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .child-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08), transparent 70%);
+    opacity: 0; transition: opacity .18s;
+  }
+  .child-card:hover::before { opacity: 1; }
+  .child-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(201,168,76,0.18);
+    background: #243b28;
+  }
+  .child-card.leaf {
+    cursor: default;
+    opacity: 0.85;
+  }
+  .child-card.leaf:hover {
+    transform: none;
+    border-color: var(--green2);
+    box-shadow: none;
+    background: var(--card2);
+  }
+  .child-card.leaf::before { display: none; }
+  .child-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--gold2);
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+  }
+  .child-card.has-children .child-avatar {
+    background: var(--green2);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(201,168,76,0.25);
+  }
+  .child-name {
+    font-size: 0.92rem; font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .child-meta {
+    font-size: 0.73rem; color: var(--muted);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .arrow-hint {
+    font-size: 0.7rem;
+    color: var(--gold);
+    background: rgba(201,168,76,0.12);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-weight: 700;
+  }
+
+  /* Back button */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 24px;
+    transition: color .15s, border-color .15s;
+  }
+  .back-btn:hover { color: var(--gold2); border-color: var(--gold); }
+
+  /* Stats bar */
+  .stats-row {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .stat { text-align: center; }
+  .stat-n { font-size: 1.4rem; font-weight: 700; color: var(--gold2); font-family: 'Cormorant Garamond', serif; }
+  .stat-l { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Root view special */
+  .root-intro {
+    text-align: center; margin-bottom: 32px;
+    color: var(--muted); font-size: 0.88rem; line-height: 1.7;
+  }
+
+  /* Generation badge */
+  .gen-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  /* Special highlight for Muhammed */
+  .child-card.special .child-avatar {
+    background: #4a3000;
+    border-color: var(--gold2);
+  }
+  .child-card.special .child-name { color: var(--gold2); }
+  .special-badge {
+    font-size: 0.65rem;
+    background: var(--gold);
+    color: #1a1a00;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  /* Connector line visual (decorative) */
+  .connector {
+    width: 2px; height: 28px;
+    background: linear-gradient(var(--gold), var(--green));
+    margin: 0 auto 4px;
+    border-radius: 1px;
+    opacity: 0.5;
+  }
+
+  /* Search */
+  .search-wrap {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 14px;
+  }
+  .search-wrap input {
+    flex: 1; background: none; border: none; outline: none;
+    color: var(--text); font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+  }
+  .search-wrap input::placeholder { color: var(--muted); }
+  .search-icon { color: var(--muted); font-size: 1rem; }
+
+  /* Search results */
+  .search-results {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .search-result-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background .15s;
+    font-size: 0.88rem;
+  }
+  .search-result-item:last-child { border-bottom: none; }
+  .search-result-item:hover { background: var(--card); }
+  .sri-path { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .no-results { padding: 16px; text-align: center; color: var(--muted); font-size: 0.88rem; }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    color: var(--border);
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 5;
+  }
+
+  @media (max-width: 480px) {
+    .children-grid { grid-template-columns: repeat(2, 1fr); }
+    header h1 { font-size: 1.4rem; }
+    .ancestor-name { padding: 12px 20px; font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-pattern">
+  <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+    <!-- Subtle tree branches background -->
+    <g stroke="#40916c" fill="none" stroke-width="1">
+      <line x1="400" y1="600" x2="400" y2="300"/>
+      <line x1="400" y1="450" x2="250" y2="250"/>
+      <line x1="400" y1="450" x2="550" y2="250"/>
+      <line x1="250" y1="350" x2="150" y2="180"/>
+      <line x1="250" y1="350" x2="300" y2="180"/>
+      <line x1="550" y1="350" x2="500" y2="180"/>
+      <line x1="550" y1="350" x2="650" y2="180"/>
+      <line x1="400" y1="380" x2="380" y2="200"/>
+      <line x1="400" y1="380" x2="420" y2="200"/>
+      <!-- Leaves -->
+      <ellipse cx="150" cy="170" rx="18" ry="12" transform="rotate(-30 150 170)"/>
+      <ellipse cx="300" cy="170" rx="18" ry="12" transform="rotate(20 300 170)"/>
+      <ellipse cx="500" cy="170" rx="18" ry="12" transform="rotate(-20 500 170)"/>
+      <ellipse cx="650" cy="170" rx="18" ry="12" transform="rotate(30 650 170)"/>
+      <ellipse cx="380" cy="190" rx="14" ry="9" transform="rotate(-15 380 190)"/>
+      <ellipse cx="420" cy="190" rx="14" ry="9" transform="rotate(15 420 190)"/>
+    </g>
+  </svg>
+</div>
+
+<header>
+  <span class="tree-icon">🌳</span>
+  <h1>Арзыкуловтордун тукум дарагы</h1>
+  <p>Ата тегибизди таанып билели · Explore our family heritage</p>
+</header>
+
+<div id="breadcrumb"></div>
+
+<div id="view"></div>
+
+<footer>
+  Арзыкуловтордун тукум дарагы · Жооптуу: Мухаммед Салих · 2026
+</footer>
+
+<script>
+// =============================================
+// FULL FAMILY DATA
+// =============================================
+const TREE = {
+  id: 'arzykul',
+  name: 'Арзыкул',
+  children: [
+    {
+      id: 'akmat', name: 'Акмат',
+      children: [
+        {
+          id: 'azam', name: 'Азам',
+          children: [
+            { id: 'mukum', name: 'Мукум' },
+            { id: 'talip', name: 'Талип' },
+            { id: 'kurban', name: 'Курбан' },
+            { id: 'saparali', name: 'Сапарали' },
+            { id: 'rajabali', name: 'Ражабали' },
+            { id: 'shahlo', name: 'Шахло' },
+          ]
+        },
+        {
+          id: 'karim', name: 'Карим',
+          children: [
+            { id: 'kibire', name: 'Кибирė' },
+            { id: 'kamalidin', name: 'Камалидин' },
+            { id: 'saira', name: 'Сайра' },
+            { id: 'feruza', name: 'Феруза' },
+            { id: 'ibrahim', name: 'Ибрахим' },
+          ]
+        },
+        {
+          id: 'mahmarayim', name: 'Махмарайым',
+          children: [
+            { id: 'alisher', name: 'Алишер' },
+            { id: 'gulsunai', name: 'Гүлсүнай' },
+            { id: 'jyldyz', name: 'Жылдыз' },
+            { id: 'jumagul', name: 'Жумагүл' },
+            { id: 'jumabai', name: 'Жумабай' },
+          ]
+        },
+        {
+          id: 'taaji', name: 'Таажи',
+          children: [
+            { id: 'tashbubu', name: 'Ташбүбү' },
+            { id: 'tazagul', name: 'Тазагүл' },
+            { id: 'rano', name: 'Рано' },
+            { id: 'zymyrat', name: 'Зымырат' },
+            { id: 'arslanbek', name: 'Арсланбек' },
+            { id: 'mirbek', name: 'Мирбек' },
+          ]
+        },
+        {
+          id: 'zebo', name: 'Зебо',
+          children: [
+            { id: 'aman', name: 'Аман' },
+            { id: 'azamat', name: 'Азамат' },
+          ]
+        },
+      ]
+    },
+    {
+      id: 'adil', name: 'Адил',
+      children: [
+        {
+          id: 'musa', name: 'Муса',
+          children: [
+            { id: 'muzaffar', name: 'Музаффар' },
+            { id: 'mustafa_adil', name: 'Мустафа' },
+            { id: 'shahnoza', name: 'Шахноза' },
+          ]
+        },
+        {
+          id: 'siraj', name: 'Сираж',
+          children: [
+            { id: 'rahim', name: 'Рахим' },
+          ]
+        },
+        { id: 'safo', name: 'Сафо' },
+        { id: 'shakir', name: 'Шакир' },
+        { id: 'shari', name: 'Шари' },
+        { id: 'bari', name: 'Бари' },
+        { id: 'asalkan', name: 'Асалкан' },
+        { id: 'zuurahan', name: 'Зуурахан' },
+        { id: 'dilbar', name: 'Дилбар' },
+      ]
+    },
+    {
+      id: 'mahmadi', name: 'Махмади',
+      children: [
+        {
+          id: 'mahmanabi', name: 'Махманаби',
+          children: [
+            { id: 'muhammed', name: 'Мухаммед', special: true },
+            { id: 'sherali', name: 'Шерали' },
+            { id: 'mahbuba', name: 'Махбуба' },
+            { id: 'habiba', name: 'Хабиба' },
+            { id: 'hasan', name: 'Хасан' },
+            { id: 'zuura', name: 'Зуура' },
+            { id: 'abdulla', name: 'Абдулла' },
+          ]
+        },
+        {
+          id: 'kadyrali', name: 'Кадырали',
+          children: [
+            { id: 'habibulla', name: 'Хабибулла' },
+            { id: 'mustafa_kad', name: 'Мустафа' },
+            { id: 'raziya', name: 'Разия' },
+            { id: 'marziya', name: 'Марзия' },
+          ]
+        },
+        {
+          id: 'kiymatxan', name: 'Кыйматхан',
+          children: [
+            { id: 'saifullo', name: 'Сайфулло' },
+          ]
+        },
+        { id: 'usen', name: 'Үсөн' },
+        { id: 'nazakat', name: 'Назакат' },
+        { id: 'jamilya', name: 'Жамиля' },
+      ]
+    },
+    {
+      id: 'hadija', name: 'Хадижа',
+      children: [
+        {
+          id: 'junus', name: 'Жунус',
+          children: [
+            { id: 'nimat', name: 'Нимат' },
+            { id: 'nisrat', name: 'Нисрат' },
+            { id: 'sanovar', name: 'Сановар' },
+            { id: 'sabohat', name: 'Сабохат' },
+            { id: 'tashbubu2', name: 'Ташбүбү' },
+            { id: 'nazar', name: 'Назар' },
+          ]
+        },
+        {
+          id: 'kurbanbuush', name: 'Курбанбүүш',
+          children: [
+            { id: 'salim', name: 'Салим' },
+            { id: 'orozmat', name: 'Орозмат' },
+            { id: 'meerinca', name: 'Меерина' },
+            { id: 'orozali', name: 'Орозали' },
+          ]
+        },
+        { id: 'hafiza', name: 'Хафиза' },
+      ]
+    },
+  ]
+};
+
+// Build lookup and path index
+const nodeMap = {};
+const pathMap = {};
+
+function indexTree(node, path) {
+  nodeMap[node.id] = node;
+  pathMap[node.id] = [...path];
+  if (node.children) {
+    for (const c of node.children) {
+      indexTree(c, [...path, node.id]);
+    }
+  }
+}
+indexTree(TREE, []);
+
+// Generation labels
+const GEN_LABELS = ['Баш ата', 'Балдары', 'Небере', 'Чоболор', 'Дөнөлөр'];
+
+// Navigation state
+let history_stack = [];
+let current_id = 'arzykul';
+
+function getGenLabel(depth) {
+  return GEN_LABELS[Math.min(depth, GEN_LABELS.length - 1)] || (depth + '-жылдык муун');
+}
+
+function getDepth(id) {
+  return pathMap[id] ? pathMap[id].length : 0;
+}
+
+function getInitials(name) {
+  return name.slice(0, 1).toUpperCase();
+}
+
+function countDescendants(node) {
+  if (!node.children || node.children.length === 0) return 0;
+  let c = node.children.length;
+  for (const ch of node.children) c += countDescendants(ch);
+  return c;
+}
+
+function navigateTo(id, addHistory = true) {
+  if (addHistory && current_id !== id) history_stack.push(current_id);
+  current_id = id;
+  render();
+}
+
+function goBack() {
+  if (history_stack.length > 0) {
+    current_id = history_stack.pop();
+    render();
+  }
+}
+
+function renderBreadcrumb() {
+  const bc = document.getElementById('breadcrumb');
+  const path = pathMap[current_id] || [];
+  const fullPath = [...path, current_id];
+  let html = '';
+  fullPath.forEach((id, i) => {
+    const node = nodeMap[id];
+    if (i < fullPath.length - 1) {
+      html += `<span class="crumb" onclick="navigateTo('${id}')">${node.name}</span>`;
+      html += `<span class="crumb-sep">›</span>`;
+    } else {
+      html += `<span class="crumb-current">${node.name}</span>`;
+    }
+  });
+  bc.innerHTML = html;
+}
+
+// Search state
+let searchQuery = '';
+
+function renderSearchResults(q) {
+  if (!q || q.length < 2) return '';
+  const results = [];
+  for (const [id, node] of Object.entries(nodeMap)) {
+    if (id === 'arzykul') continue;
+    if (node.name.toLowerCase().includes(q.toLowerCase())) {
+      const path = pathMap[id];
+      const pathNames = path.map(pid => nodeMap[pid]?.name || '').join(' › ');
+      results.push({ id, name: node.name, pathNames });
+    }
+  }
+  if (results.length === 0) {
+    return `<div class="search-results"><div class="no-results">Табылган жок — "${q}"</div></div>`;
+  }
+  let html = '<div class="search-results">';
+  results.slice(0, 8).forEach(r => {
+    html += `<div class="search-result-item" onclick="navigateTo('${r.id}')">
+      <strong>${r.name}</strong>
+      <div class="sri-path">${r.pathNames}</div>
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function render() {
+  renderBreadcrumb();
+  const node = nodeMap[current_id];
+  const depth = getDepth(current_id);
+  const view = document.getElementById('view');
+
+  let html = '';
+
+  // Search bar
+  html += `<div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Ат менен издөө..." value="${searchQuery}" oninput="onSearch(this.value)">
+    ${searchQuery ? `<span style="cursor:pointer;color:var(--muted);font-size:0.8rem;" onclick="clearSearch()">✕</span>` : ''}
+  </div>`;
+
+  // Show search results if active
+  if (searchQuery.length >= 2) {
+    html += renderSearchResults(searchQuery);
+    view.innerHTML = html;
+    return;
+  }
+
+  // Back button
+  if (history_stack.length > 0 || current_id !== 'arzykul') {
+    html += `<button class="back-btn" onclick="goBack()">← Артка</button>`;
+  }
+
+  // Root view
+  if (current_id === 'arzykul') {
+    const totalDescendants = countDescendants(node);
+    html += `<div class="root-intro">
+      <span class="gen-badge">🌱 Баш ата</span><br>
+      Бул тукум дарагы Арзыкул атабыздан тарагандарды камтыйт.<br>
+      Ат жазылган карточкага чыкылдатып, бутактарды ачыңыз.
+    </div>`;
+    html += `<div class="stats-row">
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">Тике бала</div></div>
+      <div class="stat"><div class="stat-n">${totalDescendants}</div><div class="stat-l">Бардык урпак</div></div>
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">Муун</div></div>
+    </div>`;
+  }
+
+  // Ancestor card
+  html += `<div class="ancestor-card">
+    <div class="ancestor-name">${node.name}</div>
+    <div class="level-label">${getGenLabel(depth)}</div>
+  </div>`;
+
+  if (node.children && node.children.length > 0) {
+    const desc_count = countDescendants(node);
+    html += `<div class="children-label">
+      ${node.children.length} ${node.children.length === 1 ? 'бала' : 'балдары'}
+      ${desc_count > node.children.length ? `· жалпы ${desc_count} урпак` : ''}
+    </div>`;
+
+    html += '<div class="children-grid">';
+    for (const child of node.children) {
+      const hasChildren = child.children && child.children.length > 0;
+      const childDesc = countDescendants(child);
+      const isSpecial = child.special;
+      const classes = ['child-card', hasChildren ? 'has-children' : 'leaf', isSpecial ? 'special' : ''].join(' ');
+
+      html += `<div class="${classes}" ${hasChildren ? `onclick="navigateTo('${child.id}')"` : ''} title="${child.name}">`;
+      html += `<div class="child-avatar">${getInitials(child.name)}</div>`;
+      html += `<div class="child-name">${child.name}</div>`;
+
+      if (isSpecial) {
+        html += `<span class="special-badge">✓</span>`;
+      }
+
+      if (hasChildren) {
+        html += `<div class="child-meta">`;
+        html += `<span>${child.children.length} бала</span>`;
+        if (childDesc > child.children.length) html += `<span>· ${childDesc} урпак</span>`;
+        html += `</div>`;
+        html += `<span class="arrow-hint">ачуу →</span>`;
+      } else {
+        html += `<div class="child-meta" style="color:var(--leaf)">🍃 акыркы</div>`;
+      }
+
+      html += '</div>';
+    }
+    html += '</div>';
+  } else {
+    html += `<div style="text-align:center;padding:40px 20px;color:var(--muted);">
+      <div style="font-size:2rem;margin-bottom:12px;">🍃</div>
+      <div>Бул тукум дарагынын акыркы бутагы</div>
+    </div>`;
+  }
+
+  view.innerHTML = html;
+
+  // Animate in
+  view.style.animation = 'none';
+  void view.offsetHeight;
+  view.style.animation = 'fadeIn .3s ease';
+}
+
+function onSearch(val) {
+  searchQuery = val;
+  render();
+}
+
+function clearSearch() {
+  searchQuery = '';
+  render();
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'Backspace' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    goBack();
+  }
+});
+
+// Initial render
+render();
+</script>
+</body>
+</html>

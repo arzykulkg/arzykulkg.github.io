@@ -1,4 +1,4 @@
-# Arzykul.kg
+# arzykul.kg
 
 - `family/` – family tree
-- `education/` – Global English (grades 7–9) and Essential Grammar in Use (4th edition) and Live Class
+- `education/` – Global English (7, 8, 9), Essential Grammar in Use 4th edition, Live Class

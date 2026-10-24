@@ -682,7 +682,7 @@ $("#m2").onclick=openStats;$("#m3").onclick=function(){openPick(function(){close
 })();
 /* ===== v4: bright extras ===== */
 (function(){
-  var LT=false;try{LT=localStorage.getItem("arzykul_light")==="1"}catch(e){}
+  var LT=true;try{LT=localStorage.getItem("arzykul_light")!=="0"}catch(e){}
   function theme(on){document.body.classList.toggle("light",on);var m=document.querySelector('meta[name=theme-color]');if(m)m.content=on?"#fff1d6":"#1a0b4d";var b=$("#m6");if(b)b.textContent=on?"🌙 Түнкү тема":"☀️ Жарык тема";try{localStorage.setItem("arzykul_light",on?"1":"0")}catch(e){}}
   var mb=document.createElement("button");mb.id="m6";mb.addEventListener("click",function(){theme(!document.body.classList.contains("light"));closeSheet();confetti(innerWidth-40,90,"#ffc15e",26)});
   $("#menu").insertBefore(mb,$("#m1"));theme(LT);

@@ -809,7 +809,7 @@ if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){navigato
   setTimeout(function(){
     var id=nodeMap.arzykul?"arzykul":TREE.id;
     if(location.hash.length>1){var h=decodeURIComponent(location.hash.slice(1));if(nodeMap[h])id=h}
-    else if(ME&&nodeMap[ME])id=ME;
+    else if(nodeMap.mandagul)id="mandagul";
     cur=id;try{history.replaceState({fv:id,i:0},"")}catch(e){}render(id,false);S.querySelector(".fc").scrollIntoView({block:"center"});
     mv.textContent="🌿 Тизме көрүнүшү";setView(V);
     if(V==="fv")crumbs(cur);

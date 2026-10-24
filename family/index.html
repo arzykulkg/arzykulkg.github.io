@@ -369,6 +369,12 @@ body.prto #prt{display:block}
 #prt>ul{padding-left:0;border:0;columns:2;column-gap:20px}
 #prt li small{color:#888}
 @media print{body.prto>*:not(#prt){display:none!important}#prt{position:static;overflow:visible}#prt .bar2{display:none}}
+/* v10 */
+html{filter:hue-rotate(var(--hue,0deg))}
+html[style*="--hue"] .av.ph,html[style*="--hue"] .cav.ph,html[style*="--hue"] #gv img,html[style*="--hue"] .gcell{filter:hue-rotate(calc(-1*var(--hue)))}
+.qo{display:block;width:100%;margin-top:10px;padding:14px;border-radius:16px;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:inherit;font:600 1rem sans-serif;text-align:left;cursor:pointer}
+.qo.ok{background:rgba(80,220,140,.45);border-color:#6f9}.qo.no{background:rgba(255,80,110,.45);border-color:#f66}
+.qq{font:800 1.15rem/1.4 sans-serif;margin:10px 0 4px}.qb{height:6px;border-radius:3px;background:rgba(255,255,255,.2);overflow:hidden}.qb i{display:block;height:100%;background:linear-gradient(90deg,#ff5d9e,#ffc15e);transition:width .4s}
 </style></head><body>
 <canvas id="fx"></canvas>
 <div id="splash"><svg viewBox="0 0 200 200"><path class="st1" d="M100 185 V105"/><path class="st1 st2" d="M100 150 Q78 135 56 128"/><path class="st1 st3" d="M100 130 Q124 114 148 104"/><path class="st1 st4" d="M100 105 Q100 78 100 52"/>
@@ -1041,5 +1047,80 @@ $("#m2").onclick=openStats;
 addMenu("m11","🧭 Эки адам кандай тууган?",openPair,"#m3");
 addMenu("m12","🖨 Басып чыгаруу / PDF",printTree,"#m4");
 setTimeout(bdBanner,600);
+})();
+/* ================= v10: quiz, themes, month card, branch poster ================= */
+(function(){
+function sheetOpen(h,cur){var s=$("#sheet");s.className="";s.dataset.cur=cur||"";s.innerHTML=h;s.scrollTop=0;document.body.classList.add("sheet");return s}
+function addMenu(id,txt,fn,before){var b=document.createElement("button");b.id=id;b.textContent=txt;$("#menu").insertBefore(b,$(before||"#m4"));b.addEventListener("click",fn)}
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function pick(a,n){return shuf(a).slice(0,n)}
+function sendCanvas(cv,name,title){cv.toBlob(function(bl){var f=new File([bl],name,{type:"image/png"});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:title}).catch(function(){})}
+  else{var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download=name;document.body.appendChild(a);a.click();a.remove();toast("Сүрөт жүктөлдү")}},"image/png")}
+/* ---- quiz ---- */
+var cnt0={};Object.keys(nodeMap).forEach(function(i){var n=nodeMap[i].name;cnt0[n]=(cnt0[n]||0)+1});
+function uniq(id){return cnt0[nodeMap[id].name]===1}
+function mkQuiz(){
+  var ids=Object.keys(nodeMap),Q=[],withKids=ids.filter(function(i){return uniq(i)&&(nodeMap[i].children||[]).length>=2&&nodeMap[i].children.every(function(c){return uniq(c.id)})}),
+  names=ids.map(function(i){return nodeMap[i].name}).filter(function(n){return cnt0[n]===1});
+  function opts(right,pool,n){var o=[right];shuf(pool).forEach(function(x){if(o.length<n&&o.indexOf(x)<0)o.push(x)});return shuf(o)}
+  var tries=0;while(Q.length<10&&tries++<800){var t=Math.floor(Math.random()*4),id=withKids[Math.floor(Math.random()*withKids.length)],n=nodeMap[id];
+    if(t===0){var c=n.children[Math.floor(Math.random()*n.children.length)],bad=names.filter(function(x){return !n.children.some(function(k){return k.name===x})});
+      Q.push({q:"«"+n.name+"» дегендин баласы ким?",o:opts(c.name,bad,4),a:c.name})}
+    else if(t===1){var k=n.children.length,o=[k];[k+1,k+2,k-1,k+3,Math.max(1,k-2)].forEach(function(x){if(x>0&&o.indexOf(x)<0&&o.length<4)o.push(x)});Q.push({q:"«"+n.name+"» нын канча баласы бар?",o:shuf(o).map(String),a:String(k)})}
+    else if(t===2){var c2=n.children[Math.floor(Math.random()*n.children.length)];if(!c2||!(c2.children||[]).length||!uniq(c2.id))continue;var gc=c2.children[0];if(!uniq(gc.id))continue;
+      Q.push({q:"«"+gc.name+"» нын чоң атасы/чоң энеси ким? (ата-энесинин ата-энеси)",o:opts(n.name,names,4),a:n.name})}
+    else{var c3=n.children[Math.floor(Math.random()*n.children.length)];Q.push({q:"«"+c3.name+"» кимдин баласы?",o:opts(n.name,names,4),a:n.name})}}
+  var seen={};return Q.filter(function(q){if(seen[q.q])return false;seen[q.q]=1;return true})
+}
+function openQuiz(){
+  var Q=mkQuiz(),i=0,sc=0,best=0;try{best=+localStorage.getItem("arzykul_qbest")||0}catch(e){}
+  var s=sheetOpen("","");
+  function show(){if(i>=Q.length){var msg=sc>=Q.length*.8?"🏆 Тукум билги­чи!":sc>=Q.length*.5?"👏 Жакшы!":"📚 Дагы бир жолу аракет кылыңыз";if(sc>best){best=sc;try{localStorage.setItem("arzykul_qbest",sc)}catch(e){}}
+      s.innerHTML='<div class="grab"></div><div class="cn" style="font-size:1.4rem;text-align:center">'+msg+'</div><div class="st"><div><b>'+sc+'/'+Q.length+'</b><span>туура</span></div><div><b>'+best+'</b><span>эң мыкты</span></div></div><div class="acts"><button id="qa">🔁 Кайра ойноо</button></div>';$("#qa").onclick=openQuiz;return}
+    var q=Q[i];s.innerHTML='<div class="grab"></div><div class="cn" style="font-size:1.1rem">🎯 Тукум викторинасы</div><div class="cs">'+(i+1)+' / '+Q.length+' · упай: '+sc+'</div><div class="qb"><i style="width:'+(100*i/Q.length)+'%"></i></div><div class="qq">'+esc(q.q)+'</div>'+q.o.map(function(o){return '<button class="qo" data-o="'+esc(o)+'">'+esc(o)+'</button>'}).join("");
+    [].forEach.call(s.querySelectorAll(".qo"),function(b){b.onclick=function(){if(s.dataset.lock)return;s.dataset.lock=1;vib();var ok=b.dataset.o===q.a;if(ok)sc++;b.classList.add(ok?"ok":"no");if(!ok)[].forEach.call(s.querySelectorAll(".qo"),function(x){if(x.dataset.o===q.a)x.classList.add("ok")});
+      setTimeout(function(){delete s.dataset.lock;i++;show()},ok?700:1400)}})}
+  show()}
+/* ---- themes ---- */
+var TH=[["🌈 Алгачкы",0],["🌿 Токой",-150],["🌊 Океан",-55],["🌸 Гүл",45],["🔥 Күн",130]],ti=0;
+try{ti=+localStorage.getItem("arzykul_theme")||0}catch(e){}
+function applyTh(){document.documentElement.style.setProperty("--hue",TH[ti][1]+"deg");if(!TH[ti][1])document.documentElement.style.removeProperty("--hue")}
+applyTh();
+addMenu("m13","🎨 Түс темасы",function(){ti=(ti+1)%TH.length;try{localStorage.setItem("arzykul_theme",ti)}catch(e){}applyTh();toast(TH[ti][0])},"#m4");
+addMenu("m14","🎯 Тукум викторинасы",openQuiz,"#m3");
+/* ---- month birthday card ---- */
+function monthCard(){
+  var now=new Date(),mo=now.getMonth()+1,L=[],sk={};
+  Object.keys(nodeMap).forEach(function(id){var mm=meta(nodeMap[id]),b=pb(mm.b),k=nodeMap[id].name+mm.b;if(sk[k])return;sk[k]=1;if(b&&b.full&&b.m===mo&&!pb(mm.d))L.push({n:nodeMap[id],b:b})});
+  if(!L.length){toast("Бул айда туулган күн жок");return}
+  L.sort(function(a,b){return a.b.d-b.b.d});L=L.slice(0,14);
+  var M=["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],W=1080,H=Math.max(1000,380+L.length*96+160),cv=document.createElement("canvas");cv.width=W;cv.height=H;var x=cv.getContext("2d");
+  var g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#1a0b4d");g.addColorStop(.6,"#6a2aa8");g.addColorStop(1,"#ff5d9e");x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.textAlign="center";x.fillStyle="#fff";x.font="800 84px serif";x.fillText("🎂 "+M[mo-1],W/2,170);x.font="600 38px sans-serif";x.fillStyle="rgba(255,255,255,.85)";x.fillText("Бул айда туулгандар · Арзыкулов тукуму",W/2,235);
+  L.forEach(function(p,i){var y=330+i*96;x.fillStyle="rgba(255,255,255,.15)";x.beginPath();if(x.roundRect)x.roundRect(70,y-52,W-140,80,26);else x.rect(70,y-52,W-140,80);x.fill();
+    x.textAlign="left";x.fillStyle="#ffc15e";x.font="800 40px sans-serif";x.fillText(String(p.b.d).padStart(2,"0")+"."+String(mo).padStart(2,"0"),100,y+4);
+    x.fillStyle="#fff";x.font="700 38px sans-serif";var t=(p.n.f?"♀ ":"")+p.n.name;x.fillText(t.length>22?t.slice(0,21)+"…":t,290,y+4);
+    x.textAlign="right";x.fillStyle="rgba(255,255,255,.8)";x.font="600 34px sans-serif";x.fillText((now.getFullYear()-p.b.y)+" жаш",W-100,y+4)});
+  sendCanvas(cv,"tuulgan-kunduor.png","Туулган күндөр")}
+addMenu("m15","🎂 Айлык туулган күн сүрөтү",monthCard,"#m4");
+/* ---- branch poster ---- */
+function poster(id){
+  var root=nodeMap[id],MAXD=3,rows=0,nodes=[];
+  function lim(){var c=0;(function w(n,d){c++;if(d<MAXD)(n.children||[]).forEach(function(k){w(k,d+1)})})(root,0);return c}
+  while(MAXD>1&&lim()>160)MAXD--;
+  function lay(n,d){var o={n:n,d:d,k:[]};if(d<MAXD)(n.children||[]).forEach(function(c){o.k.push(lay(c,d+1))});
+    if(!o.k.length){o.y=rows++}else o.y=(o.k[0].y+o.k[o.k.length-1].y)/2;nodes.push(o);return o}
+  var T=lay(root,0),CW=300,GAP=70,RH=64,W=(MAXD+1)*(CW+GAP)+60,H=rows*RH+250,cv=document.createElement("canvas");cv.width=W;cv.height=H;var x=cv.getContext("2d");
+  var bg=x.createLinearGradient(0,0,W,H);bg.addColorStop(0,"#1a0b4d");bg.addColorStop(1,"#3b1a8f");x.fillStyle=bg;x.fillRect(0,0,W,H);
+  x.fillStyle="#fff";x.font="800 54px serif";x.textAlign="left";x.fillText("Тукум дарагы · "+root.name,40,80);x.font="600 28px sans-serif";x.fillStyle="rgba(255,255,255,.7)";x.fillText("Арзыкулов тукуму · "+(cnt(root)+1)+" адам"+(MAXD<3?"":""),40,125);
+  function px(o){return{x:40+o.d*(CW+GAP),y:190+o.y*RH}}
+  nodes.forEach(function(o){var p=px(o);o.k.forEach(function(c){var q=px(c);x.strokeStyle="rgba(255,255,255,.35)";x.lineWidth=3;x.beginPath();x.moveTo(p.x+CW,p.y);x.bezierCurveTo(p.x+CW+GAP/2,p.y,q.x-GAP/2,q.y,q.x,q.y);x.stroke()})});
+  nodes.forEach(function(o){var p=px(o),c=o.n.f?"#ff5d9e":GEN[(depthMap[o.n.id])%GEN.length];x.fillStyle=c;x.beginPath();if(x.roundRect)x.roundRect(p.x,p.y-26,CW,52,26);else x.rect(p.x,p.y-26,CW,52);x.fill();
+    x.fillStyle="#1a0b4d";x.font="800 26px sans-serif";x.textAlign="left";var t=o.n.name;while(x.measureText(t).width>CW-36&&t.length>4)t=t.slice(0,-2);x.fillText(t+(t!==o.n.name?"…":""),p.x+18,p.y+9);
+    var kc=(o.n.children||[]).length;if(kc&&o.d===MAXD){x.fillStyle="#1a0b4d";x.textAlign="right";x.font="700 22px sans-serif";x.fillText("+"+cnt(o.n)+" ›",p.x+CW-16,p.y+8)}});
+  sendCanvas(cv,"tukum-"+id+".png","Тукум дарагы — "+root.name)}
+var _oi2=openInfo;openInfo=function(id,edit){_oi2(id,edit);if(edit)return;var a=document.querySelector("#sheet .acts");if(a&&(nodeMap[id].children||[]).length)a.insertAdjacentHTML("afterbegin",'<button data-a="poster">🗺 Постер (бутак)</button>')};
+$("#sheet").addEventListener("click",function(e){var b=e.target.closest('[data-a="poster"]');if(b){e.stopPropagation();vib();poster(this.dataset.cur)}},true);
 })();
 </script></body></html>

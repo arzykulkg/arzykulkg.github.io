@@ -406,7 +406,7 @@ $("#cnt").textContent=Object.keys(nodeMap).length+" адам · "+(maxD+1)+" м�
 $("#foot").textContent="🌿 "+Object.keys(nodeMap).length+" адам · "+(maxD+1)+" муун";
 
 var PH={},MT={},ME="";
-try{PH=JSON.parse(localStorage.getItem("arzykul_photos")||"{}")}catch(e){}
+try{PH=JSON.parse(localStorage.getItem("arzykul_photos")||"{}")}catch(e){}try{if(localStorage.getItem("arzykul_phv")!=="2"){delete PH.kamalidin;delete PH.kamalidin_h;localStorage.setItem("arzykul_photos",JSON.stringify(PH));localStorage.setItem("arzykul_phv","2")}}catch(e){}
 try{MT=JSON.parse(localStorage.getItem("arzykul_meta")||"{}")}catch(e){}
 try{ME=localStorage.getItem("arzykul_me")||""}catch(e){}
 if(ME&&!nodeMap[ME])ME="";if(!ME&&nodeMap.kamalidin)ME="kamalidin";

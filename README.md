@@ -1,4 +1,3 @@
-# arzykul.kg
+# Арзыкуловтордун санжырасы
 
-- `family/` – family tree
-- `education/` – Global English (7, 8, 9), Essential Grammar in Use 4th edition, Live Class
+site root = family tree. `education/` = Global English, Essential Grammar in Use, Live Class (not linked from the family tree).

@@ -18,3 +18,6 @@ Site root = family tree. `education/` = Global English, Essential Grammar in Use
 1. GitHub keeps full history of this repo (the main copy).
 2. Menu → "Толук резерв (JSON)" and "CSV архив (Excel)" — keep copies on Google Drive / a USB stick.
 3. Print the book to PDF once a year and keep a paper copy.
+
+## Mobile UI (v11.1)
+Bottom nav (Дарак · Издөө · Бутактар · Кошуу · Меню), smart search (ө/о, ү/у, ң/н ignored; "Камалидин Карим" finds by father's name; recent searches), branches list, and a safe "Маалымат кошуу / ката билдирүү" form that prepares a WhatsApp message for the admin (nothing is written to the public tree). Optional: set `window.ADMIN_WA="996XXXXXXXXX"` in `data/bios.js` to send suggestions straight to one WhatsApp number.

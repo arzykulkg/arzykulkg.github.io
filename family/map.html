@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Арзыкуловтордун тукум дарагы</title>
+<meta name="theme-color" content="#1a1410">
+<meta name="description" content="Арзыкуловтордун тукум дарагы — интерактивдүү санжыра">
+<meta property="og:title" content="Арзыкуловтордун тукум дарагы"><meta property="og:description" content="Интерактивдүү санжыра — 246 адам">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap');
+:root{
+  --bg:#1a1410;--bg2:#2d2520;--bg3:#3d3228;
+  --gold:#D4A574;--gold2:#E8C9A0;--gold-glow:rgba(212,165,116,.35);--gold-soft:rgba(212,165,116,.12);
+  --accent:#1F7BA0;--accent2:#2A9FD8;--accent-glow:rgba(31,123,160,.4);--accent-soft:rgba(31,123,160,.15);
+  --node:#3a3228;--border:#5a4d42;
+  --text:#F5E6D3;--text2:#D4C4B8;--text3:#8B7D6F;
+  --female:#C41E3A;--fem-glow:rgba(196,30,58,.35);--fem-soft:rgba(196,30,58,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Raleway',sans-serif;background:var(--bg);color:var(--text)}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 22% 28%,rgba(212,165,116,.08) 0%,transparent 55%),
+    radial-gradient(circle at 78% 72%,rgba(31,123,160,.06) 0%,transparent 55%),
+    repeating-linear-gradient(45deg,transparent,transparent 35px,rgba(212,165,116,.04) 35px,rgba(212,165,116,.04) 70px),
+    repeating-linear-gradient(-45deg,transparent,transparent 35px,rgba(31,123,160,.04) 35px,rgba(31,123,160,.04) 70px);
+  background-size:100% 100%,100% 100%,100% 100%,100% 100%;z-index:0;
+}
+
+/* TOP BAR */
+#topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:linear-gradient(135deg,rgba(45,37,32,.98) 0%,rgba(61,50,40,.98) 100%);backdrop-filter:blur(14px);
+  border-bottom:2px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.4);
+  display:flex;align-items:center;height:56px;
+}
+.tb-logo{width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;border-right:2px solid var(--gold);flex-shrink:0;}
+.tb-search{flex:1;display:flex;align-items:center;gap:10px;padding:0 18px;height:100%;}
+.tb-search input{flex:1;background:rgba(255,255,255,.08);border:1px solid var(--gold);outline:none;color:var(--text);font-family:'Raleway',sans-serif;font-size:.9rem;padding:8px 12px;border-radius:8px;transition:all .3s;}
+.tb-search input::placeholder{color:var(--text3)}
+.tb-search input:focus{background:rgba(255,255,255,.12);border-color:var(--accent2);box-shadow:0 0 12px var(--gold-glow)}
+.tb-icon{color:var(--gold);font-size:.9rem;flex-shrink:0}
+.tb-clear{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.8rem;padding:4px 8px;border-radius:6px;transition:color .15s;}
+.tb-clear:hover{color:var(--gold)}
+.tb-reset{
+  margin-right:12px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#1a1410;
+  cursor:pointer;font-size:.8rem;padding:7px 16px;border-radius:100px;
+  font-family:'Raleway',sans-serif;font-weight:600;transition:all .2s;white-space:nowrap;
+  box-shadow:0 2px 8px var(--gold-glow);
+}
+.tb-reset:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--gold-glow)}
+
+/* CANVAS */
+#canvas{
+  position:fixed;top:56px;left:0;right:0;bottom:0;
+  overflow:hidden;z-index:5;cursor:grab;
+}
+#canvas:active{cursor:grabbing}
+#scene{position:absolute;transform-origin:0 0;will-change:transform;}
+
+/* SVG LINES */
+#lines{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;}
+
+/* NODE PILL */
+.node{
+  position:absolute;display:flex;align-items:center;gap:10px;
+  padding:10px 16px 10px 10px;border-radius:100px;
+  border:2px solid var(--gold);background:linear-gradient(135deg,var(--node),rgba(61,50,40,.8));
+  cursor:pointer;user-select:none;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.3);
+  transition:border-color .2s,box-shadow .2s,transform .15s,opacity .3s;
+}
+.node:hover{border-color:var(--accent2);box-shadow:0 0 20px var(--accent-glow);transform:scale(1.05)}
+.node.female:hover{border-color:var(--female);box-shadow:0 0 20px var(--fem-glow)}
+.node.expanded{
+  background:linear-gradient(135deg,var(--accent),rgba(31,123,160,.9));
+  border-color:var(--accent2);box-shadow:0 0 30px var(--accent-glow);
+}
+.node.expanded.female{
+  background:linear-gradient(135deg,var(--female),rgba(196,30,58,.9));
+  border-color:var(--female);box-shadow:0 0 30px var(--fem-glow);
+}
+.node.leaf-node{cursor:default;opacity:.75}
+.node.leaf-node:hover{transform:none;border-color:var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.node.dimmed{opacity:.4}
+
+.n-av{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));border:2px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:700;color:#1a1410;flex-shrink:0;
+  font-family:'Playfair Display',serif;
+}
+.node.expanded .n-av{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.4);color:#fff}
+.node.has-kids .n-av{background:var(--accent-soft);border-color:var(--accent2);color:var(--accent2)}
+.node.female.has-kids .n-av{background:var(--fem-soft);border-color:var(--female);color:var(--female)}
+.n-nm{font-size:.88rem;font-weight:600;color:var(--text);font-family:'Playfair Display',serif;letter-spacing:.3px}
+.node.expanded .n-nm{color:#fff;font-weight:700}
+.node.has-kids .n-nm{font-weight:700;color:var(--text2)}
+.n-ct{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--accent-soft);display:flex;align-items:center;justify-content:center;
+  font-size:.68rem;font-weight:700;color:var(--accent2);flex-shrink:0;margin-left:2px;
+}
+.node.female .n-ct{background:var(--fem-soft);color:var(--female)}
+.node.expanded .n-ct{background:rgba(255,255,255,.2);color:rgba(255,255,255,.9)}
+
+/* SEARCH OVERLAY */
+#srOverlay{
+  position:fixed;top:56px;left:0;right:0;bottom:0;z-index:200;
+  background:linear-gradient(135deg,rgba(26,20,16,.98),rgba(45,37,32,.98));backdrop-filter:blur(8px);
+  overflow-y:auto;padding:20px;display:none;border-top:2px solid var(--gold);
+}
+.sr-item{padding:12px 18px;border-radius:12px;cursor:pointer;border:2px solid var(--gold);background:linear-gradient(135deg,var(--node),rgba(61,50,40,.7));margin-bottom:10px;font-size:.88rem;transition:all .2s;color:var(--text);}
+.sr-item:hover{background:linear-gradient(135deg,var(--accent),rgba(31,123,160,.8));border-color:var(--accent2);color:#fff;transform:translateX(4px)}
+.sr-path{font-size:.75rem;color:var(--text3);margin-top:4px;font-family:'Raleway',sans-serif}
+.sr-none{text-align:center;color:var(--text3);padding:50px 20px;font-size:.95rem}
+
+/* CONTROLS */
+#controls{position:fixed;bottom:24px;right:20px;z-index:100;display:flex;flex-direction:column;gap:10px;}
+.ctrl-btn{
+  width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent),rgba(31,123,160,.85));border:2px solid var(--gold);
+  color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.4);font-weight:600;
+}
+.ctrl-btn:hover{transform:translateY(-4px);box-shadow:0 8px 20px var(--accent-glow);border-color:var(--accent2)}
+.admin-overlay,
+#adminPanel{
+  display:none!important;
+}
+.admin-overlay{
+  position:fixed;bottom:120px;right:20px;top:auto;z-index:250;
+  width:min(420px,calc(100vw - 32px));
+}
+.admin-overlay.open{display:block!important;}
+#adminPanel.open{display:block!important;}
+.admin-box{
+  width:100%;padding:18px 20px;border-radius:20px;
+  background:rgba(18,14,12,.98);border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 18px 52px rgba(0,0,0,.45);
+}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.admin-title{font-size:1.05rem;font-weight:700;color:var(--gold);}
+.admin-close{background:none;border:none;color:var(--text2);font-size:1.1rem;cursor:pointer;}
+.admin-close:hover{color:var(--gold);}
+.admin-form{display:grid;gap:12px;}
+.admin-field{display:flex;flex-direction:column;gap:6px;font-size:.88rem;color:var(--text2);}
+.admin-field label{font-size:.86rem;color:var(--text);}
+.admin-field input,.admin-field select,.admin-field textarea{
+  width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(212,165,116,.3);
+  background:rgba(255,255,255,.06);color:var(--text);outline:none;font-family:'Raleway',sans-serif;
+}
+.admin-field input:focus,.admin-field select:focus,.admin-field textarea:focus{
+  border-color:var(--accent2);box-shadow:0 0 14px rgba(212,165,116,.16);
+}
+.admin-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;margin-top:6px;}
+.admin-btn{border:none;padding:11px 16px;border-radius:12px;cursor:pointer;font-weight:700;font-family:'Raleway',sans-serif;}
+.admin-btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1410;}
+.admin-btn.secondary{background:rgba(255,255,255,.08);color:var(--text2);border:1px solid rgba(255,255,255,.08);}
+.admin-status{min-height:1.2rem;font-size:.85rem;color:var(--text3);}
+.admin-status.success{color:#8ee39b;}
+.admin-status.error{color:#ff9f9b;}
+.admin-panel{position:fixed;right:20px;bottom:90px;z-index:220;width:min(420px,calc(100vw - 32px));background:rgba(15,12,10,.96);border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 22px 50px rgba(0,0,0,.45);padding:22px;display:none;backdrop-filter:blur(18px);}
+.admin-panel.open{display:block;}
+.admin-panel .panel-title{font-size:1rem;font-weight:700;color:#f7e6c7;font-family:'Playfair Display',serif;margin-bottom:14px;}
+.admin-panel .panel-row{display:grid;gap:14px;margin-bottom:14px;}
+.admin-note{font-size:.85rem;color:#d9c8b3;line-height:1.5;}
+.admin-field input,.admin-field select,.admin-field textarea{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.25);color:#f8f1e6;}
+.admin-field input::placeholder{color:rgba(248,241,230,.65);}
+.admin-field select{appearance:none;-webkit-appearance:none;-moz-appearance:none;}
+.admin-field label{color:#f5e6d3;}
+.admin-actions .admin-btn.primary{background:linear-gradient(135deg,#f2c97f,#f7e6c7);color:#1a1410;}
+.admin-actions .admin-btn.secondary{background:rgba(255,255,255,.1);color:#f3e8d7;border-color:rgba(255,255,255,.18);}
+
+/* ===== v2 improvements ===== */
+body.cardopen #controls{right:352px}
+body::before{
+  background-image:
+    radial-gradient(circle at 22% 28%,rgba(212,165,116,.10) 0%,transparent 55%),
+    radial-gradient(circle at 78% 72%,rgba(31,123,160,.08) 0%,transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140' fill='none' stroke='%23D4A574' stroke-opacity='.07' stroke-width='2'%3E%3Cpath d='M70 18c-16 0-22 18-10 26 8 5 16-2 12-9-3-5-9-2-8 2'/%3E%3Cpath d='M70 122c16 0 22-18 10-26-8-5-16 2-12 9 3 5 9 2 8-2'/%3E%3Cpath d='M18 70c0-16 18-22 26-10 5 8-2 16-9 12-5-3-2-9 2-8'/%3E%3Cpath d='M122 70c0 16-18 22-26 10-5-8 2-16 9-12 5 3 2 9-2 8'/%3E%3C/svg%3E")!important;
+  background-size:100% 100%,100% 100%,140px 140px!important;background-repeat:no-repeat,no-repeat,repeat!important}
+.tb-title{font:700 1.05rem 'Playfair Display',serif;color:var(--gold);padding:0 6px 0 16px;white-space:nowrap}
+.tb-search{padding:0 12px 0 12px}
+.node{border-color:var(--g,var(--gold));padding-right:12px}
+.node .n-av{box-shadow:0 0 0 2px var(--g,var(--gold))}
+.n-ct{margin-left:auto;width:auto;min-width:26px;height:24px;padding:0 7px;border-radius:12px}
+.genlbl{position:absolute;font:700 .72rem 'Raleway',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--g);border-bottom:2px solid var(--g);padding:2px 10px 4px 2px;white-space:nowrap;opacity:.9;pointer-events:none}
+.node.sel{box-shadow:0 0 0 4px rgba(255,255,255,.28),0 0 26px var(--gold-glow)}
+#card{position:fixed;z-index:120;top:72px;right:16px;width:320px;max-height:calc(100vh - 100px);overflow:auto;
+  background:linear-gradient(160deg,rgba(45,37,32,.97),rgba(26,20,16,.97));border:2px solid var(--gold);border-radius:20px;
+  box-shadow:0 18px 50px rgba(0,0,0,.55);padding:18px 18px 16px;display:none;backdrop-filter:blur(10px)}
+#card.open{display:block;animation:cin .25s ease}
+@keyframes cin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#card .ch{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+#card .cav{width:52px;height:52px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font:800 1.4rem 'Playfair Display',serif;color:#1a1410;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 0 0 3px var(--g)}
+#card.f .cav{background:linear-gradient(135deg,#e0566f,#C41E3A);color:#fff}
+#card .cn{font:700 1.3rem 'Playfair Display',serif;line-height:1.15}
+#card .cs{font-size:.78rem;color:var(--text3);margin-top:2px}
+#card .cx{margin-left:auto;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer;padding:6px;align-self:flex-start}
+#card .st{display:flex;gap:8px;margin:10px 0}
+#card .st div{flex:1;background:var(--gold-soft);border:1px solid rgba(212,165,116,.25);border-radius:12px;padding:8px 6px;text-align:center}
+#card .st b{display:block;font:800 1.25rem 'Playfair Display',serif;color:var(--gold)}
+#card .st span{font-size:.68rem;color:var(--text2)}
+#card h5{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin:12px 0 6px}
+#card .chips{display:flex;flex-wrap:wrap;gap:6px}
+#card .chip{background:rgba(255,255,255,.07);border:1px solid rgba(212,165,116,.35);color:var(--text);border-radius:100px;padding:5px 11px;font-size:.82rem;cursor:pointer;font-family:'Raleway',sans-serif}
+#card .chip:hover{background:var(--accent);border-color:var(--accent2)}
+#card .chip.f{border-color:rgba(196,30,58,.6)}
+#card .note{font-size:.88rem;color:var(--text2);background:rgba(255,255,255,.05);border-left:3px solid var(--gold);padding:8px 10px;border-radius:6px}
+#card .path{display:flex;flex-direction:column;gap:2px;font-size:.84rem}
+#card .path a{color:var(--text2);cursor:pointer;padding:2px 0 2px 12px;border-left:2px solid var(--gold-glow)}
+#card .path a:hover{color:var(--gold)}
+.ctrl-btn{touch-action:manipulation}
+@media(max-width:1000px){.tb-title{display:none}}
+@media(max-width:700px){
+  body.cardopen #controls{right:20px}
+  .tb-logo{width:46px}
+  .tb-search{padding:0 6px;gap:6px}
+  .tb-reset{font-size:0;width:40px;height:40px;padding:0;margin-right:8px;display:flex;align-items:center;justify-content:center}
+  .tb-reset::before{content:'⟳';font-size:1.25rem}
+  .ctrl-btn{width:52px;height:52px}
+  #card{top:auto;left:0;right:0;bottom:0;width:auto;max-height:46vh;border-radius:22px 22px 0 0;border-width:2px 0 0 0}
+  body.cardopen #controls{bottom:calc(46vh + 14px)}
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a class="tb-logo" href="index.html" title="Дарак көрүнүшү" style="text-decoration:none">🌳</a><div class="tb-title">Арзыкуловтордун тукум дарагы</div>
+  <div class="tb-search">
+    <span class="tb-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Ат менен издөө..." oninput="doSearch(this.value)">
+    <button class="tb-clear" id="clearBtn" onclick="clearSearch()" style="display:none">✕</button>
+  </div>
+  <button class="tb-reset" onclick="resetTree()" aria-label="Баштапкы көрүнүш" title="Баштапкы көрүнүш">⟳ Баштапкы</button>
+</div>
+
+<div id="canvas">
+  <div id="scene">
+    <svg id="lines"></svg>
+  </div>
+</div>
+
+<div id="srOverlay"></div>
+<div id="card" aria-live="polite"></div>
+
+<div id="adminLoginOverlay" class="admin-overlay" aria-hidden="true" style="display:none;">
+  <div class="admin-box" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
+    <div class="admin-header">
+      <div class="admin-title" id="adminLoginTitle">Админ кирүү</div>
+      <button class="admin-close" type="button" onclick="closeAdminLogin()" aria-label="Жабуу">✕</button>
+    </div>
+    <form class="admin-form" onsubmit="handleAdminLogin(event)">
+      <div class="admin-field">
+        <label for="adminUsername">Колдонуучу аты</label>
+        <input id="adminUsername" autocomplete="username" value="admin" required>
+      </div>
+      <div class="admin-field">
+        <label for="adminPassword">Сыр сөз</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" required>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-btn primary" type="submit">Кирүү</button>
+        <button class="admin-btn secondary" type="button" onclick="closeAdminLogin()">Жокко чыгаруу</button>
+      </div>
+      <div id="adminLoginStatus" class="admin-status"></div>
+    </form>
+  </div>
+</div>
+
+<div id="adminPanel" class="admin-panel" aria-hidden="true" style="display:none;">
+  <div class="panel-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+    <div class="panel-title">Админ панели</div>
+    <button class="admin-close" type="button" onclick="hideAdminPanel()" aria-label="Жабуу">✕</button>
+  </div>
+  <div class="panel-row">
+    <div class="admin-note">Жаңы адам кошууга, тандалганды жаңыртууга же өчүрүүгө болот. Өзгөртүүлөр ушул браузерде сакталат — башка түзмөккө өткөрүү үчүн «Сактоо» баскычын колдонуңуз.</div>
+  </div>
+  <div class="panel-row">
+    <label class="admin-field">Адамды тандоо
+      <select id="personSelect" onchange="selectManagedPerson()"><option value="">-- Адамды тандаңыз --</option></select>
+    </label>
+    <label class="admin-field">Ата-энеси
+      <select id="parentSelect"></select>
+    </label>
+  </div>
+  <div class="panel-row">
+    <label class="admin-field">Аты
+      <input id="personName" placeholder="Жаңы же учурдагы адамдын аты" required>
+    </label>
+    <label class="admin-field">Жынысы
+      <select id="personGender"><option value="m">Эркек</option><option value="f">Аял</option></select>
+    </label>
+  </div>
+  <div class="panel-row">
+    <div class="admin-actions">
+      <button class="admin-btn primary" type="button" onclick="addManagedPerson()">Кошуу</button>
+      <button class="admin-btn secondary" type="button" onclick="updateManagedPerson()">Жаңыртуу</button>
+      <button class="admin-btn secondary" type="button" onclick="deleteManagedPerson()">Өчүрүү</button>
+      <button class="admin-btn secondary" type="button" onclick="logoutAdmin()">Чыгуу</button>
+    </div>
+  </div>
+  <div class="panel-row"><div class="admin-actions" style="justify-content:flex-start">
+      <button class="admin-btn secondary" type="button" onclick="exportTree()">⬇ Сактоо (JSON)</button>
+      <button class="admin-btn secondary" type="button" onclick="document.getElementById('impFile').click()">⬆ Жүктөө</button>
+      <input type="file" id="impFile" accept=".json,application/json" style="display:none" onchange="importTree(this)">
+    </div></div>
+  <div id="adminPanelStatus" class="admin-status"></div>
+</div>
+
+<div id="controls">
+  <button class="ctrl-btn" onclick="openAdminPanel()" title="Админ" aria-label="Админ">⚙</button>
+  <button class="ctrl-btn" onclick="fitAll()" title="Баарын көрсөтүү" aria-label="Баарын көрсөтүү">⊡</button>
+  <button class="ctrl-btn" onclick="zoomBy(1.2)" title="Чоңойтуу" aria-label="Чоңойтуу">+</button>
+  <button class="ctrl-btn" onclick="zoomBy(0.8)" title="Кичирейтүү" aria-label="Кичирейтүү">−</button>
+</div>
+
+<script>
+/* ══════════════════════════
+   DATA
+══════════════════════════ */
+var TREE={"id":"mandagul","name":"Мандагул","children":[{"id":"koybak","name":"Койбак","children":[{"id":"koshbak_zn","name":"Кошбак","children":[{"id":"akbarak","name":"Акбарак","children":[{"id":"janbarak","name":"Жанбарак","children":[{"id":"jeenkul","name":"Жеенкул","children":[{"id":"shayimkul","name":"Шайымкул","children":[{"id":"arzykul","name":"Арзыкул","children":[{"id":"toktochan","name":"Токтожан","f":1,"children":[{"id":"kadyrali_tk","name":"Кадырали"},{"id":"bubusara_tk","name":"Бүбүсара","f":1},{"id":"savrinsa_tk","name":"Савринса","f":1}]},{"id":"mahmut","name":"Махмуд","children":[{"id":"alicha","name":"Алича","f":1,"children":[{"id":"adalat_al","name":"Адалат","f":1,"note":"Күйөөсү: Муса","children":[{"id":"muzaffar_ad","name":"Музаффар"},{"id":"mustafa_ad","name":"Мустафа"},{"id":"shahnoza_ad","name":"Шахноза","f":1},{"id":"ainura_ad","name":"Айнура","f":1}]},{"id":"isa_al","name":"Иса","children":[{"id":"asatilla_ia","name":"Асатилла"},{"id":"ikmatilla_ia","name":"Икматилла","children":[{"id":"narmin_ik_ia","name":"Нармин","f":1},{"id":"alinur_ik_ia","name":"Алинур"},{"id":"dariya_ik_ia","name":"Дария","f":1},{"id":"bermet_ik_ia","name":"Бермет","f":1}]},{"id":"zamira_ia","name":"Замира","f":1},{"id":"gulmira_ia","name":"Гулмира","f":1},{"id":"abdullo_ia","name":"Абдулло"}]},{"id":"abdulkhay_al","name":"Абдулхай","children":[{"id":"habibulo_al","name":"Хабибулло"},{"id":"zarifa_al","name":"Зарифа","f":1},{"id":"orozali_al","name":"Орозали"},{"id":"firuz_al","name":"Фируз"},{"id":"yusup_al","name":"Юсуф"}]},{"id":"sabyr_al","name":"Сабыр","children":[{"id":"manas_al","name":"Манас"},{"id":"muhammad_al","name":"Мухаммад"},{"id":"aizada_al","name":"Айзада","f":1},{"id":"ibrahim_al","name":"Ибрахим"},{"id":"adina_al","name":"Адина","f":1},{"id":"islam_al","name":"Ислам"}]},{"id":"jumagul_al","name":"Жумагул","f":1,"children":[{"id":"aitkul_al","name":"Айткул","f":1},{"id":"bakyt_al","name":"Бакыт"},{"id":"alikhan_al","name":"Алихан"},{"id":"alisher_al","name":"Алишер"},{"id":"ishak_al","name":"Исхак"},{"id":"ismail_al","name":"Исмаил"}]},{"id":"saly_al","name":"Салы","children":[{"id":"abdulbasit_al","name":"Абдулбасит"},{"id":"abdusami_al","name":"Абдусами"},{"id":"nuriza_al","name":"Нуриза","f":1},{"id":"nazima_al","name":"Назима","f":1},{"id":"muhammad_saly","name":"Мухаммад"}]},{"id":"salokhidin_al","name":"Салохидин"}]}]},{"id":"akmat","name":"Ахмад","children":[{"id":"azzam","name":"Аззам","children":[{"id":"mukum","name":"Мукимжан","children":[{"id":"abdrasul","name":"Абдрасул"},{"id":"islam","name":"Ислам"},{"id":"habiba_mk","name":"Хабиба","f":1},{"id":"sumaya_mk","name":"Сумая","f":1}]},{"id":"talip","name":"Талип","children":[{"id":"madina_t","name":"Мадина","f":1},{"id":"nurmahamat","name":"Нурмухаммед"},{"id":"abdishukur_t","name":"Абдушукур"},{"id":"muslima_t","name":"Муслима","f":1},{"id":"amina_t","name":"Амина","f":1}]},{"id":"kurbanali","name":"Курбанали","children":[{"id":"umarali","name":"Умарали"},{"id":"hadija_kb","name":"Хадича","f":1},{"id":"bilal_k","name":"Билал"}]},{"id":"saparali","name":"Сапарали","children":[{"id":"ali_sap","name":"Али"},{"id":"ilyaz","name":"Илязхан"},{"id":"bakir","name":"Абубакир"},{"id":"saliha_sap","name":"Салиха","f":1}]},{"id":"rejebal","name":"Ражабали","children":[{"id":"muhammad_rj","name":"Мухаммад"},{"id":"aziza_rj","name":"Азиза","f":1}]},{"id":"shahlo_a","name":"Шахло","f":1,"children":[{"id":"rayana_sh","name":"Раяна","f":1,"b":"07.08.2011","note":"Акылбекова Раяна Тынчтыкбековна"},{"id":"jasmina_sh","name":"Жасмина","f":1,"b":"04.03.2014","note":"Акылбекова Жасмина Тынчтыкбековна"},{"id":"nursaid_sh","name":"Нурсаид","b":"02.03.2016","note":"Акылбеков Нурсаид Тынчтыкбекович"},{"id":"nuriman_sh","name":"Нуриман","b":"27.02.2024","note":"Акылбеков Нуриман Тынчтыкбекович"}]}]},{"id":"karim","name":"Карим","children":[{"id":"kibiryo_k","name":"Кибирё","f":1,"children":[{"id":"orozbek","name":"Орозбек"},{"id":"dastan","name":"Дастан"},{"id":"datka","name":"Датка","f":1},{"id":"bermet","name":"Бермет","f":1},{"id":"bayana_k","name":"Баяна","f":1}]},{"id":"kamalidin","name":"Камалидин","children":[{"id":"fatima_k","name":"Фатима","f":1,"b":"14.09.2013"},{"id":"muhammadsalih","name":"Мухаммедсалих","b":"15.11.2015"},{"id":"malikazekhra","name":"Маликазехра","f":1,"b":"27.10.2021"}],"b":"05.11.1985"},{"id":"sayra_k","name":"Сайра","f":1,"children":[{"id":"nursultan","name":"Нурсултан"},{"id":"muhammad_k","name":"Мухаммад"},{"id":"jusup","name":"Юсуф"},{"id":"aliya","name":"Алия","f":1},{"id":"abdulla_k","name":"Абдулла"}]},{"id":"feruza_k","name":"Феруза","f":1,"children":[{"id":"rayana","name":"Раяна","f":1},{"id":"rabiya","name":"Рабия","f":1},{"id":"saliha_fk","name":"Салиха","f":1},{"id":"umar_k","name":"Умар"}]},{"id":"ibrahim_k","name":"Ибрахим","children":[{"id":"amina_k","name":"Амина","f":1},{"id":"albina_k","name":"Албина","f":1},{"id":"safiya","name":"Сафия","f":1},{"id":"sabina","name":"Сабина","f":1}]}]},{"id":"mamaraim","name":"Махмарайым","f":1,"children":[{"id":"alisher","name":"Алишер","children":[{"id":"guliza","name":"Гүлиза","f":1},{"id":"almanbet","name":"Алманбет"},{"id":"altynay","name":"Алтынай","f":1},{"id":"aliya_mr","name":"Алия","f":1}]},{"id":"gulsunay","name":"Гүлсунай","f":1},{"id":"jyldyz","name":"Жылдыз","f":1},{"id":"jumagul","name":"Жумагүл","f":1},{"id":"jumabai","name":"Жумабай"}]},{"id":"taaji","name":"Таажи","f":1,"children":[{"id":"tashbubu_t","name":"Ташбүбү","f":1,"children":[{"id":"bakytbek_tb","name":"Бакытбек"}]},{"id":"tazagul","name":"Тазагүл","f":1,"children":[{"id":"daniyar_tz","name":"Данияр"},{"id":"ainura_tz","name":"Айнура","f":1},{"id":"maksat_tz","name":"Максат"},{"id":"sumaya_tz","name":"Сумая","f":1},{"id":"esma_tz","name":"Эсма","f":1},{"id":"mahmud_tz","name":"Махмуд"}]},{"id":"kyzylgul","name":"Кызылгүл","f":1,"children":[{"id":"yun0_kz","name":"Назира","f":1,"note":"Юнусова Назира"},{"id":"yun1_kz","name":"Фарида","f":1,"note":"Юнусова Фарида"},{"id":"yun2_kz","name":"Санжарбек","note":"Юнусов Санжарбек"},{"id":"yun3_kz","name":"Хабиба","f":1,"note":"Юнусова Хабиба"},{"id":"yun4_kz","name":"Мухаммад","note":"Юнусов Мухаммад"},{"id":"yun5_kz","name":"Мадина","f":1,"note":"Юнусова Мадина"},{"id":"yun6_kz","name":"Сакина","f":1,"note":"Юнусова Сакина"}]},{"id":"rano","name":"Рано","f":1,"children":[{"id":"bilal_rn","name":"Билал"},{"id":"osmon_rn","name":"Осмон"}]},{"id":"zymyrat","name":"Зымырат","f":1},{"id":"arslanbek","name":"Арсланбек","children":[{"id":"meerim_ar","name":"Мээрим","f":1},{"id":"muhammat_ar","name":"Мухаммад"}]},{"id":"mirbek","name":"Мирбек","children":[{"id":"maryam_mb","name":"Марьям","f":1}]}]},{"id":"zebo","name":"Зебо","f":1,"children":[{"id":"aman","name":"Аман","children":[{"id":"alfiya","name":"Алфия","f":1},{"id":"asiya","name":"Асия","f":1},{"id":"hadija_am","name":"Хадича","f":1},{"id":"aysha","name":"Айша","f":1},{"id":"alinur","name":"Алинур"}]},{"id":"azamat","name":"Азамат","children":[{"id":"ibrahim_az","name":"Ибрахим"},{"id":"menmet_az","name":"Мехмед"},{"id":"muhammed_az","name":"Мухаммед"},{"id":"ilima_az","name":"Илима","f":1},{"id":"safiya_az","name":"Сафия","f":1}]}]}]},{"id":"aijigit","name":"Айжигит"},{"id":"adil","name":"Адил","children":[{"id":"musa","name":"Муса","children":[{"id":"muzaffar","name":"Музаффар"},{"id":"mustafa_m","name":"Мустафа"},{"id":"shahnoza","name":"Шахноза","f":1},{"id":"ainura","name":"Айнура","f":1}]},{"id":"siraj","name":"Сиражидин","children":[{"id":"rahim","name":"Рахим"},{"id":"gulnoza_s","name":"Гулноза","f":1},{"id":"gulanda_s","name":"Гуланда","f":1},{"id":"shukurullo_s","name":"Шукурулло"}]},{"id":"mahmadsafon","name":"Махмадсафо","children":[{"id":"zhumabai_ms","name":"Жумабай"},{"id":"nurullo_ms","name":"Нурулло"},{"id":"zarina_ms","name":"Зарина","f":1},{"id":"aijigit_ms","name":"Айжигит"},{"id":"bilal_ms","name":"Билал"},{"id":"asan_ms","name":"Асан"},{"id":"zura_ms","name":"Зура","f":1}]},{"id":"shakir","name":"Шакир","children":[{"id":"safiya_sh","name":"Сафия","f":1},{"id":"ali_sh","name":"Али"},{"id":"amin","name":"Амин"},{"id":"yasin","name":"Ясин"}]},{"id":"shari","name":"Шаари","f":1,"children":[{"id":"nimat_sh","name":"Нимат","children":[{"id":"ali_nm_nimat_","name":"Али","b":"05.08.2001"},{"id":"usman_nm_nimat_","name":"Усман","b":"17.12.2005"},{"id":"umar_nm_nimat_","name":"Умар","b":"07.08.2009"},{"id":"muhammad_nm_nimat_","name":"Мухаммад","b":"25.01.2015"},{"id":"samara_nm_nimat_","name":"Самара","f":1,"b":"07.12.2022"}]},{"id":"nisrat_sh","name":"Нисрат","children":[{"id":"yun0_nsh","name":"Назира","f":1,"note":"Юнусова Назира"},{"id":"yun1_nsh","name":"Фарида","f":1,"note":"Юнусова Фарида"},{"id":"yun2_nsh","name":"Санжарбек","note":"Юнусов Санжарбек"},{"id":"yun3_nsh","name":"Хабиба","f":1,"note":"Юнусова Хабиба"},{"id":"yun4_nsh","name":"Мухаммад","note":"Юнусов Мухаммад"},{"id":"yun5_nsh","name":"Мадина","f":1,"note":"Юнусова Мадина"},{"id":"yun6_nsh","name":"Сакина","f":1,"note":"Юнусова Сакина"}]},{"id":"sanovar_sh","name":"Сановар","f":1},{"id":"sabohat_sh","name":"Сабохат","f":1},{"id":"tashbubu_sh","name":"Ташбүбү","f":1},{"id":"nazar_sh2","name":"Назар"}]},{"id":"bari","name":"Барги","f":1,"children":[{"id":"hayrullo_b","name":"Хайрулло"},{"id":"gulsara_b","name":"Гулсара","f":1},{"id":"maisara_b","name":"Майсара","f":1},{"id":"aisara_b","name":"Айсара","f":1},{"id":"kurasan_b","name":"Курасан"}]},{"id":"asalkan","name":"Асалкан","f":1,"children":[{"id":"sailikhan_a","name":"Сайлихан","f":1},{"id":"raikhan_a","name":"Райхан","f":1},{"id":"fazlidin_a","name":"Фазлидин"},{"id":"shahabidin_a","name":"Шахабидин"},{"id":"azamat_a","name":"Азамат"},{"id":"ainura_a","name":"Айнура","f":1}]},{"id":"zuurakan","name":"Зуурахан","f":1,"children":[{"id":"madina_zu","name":"Мадина","f":1},{"id":"bakir_zu","name":"Бакир"}]},{"id":"dilbar","name":"Дилбар","f":1,"children":[{"id":"kurbanai_d","name":"Курбанай","f":1},{"id":"muhammad_d","name":"Мухаммед"},{"id":"baktybek_d","name":"Бактыбек"},{"id":"azamat_d","name":"Азамат"},{"id":"sumaya_d","name":"Сумая","f":1}]},{"id":"zulaykha","name":"Зулайха","f":1,"children":[{"id":"asatilla_z","name":"Асатилла"},{"id":"ikmatilla_z","name":"Икматилла","children":[{"id":"narmin_ik_z","name":"Нармин","f":1},{"id":"alinur_ik_z","name":"Алинур"},{"id":"dariya_ik_z","name":"Дария","f":1},{"id":"bermet_ik_z","name":"Бермет","f":1}]},{"id":"zamira_z","name":"Замира","f":1},{"id":"gulmira_z","name":"Гулмира","f":1},{"id":"abdullo_z","name":"Абдулло"}]}]},{"id":"mamadi","name":"Махмади","children":[{"id":"mahmanabi","name":"Махманаби","children":[{"id":"muhammed","name":"Мухаммед","children":[{"id":"ahat","name":"Ахат"}]},{"id":"sherali","name":"Шерали","children":[{"id":"halilulo","name":"Халилулло"},{"id":"ramazan","name":"Рамазан"}]},{"id":"mahbuba","name":"Махбуба","f":1},{"id":"habiba","name":"Хабиба","f":1},{"id":"hasan_m","name":"Хасан"},{"id":"zuura_m","name":"Зуура","f":1},{"id":"abdulla_m","name":"Абдулла"}]},{"id":"kadyrali","name":"Кадырали","children":[{"id":"habibulla","name":"Хабибулла","children":[{"id":"safiya_hb","name":"Сафия","f":1},{"id":"haticha_hb","name":"Хатича","f":1},{"id":"muhammad_h","name":"Мухаммед"}]},{"id":"mustafa_k","name":"Мустафа","children":[{"id":"sayfura_mk","name":"Сайфура","f":1},{"id":"abidin","name":"Абидин"},{"id":"alixan","name":"Алихан"},{"id":"tanzilya_mk","name":"Танзиля","f":1},{"id":"azaliya_mk","name":"Азалия","f":1}]},{"id":"raziya","name":"Разия","f":1,"children":[{"id":"ishak_rz","name":"Исхак"},{"id":"ibrahim_rz","name":"Ибрахим"}]},{"id":"marziya","name":"Марзия","f":1,"children":[{"id":"samira_mz","name":"Самира","f":1},{"id":"muhammad_mz","name":"Мухаммад"},{"id":"abdurahman_mz","name":"Абдурахман"},{"id":"abdullo_mz","name":"Абдулло"},{"id":"ahsana_mz","name":"Ахсана","f":1}]}]},{"id":"kiymatkan","name":"Кыйматхан","f":1,"children":[{"id":"sayfullo","name":"Сайфулла","children":[{"id":"rahima_sf","name":"Рахима","f":1},{"id":"bilal_sf","name":"Билал"},{"id":"dariya_sf","name":"Дария","f":1},{"id":"nagima_sf","name":"Нагима","f":1},{"id":"nurmuhammed_sf","name":"Нурмухаммед"}]},{"id":"nasrullo_ky","name":"Насрулла","children":[{"id":"asenat_ns","name":"Асенат","f":1},{"id":"muhammednabi_ns","name":"Мухаммеднаби"}]},{"id":"shukrullo_ky","name":"Шукрулла","children":[{"id":"muhammed_sk","name":"Мухаммед"},{"id":"maryam_sk","name":"Марьям","f":1}]},{"id":"madina_ky","name":"Мадина","f":1,"children":[{"id":"ibragim_md","name":"Ибрагим"},{"id":"imran_md","name":"Имран"},{"id":"ismail_md","name":"Исмаил"}]}]},{"id":"usen","name":"Үсөн","children":[{"id":"hayrullo","name":"Хайрулло"},{"id":"yarmuhammad","name":"Ярмухаммад"}]},{"id":"nazakat","name":"Назакат","f":1,"children":[{"id":"rahim_nz","name":"Рахим"},{"id":"gulnoza_nz","name":"Гулноза","f":1},{"id":"gulanda_nz","name":"Гуланда","f":1},{"id":"shukurullo_nz","name":"Шукурулло"}]},{"id":"jamilya","name":"Жамиля","f":1,"children":[{"id":"altynbek_jm","name":"Алтынбек"},{"id":"almazbek_jm","name":"Алмазбек"},{"id":"aitbek_jm","name":"Айтбек"},{"id":"aziza_jm","name":"Азиза","f":1},{"id":"hamidulla_jm","name":"Хамидулла"},{"id":"abdulla_jm","name":"Абдулла"}]},{"id":"giyaz","name":"Гыяз","children":[{"id":"nurmuhammad","name":"Нурмухаммад","children":[{"id":"ahmad_nm","name":"Ахмад"}]},{"id":"umar_g","name":"Умар"},{"id":"firdaus","name":"Фирдаус","f":1},{"id":"aziz","name":"Азиз"},{"id":"rayana_g","name":"Раяна","f":1},{"id":"hamza","name":"Хамза"},{"id":"imran_g","name":"Имран"}]}]},{"id":"hadija","name":"Хадижа","f":1,"children":[{"id":"junus","name":"Жунус","children":[{"id":"nimat","name":"Нимат","children":[{"id":"ali_nm","name":"Али","b":"05.08.2001"},{"id":"usman_nm","name":"Усман","b":"17.12.2005"},{"id":"umar_nm","name":"Умар","b":"07.08.2009"},{"id":"muhammad_nm","name":"Мухаммад","b":"25.01.2015"},{"id":"samara_nm","name":"Самара","f":1,"b":"07.12.2022"}]},{"id":"nisrat","name":"Нисрат","children":[{"id":"yun0_ns","name":"Назира","f":1,"note":"Юнусова Назира"},{"id":"yun1_ns","name":"Фарида","f":1,"note":"Юнусова Фарида"},{"id":"yun2_ns","name":"Санжарбек","note":"Юнусов Санжарбек"},{"id":"yun3_ns","name":"Хабиба","f":1,"note":"Юнусова Хабиба"},{"id":"yun4_ns","name":"Мухаммад","note":"Юнусов Мухаммад"},{"id":"yun5_ns","name":"Мадина","f":1,"note":"Юнусова Мадина"},{"id":"yun6_ns","name":"Сакина","f":1,"note":"Юнусова Сакина"}]},{"id":"sanovar","name":"Сановар","f":1},{"id":"sabohat","name":"Сабохат","f":1},{"id":"tashbubu_j","name":"Ташбүбү","f":1},{"id":"nazar_j","name":"Назар"}]},{"id":"kurbanbuush","name":"Курбанбүүш","f":1,"children":[{"id":"salim","name":"Салим"},{"id":"orozmat","name":"Орозмат"},{"id":"meerinsa","name":"Мееринса","f":1},{"id":"orozali","name":"Орозали"}]},{"id":"hafiza","name":"Хафиза","f":1,"children":[{"id":"kibiryo_h","name":"Кибирё","f":1,"children":[{"id":"orozbek_h","name":"Орозбек"},{"id":"dastan_h","name":"Дастан"},{"id":"datka_h","name":"Датка","f":1},{"id":"bermet_h","name":"Бермет","f":1},{"id":"bayana_k_h","name":"Баяна","f":1}]},{"id":"kamalidin_h","name":"Камалидин","children":[{"id":"fatima_k_kamali","name":"Фатима","f":1,"b":"14.09.2013"},{"id":"muhammadsalih_kamali","name":"Мухаммедсалих","b":"15.11.2015"},{"id":"malikazekhra_kamali","name":"Маликазехра","f":1,"b":"27.10.2021"}],"b":"05.11.1985"},{"id":"sayra_h","name":"Сайра","f":1,"children":[{"id":"nursultan_sayra_","name":"Нурсултан"},{"id":"muhammad_k_sayra_","name":"Мухаммад"},{"id":"jusup_sayra_","name":"Юсуф"},{"id":"aliya_sayra_","name":"Алия","f":1},{"id":"abdulla_k_sayra_","name":"Абдулла"}]},{"id":"feruza_h","name":"Феруза","f":1,"children":[{"id":"rayana_feruza","name":"Раяна","f":1},{"id":"rabiya_feruza","name":"Рабия","f":1},{"id":"saliha_fk_feruza","name":"Салиха","f":1},{"id":"umar_k_feruza","name":"Умар"}]},{"id":"ibrahim_h","name":"Ибрахим","children":[{"id":"amina_k_ibrahi","name":"Амина","f":1},{"id":"albina_k_ibrahi","name":"Албина","f":1},{"id":"safiya_ibrahi","name":"Сафия","f":1},{"id":"sabina_ibrahi","name":"Сабина","f":1}]}]}]}]},{"id":"koshbak_shay","name":"Кошбак","children":[{"id":"nazar_sh","name":"Назар","children":[{"id":"mamyt_sh","name":"Мамыт"},{"id":"kurbanbek_sh","name":"Курбанбек"}]},{"id":"sayitkan_sh","name":"Сайыткан","children":[{"id":"suyun_sh","name":"Суйун","children":[{"id":"altynbek_sh","name":"Алтынбек"}]}]}]}]}]}]}]}]}]}]};
+
+/* ══════════════════════════
+   INDEX
+══════════════════════════ */
+var nodeMap={}, parentMap={};
+var ADMIN_USER="admin";
+var ADMIN_HASH="a02ec992fd1ac20887e2eb95ba6cd5e3e01635599bf796992b301d15bb19c258";
+var TREE_STORAGE_KEY="arzykul_tree_data";
+var adminAuthenticated=false;
+
+function indexTree(n, par){
+  nodeMap[n.id]=n;
+  parentMap[n.id]=par||null;
+  if(n.children) n.children.forEach(function(c){indexTree(c,n.id);});
+}
+
+function buildIndex(){
+  nodeMap={}; parentMap={};
+  indexTree(TREE, null);
+}
+
+function hashText(text){
+  if(!window.crypto||!window.crypto.subtle){
+    return Promise.resolve(text);
+  }
+  var encoder=new TextEncoder();
+  return window.crypto.subtle.digest("SHA-256", encoder.encode(text)).then(function(hash){
+    var hex=[];
+    var view=new Uint8Array(hash);
+    view.forEach(function(b){ hex.push(("00"+b.toString(16)).slice(-2)); });
+    return hex.join("");
+  });
+}
+
+function loadSavedTree(){
+  try{
+    var raw=localStorage.getItem(TREE_STORAGE_KEY);
+    if(!raw) return;
+    var saved=JSON.parse(raw);
+    if(saved && typeof saved === "object" && saved.id){
+      TREE = saved;
+    }
+  }catch(e){}
+}
+
+function saveTree(){
+  try{
+    localStorage.setItem(TREE_STORAGE_KEY, JSON.stringify(TREE));
+  }catch(e){}
+}
+
+function authenticatedFromSession(){
+  adminAuthenticated = sessionStorage.getItem("adminLoggedIn") === "1";
+}
+
+function openAdminPanel(){
+  if(!adminAuthenticated){
+    openAdminLogin();
+    return;
+  }
+  showAdminPanel();
+}
+
+function openAdminLogin(){
+  var overlay=document.getElementById("adminLoginOverlay");
+  if(!overlay) return;
+  overlay.classList.add("open");
+  overlay.style.display="block";
+  overlay.setAttribute("aria-hidden","false");
+  document.getElementById("adminUsername").focus();
+}
+
+function closeAdminLogin(){
+  var overlay=document.getElementById("adminLoginOverlay");
+  if(!overlay) return;
+  overlay.classList.remove("open");
+  overlay.style.display="none";
+  overlay.setAttribute("aria-hidden","true");
+  var status=document.getElementById("adminLoginStatus");
+  if(status) status.textContent="";
+}
+
+function showAdminPanel(){
+  refreshAdminSelectors();
+  var panel=document.getElementById("adminPanel");
+  if(panel){
+    panel.classList.add("open");
+    panel.style.display="block";
+    panel.setAttribute("aria-hidden","false");
+  }
+  var status=document.getElementById("adminPanelStatus");
+  if(status) status.textContent="";
+}
+
+function hideAdminPanel(){
+  var panel=document.getElementById("adminPanel");
+  if(panel){
+    panel.classList.remove("open");
+    panel.style.display="none";
+    panel.setAttribute("aria-hidden","true");
+  }
+}
+
+function handleAdminLogin(e){
+  e.preventDefault();
+  var username=document.getElementById("adminUsername").value.trim();
+  var password=document.getElementById("adminPassword").value;
+  var status=document.getElementById("adminLoginStatus");
+  if(!username||!password){
+    if(status){ status.textContent="Колдонуучу аты жана сыр сөз керек."; status.className="admin-status error"; }
+    return;
+  }
+  if(username!==ADMIN_USER){
+    if(status){ status.textContent="Колдонуучу аты же сыр сөз туура эмес."; status.className="admin-status error"; }
+    return;
+  }
+  hashText(password).then(function(hash){
+    if(hash===ADMIN_HASH){
+      adminAuthenticated=true;
+      sessionStorage.setItem("adminLoggedIn","1");
+      if(status){ status.textContent="Ийгиликтүү кирдиңиз..."; status.className="admin-status success"; }
+      closeAdminLogin();
+      showAdminPanel();
+      setTimeout(function(){ if(status) status.textContent=""; }, 1800);
+    } else {
+      if(status){ status.textContent="Колдонуучу аты же сыр сөз туура эмес."; status.className="admin-status error"; }
+    }
+  });
+}
+
+function logoutAdmin(){
+  adminAuthenticated=false;
+  sessionStorage.removeItem("adminLoggedIn");
+  hideAdminPanel();
+  var status=document.getElementById("adminPanelStatus");
+  if(status){ status.textContent="Админдик сессия жабылды."; status.className="admin-status"; }
+}
+
+function refreshAdminSelectors(){
+  buildIndex();
+  var parentSelect=document.getElementById("parentSelect");
+  var personSelect=document.getElementById("personSelect");
+  if(!parentSelect||!personSelect) return;
+  var ids=Object.keys(nodeMap).sort(function(a,b){ return nodeMap[a].name.localeCompare(nodeMap[b].name); });
+  parentSelect.innerHTML="";
+  personSelect.innerHTML="<option value=\"\">-- Адамды тандаңыз --</option>";
+  ids.forEach(function(id){
+    var opt=document.createElement("option"); opt.value=id; opt.textContent=nodeMap[id].name;
+    parentSelect.appendChild(opt);
+    var opt2=opt.cloneNode(true);
+    personSelect.appendChild(opt2);
+  });
+  if(nodeMap["mandagul"]) parentSelect.value="mandagul";
+}
+
+function selectManagedPerson(){
+  var select=document.getElementById("personSelect");
+  var id=select.value;
+  var status=document.getElementById("adminPanelStatus");
+  if(!id){
+    document.getElementById("personName").value="";
+    document.getElementById("personGender").value="m";
+    if(status){ status.textContent="Жаңы адам кошсоңуз болот."; status.className="admin-status"; }
+    return;
+  }
+  var node=nodeMap[id];
+  if(node){
+    document.getElementById("personName").value=node.name||"";
+    document.getElementById("personGender").value=node.f?"f":"m";
+    document.getElementById("parentSelect").value=parentMap[id]||"mandagul";
+    if(status){ status.textContent="Тандалган адам оңдоого даяр."; status.className="admin-status"; }
+  }
+}
+
+function findParentObject(id){
+  var pid=parentMap[id];
+  return pid?nodeMap[pid]:null;
+}
+
+function isDescendant(ancestorId, descendantId){
+  var current=parentMap[descendantId];
+  while(current){
+    if(current===ancestorId) return true;
+    current=parentMap[current];
+  }
+  return false;
+}
+
+function removeNodeById(id){
+  var parent=findParentObject(id);
+  if(!parent||!parent.children) return false;
+  for(var i=0;i<parent.children.length;i++){
+    if(parent.children[i].id===id){ parent.children.splice(i,1); return true; }
+  }
+  return false;
+}
+
+function addManagedPerson(){
+  var name=document.getElementById("personName").value.trim();
+  var gender=document.getElementById("personGender").value;
+  var parentId=document.getElementById("parentSelect").value;
+  var status=document.getElementById("adminPanelStatus");
+  if(!name){ if(status){ status.textContent="Bir isim giriniz."; status.className="admin-status error"; } return; }
+  var parent=nodeMap[parentId]||TREE;
+  if(!parent.children) parent.children=[];
+  var id="custom_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  parent.children.push({id:id,name:name,f:gender==="f"?1:0});
+  saveTree();
+  buildIndex();
+  refreshAdminSelectors();
+  renderMap();
+  if(status){ status.textContent="Адам кошулду."; status.className="admin-status success"; }
+}
+
+function updateManagedPerson(){
+  var selected=document.getElementById("personSelect").value;
+  var name=document.getElementById("personName").value.trim();
+  var gender=document.getElementById("personGender").value;
+  var targetParent=document.getElementById("parentSelect").value;
+  var status=document.getElementById("adminPanelStatus");
+  if(!selected){ if(status){ status.textContent="Оңдоо үчүн адамды тандаңыз."; status.className="admin-status error"; } return; }
+  if(!name){ if(status){ status.textContent="Bir isim giriniz."; status.className="admin-status error"; } return; }
+  var node=nodeMap[selected];
+  if(!node){ if(status){ status.textContent="Тандалган адам табылган жок."; status.className="admin-status error"; } return; }
+  node.name=name;
+  node.f=(gender==="f"?1:0);
+  if(targetParent && targetParent!==selected){
+    if(isDescendant(selected,targetParent)){
+      if(status){ status.textContent="Ата-эне туура эмес тандалды."; status.className="admin-status error"; }
+      return;
+    }
+    var currentParent=findParentObject(selected);
+    var newParent=nodeMap[targetParent]||TREE;
+    if(currentParent){ removeNodeById(selected); }
+    if(!newParent.children) newParent.children=[];
+    newParent.children.push(node);
+  }
+  saveTree();
+  buildIndex();
+  refreshAdminSelectors();
+  renderMap();
+  if(status){ status.textContent="Адам жаңыртылды."; status.className="admin-status success"; }
+}
+
+function deleteManagedPerson(){
+  var selected=document.getElementById("personSelect").value;
+  var status=document.getElementById("adminPanelStatus");
+  if(!selected){ if(status){ status.textContent="Өчүрүү үчүн адамды тандаңыз."; status.className="admin-status error"; } return; }
+  if(selected===TREE.id){ if(status){ status.textContent="Түпкү атаны өчүрүүгө болбойт."; status.className="admin-status error"; } return; }
+  if(!confirm("Тандалган адамды жана анын бардык урпактарын өчүрөсүзбү?")) return;
+  if(!removeNodeById(selected)){
+    if(status){ status.textContent="Өчүрүү мүмкүн болгон жок."; status.className="admin-status error"; }
+    return;
+  }
+  saveTree();
+  buildIndex();
+  refreshAdminSelectors();
+  renderMap();
+  document.getElementById("personSelect").value="";
+  document.getElementById("personName").value="";
+  if(status){ status.textContent="Адам өчүрүлдү."; status.className="admin-status success"; }
+}
+
+function initAdmin(){
+  loadSavedTree();
+  authenticatedFromSession();
+  buildIndex();
+  closeAdminLogin();
+  hideAdminPanel();
+  var overlay=document.getElementById("adminLoginOverlay");
+  if(overlay){
+    overlay.classList.remove("open");
+    overlay.style.display="none";
+    overlay.setAttribute("aria-hidden","true");
+  }
+  var panel=document.getElementById("adminPanel");
+  if(panel){
+    panel.classList.remove("open");
+    panel.style.display="none";
+    panel.setAttribute("aria-hidden","true");
+  }
+}
+
+initAdmin();
+
+function countDesc(n){
+  if(!n.children||!n.children.length) return 0;
+  return n.children.reduce(function(s,c){return s+1+countDesc(c);},0);
+}
+function ini(s){return s.slice(0,1).toUpperCase();}
+function nodeW(n){return Math.max(140, n.name.length*9+96);}
+
+/* ══════════════════════════
+   MIND MAP STATE
+   expanded: Set of expanded node ids
+   positions: id -> {x,y,w,h}  (center of right edge = anchor out)
+══════════════════════════ */
+var expanded = {};   // id -> true/false (toggled)
+var positions = {};  // id -> {x, y, w, h}
+var NODE_H = 44;
+var GAP_X = 200;     // horizontal gap between parent right edge and child left
+var GAP_Y = 54;      // vertical spacing between siblings
+
+/* ══════════════════════════
+   PAN / ZOOM
+══════════════════════════ */
+var tx=0, ty=0, sc=1;
+var drag={on:false,sx:0,sy:0,stx:0,sty:0};
+var canvas=document.getElementById("canvas");
+var scene=document.getElementById("scene");
+
+canvas.addEventListener("mousedown",function(e){
+  if(e.target.closest(".node")) return;
+  drag={on:true,sx:e.clientX,sy:e.clientY,stx:tx,sty:ty};
+});
+window.addEventListener("mousemove",function(e){
+  if(!drag.on) return;
+  tx=drag.stx+(e.clientX-drag.sx); ty=drag.sty+(e.clientY-drag.sy);
+  applyT();
+});
+window.addEventListener("mouseup",function(){drag.on=false;});
+canvas.addEventListener("touchstart",function(e){
+  if(e.touches.length===1&&!e.target.closest(".node")){
+    var t=e.touches[0];
+    drag={on:true,sx:t.clientX,sy:t.clientY,stx:tx,sty:ty};
+  }
+},{passive:true});
+canvas.addEventListener("touchmove",function(e){
+  if(!drag.on||e.touches.length!==1) return;
+  var t=e.touches[0];
+  tx=drag.stx+(t.clientX-drag.sx); ty=drag.sty+(t.clientY-drag.sy);
+  applyT(); e.preventDefault();
+},{passive:false});
+canvas.addEventListener("touchend",function(){drag.on=false;});
+canvas.addEventListener("wheel",function(e){
+  e.preventDefault();
+  var f=e.deltaY<0?1.1:0.9;
+  var r=canvas.getBoundingClientRect();
+  var mx=e.clientX-r.left, my=e.clientY-r.top;
+  sc=Math.max(0.2,Math.min(4,sc*f));
+  tx=mx-(mx-tx)*f; ty=my-(my-ty)*f;
+  applyT();
+},{passive:false});
+function applyT(){scene.style.transform="translate("+tx+"px,"+ty+"px) scale("+sc+")";}
+function zoomBy(f){
+  var cw=canvas.clientWidth,ch=canvas.clientHeight;
+  sc=Math.max(0.2,Math.min(4,sc*f));
+  tx=cw/2-(cw/2-tx)*f; ty=ch/2-(ch/2-ty)*f;
+  applyT();
+}
+function fitAll(){
+  var els=scene.querySelectorAll(".node");
+  if(!els.length) return;
+  var mn={x:Infinity,y:Infinity}, mx={x:-Infinity,y:-Infinity};
+  els.forEach(function(el){
+    var l=parseFloat(el.style.left)||0, t=parseFloat(el.style.top)||0;
+    var w=el.offsetWidth||160, h=NODE_H;
+    mn.x=Math.min(mn.x,l); mn.y=Math.min(mn.y,t);
+    mx.x=Math.max(mx.x,l+w); mx.y=Math.max(mx.y,t+h);
+  });
+  var cw=canvas.clientWidth, ch=canvas.clientHeight;
+  var pw=mx.x-mn.x+80, ph=mx.y-mn.y+80;
+  sc=Math.min(Math.max(0.25,Math.min(cw/pw,ch/ph)),1.4);
+  tx=(cw-pw*sc)/2-mn.x*sc+40*sc;
+  ty=(ch-ph*sc)/2-mn.y*sc+40*sc;
+  applyT();
+}
+
+/* ══════════════════════════
+   LAYOUT ENGINE
+   Recursively assign y positions (subtree height),
+   then place nodes with fixed x = depth * (nodeW + GAP_X)
+══════════════════════════ */
+
+// Returns total height consumed by subtree of n (if expanded)
+function subtreeH(n){
+  if(!expanded[n.id]||!n.children||!n.children.length) return NODE_H;
+  var sum=0;
+  n.children.forEach(function(c){sum+=subtreeH(c)+GAP_Y-NODE_H;});
+  sum+=NODE_H; // last child
+  // actually: total = children.length * NODE_H + (children.length-1) * (GAP_Y - NODE_H)
+  // simpler: sum of each child subtreeH + gaps between
+  return sum;
+}
+
+function subtreeHeight(n){
+  if(!expanded[n.id]||!n.children||!n.children.length) return NODE_H;
+  var total=0;
+  n.children.forEach(function(c,i){
+    if(i>0) total+=GAP_Y-NODE_H; // gap between siblings
+    total+=subtreeHeight(c);
+  });
+  return total;
+}
+
+// Place node n at left=x, center-y=cy
+// Returns array of {id,x,y,w,h,data} and edges {x1,y1,x2,y2}
+function layout(n, x, cy, nodesArr, edgesArr, parentAnchor){
+  var w=nodeW(n), h=NODE_H;
+  var top=cy-h/2;
+  positions[n.id]={x:x,y:top,w:w,h:h};
+  nodesArr.push({id:n.id, x:x, y:top, w:w, h:h, data:n});
+
+  if(parentAnchor){
+    edgesArr.push({
+      x1:parentAnchor.x, y1:parentAnchor.y,
+      x2:x,              y2:cy, id:n.id
+    });
+  }
+
+  if(expanded[n.id]&&n.children&&n.children.length){
+    var childX=x+w+GAP_X;
+    // compute total height of all children subtrees + gaps
+    var totalH=0;
+    n.children.forEach(function(c,i){
+      if(i>0) totalH+=(GAP_Y-NODE_H);
+      totalH+=subtreeHeight(c);
+    });
+    var startCY=cy-totalH/2+subtreeHeight(n.children[0])/2;
+    var curCY=cy-totalH/2;
+    n.children.forEach(function(c){
+      var ch=subtreeHeight(c);
+      var childCY=curCY+ch/2;
+      layout(c, childX, childCY, nodesArr, edgesArr, {x:x+w, y:cy});
+      curCY+=ch+(GAP_Y-NODE_H);
+    });
+  }
+}
+
+/* ══════════════════════════
+   RENDER
+══════════════════════════ */
+var domNodes={}; // id -> el  (persistent DOM elements)
+var domLines={}; // edgeKey -> path el
+
+function expandNode(id){
+  if(!nodeMap[id]) return;
+  var n=nodeMap[id];
+  if(!n.children||!n.children.length) return;
+
+  // toggle
+  if(expanded[id]){
+    // collapse: remove this and all descendants
+    collapseSubtree(id);
+  } else {
+    expanded[id]=true;
+  }
+  renderMap();
+  
+  // Auto-pan to show the expanded node
+  setTimeout(function(){
+    var pos=positions[id];
+    if(pos){
+      var cw=visW();
+      var ch=visH();
+      var nodeX=pos.x+pos.w/2;
+      var nodeY=pos.y+pos.h/2;
+      // Center the node on screen with smooth animation
+      var targetTx=cw/2-nodeX*sc;
+      var targetTy=ch/2-nodeY*sc;
+      animatePan(targetTx, targetTy, 400);
+    }
+  },50);
+}
+
+function animatePan(targetTx, targetTy, duration){
+  var startTx=tx, startTy=ty;
+  var startTime=Date.now();
+  
+  function ease(t){
+    // ease-out cubic
+    t=Math.min(1,t);
+    return 1-Math.pow(1-t,3);
+  }
+  
+  function frame(){
+    var now=Date.now();
+    var elapsed=now-startTime;
+    var progress=Math.min(1, elapsed/duration);
+    var t=ease(progress);
+    tx=startTx+(targetTx-startTx)*t;
+    ty=startTy+(targetTy-startTy)*t;
+    applyT();
+    if(progress<1){
+      requestAnimationFrame(frame);
+    }
+  }
+  
+  requestAnimationFrame(frame);
+}
+
+function collapseSubtree(id){
+  expanded[id]=false;
+  var n=nodeMap[id];
+  if(n.children) n.children.forEach(function(c){collapseSubtree(c.id);});
+}
+
+function resetTree(){
+  // collapse all except root
+  Object.keys(expanded).forEach(function(k){expanded[k]=false;});
+  expanded["mandagul"]=true;
+  renderMap();
+  setTimeout(fitAll,60);
+}
+
+function renderMap(){
+  var nodesArr=[], edgesArr=[];
+  // start root at x=40, cy=300
+  layout(TREE, 40, 300, nodesArr, edgesArr, null);
+
+  // ── update SVG lines ──
+  var svg=document.getElementById("lines");
+  // collect current edge keys
+  var newEdgeKeys={};
+  edgesArr.forEach(function(e){
+    var key=e.x1+","+e.y1+","+e.x2+","+e.y2;
+    newEdgeKeys[key]=e;
+  });
+  // remove stale
+  Object.keys(domLines).forEach(function(k){
+    if(!newEdgeKeys[k]){domLines[k].remove();delete domLines[k];}
+  });
+  // add new
+  Object.keys(newEdgeKeys).forEach(function(k){
+    if(!domLines[k]){
+      var e=newEdgeKeys[k];
+      var path=document.createElementNS("http://www.w3.org/2000/svg","path");
+      var mx=(e.x1+e.x2)/2;
+      path.setAttribute("d","M "+e.x1+" "+e.y1+" C "+mx+" "+e.y1+" "+mx+" "+e.y2+" "+e.x2+" "+e.y2);
+      path.setAttribute("fill","none");
+      path.setAttribute("stroke",genColor(depthOf(e.id)));path.setAttribute("stroke-opacity",".55");
+      path.setAttribute("stroke-width","2.5");
+      path.setAttribute("stroke-linecap","round");
+      svg.appendChild(path);
+      domLines[k]=path;
+    }
+  });
+  // update SVG size
+  var maxX=0,maxY=0;
+  nodesArr.forEach(function(nd){maxX=Math.max(maxX,nd.x+nd.w+80);maxY=Math.max(maxY,nd.y+nd.h+80);});
+  svg.setAttribute("width",Math.max(maxX,800));
+  svg.setAttribute("height",Math.max(maxY,600));
+
+  // ── update node DOM elements ──
+  var newIds={};
+  nodesArr.forEach(function(nd){newIds[nd.id]=nd;});
+
+  // remove nodes no longer in layout
+  Object.keys(domNodes).forEach(function(id){
+    if(!newIds[id]){domNodes[id].remove();delete domNodes[id];}
+  });
+
+  // update or create nodes
+  nodesArr.forEach(function(nd){
+    var n=nd.data;
+    var hasKids=n.children&&n.children.length>0;
+    var isExp=!!expanded[n.id];
+    var cd=countDesc(n);
+
+    if(!domNodes[nd.id]){
+      // create
+      var el=document.createElement("div");
+      domNodes[nd.id]=el;
+      scene.appendChild(el);
+      (function(id){
+        el.addEventListener("click",function(e){e.stopPropagation();expandNode(id);showCard(id);});
+      })(nd.id);
+    }
+    var el=domNodes[nd.id];
+    // update classes
+    var cls="node"
+      +(isExp?" expanded":"")
+      +(n.f?" female":"")
+      +(hasKids?" has-kids":" leaf-node");
+    el.className=cls+(selId===n.id?" sel":"");
+    el.style.setProperty("--g",genColor(depthOf(n.id)));
+    // update position
+    el.style.left=nd.x+"px";
+    el.style.top=nd.y+"px";
+    el.style.width=nd.w+"px";
+    // update content
+    var inner='<div class="n-av">'+ini(n.name)+'</div>'
+      +'<div class="n-nm">'+n.name+'</div>';
+    if(hasKids) inner+='<div class="n-ct">'+cd+'</div>';
+    el.innerHTML=inner;
+  });
+  /* generation labels */
+  [].forEach.call(scene.querySelectorAll(".genlbl"),function(x){x.remove();});
+  var cols={},minY=Infinity;
+  nodesArr.forEach(function(nd){var d=depthOf(nd.id);if(cols[d]===undefined||nd.x<cols[d])cols[d]=nd.x;minY=Math.min(minY,nd.y);});
+  Object.keys(cols).forEach(function(d){
+    var l=document.createElement("div");l.className="genlbl";l.textContent=(+d+1)+"-муун";
+    l.style.left=cols[d]+"px";l.style.top=(minY-40)+"px";l.style.setProperty("--g",genColor(+d));scene.appendChild(l);
+  });
+}
+
+
+/* ══════════════════════════
+   GENERATIONS, CARD, PINCH, BACKUP
+══════════════════════════ */
+var GEN=["#D4A574","#2A9FD8","#7BC47F","#E3B341","#C77DFF","#FF8FA3","#4DD0C4","#F28C52","#9FB4FF","#E8C9A0"];
+function genColor(d){return GEN[d%GEN.length];}
+function depthOf(id){var d=0,p=parentMap[id];while(p){d++;p=parentMap[p];}return d;}
+var selId=null;
+function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function visW(){return canvas.clientWidth-((window.innerWidth>700&&document.body.classList.contains("cardopen"))?340:0);}
+function visH(){return canvas.clientHeight-((window.innerWidth<=700&&document.body.classList.contains("cardopen"))?Math.round(window.innerHeight*.46):0);}
+function showCard(id){
+  var n=nodeMap[id];if(!n)return;
+  var old=selId;selId=id;
+  if(old&&domNodes[old])domNodes[old].classList.remove("sel");
+  if(domNodes[id])domNodes[id].classList.add("sel");
+  var d=depthOf(id),kids=n.children||[],path=[],p=parentMap[id];
+  while(p){path.unshift(p);p=parentMap[p];}
+  var c=document.getElementById("card");
+  c.className="open"+(n.f?" f":"");c.style.setProperty("--g",genColor(d));
+  var h='<div class="ch"><div class="cav">'+esc(ini(n.name))+'</div><div><div class="cn">'+esc(n.name)+'</div><div class="cs">'+(n.f?"Аял":"Эркек")+' · '+(d+1)+'-муун</div></div><button class="cx" onclick="closeCard()" aria-label="Жабуу">✕</button></div>';
+  h+='<div class="st"><div><b>'+kids.length+'</b><span>баласы</span></div><div><b>'+countDesc(n)+'</b><span>бардык урпагы</span></div><div><b>'+(d+1)+'</b><span>муун</span></div></div>';
+  if(n.note)h+='<div class="note">'+esc(n.note)+'</div>';
+  if(path.length){h+='<h5>Ата-бабалары</h5><div class="path">'+path.map(function(pid){return'<a onclick="focusPerson(\''+pid+'\')">'+esc(nodeMap[pid].name)+'</a>';}).join("")+'</div>';}
+  if(kids.length){h+='<h5>Балдары</h5><div class="chips">'+kids.map(function(k){return'<button class="chip'+(k.f?" f":"")+'" onclick="focusPerson(\''+k.id+'\')">'+(k.f?"♀ ":"")+esc(k.name)+'</button>';}).join("")+'</div>';}
+  c.innerHTML=h;document.body.classList.add("cardopen");
+}
+function closeCard(){
+  document.getElementById("card").className="";document.body.classList.remove("cardopen");
+  if(selId&&domNodes[selId])domNodes[selId].classList.remove("sel");selId=null;
+}
+function focusPerson(id){jumpTo(id);}
+/* pinch zoom (two fingers) */
+var pinch=null;
+canvas.addEventListener("touchstart",function(e){
+  if(e.touches.length===2){drag.on=false;var a=e.touches[0],b=e.touches[1];pinch={d:Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY),sc:sc};}
+},{passive:true});
+canvas.addEventListener("touchmove",function(e){
+  if(e.touches.length!==2||!pinch)return;
+  var a=e.touches[0],b=e.touches[1],d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
+  var r=canvas.getBoundingClientRect(),mx=(a.clientX+b.clientX)/2-r.left,my=(a.clientY+b.clientY)/2-r.top;
+  var ns=Math.max(0.2,Math.min(4,pinch.sc*d/pinch.d)),f=ns/sc;sc=ns;tx=mx-(mx-tx)*f;ty=my-(my-ty)*f;applyT();e.preventDefault();
+},{passive:false});
+canvas.addEventListener("touchend",function(e){if(e.touches.length<2)pinch=null;});
+canvas.addEventListener("click",function(e){if(!e.target.closest(".node"))closeCard();});
+/* backup */
+function exportTree(){
+  var st=document.getElementById("adminPanelStatus");
+  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(TREE,null,1)],{type:"application/json"}));
+  a.download="tukum-daragy.json";document.body.appendChild(a);a.click();a.remove();
+  if(st){st.textContent="Файл сакталды.";st.className="admin-status success";}
+}
+function importTree(inp){
+  var st=document.getElementById("adminPanelStatus"),f=inp.files&&inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var t=JSON.parse(r.result);if(!t||!t.id||!t.name)throw 0;
+      if(!confirm("Учурдагы дарак жүктөлгөн файл менен алмашат. Улантасызбы?"))return;
+      TREE=t;buildIndex();saveTree();refreshAdminSelectors();Object.keys(expanded).forEach(function(k){delete expanded[k];});expanded[TREE.id]=true;renderMap();setTimeout(fitAll,60);
+      if(st){st.textContent="Жүктөлдү: "+Object.keys(nodeMap).length+" адам.";st.className="admin-status success";}
+    }catch(e){if(st){st.textContent="Файл жараксыз.";st.className="admin-status error";}}
+    inp.value="";
+  };
+  r.readAsText(f);
+}
+
+/* ══════════════════════════
+   SEARCH
+══════════════════════════ */
+function doSearch(q){
+  document.getElementById("clearBtn").style.display=q?"block":"none";
+  var ov=document.getElementById("srOverlay");
+  if(!q||q.length<2){ov.style.display="none";return;}
+  var res=[];
+  for(var id in nodeMap){
+    if(nodeMap[id].name.toLowerCase().indexOf(q.toLowerCase())>=0) res.push(nodeMap[id]);
+  }
+  ov.style.display="block";
+  if(!res.length){ov.innerHTML='<div class="sr-none">Табылган жок — "'+q+'"</div>';return;}
+  var html="";
+  res.slice(0,16).forEach(function(n){
+    // build path
+    var p=[],pid=parentMap[n.id];
+    while(pid){p.unshift(nodeMap[pid].name);pid=parentMap[pid];}
+    html+='<div class="sr-item" onclick="jumpTo(\''+n.id+'\')">'+(n.f?"♀ ":"")+n.name+'<div class="sr-path">'+p.join(" › ")+'</div></div>';
+  });
+  ov.innerHTML=html;
+}
+function clearSearch(){
+  document.getElementById("searchInput").value="";
+  document.getElementById("clearBtn").style.display="none";
+  document.getElementById("srOverlay").style.display="none";
+}
+function jumpTo(id){
+  clearSearch();
+  // expand all ancestors
+  var pid=parentMap[id];
+  while(pid){expanded[pid]=true;pid=parentMap[pid];}
+  renderMap();
+  // scroll to node
+  setTimeout(function(){
+    var el=domNodes[id];
+    if(!el) return;
+    var l=parseFloat(el.style.left)||0, t=parseFloat(el.style.top)||0;
+    showCard(id);
+    var cw=visW(), ch=visH();
+    tx=cw/2-l*sc-80*sc; ty=ch/2-t*sc-22*sc;
+    applyT();
+  },60);
+}
+
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape") clearSearch();
+});
+
+/* ══════════════════════════
+   INIT
+══════════════════════════ */
+expanded["mandagul"]=true;
+renderMap();
+setTimeout(function(){
+  var cw=canvas.clientWidth, ch=canvas.clientHeight;
+  sc=0.9; tx=60; ty=ch/2-260;
+  applyT();
+},30);
+if(location.hash==="#admin")setTimeout(function(){try{openAdminPanel()}catch(e){}},300);
+</script>
+</body>
+</html>

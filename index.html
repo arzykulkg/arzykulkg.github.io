@@ -1281,7 +1281,7 @@ function bdBanner(){var L=bdList().filter(function(x){return x.dl<=7});if(!L.len
   var t=L.filter(function(x){return x.dl===0}),txt=t.length?"🎉 Бүгүн туулган күн: "+t.map(function(x){return x.n.name+" ("+ageOf(x.b)+")"}).join(", "):"🎂 "+L[0].dl+" күндөн кийин: "+L[0].n.name+" ("+(ageOf(L[0].b)+1)+" жашка толот)"+(L.length>1?" жана дагы "+(L.length-1):"");
   var d=document.createElement("div");d.id="bdb";d.textContent=txt;document.body.appendChild(d);d.onclick=function(){d.classList.remove("on");openBdays()};
   setTimeout(function(){d.classList.add("on")},1800);setTimeout(function(){d.classList.remove("on")},9000);
-  if(t.length&&window.Notification&&Notification.permission==="granted"){try{new Notification("🎉 Туулган күн",{body:txt.replace("🎉 ","")})}catch(e){}}}
+  if(t.length&&window.Notification&&Notification.permission==="granted"){try{var bt=txt.replace("🎉 ","");if(navigator.serviceWorker&&navigator.serviceWorker.ready){navigator.serviceWorker.ready.then(function(r){return r.showNotification("🎉 Туулган күн",{body:bt,icon:"icon-192.png"})}).catch(function(){})}else{new Notification("🎉 Туулган күн",{body:bt})}}catch(e){}}}
 addMenu("m10","🔔 Туулган күн эскертмеси",function(){if(!window.Notification){toast("Бул браузерде эскертме жок");return}Notification.requestPermission().then(function(p){toast(p==="granted"?"Күйгүзүлдү: тиркеме ачылганда эскертет":"Уруксат берилген жок")})},"#m4");
 /* ---- 5. print ---- */
 function printTree(){
@@ -1735,6 +1735,20 @@ $("#sheet").addEventListener("click",function(e){var b=e.target.closest('[data-a
 document.body.insertAdjacentHTML("beforeend",'<nav id="mnav"><button data-n="tree"><b>🌳</b><span>Дарак</span></button><button data-n="search"><b>🔍</b><span>Издөө</span></button><button data-n="br"><b>🌿</b><span>Бутактар</span></button><button data-n="add"><b>✍</b><span>Кошуу</span></button><button data-n="menu"><b>☰</b><span>Меню</span></button></nav>');
 $("#mnav").addEventListener("click",function(e){var t=e.target.closest("[data-n]");if(!t)return;vib();var k=t.dataset.n;
   if(k==="tree")window.scrollTo({top:0,behavior:"smooth"});else if(k==="search")$("#sb").click();else if(k==="br")openBranches();else if(k==="add")openSuggest();else $("#mb").click()});
+
+/* ================= v11.2: birthdays to phone calendar (.ics) ================= */
+function exportICS(){
+  var seen={},ev=[],now=new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z";
+  function ics(t){return String(t).replace(/\\/g,"\\\\").replace(/;/g,"\;").replace(/,/g,"\\,").replace(/\n/g,"\\n")}
+  Object.keys(nodeMap).forEach(function(id){var n=nodeMap[id],m=meta(n),b=pb(m.b),k=n.name+"|"+m.b;if(!b||!b.full||pb(m.d)||seen[k])return;seen[k]=1;
+    var ds=String(b.y).padStart(4,"0")+String(b.m).padStart(2,"0")+String(b.d).padStart(2,"0");
+    ev.push("BEGIN:VEVENT\r\nUID:bd-"+id+"@arzykulkg.github.io\r\nDTSTAMP:"+now+"\r\nDTSTART;VALUE=DATE:"+ds+"\r\nRRULE:FREQ=YEARLY\r\nSUMMARY:"+ics("🎂 "+n.name+" — туулган күн")+"\r\nDESCRIPTION:"+ics("Арзыкулов санжырасы")+"\r\nTRANSP:TRANSPARENT\r\nBEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:"+ics(n.name+" — бүгүн туулган күн")+"\r\nTRIGGER:PT9H\r\nEND:VALARM\r\nBEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:"+ics(n.name+" — эртең туулган күн")+"\r\nTRIGGER:-PT15H\r\nEND:VALARM\r\nEND:VEVENT")});
+  if(!ev.length){toast("Туулган күнү бар адам жок");return}
+  dl("arzykul-tuulgan-kunduor.ics","BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//arzykulkg//sanjyra//KY\r\nCALSCALE:GREGORIAN\r\n"+ev.join("\r\n")+"\r\nEND:VCALENDAR\r\n","text/calendar;charset=utf-8");
+  toast(ev.length+" туулган күн файлы даяр — ачып, календарга кошуңуз");
+}
+addMenu("m30","📅 Туулган күндөр → телефон календары (.ics)",exportICS,"#m4");
+(function(){var b=$("#m10");if(b)b.textContent="🔔 Эскертме (сайт ачылганда гана)"})();
 
 })();
 </script></body></html>

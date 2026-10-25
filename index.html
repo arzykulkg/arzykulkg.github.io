@@ -624,6 +624,13 @@ body.light #mnav{background:rgba(255,253,244,.95);border-top-color:rgba(154,116,
 @media(max-width:720px){body:not(.fv):not(.story):not(.bko):not(.sho):not(.gvo) #mnav{display:flex}body:not(.fv) #fab{bottom:calc(84px + env(safe-area-inset-bottom))}body:not(.fv){padding-bottom:calc(100px + env(safe-area-inset-bottom))}}
 body.sheet #mnav{display:none!important}
 
+/* ===== v11.3: grouped menu ===== */
+#menu{max-height:calc(100vh - 90px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+#menu .mh{font:700 .68rem 'Raleway',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:12px 14px 4px;opacity:.9;border-top:1px solid rgba(227,183,79,.25);margin-top:4px}
+#menu .mh:first-child{border-top:0;margin-top:0}
+body.light #menu .mh{color:#7a5a14}
+#menu a,#menu button{padding:11px 14px}
+
 </style></head><body>
 <canvas id="fx"></canvas>
 <div id="splash"><svg viewBox="0 0 200 200"><path class="st1" d="M100 185 V105"/><path class="st1 st2" d="M100 150 Q78 135 56 128"/><path class="st1 st3" d="M100 130 Q124 114 148 104"/><path class="st1 st4" d="M100 105 Q100 78 100 52"/>
@@ -1749,6 +1756,27 @@ function exportICS(){
 }
 addMenu("m30","📅 Туулган күндөр → телефон календары (.ics)",exportICS,"#m4");
 (function(){var b=$("#m10");if(b)b.textContent="🔔 Эскертме (сайт ачылганда гана)"})();
+
+/* ================= v11.3: grouped menu ================= */
+(function(){
+  var M=$("#menu");
+  function get(x){return typeof x==="string"?$(x):[].slice.call(M.children).filter(function(e){return x.test(e.textContent)})[0]}
+  var G=[
+   ["🌳 Көрүү",["#m29",/Тизме көрүнүшү|Дарак көрүнүшү/,"#m1",/Санжыра окуясы/,"#m2"]],
+   ["🧭 Тууганым",[/Эки адам кандай/,"#m3",/Тукум викторинасы/]],
+   ["🎂 Туулган күндөр",[/Жакынкы туулган/,"#m30","#m10","#m15"]],
+   ["📖 Китеп жана көргөзмө",["#m20","#m21",/Басып чыгаруу/,"#m23"]],
+   ["🎨 Көрүнүш",["#m6","#m22","#m13"]],
+   ["💾 Маалымат жана сактоо",["#m28","#m24","#m25","#m26","#m27"]],
+   ["🗺 Башка барактар",[/Чоң карта/,/Админ/]]
+  ];
+  var used=[],fr=document.createDocumentFragment();
+  G.forEach(function(g){var els=g[1].map(get).filter(Boolean);if(!els.length)return;
+    var h=document.createElement("div");h.className="mh";h.textContent=g[0];fr.appendChild(h);els.forEach(function(e){used.push(e);fr.appendChild(e)})});
+  [].slice.call(M.children).forEach(function(e){if(used.indexOf(e)<0&&e.tagName!=="INPUT"){if(e.id==="m4"||e.id==="m5")e.style.display="none";else fr.appendChild(e)}else if(used.indexOf(e)<0)fr.appendChild(e)});
+  M.appendChild(fr);
+})();
+setTimeout(function(){var M=$("#menu"),v=[].slice.call(M.children).filter(function(e){return/Тизме көрүнүшү|Дарак көрүнүшү/.test(e.textContent)})[0],a=$("#m29");if(v&&a&&a.nextSibling!==v)M.insertBefore(v,a.nextSibling)},900);
 
 })();
 </script></body></html>

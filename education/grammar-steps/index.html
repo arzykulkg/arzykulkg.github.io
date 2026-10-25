@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grammar Steps A1–A2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: classroom-software shell — teal top band, section tiles, one topic per screen with tabs (Rule · 3 exercises · Game · Q&A) and a fixed action row */
+:root{
+  --bg:#eef3f2; --panel:#ffffff; --ink:#1f2d33; --muted:#5f6f75; --line:#d3dedc;
+  --band:#0f6e6a; --band-ink:#fff; --accent:#0f6e6a; --hot:#e0742a; --sec:#3d6fb6;
+  --ok:#1e8a4b; --ok-bg:#e1f3e8; --bad:#c23b32; --bad-bg:#fbe5e3; --sel:#ffd98a;
+  --chip:#e6eeec; --chip-ink:#1f2d33; --star:#e8a317;
+  --display:"Lexend",system-ui,sans-serif; --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121a1c; --panel:#1b2528; --ink:#e8efef; --muted:#9db0b2; --line:#2f3d40; --band:#0c5a57; --accent:#4fc2b9; --hot:#f09a5a; --sec:#83a9e6;
+  --ok:#5fd18f; --ok-bg:#163226; --bad:#ff8c82; --bad-bg:#3a1e1c; --sel:#7d6420; --chip:#26333a; --chip-ink:#e8efef; --star:#f2c14e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121a1c; --panel:#1b2528; --ink:#e8efef; --muted:#9db0b2; --line:#2f3d40; --band:#0c5a57; --accent:#4fc2b9; --hot:#f09a5a; --sec:#83a9e6;
+  --ok:#5fd18f; --ok-bg:#163226; --bad:#ff8c82; --bad-bg:#3a1e1c; --sel:#7d6420; --chip:#26333a; --chip-ink:#e8efef; --star:#f2c14e; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.5}
+.band{background:var(--band);color:var(--band-ink)}
+.band .in,.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band .in{display:flex;align-items:center;gap:12px;padding-block:12px;min-height:56px}
+.band h1{font-family:var(--display);font-size:1.05rem;font-weight:600;margin:0;flex:1;min-width:0;overflow-wrap:anywhere}
+.btn-back,.btn-home{font:600 .9rem var(--display);background:rgba(255,255,255,.18);color:#fff;border:0;border-radius:6px;padding:8px 12px;cursor:pointer;flex:none}
+.wrap{padding-block:24px 48px}
+h2{font-family:var(--display);font-weight:600;font-size:1.6rem;margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 22px;max-width:65ch}
+button{font-family:inherit}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* home */
+.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+.prog{font:500 .95rem var(--display);color:var(--muted)}
+.prog b{color:var(--star);font-size:1.1rem}
+.secs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:10px;align-content:start}
+.sec header{display:flex;align-items:center;gap:12px}
+.snum{flex:none;width:44px;height:44px;border:4px solid var(--sec);display:grid;place-items:center;font:600 1.2rem var(--display);color:var(--sec)}
+.sec h3{margin:0;font:600 1.1rem var(--display);color:var(--sec);flex:1;min-width:0}
+.tlist{display:grid;gap:4px;margin:0;padding:0;list-style:none}
+.tbtn{width:100%;display:flex;gap:10px;align-items:center;justify-content:space-between;text-align:left;background:none;border:0;border-radius:6px;padding:7px 8px;color:var(--ink);font-size:1rem;cursor:pointer}
+.tbtn:hover{background:var(--chip)}
+.tbtn .stars{flex:none;color:var(--star);font-size:.85rem;letter-spacing:1px}
+.tbtn .stars .off{color:var(--line)}
+.stest{justify-self:start;background:var(--hot);color:#fff;border:0;border-radius:6px;padding:7px 14px;font:600 .9rem var(--display);cursor:pointer}
+
+/* topic */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.tab{border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 14px;font:500 .92rem var(--display);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.tab .dot{color:var(--star)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}
+.instr{font-weight:700;margin:0 0 18px}
+.rules{display:grid;gap:14px}
+.rule{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:12px 14px;border-left:5px solid var(--accent);background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 8px 8px 0}
+.rule b{font-family:var(--display);font-weight:600}
+.rule i{color:var(--muted);font-style:normal}
+.rule i::before{content:"e.g. ";font-weight:700;color:var(--accent)}
+.qlist{display:grid;gap:14px;counter-reset:q}
+.q{display:flex;gap:12px;align-items:flex-start}
+.q::before{counter-increment:q;content:counter(q);flex:none;width:30px;height:30px;border-radius:50%;background:var(--chip);color:var(--muted);display:grid;place-items:center;font:600 .85rem var(--display);margin-top:2px}
+.q .t{flex:1;min-width:0;line-height:2.1}
+.slot{display:inline-flex;align-items:center;justify-content:center;min-width:130px;min-height:40px;vertical-align:middle;border:2px dashed var(--line);border-radius:8px;padding:2px 4px;cursor:pointer}
+.slot.target{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 10%,transparent)}
+.chip{display:inline-block;background:var(--chip);color:var(--chip-ink);border:1px solid var(--line);border-radius:7px;padding:6px 14px;font:500 1rem var(--display);cursor:grab;user-select:none;touch-action:manipulation;box-shadow:0 1px 0 var(--line)}
+.chip.sel{background:var(--sel);border-color:var(--hot)}
+.bank{display:flex;flex-wrap:wrap;gap:10px;padding:14px;border-radius:8px;background:color-mix(in srgb,var(--chip) 60%,transparent);min-height:62px;margin-top:20px}
+select,input[type=text]{font:inherit;font-size:1rem;color:var(--ink);background:var(--panel);border:2px solid var(--line);border-radius:7px;padding:5px 8px;max-width:100%}
+input[type=text]{width:100%;margin-top:6px}
+.mcq{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.opt{border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:1rem}
+.opt.on{border-color:var(--sec);background:color-mix(in srgb,var(--sec) 14%,transparent)}
+.sortgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px}
+.col h4{font:600 1rem var(--display);margin:0 0 8px;text-align:center;color:var(--muted)}
+.col .slot{display:flex;width:100%;margin-bottom:8px;min-width:0;min-height:48px}
+.col .slot .chip,.sortgrid~.bank .chip{white-space:normal}
+.line{display:flex;flex-wrap:wrap;gap:8px;min-height:50px;padding:8px;border-bottom:2px solid var(--line);margin-top:6px}
+.ok{border-color:var(--ok)!important;background:var(--ok-bg)!important}
+.bad{border-color:var(--bad)!important;background:var(--bad-bg)!important;animation:shake .35s}
+.model{color:var(--ok);font-size:.92rem;font-weight:700;margin-top:4px}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
+.score{font:600 1.2rem var(--display);min-width:150px}
+.score output{display:inline-block;min-width:60px;border-bottom:2px solid var(--line);text-align:center;font-variant-numeric:tabular-nums}
+.score output.pop{animation:pop .4s}
+.act{border:0;border-radius:7px;padding:11px 18px;font:600 .95rem var(--display);cursor:pointer;color:#fff;background:var(--sec)}
+.act.alt{background:var(--chip);color:var(--chip-ink)}
+.act.see{background:var(--ok)}
+.nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:16px}
+.nav button{background:none;border:0;color:var(--accent);font:600 1rem var(--display);cursor:pointer;padding:6px 0}
+.nav button:disabled{opacity:.3;cursor:default}
+.hint{color:var(--muted);font-size:.9rem;margin-top:10px}
+
+/* games */
+.gpick{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.gcard{background:var(--panel);border:2px solid var(--line);border-radius:10px;padding:16px;text-align:left;cursor:pointer;color:var(--ink);display:grid;gap:4px}
+.gcard:hover{border-color:var(--hot)}
+.gcard b{font:600 1.05rem var(--display)}
+.gcard span{color:var(--muted);font-size:.92rem}
+.ghead{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:14px;font:600 1rem var(--display)}
+.timer{height:8px;border-radius:4px;background:var(--chip);overflow:hidden;margin-bottom:18px}
+.timer i{display:block;height:100%;background:var(--hot);transition:width .25s linear}
+.big{font:500 1.35rem var(--display);text-align:center;padding:22px 10px;min-height:96px;display:grid;place-items:center}
+.gbtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.gbtns button{min-width:140px;border:0;border-radius:10px;padding:14px 18px;font:600 1.05rem var(--display);cursor:pointer;color:#fff}
+.yes{background:var(--ok)} .no{background:var(--bad)} .pick{background:var(--sec)}
+.fb{text-align:center;min-height:30px;margin-top:12px;font-weight:700}
+.fb.y{color:var(--ok)} .fb.n{color:var(--bad)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.mc{min-height:76px;border-radius:10px;border:2px solid var(--line);background:var(--sec);color:transparent;font:600 1rem var(--display);cursor:pointer;padding:8px}
+.mc.up{background:var(--panel);color:var(--ink)}
+.mc.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ink);cursor:default}
+.result{text-align:center;display:grid;gap:10px;justify-items:center;padding:16px}
+.result .n{font:700 2.4rem var(--display);color:var(--hot)}
+/* modes */
+.mode{font:600 .85rem var(--display);background:transparent;color:#fff;border:2px solid rgba(255,255,255,.45);border-radius:999px;padding:6px 12px;cursor:pointer;flex:none}
+.mode[aria-pressed="true"]{background:#fff;color:var(--band);border-color:#fff}
+.tnotes{margin-top:18px;background:var(--panel);border:2px dashed var(--hot);border-radius:10px;padding:16px 20px}
+.tnotes summary{font:600 1.05rem var(--display);color:var(--hot);cursor:pointer}
+.tnotes h4{font:600 .95rem var(--display);margin:14px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tnotes ul,.tnotes ol{margin:0;padding-left:22px;display:grid;gap:4px}
+.tnotes .fix{color:var(--ok);font-weight:700}
+.tnotes .wrong{color:var(--bad);text-decoration:line-through}
+.tbadge{display:inline-block;font:600 .75rem var(--display);letter-spacing:.06em;text-transform:uppercase;background:var(--hot);color:#fff;border-radius:4px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+body.board{font-size:24px}
+body.board .wrap{max-width:1400px}
+body.board h2{font-size:2.2rem}
+body.board .chip{font-size:1.35rem;padding:10px 20px}
+body.board .slot{min-height:58px;min-width:180px}
+body.board select,body.board input[type=text]{font-size:1.3rem;padding:8px 12px}
+body.board .opt{font-size:1.3rem;padding:10px 20px}
+body.board .act{font-size:1.15rem;padding:15px 24px}
+body.board .tab{font-size:1.1rem;padding:10px 18px}
+body.board .q::before{width:40px;height:40px;font-size:1.1rem}
+body.board .big{font-size:2rem;min-height:140px}
+body.board .gbtns button{font-size:1.4rem;padding:20px 26px;min-width:200px}
+body.board .mc{min-height:110px;font-size:1.3rem}
+body.board .hint,body.board .lead{display:none}
+body.board .rule b{font-size:1.25rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:520px){.slot{min-width:100px}.q .t{line-height:1.9}.band .in{gap:8px;flex-wrap:wrap}}
+</style>
+
+<div class="band"><div class="in">
+  <button class="btn-back" id="back" hidden>‹ Back</button>
+  <h1 id="crumb">Grammar Steps · A1–A2</h1>
+  <button class="mode" id="boardBtn" aria-pressed="false" title="Big text for the smart board">Board</button>
+  <button class="mode" id="teacherBtn" aria-pressed="false" title="Answer keys and teaching notes">Teacher</button>
+  <button class="btn-home" id="homeBtn" hidden>Home</button>
+</div></div>
+<main class="wrap" id="app"></main>
+
+<script>
+/* Grammar Steps A1–A2 · original practice content · Part 1: Present, Past */
+window.T=window.T||{};Object.assign(window.T,{
+be:{t:"am / is / are",
+ r:[["I am · he/she/it is · we/you/they are","I am a student. Aigerim is twelve."],["Short forms: I'm, he's, it's, we're, they're","They're from Bishkek."],["Negative: am not · isn't · aren't","The shop isn't open today."]],
+ d:["My brother [is*|are|am] a doctor.","We [are*|is|am] in class 8-A.","I [am*|is|are] hungry.","These apples [are*|is] very sweet.","It [isn't*|aren't] cold today.","You [aren't*|isn't] late."],
+ gp:{q:["Aibek {is} my best friend.","My parents {are} at work.","I {am} not tired.","The windows {aren't} clean.","This book {isn't} expensive."],x:["am not"]},
+ o:["My sister is a nurse.","We are not at home.","The weather is nice today."],
+ tf:[["She is from Osh.",1],["They is my cousins.",0,"They are my cousins."],["I'm fourteen.",1],["He are very tall.",0,"He is very tall."],["We aren't ready.",1],["I is happy.",0,"I am happy."]],
+ m:[["I","am"],["she","is"],["they","are"],["it","is"],["we","are"],["you","are"]],
+ qa:[["Where are you from? (Bishkek)",["I am from Bishkek.","I'm from Bishkek."]],["How old is your brother? (ten)",["He is ten.","He's ten.","He is ten years old.","He's ten years old."]],["Is it hot today? (No)",["No, it isn't.","No, it is not."]]]},
+be_q:{t:"am/is/are questions",
+ r:[["Am I…? · Is she…? · Are they…?","Is your teacher strict?"],["Short answers: Yes, I am. / No, she isn't.","Are you cold? – No, I'm not."],["Where/How/What + is/are…?","Where is the bus stop?"]],
+ d:["[Is*|Are] your sister at school?","[Are*|Is] you ready?","Where [are*|is] my keys?","How old [is*|are] your grandfather?","[Am*|Are] I late?","What colour [is*|are] your bag?"],
+ gp:{q:["{Are} they your friends?","{Is} the museum open on Monday?","Yes, I {am}.","No, they {aren't}.","Why {is} Aibek sad?"],x:["isn't"]},
+ o:["Is your father a teacher?","Where are your shoes?","Are you good at maths?"],
+ tf:[["Is they at home?",0,"Are they at home?"],["Are you hungry? – Yes, I am.",1],["Where is the toilets?",0,"Where are the toilets?"],["Is she your aunt? – No, she isn't.",1],["How old you are?",0,"How old are you?"],["Am I right?",1]],
+ qa:[["Are you a student? (Yes)",["Yes, I am."]],["Is your school big? (No)",["No, it isn't.","No, it is not.","No, it's not."]],["Are your friends here? (Yes)",["Yes, they are."]]]},
+pcont:{t:"Present continuous (I am doing)",
+ r:[["am/is/are + verb-ing","I am reading. They are playing."],["Use it for actions happening now","Look! It's snowing."],["Spelling: make → making, run → running","She is swimming in the lake."]],
+ d:["Be quiet! The baby [is sleeping*|sleeps].","Look! Those boys [are running*|run] to the bus.","I [am writing*|write] a message now.","Mum [is cooking*|cooks] plov at the moment.","We [are watching*|watch] a film right now.","Listen! Somebody [is singing*|sings]."],
+ gp:{q:["She is {wearing} a red coat today.","They are {sitting} in the garden.","I am {making} tea. Do you want some?","Why are you {crying}?","He is {studying} for his exam."],x:["sit"]},
+ o:["The children are playing football.","I am doing my homework.","It is raining now."],
+ tf:[["She is reading a book now.",1],["They are play outside.",0,"They are playing outside."],["I'm siting on the sofa.",0,"I'm sitting on the sofa."],["We are having lunch.",1],["He writing a letter.",0,"He is writing a letter."],["The sun is shining.",1]],
+ m:[["run","running"],["make","making"],["swim","swimming"],["write","writing"],["sit","sitting"],["study","studying"]],
+ qa:[["What are you doing now? (read a book)",["I am reading a book.","I'm reading a book."]],["What is Aibek doing? (play chess)",["He is playing chess.","He's playing chess."]],["What are they doing? (eat lunch)",["They are eating lunch.","They're eating lunch."]]]},
+pcont_q:{t:"Present continuous: questions & negatives",
+ r:[["Negative: am not / isn't / aren't + -ing","He isn't working today."],["Question: Am/Is/Are + subject + -ing?","Are you listening?"],["Wh-question: What are you doing?","Where is she going?"]],
+ d:["[Are*|Is] they waiting for us?","What [is*|are] your brother doing?","I [am not*|not am] watching TV.","She [isn't*|aren't] wearing her glasses.","Where [are*|is] you going?","[Is*|Are] it raining outside?"],
+ gp:{q:["Why {are} you laughing?","He {isn't} listening to me.","{Is} your mum working today?","They {aren't} playing now.","What {is} Aigerim drawing?"],x:["doesn't"]},
+ o:["Are you enjoying the party?","She isn't feeling well today.","What are you looking at?"],
+ tf:[["Is you coming with us?",0,"Are you coming with us?"],["They aren't studying.",1],["What is she cooking?",1],["He not is working.",0,"He isn't working."],["Where are they going?",1],["Are it snowing?",0,"Is it snowing?"]],
+ qa:[["Are you sleeping? (No)",["No, I'm not.","No, I am not."]],["Is your teacher talking? (Yes)",["Yes, she is.","Yes, he is."]],["Are your friends playing? (No)",["No, they aren't.","No, they are not.","No, they're not."]]]},
+psimp:{t:"Present simple (I do / she does)",
+ r:[["I/you/we/they work · he/she/it works","My dad works in a bank."],["Use it for habits and facts","Water boils at 100 degrees."],["-es/-ies: go → goes, watch → watches, study → studies","She studies English every day."]],
+ d:["My sister [likes*|like] horses.","We [walk*|walks] to school every day.","The sun [rises*|rise] in the east.","Aibek [watches*|watchs] football on Sundays.","Cats [sleep*|sleeps] a lot.","My uncle [flies*|flys] to Moscow every month."],
+ gp:{q:["She {goes} to bed at ten.","I {drink} milk every morning.","He {plays} the komuz very well.","My friends {live} near the park.","The shop {closes} at nine."],x:["play"]},
+ o:["My mother teaches music.","We have English on Monday.","He usually gets up early."],
+ tf:[["He play football every day.",0,"He plays football every day."],["They live in Karakol.",1],["She watchs TV in the evening.",0,"She watches TV in the evening."],["Water freezes at zero degrees.",1],["My dog likes apples.",1],["Aigerim studys hard.",0,"Aigerim studies hard."]],
+ m:[["go","goes"],["watch","watches"],["study","studies"],["fly","flies"],["do","does"],["have","has"]],
+ qa:[["What time do you get up? (7 o'clock)",["I get up at 7 o'clock.","I get up at seven o'clock."]],["Where does your father work? (in a hospital)",["He works in a hospital."]],["What does your sister like? (horses)",["She likes horses."]]]},
+psimp_neg:{t:"Present simple: don't / doesn't / do…?",
+ r:[["I/you/we/they don't · he/she/it doesn't + verb","She doesn't eat meat."],["Do/Does + subject + verb?","Does he speak Russian?"],["After doesn't/does: no -s","He doesn't like (not likes) coffee."]],
+ d:["I [don't*|doesn't] like cold weather.","My brother [doesn't*|don't] play tennis.","[Does*|Do] your mum drive?","[Do*|Does] you live near here?","She doesn't [know*|knows] the answer.","Where [does*|do] Aibek work?"],
+ gp:{q:["They {don't} have a car.","{Does} your teacher give a lot of homework?","He doesn't {speak} French.","{Do} your parents watch the news?","What time {does} the film start?"],x:["speaks"]},
+ o:["My father doesn't drink coffee.","Do you like ice cream?","Where does your aunt live?"],
+ tf:[["She don't like fish.",0,"She doesn't like fish."],["Do they speak English?",1],["Does he likes music?",0,"Does he like music?"],["I don't understand.",1],["Where do you live?",1],["He doesn't works here.",0,"He doesn't work here."]],
+ qa:[["Do you like tea? (Yes)",["Yes, I do."]],["Does your brother play chess? (No)",["No, he doesn't.","No, he does not."]],["Do your friends live near you? (Yes)",["Yes, they do."]]]},
+pres_vs:{t:"I am doing or I do?",
+ r:[["Now / at the moment → present continuous","I'm cooking now."],["Every day / usually / always → present simple","I cook every evening."],["Some verbs are not used in -ing: like, want, know, need","I want (not am wanting) water."]],
+ d:["Shh! The baby [is sleeping*|sleeps].","I [go*|am going] to the gym twice a week.","Look! The bus [is coming*|comes].","She usually [walks*|is walking] to work.","I [need*|am needing] help with this.","What [are you doing*|do you do] now?"],
+ gp:{q:["He {plays} football every Saturday.","Right now he {is playing} in the yard.","I {know} the answer.","We {are having} dinner at the moment.","She always {wears} a hat."],x:["is wearing"]},
+ o:["She is talking on the phone now.","We usually have lunch at one.","I don't understand this word."],
+ tf:[["I am knowing his name.",0,"I know his name."],["Look! It's raining.",1],["He is going to school every day.",0,"He goes to school every day."],["They're watching TV now.",1],["I want a new phone.",1],["She is liking chocolate.",0,"She likes chocolate."]],
+ qa:[["What do you usually do on Sundays? (visit my grandparents)",["I usually visit my grandparents.","I visit my grandparents."]],["What are you doing now? (do an exercise)",["I am doing an exercise.","I'm doing an exercise."]],["Do you know the answer? (Yes)",["Yes, I do."]]]},
+have:{t:"have / has / have got",
+ r:[["I/you/we/they have · he/she/it has","She has two brothers."],["have got / has got means the same (British English)","I've got a new bike."],["Negative: don't have / haven't got","He doesn't have a phone. He hasn't got a phone."]],
+ d:["My grandparents [have*|has] a big garden.","Aigerim [has*|have] long hair.","I [haven't*|hasn't] got a pen.","[Have*|Has] you got any sisters?","He [doesn't have*|don't have] a car.","Our school [has got*|have got] a new gym."],
+ gp:{q:["We {have} English four times a week.","She {has} got a cold.","They {haven't} got any money.","{Does} he have a bike?","{Have} you got a minute?"],x:["hasn't"]},
+ o:["I have got two sisters.","Does your flat have a balcony?","He hasn't got a dog."],
+ tf:[["She have a cat.",0,"She has a cat."],["I've got a headache.",1],["Has you got a pen?",0,"Have you got a pen?"],["He doesn't have a car.",1],["They has got a new house.",0,"They have got a new house."],["We have a big family.",1]],
+ qa:[["Have you got a pet? (Yes)",["Yes, I have."]],["Does your school have a library? (Yes)",["Yes, it does."]],["Has your friend got a bike? (No)",["No, he hasn't.","No, she hasn't.","No, he has not.","No, she has not."]]]},
+waswere:{t:"was / were",
+ r:[["I/he/she/it was · we/you/they were","I was tired yesterday."],["Negative: wasn't / weren't","They weren't at school."],["Question: Was/Were + subject…?","Were you at home last night?"]],
+ d:["I [was*|were] at the market yesterday.","My friends [were*|was] very kind.","The test [wasn't*|weren't] difficult.","[Were*|Was] you at the concert?","Where [was*|were] Aibek last night?","We [weren't*|wasn't] hungry."],
+ gp:{q:["It {was} very windy yesterday.","The children {were} in the park.","I {wasn't} at home on Sunday.","{Were} your parents angry?","Why {was} the shop closed?"],x:["is"]},
+ o:["The film was very boring.","Were you tired after the trip?","We were in Issyk-Kul last summer."],
+ tf:[["They was at the cinema.",0,"They were at the cinema."],["I was born in 2012.",1],["Was you happy?",0,"Were you happy?"],["The weather wasn't good.",1],["Where were you yesterday?",1],["She were my teacher.",0,"She was my teacher."]],
+ qa:[["Where were you yesterday? (at home)",["I was at home.","I was at home yesterday."]],["Was the lesson interesting? (Yes)",["Yes, it was."]],["Were your friends at school? (No)",["No, they weren't.","No, they were not."]]]},
+past:{t:"Past simple (worked / went)",
+ r:[["Regular verbs: + -ed","We visited our grandmother."],["Irregular verbs have special forms","go → went, buy → bought, see → saw"],["Time words: yesterday, last week, ago, in 2020","I saw him two days ago."]],
+ d:["I [played*|play] chess yesterday.","We [went*|goed] to Naryn last summer.","She [bought*|buyed] a new dress.","They [stopped*|stoped] the car.","He [saw*|seed] a fox in the forest.","My dad [studied*|studyed] in Almaty."],
+ gp:{q:["Yesterday I {got} up at six.","We {ate} manty for dinner.","She {wrote} a long letter.","They {came} home very late.","I {lost} my keys last week."],x:["eat"]},
+ o:["We watched a film last night.","She left school at three.","I met my cousin two days ago."],
+ tf:[["I goed to the park.",0,"I went to the park."],["She studied all night.",1],["We buyed some bread.",0,"We bought some bread."],["He stopped the bus.",1],["They swimmed in the lake.",0,"They swam in the lake."],["I saw a good film.",1]],
+ m:[["go","went"],["buy","bought"],["see","saw"],["eat","ate"],["write","wrote"],["come","came"],["get","got"],["take","took"]],
+ qa:[["What did you do yesterday? (play football)",["I played football.","I played football yesterday."]],["Where did you go last summer? (Issyk-Kul)",["I went to Issyk-Kul.","I went to Issyk-Kul last summer."]],["What did you eat for breakfast? (eggs)",["I ate eggs.","I ate eggs for breakfast."]]]},
+past_neg:{t:"Past simple: didn't / did…?",
+ r:[["didn't + verb (for all persons)","I didn't see him."],["Did + subject + verb?","Did you finish your homework?"],["After did/didn't: base verb (go, not went)","She didn't go (not went) to school."]],
+ d:["I [didn't*|don't] watch TV last night.","[Did*|Do] you call me yesterday?","She didn't [buy*|bought] anything.","Where [did*|was] you go on Saturday?","He [didn't*|wasn't] like the food.","Did they [win*|won] the match?"],
+ gp:{q:["We {didn't} go out yesterday.","{Did} you enjoy the trip?","He didn't {say} goodbye.","What did you {do} last weekend?","Why {did} she leave early?"],x:["said"]},
+ o:["Did you sleep well last night?","I didn't understand the question.","Where did you buy that hat?"],
+ tf:[["Did you went to school?",0,"Did you go to school?"],["She didn't call me.",1],["I didn't saw him.",0,"I didn't see him."],["What did they eat?",1],["He don't come yesterday.",0,"He didn't come yesterday."],["Did it rain last night?",1]],
+ qa:[["Did you watch TV last night? (No)",["No, I didn't.","No, I did not."]],["Did your team win? (Yes)",["Yes, it did.","Yes, we did.","Yes, they did."]],["Did she visit you? (Yes)",["Yes, she did."]]]},
+pastcont:{t:"Past continuous (I was doing)",
+ r:[["was/were + verb-ing","At 8 o'clock I was having breakfast."],["An action in progress at a time in the past","What were you doing at 9 last night?"],["Negative: wasn't/weren't + -ing","They weren't listening."]],
+ d:["At 7 pm I [was doing*|did] my homework.","They [were playing*|was playing] football at noon.","What [were*|was] you doing at ten?","It [was raining*|rained] all morning.","She [wasn't sleeping*|didn't sleeping] at midnight.","We [were walking*|walked] home at that time."],
+ gp:{q:["At six o'clock Mum {was} cooking dinner.","The boys {were} running in the yard.","I {wasn't} listening to the teacher.","{Were} you sleeping at eleven?","What {was} Aibek doing?"],x:["did"]},
+ o:["I was reading at nine o'clock.","They were having lunch at noon.","What were you doing yesterday evening?"],
+ tf:[["At 8 I was watching TV.",1],["They was playing outside.",0,"They were playing outside."],["She were sleeping.",0,"She was sleeping."],["We weren't working.",1],["What were you doing?",1],["He was write a letter.",0,"He was writing a letter."]],
+ qa:[["What were you doing at 8 last night? (watch TV)",["I was watching TV."]],["Were you sleeping at midnight? (Yes)",["Yes, I was."]],["Was it snowing this morning? (No)",["No, it wasn't.","No, it was not."]]]},
+pastcont_vs:{t:"I was doing or I did?",
+ r:[["Longer action → past continuous","I was walking home…"],["Short action that interrupts → past simple","…when I saw an accident."],["while + past continuous, when + past simple","While I was cooking, the phone rang."]],
+ d:["I was having a shower when the phone [rang*|was ringing].","While we [were playing*|played], it started to rain.","She [was reading*|read] when I came in.","He [fell*|was falling] off his bike yesterday.","When I arrived, they [were eating*|ate] dinner.","I [saw*|was seeing] Aigerim at the shop."],
+ gp:{q:["I {was} sleeping when you called.","The lights went out while we {were} watching TV.","When the teacher came in, the students {stopped} talking.","She cut her finger while she {was} cooking.","I {met} my old friend yesterday."],x:["did"]},
+ o:["I was walking home when it started to rain.","While she was reading, I made tea.","He broke his arm while he was skiing."],
+ tf:[["When I arrived, she was cooking.",1],["While I walked home, I was seeing a cat.",0,"While I was walking home, I saw a cat."],["The phone rang while I was sleeping.",1],["He was falling and broke his leg.",0,"He fell and broke his leg."],["We were having dinner when Dad came.",1],["I was meeting him yesterday at 5.",0,"I met him yesterday at 5."]],
+ qa:[["What were you doing when the phone rang? (cook)",["I was cooking.","I was cooking when the phone rang."]],["What happened while you were walking? (see a dog)",["I saw a dog.","I saw a dog while I was walking."]],["Were they sleeping when you came home? (No)",["No, they weren't.","No, they were not."]]]}
+});
+
+</script>
+<script>
+/* Part 2: Present perfect, Passive, Future, Modals, There/it */
+window.T=window.T||{};Object.assign(window.T,{
+pp:{t:"Present perfect (I have done)",
+ r:[["have/has + past participle","I have finished my homework."],["Past action with a result now","She has lost her key. (She can't open the door.)"],["Irregular participles: go → gone, see → seen, do → done","They have gone home."]],
+ d:["I [have finished*|has finished] my project.","She [has broken*|have broken] her phone.","We [have seen*|have saw] this film before.","He [has gone*|has went] to the bank.","They [have bought*|have buyed] a new car.","My dad [has made*|has make] lunch."],
+ gp:{q:["Oh no! I have {lost} my bag.","She has {written} three emails today.","We have {eaten} all the cake.","They have {taken} the bus.","He has {done} the washing-up."],x:["went"]},
+ o:["I have cleaned my room.","She has found her glasses.","They have moved to a new flat."],
+ tf:[["I have saw this film.",0,"I have seen this film."],["She has finished her work.",1],["He have lost his key.",0,"He has lost his key."],["We've done our homework.",1],["They has gone home.",0,"They have gone home."],["I've broken my pencil.",1]],
+ m:[["see","seen"],["go","gone"],["do","done"],["eat","eaten"],["write","written"],["take","taken"],["be","been"],["break","broken"]],
+ qa:[["What has happened? (I / lose / my phone)",["I have lost my phone.","I've lost my phone."]],["Why is he happy? (he / pass / the exam)",["He has passed the exam.","He's passed the exam."]],["Is the cake still here? (No / we / eat / it)",["No, we have eaten it.","No, we've eaten it."]]]},
+pp_adv:{t:"ever / never / just / already / yet",
+ r:[["Have you ever…? = at any time in your life","Have you ever been to Osh?"],["just / already go before the participle","I've just eaten. She's already left."],["yet = in questions and negatives, at the end","Have you finished yet? I haven't finished yet."]],
+ d:["Have you [ever*|yet] eaten horse meat?","I have [never*|ever] been to London.","She has [just*|yet] arrived.","Has the film started [yet*|already]?","I have [already*|yet] done my homework.","He hasn't called [yet*|just]."],
+ gp:{q:["Have you {ever} seen snow in May?","We have {never} met before.","I have {just} finished. It was a minute ago.","Has your brother come home {yet}?","They have {already} left."],x:["ago"]},
+ o:["Have you ever been to Issyk-Kul?","I have just had lunch.","She hasn't finished her work yet."],
+ tf:[["Have you ever ridden a horse?",1],["I have yet finished.",0,"I have already finished. / I haven't finished yet."],["He has just gone out.",1],["Has she called already yet?",0,"Has she called yet?"],["I've never seen a whale.",1],["We have ever been to Paris.",0,"We have been to Paris. / We have never been to Paris."]],
+ qa:[["Have you ever been to Osh? (Yes)",["Yes, I have."]],["Has the lesson started yet? (No)",["No, it hasn't.","No, it has not.","No, it hasn't started yet."]],["Have you ever seen a camel? (No / never)",["No, I have never seen a camel.","No, I've never seen a camel.","No, never."]]]},
+forsince:{t:"How long…? for / since",
+ r:[["for + a period of time","for two years, for a week"],["since + a starting point","since 2020, since Monday, since 9 o'clock"],["How long have you…? + present perfect","I have lived here for five years."]],
+ d:["I have known him [for*|since] ten years.","She has lived in Bishkek [since*|for] 2019.","We have been here [since*|for] eight o'clock.","They have had their dog [for*|since] two months.","How long [have*|are] you been a teacher?","He has worked here [since*|for] January."],
+ gp:{q:["I have studied English {for} four years.","She has been ill {since} Friday.","{How} long have you had that bike?","We haven't seen him {since} last summer.","They have been married {for} a long time."],x:["ago"]},
+ o:["How long have you lived here?","I have had this phone for a year.","She has been at school since eight."],
+ tf:[["I have lived here since three years.",0,"I have lived here for three years."],["He has worked here since 2021.",1],["How long have you known her?",1],["I know him for a long time.",0,"I have known him for a long time."],["We have been friends for ages.",1],["She has been ill for Monday.",0,"She has been ill since Monday."]],
+ m:[["for","two weeks"],["since","Monday"],["for","an hour"],["since","2015"],["for","ten minutes"],["since","last year"]],
+ qa:[["How long have you lived in your town? (ten years)",["I have lived here for ten years.","I've lived here for ten years.","For ten years."]],["How long have you known your best friend? (2020)",["I have known him since 2020.","I have known her since 2020.","I've known him since 2020.","I've known her since 2020.","Since 2020."]],["How long have you been at this school? (September)",["I have been here since September.","I've been here since September.","Since September."]]]},
+pp_vs:{t:"I have done or I did?",
+ r:[["Finished time (yesterday, in 2020, ago) → past simple","I saw him yesterday."],["No time / time up to now → present perfect","I have seen him today. (today isn't finished)"],["When…? questions → past simple","When did you arrive? (not When have you arrived?)"]],
+ d:["I [lost*|have lost] my keys yesterday.","She [has been*|was] to Turkey three times.","When [did you buy*|have you bought] that bag?","We [moved*|have moved] here in 2018.","Look! Somebody [has opened*|opened] the window.","I [have never eaten*|never ate] sushi in my life."],
+ gp:{q:["He {finished} school two years ago.","I {have} already seen this film.","When {did} you start learning English?","She {has} lived here all her life.","We {went} to the zoo last week."],x:["has went"]},
+ o:["I visited Osh last summer.","She has never been on a plane.","When did you get home?"],
+ tf:[["I have seen him yesterday.",0,"I saw him yesterday."],["She went to Almaty in May.",1],["When have you arrived?",0,"When did you arrive?"],["I've lost my pen. Can I borrow yours?",1],["We have moved here in 2018.",0,"We moved here in 2018."],["Have you ever met a famous person?",1]],
+ qa:[["When did you start school? (in 2017)",["I started school in 2017."]],["Have you finished your homework? (Yes / just)",["Yes, I have just finished it.","Yes, I've just finished it.","Yes, I have."]],["What did you do last weekend? (visit my aunt)",["I visited my aunt.","I visited my aunt last weekend."]]]},
+passive:{t:"The passive (is done / was done)",
+ r:[["Present: am/is/are + past participle","English is spoken in many countries."],["Past: was/were + past participle","This bridge was built in 1980."],["by = who does it","The book was written by Aitmatov."]],
+ d:["Rice [is grown*|grows] in Asia.","This house [was built*|built] in 1995.","The windows [are cleaned*|clean] every week.","The letters [were sent*|was sent] yesterday.","\"Jamila\" [was written*|wrote] by Chingiz Aitmatov.","Our classroom [is painted*|painted] every summer."],
+ gp:{q:["The museum is {visited} by thousands of people.","My bike was {stolen} last night.","These cars are {made} in Japan.","The match was {played} in the rain.","The phone was {invented} in 1876."],x:["make"]},
+ o:["The shop is closed on Sundays.","The room was cleaned yesterday.","Kumis is made from horse milk."],
+ tf:[["The letter was write yesterday.",0,"The letter was written yesterday."],["English is spoken here.",1],["The cakes were made by my mum.",1],["This car made in Germany.",0,"This car was made in Germany. / This car is made in Germany."],["The window was broken by a ball.",1],["The house is build in 2010.",0,"The house was built in 2010."]],
+ qa:[["Where are these phones made? (in China)",["They are made in China.","They're made in China."]],["When was your school built? (in 2005)",["It was built in 2005."]],["Who was this song sung by? (my sister)",["It was sung by my sister."]]]},
+fut_pc:{t:"Present continuous for the future",
+ r:[["Use it for plans that are already arranged","I'm meeting Aibek tomorrow."],["Often with a future time","We're flying to Osh on Friday."],["What are you doing tonight?","I'm staying at home."]],
+ d:["I [am seeing*|see] the dentist tomorrow.","What [are you doing*|do you do] on Saturday?","We [are going*|go] to a wedding next week.","She [is coming*|comes] to our house tonight.","They [aren't working*|don't working] next Monday.","He [is playing*|plays] in a match on Sunday."],
+ gp:{q:["I {am} visiting my grandmother at the weekend.","My parents {are} having a party on Friday.","What time {is} your bus leaving tomorrow?","We {aren't} doing anything tonight.","{Are} you coming to the cinema with us?"],x:["will"]},
+ o:["I am meeting my friends after school.","What are you doing tomorrow evening?","We are leaving at six o'clock."],
+ tf:[["I'm playing football tomorrow.",1],["What do you do tonight?",0,"What are you doing tonight?"],["She is coming on Monday.",1],["We are go to Karakol next week.",0,"We are going to Karakol next week."],["Are you doing anything on Sunday?",1],["He meeting his boss tomorrow.",0,"He is meeting his boss tomorrow."]],
+ qa:[["What are you doing tonight? (watch a film)",["I am watching a film.","I'm watching a film.","I'm watching a film tonight."]],["Are you going out tomorrow? (No)",["No, I'm not.","No, I am not."]],["When is your brother arriving? (on Friday)",["He is arriving on Friday.","He's arriving on Friday."]]]},
+goingto:{t:"I'm going to…",
+ r:[["am/is/are going to + verb = a plan","I'm going to learn to swim."],["Also for something we can see is coming","Look at the clouds. It's going to rain."],["Negative/question: I'm not going to… / Are you going to…?","Are you going to buy it?"]],
+ d:["I [am going to*|going to] buy a new phone.","Look at that car! It [is going to*|will to] crash.","What [are you going to*|you are going to] wear?","She [isn't going to*|not going to] come.","They [are going to*|is going to] paint the house.","Watch out! You [are going to*|go to] fall."],
+ gp:{q:["We are going to {visit} my uncle in summer.","I'm not {going} to eat that.","{Are} you going to call her?","He {is} going to be a doctor.","It's {going} to snow tonight."],x:["will"]},
+ o:["I am going to study medicine.","Are you going to watch the match?","She is not going to tell anybody."],
+ tf:[["I'm going to play tennis.",1],["She going to cook dinner.",0,"She is going to cook dinner."],["It's going to rain.",1],["Are they going to come?",1],["We are going to visiting Bishkek.",0,"We are going to visit Bishkek."],["He is go to buy a car.",0,"He is going to buy a car."]],
+ qa:[["What are you going to do after school? (play football)",["I am going to play football.","I'm going to play football."]],["Are you going to go to university? (Yes)",["Yes, I am."]],["What is your sister going to buy? (a new dress)",["She is going to buy a new dress.","She's going to buy a new dress."]]]},
+will:{t:"will / won't",
+ r:[["will + verb (for all persons)","I think it will be sunny."],["Predictions, promises, offers, sudden decisions","I'll help you. I promise I'll call."],["Negative: won't (= will not)","Don't worry, I won't be late."]],
+ d:["I think Kyrgyzstan [will*|wills] win.","Don't worry, I [won't*|don't will] tell anyone.","It's hot. I ['ll open*|am open] the window.","[Will*|Do] you be at home tonight?","She will [be*|is] twenty next year.","I promise I [will*|am] help you."],
+ gp:{q:["I'm sure you {will} pass the exam.","The bag is heavy. I'll {carry} it for you.","We {won't} have time today.","{Will} people live on Mars one day?","Perhaps it {will} rain tomorrow."],x:["going"]},
+ o:["I think you will like this book.","I won't forget your birthday.","Will you help me with my bag?"],
+ tf:[["I will to call you later.",0,"I will call you later."],["It won't be easy.",1],["She wills come tomorrow.",0,"She will come tomorrow."],["I think it'll snow.",1],["Will you marry me?",1],["They won't to come.",0,"They won't come."]],
+ qa:[["Will you be at school tomorrow? (Yes)",["Yes, I will."]],["Do you think it will rain? (No / I don't think)",["I don't think it will rain.","No, I don't think so.","No, it won't."]],["The phone is ringing. What do you say? (I / answer it)",["I'll answer it.","I will answer it."]]]},
+will_going:{t:"will or going to?",
+ r:[["Decided before speaking → going to","I'm going to buy milk. (I planned it.)"],["Deciding now, at the moment of speaking → will","There's no milk? I'll buy some."],["Prediction from what you see now → going to","Look at those clouds! It's going to rain."]],
+ d:["A: We have no bread. B: OK, I [will*|am going to] get some.","I've decided. I [am going to*|will] study in Turkey.","Look at the sky! It [is going to*|will] snow.","\"The phone's ringing.\" \"I [will*|am going to] get it.\"","We bought tickets. We [are going to*|will] fly to Istanbul.","Wait, I [will*|am going to] help you with that box."],
+ gp:{q:["I'm {going} to visit my cousin. I booked the ticket.","\"I'm cold.\" \"I'll {close} the window.\"","She's got her paints. She's {going} to paint the wall.","\"Can I have some tea?\" \"Sure, I'll {make} some.\"","Be careful! You're going to {drop} the plates."],x:["will"]},
+ o:["I am going to learn to drive this year.","Wait here and I will bring a chair.","Look out! That vase is going to fall."],
+ tf:[["The doorbell is ringing. I'll open it.",1],["I've already decided. I will buy the blue one.",0,"I've already decided. I'm going to buy the blue one."],["Look at him! He is going to fall.",1],["It's dark. I'm going to turn on the light, I just decided.",0,"It's dark. I'll turn on the light."],["We're going to have a party on Friday. We planned it.",1],["\"I'm thirsty.\" \"I'm going to get you water.\" (sudden offer)",0,"\"I'm thirsty.\" \"I'll get you some water.\""]],
+ qa:[["Your friend says: \"My bag is heavy.\" What do you offer? (carry it)",["I'll carry it.","I will carry it.","I'll carry it for you."]],["What are your plans for the summer? (go to Issyk-Kul)",["I'm going to go to Issyk-Kul.","I am going to go to Issyk-Kul."]],["Look at the clouds. What will happen? (rain)",["It's going to rain.","It is going to rain."]]]},
+can:{t:"can / could",
+ r:[["can + verb = ability or permission now","I can swim. Can I sit here?"],["could = ability in the past","When I was five, I could read."],["Negative: can't / couldn't","I couldn't sleep last night."]],
+ d:["My little sister [can*|cans] count to 100.","[Can*|Do] I open the window?","When he was young, he [could*|can] run very fast.","I [can't*|don't can] find my phone.","[Could*|Can] you help me, please? (polite)","She can [speak*|speaks] three languages."],
+ gp:{q:["Birds {can} fly, but penguins can't.","I {couldn't} go to school yesterday because I was ill.","{Can} you play the komuz?","Sorry, I {can't} hear you.","{Could} you close the door, please?"],x:["must"]},
+ o:["Can you ride a horse?","I could swim when I was six.","She can't come to the party."],
+ tf:[["He cans play the guitar.",0,"He can play the guitar."],["Can I use your pen?",1],["I can to speak English.",0,"I can speak English."],["Could you repeat that, please?",1],["Last year I can't swim.",0,"Last year I couldn't swim."],["We can't see the board.",1]],
+ qa:[["Can you swim? (Yes)",["Yes, I can."]],["Could you read when you were four? (No)",["No, I couldn't.","No, I could not."]],["Can your father cook? (Yes)",["Yes, he can."]]]},
+must:{t:"must / mustn't / don't need to",
+ r:[["must + verb = it is necessary","You must wear a seatbelt."],["mustn't = it is not allowed","You mustn't use phones in the exam."],["don't need to = it isn't necessary","You don't need to bring food. We have plenty."]],
+ d:["Students [must*|musts] wear uniform.","You [mustn't*|don't need to] touch that. It's dangerous.","It's Sunday. I [don't need to*|mustn't] get up early.","We must [be*|to be] quiet in the library.","You [mustn't*|don't need to] tell anyone. It's a secret.","He [doesn't need to*|mustn't] pay. It's free."],
+ gp:{q:["You {must} stop at a red light.","You {mustn't} swim here. The water is too deep.","I {don't} need to buy bread. We have some.","She must {see} a doctor.","We {mustn't} be late for the exam."],x:["musts"]},
+ o:["You must finish your homework.","You mustn't run in the corridor.","We don't need to hurry."],
+ tf:[["You must to listen.",0,"You must listen."],["You mustn't smoke here.",1],["She musts go now.",0,"She must go now."],["You don't need to come early.",1],["We must be kind to animals.",1],["You don't need to cheat in exams. (it is not allowed)",0,"You mustn't cheat in exams."]],
+ qa:[["What must you do before an exam? (study)",["I must study.","You must study."]],["What mustn't you do in class? (use my phone)",["I mustn't use my phone.","You mustn't use your phone."]],["Do you need to wear a uniform at school? (Yes / must)",["Yes, I must wear a uniform.","Yes, we must wear a uniform.","Yes, I do."]]]},
+should:{t:"should / shouldn't",
+ r:[["should + verb = it's a good idea","You should drink more water."],["shouldn't = it's not a good idea","You shouldn't eat so much sugar."],["Do you think I should…? / I think you should…","I think you should see a doctor."]],
+ d:["You look tired. You [should*|shouldn't] go to bed.","You [shouldn't*|should] watch TV all day.","What [should*|do should] I wear?","He should [study*|studies] harder.","I think we [should*|must to] leave now.","Children [shouldn't*|should] drink coffee."],
+ gp:{q:["It's cold. You {should} take a jacket.","You {shouldn't} eat in class.","{Should} I call him?","She should {apologise} to her friend.","I don't think you {should} go out tonight."],x:["shoulds"]},
+ o:["You should eat more fruit.","Should I bring anything?","We shouldn't waste water."],
+ tf:[["You should to rest.",0,"You should rest."],["You shouldn't shout.",1],["She shoulds study more.",0,"She should study more."],["Should we take a taxi?",1],["I think you should ask the teacher.",1],["You don't should worry.",0,"You shouldn't worry."]],
+ qa:[["I have a headache. What should I do? (take a rest)",["You should take a rest.","You should rest."]],["Should we wear coats today? (Yes, it's cold)",["Yes, we should.","Yes, we should. It's cold."]],["My friend is always late. What should he do? (get up earlier)",["He should get up earlier."]]]},
+haveto:{t:"have to / don't have to",
+ r:[["have to / has to + verb = it's necessary (rules, situation)","I have to wear a uniform."],["don't have to = not necessary","You don't have to come if you're busy."],["Past: had to","I had to wait for an hour."]],
+ d:["My mum [has to*|have to] work on Saturdays.","Do you [have to*|has to] get up early?","We [don't have to*|haven't to] pay. It's free.","I [had to*|have to] stay at home yesterday.","She [doesn't have to*|don't have to] cook today.","Did you [have to*|had to] wait long?"],
+ gp:{q:["Doctors {have} to work at night sometimes.","He {has} to take the bus every day.","You {don't} have to wear a tie.","Yesterday we {had} to walk home.","{Do} you have to do homework every day?"],x:["must"]},
+ o:["I have to clean my room today.","She doesn't have to work tomorrow.","We had to leave early."],
+ tf:[["She have to go now.",0,"She has to go now."],["I had to wait for the bus.",1],["You don't have to shout. I can hear you.",1],["Do he have to study?",0,"Does he have to study?"],["We have to wear helmets.",1],["Yesterday I have to work late.",0,"Yesterday I had to work late."]],
+ qa:[["Do you have to wear a uniform? (Yes)",["Yes, I do."]],["What did you have to do yesterday? (help my mum)",["I had to help my mum."]],["Does your father have to work on Sundays? (No)",["No, he doesn't.","No, he does not."]]]},
+wouldlike:{t:"Would you like…? / I'd like… / Shall I…?",
+ r:[["Would you like + noun / to + verb? = an offer","Would you like some tea? Would you like to come?"],["I'd like = I want (polite)","I'd like a glass of water, please."],["Shall I…? / Shall we…? = offers and suggestions","Shall I open the window? Shall we go?"]],
+ d:["[Would you like*|Do you like] a cup of coffee now?","I'd like [to go*|go] home now.","[Shall*|Will] I help you with your bags?","[Shall we*|Do we] go to the cinema tonight?","Would you like [to dance*|dancing]?","I [would like*|like] a sandwich, please."],
+ gp:{q:["{Would} you like some more soup?","I'd {like} to buy two tickets, please.","{Shall} I turn on the light?","Shall {we} meet at six?","Would you like {to} come with us?"],x:["Do"]},
+ o:["Would you like something to drink?","Shall I carry your bag?","I would like to visit Japan."],
+ tf:[["Would you like a biscuit?",1],["I'd like go now.",0,"I'd like to go now."],["Shall we have a break?",1],["Do you like a coffee? (offer)",0,"Would you like a coffee?"],["Shall I close the door?",1],["Would you like coming with us?",0,"Would you like to come with us?"]],
+ qa:[["Would you like some tea? (Yes, please)",["Yes, please.","Yes, I would.","Yes, please. I'd like some tea."]],["What would you like to eat? (plov)",["I'd like plov.","I would like plov.","I'd like some plov."]],["It's dark. Offer to turn on the light. (Shall)",["Shall I turn on the light?"]]]},
+imperative:{t:"Do this! Don't do that! Let's…",
+ r:[["Imperative = base verb","Open your books. Sit down."],["Negative: Don't + verb","Don't touch that! Don't be late."],["Let's + verb = a suggestion","Let's go to the park."]],
+ d:["[Come*|Comes] here, please.","[Don't*|Not] eat in the classroom.","[Let's*|Let] play a game.","Please [be*|are] quiet.","[Don't be*|Not be] sad.","Let's [not go*|don't go] out tonight. It's cold."],
+ gp:{q:["{Close} the door, please.","{Don't} forget your homework!","{Let's} have a picnic on Saturday.","{Be} careful! The floor is wet.","Let's {not} wait. We're late."],x:["Doesn't"]},
+ o:["Please turn off your phones.","Don't run in the corridor.","Let's meet after school."],
+ tf:[["Don't be late!",1],["Not touch the oven!",0,"Don't touch the oven!"],["Let's going to the park.",0,"Let's go to the park."],["Sit down, please.",1],["Let's not argue.",1],["You open the window, please! (order)",0,"Open the window, please!"]],
+ qa:[["Tell your friend not to forget the tickets.",["Don't forget the tickets!","Don't forget the tickets."]],["Suggest playing football. (Let's)",["Let's play football."]],["Tell the class to open their books.",["Open your books.","Open your books, please.","Please open your books."]]]},
+thereis:{t:"there is / there are / there was / there were",
+ r:[["there is + singular · there are + plural","There is a bank near here. There are two cafes."],["Past: there was / there were","There were a lot of people at the concert."],["Questions: Is there…? Are there…?","Is there a lift in this building?"]],
+ d:["There [is*|are] a cat on the roof.","There [are*|is] thirty students in our class.","[Is*|Are] there a pharmacy near here?","There [was*|were] a storm last night.","There [weren't*|wasn't] many people at the party.","How many rooms [are*|is] there in your flat?"],
+ gp:{q:["There {is} a big tree in our yard.","There {are} five days in a school week.","{Is} there any milk in the fridge?","There {were} three cakes, but now there's one.","There {wasn't} a cloud in the sky."],x:["have"]},
+ o:["There is a mosque near my house.","Are there any good restaurants here?","There were many children in the park."],
+ tf:[["There are a book on the desk.",0,"There is a book on the desk."],["There is a park near my school.",1],["Is there any shops here?",0,"Are there any shops here?"],["There were two cats in the garden.",1],["There was a lot of snow last winter.",1],["It is a cinema in our street.",0,"There is a cinema in our street."]],
+ qa:[["Is there a library in your school? (Yes)",["Yes, there is."]],["How many students are there in your class? (25)",["There are 25 students.","There are 25 students in my class.","There are twenty-five students."]],["Were there many people at the wedding? (Yes)",["Yes, there were."]]]},
+it:{t:"It is… (time, weather, distance)",
+ r:[["it for weather","It's raining. It's cold today."],["it for time and dates","It's 5 o'clock. It's Monday."],["it for distance and feelings about situations","It's 3 km to school. It's nice to see you."]],
+ d:["[It's*|There's] very windy today.","What time is [it*|there]? – Half past four.","[It's*|Is] Friday tomorrow.","How far is [it*|there] to the airport?","[It*|There] was hot in July.","[It's*|That's] easy to learn this game."],
+ gp:{q:["{It} is snowing in the mountains.","What day {is} it today?","It's ten kilometres {from} here to the lake.","{It's} nice to meet you.","It {was} very cold last night."],x:["There"]},
+ o:["It is very hot today.","What time is it now?","It is two kilometres to the station."],
+ tf:[["Is raining now.",0,"It is raining now."],["It's half past seven.",1],["There is cold today.",0,"It is cold today."],["It's a long way to Naryn.",1],["It was sunny yesterday.",1],["Is Monday today.",0,"It's Monday today."]],
+ qa:[["What's the weather like today? (sunny)",["It is sunny.","It's sunny.","It's sunny today."]],["What time is it? (3 o'clock)",["It is three o'clock.","It's three o'clock.","It's 3 o'clock."]],["How far is it to your school? (1 km)",["It is one kilometre.","It's one kilometre.","It's 1 km.","It's about one kilometre."]]]}
+});
+
+</script>
+<script>
+/* Part 3: Questions, Verb patterns, Pronouns, Nouns & articles, Quantity */
+window.T=window.T||{};Object.assign(window.T,{
+qwords:{t:"Question words",
+ r:[["who = person · what = thing · where = place · when = time","Who is that? Where do you live?"],["why = reason · how = way · which = choice","Why are you late? Which bag is yours?"],["How + much/many/old/long/often","How often do you go swimming?"]],
+ d:["[Where*|When] do you live? – In Bishkek.","[Who*|What] is your English teacher?","[Why*|How] are you sad? – Because I lost my phone.","[How many*|How much] brothers have you got?","[When*|Where] is your birthday? – In May.","[Which*|Who] colour do you like, red or blue?"],
+ gp:{q:["{How} old is your sister?","{What} do you usually have for breakfast?","{How} often do you visit your grandparents?","{Whose} bag is this? – It's Aigerim's.","{How} much does this cost?"],x:["Who"]},
+ o:["What time does the lesson start?","How often do you play football?","Where did you go yesterday?"],
+ tf:[["Where you live?",0,"Where do you live?"],["How many sugar do you want?",0,"How much sugar do you want?"],["Why are you laughing?",1],["Whose shoes are these?",1],["What time is it?",1],["Who is she live with?",0,"Who does she live with?"]],
+ m:[["who","a person"],["where","a place"],["when","a time"],["why","a reason"],["how many","a number"],["whose","an owner"]],
+ qa:[["Make a question: ___ do you live? (place)",["Where do you live?"]],["Make a question: ___ is your favourite subject? (thing)",["What is your favourite subject?","What's your favourite subject?"]],["Make a question: ___ are you late? (reason)",["Why are you late?"]]]},
+subjq:{t:"Who saw you? / Who did you see?",
+ r:[["who/what is the subject → no do/does/did","Who lives here? What happened?"],["who/what is the object → use do/does/did","Who did you call? What did she say?"],["Compare: Who called Aibek? / Who did Aibek call?","Different meanings!"]],
+ d:["Who [broke*|did break] the window?","What [happened*|did happen] after the game?","Who [did you meet*|you met] at the party?","Who [lives*|does live] in that big house?","What [did she buy*|she bought]?","Which team [won*|did win] the game?"],
+ gp:{q:["Who {wants} more tea?","Who {did} you invite to your party?","What {happened} to your phone?","What {did} your teacher say?","Who {called} you last night?"],x:["does"]},
+ o:["Who wrote this letter?","What did you see at the zoo?","Who told you the news?"],
+ tf:[["Who did call you?",0,"Who called you?"],["What happened here?",1],["Who you saw yesterday?",0,"Who did you see yesterday?"],["Who knows the answer?",1],["What did he say?",1],["What did happen?",0,"What happened?"]],
+ qa:[["Aibek phoned somebody. Ask who. (Who…?)",["Who did Aibek phone?"]],["Somebody phoned Aibek. Ask who. (Who…?)",["Who phoned Aibek?"]],["Something happened. Ask what. (What…?)",["What happened?"]]]},
+soneither:{t:"So am I / Neither do I / too / either",
+ r:[["Agree with positive: So + auxiliary + I","I'm tired. – So am I. / I like tea. – So do I."],["Agree with negative: Neither + auxiliary + I","I can't swim. – Neither can I."],["too (positive) and either (negative) at the end","I'm hungry too. I don't like it either."]],
+ d:["\"I'm hungry.\" \"So [am*|do] I.\"","\"I love pizza.\" \"So [do*|am] I.\"","\"I can't dance.\" \"[Neither*|So] can I.\"","\"I went to the concert.\" \"So [did*|went] I.\"","\"I don't eat meat.\" \"I don't [either*|too].\"","\"I've got a cat.\" \"I have [too*|either].\""],
+ gp:{q:["\"I'm from Osh.\" \"So {am} I.\"","\"I didn't sleep well.\" \"Neither {did} I.\"","\"I like football.\" \"So {do} I.\"","\"I can't come.\" \"{Neither} can I.\"","\"I haven't finished.\" \"I haven't {either}.\""],x:["too"]},
+ o:["So do I.","Neither can I.","I don't like it either."],
+ tf:[["\"I'm cold.\" \"So do I.\"",0,"\"I'm cold.\" \"So am I.\""],["\"I like tea.\" \"So do I.\"",1],["\"I can't swim.\" \"Neither can I.\"",1],["\"I don't smoke.\" \"I don't too.\"",0,"\"I don't smoke.\" \"I don't either.\""],["\"I was late.\" \"So was I.\"",1],["\"I didn't go.\" \"So did I.\"",0,"\"I didn't go.\" \"Neither did I.\""]],
+ qa:[["\"I'm tired.\" Agree. (So…)",["So am I."]],["\"I don't like snakes.\" Agree. (Neither…)",["Neither do I."]],["\"I watched the match.\" Agree. (So…)",["So did I."]]]},
+to_ing:{t:"want to do / enjoy doing",
+ r:[["verb + to: want, need, decide, hope, plan, would like","I want to go home."],["verb + -ing: enjoy, finish, mind, stop, like/love","She enjoys reading."],["go + -ing for activities","go swimming, go shopping, go skiing"]],
+ d:["I want [to learn*|learning] Turkish.","She enjoys [cooking*|to cook].","We decided [to stay*|staying] at home.","Have you finished [eating*|to eat]?","Let's go [swimming*|to swim] in the lake.","I need [to buy*|buying] a new pen."],
+ gp:{q:["He hopes {to} become a pilot.","Do you mind {waiting} a few minutes?","My dad stopped {smoking} last year.","We plan {to} visit Turkey.","Do you like {dancing}?"],x:["go"]},
+ o:["I enjoy playing the komuz.","She wants to be a doctor.","We went skiing in Karakol."],
+ tf:[["I want going home.",0,"I want to go home."],["She enjoys painting.",1],["Let's go shopping.",1],["He finished to read the book.",0,"He finished reading the book."],["They decided to leave.",1],["Do you mind to open the window?",0,"Do you mind opening the window?"]],
+ m:[["want","to go"],["enjoy","going"],["decide","to stay"],["finish","writing"],["hope","to win"],["mind","waiting"]],
+ qa:[["What do you enjoy doing at weekends? (play football)",["I enjoy playing football."]],["What do you want to be in the future? (an engineer)",["I want to be an engineer."]],["Where did you go last Sunday? (go / ski)",["I went skiing.","I went skiing last Sunday."]]]},
+wantyou:{t:"I want you to… / tell / ask somebody to…",
+ r:[["want / would like + person + to + verb","I want you to help me."],["tell / ask + person + to + verb","The teacher told us to be quiet."],["Negative: tell somebody not to…","Mum told me not to be late."]],
+ d:["I want [you to come*|that you come] with me.","She asked [me to help*|me help] her.","The doctor told him [to rest*|rest].","My parents want [me to study*|I study] medicine.","He told us [not to*|to not] worry.","Would you like [me to*|that I] open the window?"],
+ gp:{q:["I'd like you {to} meet my brother.","The teacher told {us} to open our books.","She asked him {not} to call so late.","Do you want {me} to wait for you?","Mum told me to {buy} some bread."],x:["that"]},
+ o:["I want you to listen carefully.","She told me not to touch it.","They asked us to sit down."],
+ tf:[["I want that you help me.",0,"I want you to help me."],["She told me to wait.",1],["He asked me open the door.",0,"He asked me to open the door."],["My dad told us not to be late.",1],["Do you want me to call you?",1],["The teacher said us to sit down.",0,"The teacher told us to sit down."]],
+ qa:[["Your mother said \"Clean your room.\" What did she tell you?",["She told me to clean my room."]],["The teacher said \"Don't talk.\" What did he tell you?",["He told us not to talk.","He told me not to talk."]],["Ask your friend: do they want you to help? (Do you want…)",["Do you want me to help you?","Do you want me to help?"]]]},
+pron:{t:"I/me · he/him · they/them",
+ r:[["Subject pronouns: I, you, he, she, it, we, they","She likes him."],["Object pronouns: me, you, him, her, it, us, them","He likes her. Call me later."],["After prepositions → object pronoun","Come with us. This is for them."]],
+ d:["Can you help [me*|I]?","[She*|Her] is my aunt.","I love these shoes. I bought [them*|they] yesterday.","Aibek is nice. I like [him*|he].","Wait for [us*|we]!","[We*|Us] are going to the cinema."],
+ gp:{q:["Where is Aigerim? I can't see {her}.","This present is for {you}.","My grandparents live in Naryn. We visit {them} every summer.","Is this your phone? Can I use {it}?","{They} are my best friends."],x:["their"]},
+ o:["Please give it to me.","We saw them at the market.","She called him yesterday."],
+ tf:[["Me am a student.",0,"I am a student."],["Can you help us?",1],["I like she very much.",0,"I like her very much."],["They invited me to the party.",1],["This is for they.",0,"This is for them."],["He gave it to her.",1]],
+ m:[["I","me"],["he","him"],["she","her"],["we","us"],["they","them"],["it","it"]],
+ qa:[["Do you know Aibek? (Yes / know)",["Yes, I know him."]],["Where are the keys? (I / can't find)",["I can't find them."]],["Who is this present for? (you)",["It's for you.","It is for you."]]]},
+poss:{t:"my/your · mine/yours · whose?",
+ r:[["Before a noun: my, your, his, her, its, our, their","This is my bag."],["Without a noun: mine, yours, his, hers, ours, theirs","This bag is mine."],["Whose…? asks who owns something","Whose phone is this? – It's hers."]],
+ d:["Is this [your*|yours] pen?","This pen isn't mine. It's [hers*|her].","[Their*|Theirs] house is very big.","The dog wagged [its*|it's] tail.","That car is [ours*|our].","[Whose*|Who's] jacket is this?"],
+ gp:{q:["We love {our} school.","Is this book yours or {mine}?","Aibek and {his} sister are here.","The cat is eating {its} food.","They sold {their} old car."],x:["it's"]},
+ o:["Is this umbrella yours?","Their teacher is very kind.","Whose keys are these?"],
+ tf:[["This is my book.",1],["This book is my.",0,"This book is mine."],["Is that yours?",1],["Whose is this coat?",1],["The tree lost it's leaves.",0,"The tree lost its leaves."],["Our flat is smaller than their.",0,"Our flat is smaller than theirs."]],
+ m:[["my","mine"],["your","yours"],["her","hers"],["our","ours"],["their","theirs"],["his","his"]],
+ qa:[["Is this your bag? (Yes / mine)",["Yes, it's mine.","Yes, it is mine."]],["Whose pen is this? (Aigerim's / hers)",["It's hers.","It is hers.","It's Aigerim's."]],["Is that their car? (No / not theirs)",["No, it isn't theirs.","No, it's not theirs."]]]},
+sgen:{t:"Aibek's / my sister's / of",
+ r:[["Person + 's","Aibek's bike, my mother's car"],["Plural + ' (s')","my parents' house, the students' books"],["Things often use of","the end of the film, the top of the hill"]],
+ d:["This is [my brother's*|the brother of me] room.","Where is [Aigerim's*|Aigerims] bag?","My [parents'*|parent's] house is in Tokmok. (two parents)","The [children's*|childrens'] toys are everywhere.","Meet me at the [end of the street*|street's end].","Is that [your friend's*|your friend] car?"],
+ gp:{q:["{Aibek's} grandfather is ninety.","The {teacher's} desk is next to the window.","The {girls'} changing room is on the left.","I don't know the name {of} this song.","My {sister's} husband is a pilot."],x:["of the"]},
+ o:["This is my uncle's car.","The name of the street is Chui.","My parents' friends are here."],
+ tf:[["This is Aibeks phone.",0,"This is Aibek's phone."],["My mother's name is Gulnara.",1],["The childrens' room is upstairs.",0,"The children's room is upstairs."],["We live at the end of the road.",1],["The students' books are on the desk.",1],["The car of my father is red.",0,"My father's car is red."]],
+ qa:[["Whose bike is this? (my brother)",["It's my brother's.","It is my brother's.","It's my brother's bike."]],["What is your mother's name? (Gulnara)",["My mother's name is Gulnara.","Her name is Gulnara."]],["Whose house is that? (my grandparents)",["It's my grandparents' house.","It is my grandparents' house.","It's my grandparents'."]]]},
+myself:{t:"myself / yourself / themselves",
+ r:[["Use when the subject and object are the same person","I cut myself."],["myself, yourself, himself, herself, itself, ourselves, yourselves, themselves","They enjoyed themselves."],["by myself = alone, without help","She made the cake by herself."]],
+ d:["I hurt [myself*|me] in the garden.","He looked at [himself*|him] in the mirror.","Help [yourself*|you] to some fruit!","We enjoyed [ourselves*|us] at the party.","She lives by [herself*|her].","The children made dinner [themselves*|theirselves]."],
+ gp:{q:["Be careful! Don't burn {yourself}.","My little brother can dress {himself} now.","Did you paint the room {yourselves}? (you = two people)","The door opened by {itself}.","I taught {myself} to play the guitar."],x:["himselves"]},
+ o:["I made this cake myself.","They are enjoying themselves.","She talks to herself."],
+ tf:[["He cut hisself.",0,"He cut himself."],["I did it by myself.",1],["They enjoyed themselves.",1],["Did you hurt you?",0,"Did you hurt yourself?"],["We built it ourselves.",1],["She looked at herself.",1]],
+ m:[["I","myself"],["he","himself"],["she","herself"],["we","ourselves"],["they","themselves"],["it","itself"]],
+ qa:[["Who made this cake? (I / by)",["I made it myself.","I made it by myself."]],["Did they have a good time? (Yes / enjoy)",["Yes, they enjoyed themselves."]],["Who did he hurt? (himself)",["He hurt himself."]]]},
+thisthat:{t:"this / that / these / those · one / ones",
+ r:[["this (near) / that (far) + singular","This chair is new. That house is old."],["these (near) / those (far) + plural","These shoes are mine. Look at those birds."],["one / ones instead of repeating a noun","I like the red one. Which ones do you want?"]],
+ d:["[These*|This] apples are delicious.","Who is [that*|those] man over there?","[Those*|That] mountains are beautiful.","I don't like this shirt. I prefer the blue [one*|ones].","These shoes are too small. I need bigger [ones*|one].","[This*|These] is my friend Aibek."],
+ gp:{q:["Look at {those} clouds in the sky!","{This} soup is very hot.","{These} are my new glasses.","Which bag is yours? – The black {one}.","I need new pencils. My old {ones} are broken."],x:["that"]},
+ o:["This is my favourite song.","Are those your shoes?","I want the green one."],
+ tf:[["These book is interesting.",0,"This book is interesting."],["Those flowers are lovely.",1],["I like the red one.",1],["This are my parents.",0,"These are my parents."],["Which ones are yours?",1],["That boys are noisy.",0,"Those boys are noisy."]],
+ qa:[["Which T-shirt do you want? (the white)",["The white one.","I want the white one.","I'd like the white one."]],["Who are those people? (my cousins)",["They are my cousins.","They're my cousins.","Those are my cousins."]],["Is this your pen? (Yes)",["Yes, it is.","Yes, it's mine."]]]},
+aan_pl:{t:"a / an · singular & plural",
+ r:[["a + consonant sound · an + vowel sound","a book, an apple, an hour, a university"],["Plural: -s / -es / -ies","cats, boxes, cities"],["Irregular plurals","child → children, man → men, person → people, tooth → teeth"]],
+ d:["She is [an*|a] engineer.","I have [an*|a] uncle in Talas.","He eats [an*|a] egg every morning.","Two [children*|childs] are playing outside.","There are three [boxes*|boxs] on the floor.","Many [people*|persons] live in the city."],
+ gp:{q:["My father is {an} architect.","I want {a} new phone.","There are thirty {students} in our class.","How many {teeth} do you have?","Bishkek and Osh are big {cities}."],x:["an apple"]},
+ o:["She has an older brother.","There are two men at the door.","I saw an elephant at the zoo."],
+ tf:[["I have a umbrella.",0,"I have an umbrella."],["He is an honest man.",1],["There are five womans here.",0,"There are five women here."],["I need a new pair of shoes.",1],["Look at those sheep!",1],["She has two babys.",0,"She has two babies."]],
+ m:[["child","children"],["man","men"],["woman","women"],["tooth","teeth"],["foot","feet"],["mouse","mice"],["city","cities"],["box","boxes"]],
+ qa:[["What is your father's job? (a / an engineer)",["He is an engineer.","He's an engineer."]],["How many children are in the yard? (three)",["There are three children.","There are three children in the yard.","Three children."]],["What fruit do you eat every day? (an apple)",["I eat an apple every day.","I eat an apple."]]]},
+countable:{t:"Countable and uncountable nouns",
+ r:[["Countable: one book, two books → a/an or numbers","a chair, three chairs"],["Uncountable: water, rice, money, bread, information → no a/an, no -s","I need some water."],["Use a piece of / a glass of / a bottle of","a piece of cake, a glass of milk"]],
+ d:["Can I have [some water*|a water]?","I need some [advice*|advices].","She bought [a loaf of bread*|a bread].","We don't have much [money*|moneys].","There are three [eggs*|egg] in the fridge.","Would you like [a cup of tea*|a tea cup of]?"],
+ gp:{q:["Can I have a {glass} of juice?","I'd like a {piece} of cake, please.","There's no {sugar} in my tea.","We bought two {bottles} of water.","I have some good {news} for you!"],x:["breads"]},
+ o:["Can you give me some information?","I drink a glass of milk every morning.","We need some rice and two onions."],
+ tf:[["I need an information.",0,"I need some information."],["There is some milk in the fridge.",1],["She gave me good advices.",0,"She gave me good advice."],["I bought two kilos of apples.",1],["Can I have a piece of paper?",1],["My hairs are long.",0,"My hair is long."]],
+ m:[["a glass of","milk"],["a piece of","cake"],["a bottle of","water"],["a loaf of","bread"],["a cup of","tea"],["a bowl of","soup"]],
+ qa:[["What would you like to drink? (a glass of / juice)",["I'd like a glass of juice.","A glass of juice, please.","I would like a glass of juice."]],["Is there any bread? (Yes / some)",["Yes, there is some bread.","Yes, there is some.","Yes, there is."]],["What did you buy? (a bottle of / water)",["I bought a bottle of water."]]]},
+athe:{t:"a/an or the?",
+ r:[["a/an = one of many, first mention","I saw a dog. The dog was big."],["the = we know which one","Close the door, please."],["the = only one exists","the sun, the moon, the sky"]],
+ d:["I have [a*|the] sister and a brother.","[The*|A] sun is very bright today.","I bought a coat. [The*|A] coat is blue.","Can you open [the*|a] window? It's hot.","She's [a*|the] doctor.","What's [the*|a] name of your school?"],
+ gp:{q:["There's {a} cat in the garden.","Turn off {the} TV, please.","{The} moon goes round the Earth.","He works in {a} shop in the city centre.","We had pizza. {The} pizza was great."],x:["an"]},
+ o:["Please pass me the salt.","I live in a small house.","The sky is very blue today."],
+ tf:[["The sun is a star.",1],["I have the car. It's red.",0,"I have a car. It's red."],["Open the door, please.",1],["She is the teacher at my school.",0,"She is a teacher at my school."],["Can you close the window?",1],["Look at a moon!",0,"Look at the moon!"]],
+ qa:[["What's your mother's job? (a / the nurse)",["She is a nurse.","She's a nurse."]],["Where is the remote control? (on / the table)",["It's on the table.","It is on the table."]],["What did you see in the zoo? (a lion)",["I saw a lion."]]]},
+theplaces:{t:"the with places and names",
+ r:[["No the: most countries, cities, streets, lakes, mountains","Kyrgyzstan, Bishkek, Chui Avenue, Lake Issyk-Kul"],["the: rivers, seas, oceans, mountain ranges, deserts","the Naryn, the Black Sea, the Tian Shan"],["the: countries with Republic / States / Kingdom","the USA, the UK, the Kyrgyz Republic"]],
+ d:["She lives in [Bishkek*|the Bishkek].","Have you been to [the USA*|USA]?","[The Naryn*|Naryn River the] is a long river.","We swam in [Lake Issyk-Kul*|the Lake Issyk-Kul].","[The Tian Shan*|Tian Shan] mountains are very high.","My uncle lives in [Turkey*|the Turkey]."],
+ gp:{q:["{The} Pacific is the largest ocean.","We visited London in {the} UK.","Khan Tengri is in {the} Tian Shan.","They sailed across {the} Atlantic.","The Sahara is {a} huge desert in Africa."],x:["an"]},
+ o:["We travelled to the United States.","Lake Issyk-Kul never freezes.","The Chui River flows through Kyrgyzstan."],
+ tf:[["I live in the Kyrgyzstan.",0,"I live in Kyrgyzstan."],["The Nile is a long river.",1],["We visited the UK last year.",1],["She lives in the Moscow.",0,"She lives in Moscow."],["The Caspian Sea is big.",1],["Atlantic is an ocean.",0,"The Atlantic is an ocean."]],
+ qa:[["Which country are you from? (Kyrgyzstan)",["I am from Kyrgyzstan.","I'm from Kyrgyzstan."]],["Which ocean is the biggest? (Pacific)",["The Pacific is the biggest.","The Pacific Ocean is the biggest.","The Pacific."]],["Where is New York? (the USA)",["It's in the USA.","It is in the USA.","New York is in the USA."]]]},
+someany:{t:"some / any / no / none",
+ r:[["some in positive sentences","I've got some money."],["any in negatives and questions","I haven't got any money. Have you got any?"],["no = not any · none = not any (without a noun)","There's no milk. – How much? – None."]],
+ d:["There are [some*|any] apples on the table.","We haven't got [any*|some] bread.","Is there [any*|some] coffee left?","Would you like [some*|any] tea? (offer)","There are [no*|any] chairs in the room.","\"How many tickets are left?\" \"[None*|No].\""],
+ gp:{q:["I'd like {some} soup, please.","Are there {any} good cafes near here?","I've got {no} time today.","She didn't buy {any} fruit.","\"How much sugar do we have?\" \"{None}.\""],x:["a"]},
+ o:["I need some help with this.","Have you got any brothers?","There is no milk in the fridge."],
+ tf:[["I haven't got some money.",0,"I haven't got any money."],["There are some books on the shelf.",1],["Is there any water?",1],["There aren't no chairs.",0,"There aren't any chairs. / There are no chairs."],["Can I have some cake?",1],["I have any friends here.",0,"I have some friends here."]],
+ qa:[["Have you got any pets? (No)",["No, I haven't.","No, I haven't got any pets.","No, I don't have any pets."]],["Is there any milk? (Yes / some)",["Yes, there is some milk.","Yes, there is some.","Yes, there is."]],["How many cars has he got? (none)",["None.","He has none.","He hasn't got any."]]]},
+muchmany:{t:"much / many / a lot of",
+ r:[["many + plural countable","How many books? Not many."],["much + uncountable","How much money? Not much."],["a lot of / lots of = with both, mostly in positive sentences","She has a lot of friends and a lot of free time."]],
+ d:["How [many*|much] students are in your class?","I don't have [much*|many] time.","There are [a lot of*|much] people here.","How [much*|many] water do you drink?","We didn't see [many*|much] animals.","She drinks [a lot of*|many] coffee."],
+ gp:{q:["How {many} languages do you speak?","How {much} is this jacket?","There isn't {much} snow this year.","He has {lots} of toys.","Did you take {many} photos?"],x:["few"]},
+ o:["How many sisters have you got?","I don't drink much tea.","There are a lot of trees in the park."],
+ tf:[["How many money do you have?",0,"How much money do you have?"],["There isn't much time.",1],["She has many friends.",1],["I don't have much books.",0,"I don't have many books."],["We ate a lot of food.",1],["How much people came?",0,"How many people came?"]],
+ qa:[["How many brothers have you got? (two)",["I have got two brothers.","I've got two brothers.","I have two brothers.","Two."]],["How much homework do you have today? (a lot)",["I have a lot of homework.","A lot.","I've got a lot of homework."]],["Is there much traffic in your town? (No / not much)",["No, there isn't much traffic.","No, not much.","No, there isn't much."]]]},
+fewlittle:{t:"a little / a few",
+ r:[["a few + plural countable","a few days, a few friends"],["a little + uncountable","a little milk, a little time"],["few / little (without a) = not enough","He has few friends. (He's lonely.)"]],
+ d:["Can I have [a little*|a few] sugar?","I'll be back in [a few*|a little] minutes.","She speaks [a little*|a few] English.","There are [a few*|a little] eggs left.","We have [a little*|a few] time before the bus.","I bought [a few*|a little] apples."],
+ gp:{q:["Wait a {few} seconds, please.","Add a {little} salt to the soup.","I know a {few} people in Osh.","There's {a} little juice left.","We need a {few} more chairs."],x:["much"]},
+ o:["I have a few friends in Talas.","Can you speak a little louder?","We stayed there for a few days."],
+ tf:[["I need a few water.",0,"I need a little water."],["She has a few cousins.",1],["Give me a little time.",1],["There are a little cars outside.",0,"There are a few cars outside."],["I speak a little Turkish.",1],["Wait a little minutes.",0,"Wait a few minutes."]],
+ qa:[["Do you speak Russian? (Yes / a little)",["Yes, a little.","Yes, I speak a little Russian.","Yes, I speak a little."]],["How long did you stay? (a few days)",["I stayed for a few days.","A few days.","For a few days."]],["Do you want sugar? (Yes / a little)",["Yes, a little, please.","Yes, a little.","Yes, just a little."]]]},
+alleveryeach:{t:"all / every / each / both",
+ r:[["every / each + singular noun","Every student has a book."],["all + plural noun","All students have books."],["both = two people/things together","Both my brothers are tall."]],
+ d:["[Every*|All] child needs love.","[All*|Every] my friends came.","I go running [every*|all] morning.","[Both*|All] my parents are teachers. (two people)","[Each*|All] room has a TV.","We stayed there [all*|every] day."],
+ gp:{q:["{Every} house in our street has a garden.","{All} the shops are closed on holidays.","{Both} of my grandparents live in Naryn.","I clean my teeth {every} day.","The teacher gave a book to {each} student."],x:["any"]},
+ o:["Every student must wear a uniform.","All my friends like football.","Both of them are from Osh."],
+ tf:[["Every students are here.",0,"Every student is here."],["All the children are playing.",1],["Both my sisters are doctors.",1],["I watch TV all evenings.",0,"I watch TV every evening."],["Each person has a ticket.",1],["All student has a book.",0,"All students have a book."]],
+ qa:[["How often do you brush your teeth? (every day)",["I brush my teeth every day.","Every day."]],["Are your parents teachers? (Yes / both)",["Yes, both of them are teachers.","Yes, both of them are.","Yes, they both are."]],["Did all your friends come? (Yes)",["Yes, all my friends came.","Yes, they all came.","Yes, they did."]]]},
+something:{t:"something / anybody / nowhere…",
+ r:[["some- in positives: something, somebody, somewhere","I want something to eat."],["any- in negatives and questions: anything, anybody, anywhere","Did you see anybody?"],["no- = not any-: nothing, nobody, nowhere","There's nobody here."]],
+ d:["There's [somebody*|anybody] at the door.","I didn't buy [anything*|something].","Is there [anywhere*|somewhere] to sit? (question)","[Nobody*|Anybody] knew the answer.","I want to go [somewhere*|anywhere] warm.","There's [nothing*|anything] in the box. It's empty."],
+ gp:{q:["Would you like {something} to drink?","I can't find my keys {anywhere}.","{Nobody} called while you were out.","Did {anybody} see my phone?","I have {nothing} to do. I'm bored."],x:["somewhere"]},
+ o:["I have something for you.","Is there anybody in the classroom?","We went nowhere last weekend."],
+ tf:[["I didn't see nobody.",0,"I didn't see anybody. / I saw nobody."],["Somebody is knocking.",1],["Is there anything to eat?",1],["I know anything about it.",0,"I don't know anything about it. / I know nothing about it."],["There is nowhere to park.",1],["Nobody didn't come.",0,"Nobody came."]],
+ qa:[["Is anybody in the room? (No / nobody)",["No, there's nobody.","No, there is nobody.","No, nobody."]],["What did you buy? (nothing)",["I bought nothing.","I didn't buy anything.","Nothing."]],["Where do you want to go? (somewhere quiet)",["I want to go somewhere quiet.","Somewhere quiet."]]]}
+});
+
+</script>
+<script>
+/* Part 4: Adjectives & adverbs, Word order, Linking words, Prepositions */
+window.T=window.T||{};Object.assign(window.T,{
+adjadv:{t:"Adjectives and adverbs (quick / quickly)",
+ r:[["Adjective describes a noun","a careful driver, a quiet room"],["Adverb describes a verb: adjective + -ly","He drives carefully. Speak quietly."],["Irregular: good → well, fast → fast, hard → hard","She sings well. He works hard."]],
+ d:["She speaks English very [well*|good].","He is a [careful*|carefully] driver.","Please walk [slowly*|slow].","The test was [easy*|easily].","They worked [hard*|hardly] all day.","Aibek runs very [fast*|fastly]."],
+ gp:{q:["The baby is sleeping. Talk {quietly}, please.","My grandmother is a {good} cook.","He answered the question {correctly}.","It's a {beautiful} day!","She plays the piano {well}."],x:["goodly"]},
+ o:["My brother drives very carefully.","She is a good student.","Please speak more slowly."],
+ tf:[["He plays football good.",0,"He plays football well."],["She is a quick runner.",1],["Drive careful!",0,"Drive carefully!"],["The music is too loud.",1],["He works hard.",1],["She smiled happy.",0,"She smiled happily."]],
+ m:[["quick","quickly"],["good","well"],["careful","carefully"],["easy","easily"],["fast","fast"],["happy","happily"]],
+ qa:[["How does your friend speak English? (very well)",["He speaks English very well.","She speaks English very well.","Very well."]],["What kind of driver is your father? (careful)",["He is a careful driver.","He's a careful driver."]],["How did you do the test? (quickly)",["I did it quickly.","I did the test quickly.","Quickly."]]]},
+comparative:{t:"Comparatives (bigger / more expensive)",
+ r:[["Short adjectives + -er (+ than)","Osh is older than Bishkek."],["Long adjectives: more + adjective","This book is more interesting than that one."],["Irregular: good → better, bad → worse, far → further","Today is better than yesterday."]],
+ d:["My brother is [taller*|more tall] than me.","A car is [more expensive*|expensiver] than a bike.","This exercise is [easier*|more easy] than the last one.","Summer is [hotter*|hoter] than spring.","My cold is [worse*|badder] today.","Is Russian [more difficult*|difficulter] than English?"],
+ gp:{q:["An elephant is {bigger} than a horse.","Your bag is heavier {than} mine.","I feel {better} today, thanks.","Bishkek is {more} crowded than Talas.","Gold is more expensive {than} silver."],x:["most"]},
+ o:["My sister is younger than me.","Football is more popular than tennis.","This road is better than that one."],
+ tf:[["She is more tall than me.",0,"She is taller than me."],["A plane is faster than a train.",1],["Maths is more difficult than art.",1],["My bag is heavyer than yours.",0,"My bag is heavier than yours."],["This film is gooder.",0,"This film is better."],["Winter is colder than autumn.",1]],
+ m:[["big","bigger"],["good","better"],["bad","worse"],["happy","happier"],["far","further"],["hot","hotter"],["easy","easier"],["thin","thinner"]],
+ qa:[["Which is bigger, a cat or a horse?",["A horse is bigger than a cat.","A horse is bigger.","A horse."]],["Which is more expensive, a phone or a car?",["A car is more expensive than a phone.","A car is more expensive.","A car."]],["Are you older than your best friend? (Yes)",["Yes, I am.","Yes, I'm older."]]]},
+superlative:{t:"Superlatives (the biggest / the most expensive)",
+ r:[["the + short adjective + -est","Everest is the highest mountain."],["the most + long adjective","the most beautiful city"],["Irregular: the best, the worst, the furthest","It's the best day of my life."]],
+ d:["Jengish Chokusu is [the highest*|the most high] mountain in Kyrgyzstan.","This is [the most interesting*|the interestingest] book I have.","Aibek is [the best*|the goodest] player in the team.","It was [the worst*|the baddest] day of my life.","January is [the coldest*|the most cold] month.","Who is [the youngest*|the most young] in your family?"],
+ gp:{q:["Issyk-Kul is the {biggest} lake in Kyrgyzstan.","She is the {most} intelligent girl in the class.","That was the {best} film I've ever seen.","It's the {cheapest} shop in town.","Which is the {longest} river in the world?"],x:["more"]},
+ o:["This is the biggest room in the house.","She is the most popular girl at school.","What is the best place to visit?"],
+ tf:[["It's the most big house.",0,"It's the biggest house."],["She is the best singer.",1],["This is the most expensive car.",1],["He is the tallest boy in the class.",1],["This is the baddest day.",0,"This is the worst day."],["She's the more beautiful girl here.",0,"She's the most beautiful girl here."]],
+ m:[["tall","the tallest"],["good","the best"],["bad","the worst"],["big","the biggest"],["funny","the funniest"],["beautiful","the most beautiful"]],
+ qa:[["Who is the oldest person in your family? (my grandmother)",["My grandmother is the oldest.","My grandmother is the oldest person in my family.","My grandmother."]],["What is the biggest city in Kyrgyzstan? (Bishkek)",["Bishkek is the biggest city.","Bishkek is the biggest city in Kyrgyzstan.","Bishkek."]],["What is your best subject? (English)",["My best subject is English.","English is my best subject.","English."]]]},
+asas:{t:"as … as / not as … as",
+ r:[["as + adjective + as = the same","She is as tall as her mother."],["not as … as = less","This film isn't as good as the book."],["the same as","Your phone is the same as mine."]],
+ d:["My bag is as heavy [as*|than] yours.","Talas isn't as [big*|bigger] as Bishkek.","He is [as*|so] old as my brother.","Your shoes are the same [as*|like] mine.","Silver isn't [as expensive*|as more expensive] as gold.","I can run as fast [as*|that] you."],
+ gp:{q:["This test is as easy {as} the last one.","The bus isn't {as} fast as the train.","My answer is the {same} as yours.","She can sing as {well} as her sister.","Today isn't as cold as {yesterday}."],x:["than"]},
+ o:["I am as tall as my father.","This room isn't as big as that one.","Her dress is the same as mine."],
+ tf:[["She is as tall than me.",0,"She is as tall as me."],["Cats aren't as big as horses.",1],["My car is the same as yours.",1],["He isn't as clever like his sister.",0,"He isn't as clever as his sister."],["It's as hot as yesterday.",1],["My answer is same as yours.",0,"My answer is the same as yours."]],
+ qa:[["Is a bike as fast as a car? (No)",["No, a bike isn't as fast as a car.","No, it isn't.","No, it isn't as fast as a car."]],["Are you as tall as your mother? (Yes)",["Yes, I am as tall as my mother.","Yes, I am."]],["Is your phone the same as mine? (Yes)",["Yes, it's the same.","Yes, it is the same as yours.","Yes, it is."]]]},
+tooenough:{t:"too / enough",
+ r:[["too + adjective = more than OK","This tea is too hot. I can't drink it."],["adjective + enough = OK","Is it warm enough to swim?"],["enough + noun","We don't have enough chairs."]],
+ d:["This coat is [too*|enough] small for me.","He isn't old [enough*|too] to drive.","We have [enough*|too] food for everybody.","It's [too*|enough] cold to go swimming.","I didn't have enough [time*|time enough].","The box is [too heavy*|heavy too] to carry."],
+ gp:{q:["I can't sleep. It's {too} noisy.","Is the water warm {enough} for a bath?","We don't have {enough} money for a taxi.","These shoes are {too} big. I need a smaller size.","She's not tall {enough} to reach the shelf."],x:["very"]},
+ o:["This soup is too salty.","He is not strong enough.","There aren't enough books for everyone."],
+ tf:[["He is enough old to vote.",0,"He is old enough to vote."],["The music is too loud.",1],["We have enough chairs.",1],["It's too much hot today.",0,"It's too hot today."],["I don't have money enough.",0,"I don't have enough money."],["Is it big enough?",1]],
+ qa:[["Why can't you drink the tea? (too hot)",["Because it's too hot.","It's too hot.","Because it is too hot."]],["Can your little brother drive? (No / not old enough)",["No, he isn't old enough.","No, he is not old enough."]],["Do we have enough chairs? (Yes)",["Yes, we have enough chairs.","Yes, we do.","Yes, we have enough."]]]},
+wo_obj:{t:"Word order: verb + object, place + time",
+ r:[["verb + object stay together","I like football very much. (not I like very much football)"],["place before time","I went to school yesterday."],["Subject + verb + object + place + time","We met Aibek at the café on Monday."]],
+ d:["I [like tea very much*|like very much tea].","She [speaks English well*|speaks well English].","We went [to Osh last week*|last week to Osh].","He [plays the komuz every day*|plays every day the komuz].","I [ate a sandwich for lunch*|ate for lunch a sandwich].","They arrived [home late*|late home]."],
+ gp:{q:["I {read} the book last night.","She cleaned her room {yesterday}.","We play football {in} the park on Sundays.","He drinks {coffee} every morning.","I saw your sister {at} the market."],x:["very"]},
+ o:["I met my friend at the bus stop yesterday.","She speaks Turkish very well.","We go to the mountains every summer."],
+ tf:[["I like very much ice cream.",0,"I like ice cream very much."],["She opened the door slowly.",1],["We went yesterday to the cinema.",0,"We went to the cinema yesterday."],["He finished his homework quickly.",1],["They live in Naryn now.",1],["I play every day the guitar.",0,"I play the guitar every day."]],
+ qa:[["Put in order: very much / I / music / love",["I love music very much."]],["Put in order: yesterday / went / to the market / we",["We went to the market yesterday."]],["Put in order: speaks / well / English / she",["She speaks English well."]]]},
+wo_freq:{t:"always / usually / often / never (position)",
+ r:[["Before the main verb","I always get up early."],["After am/is/are/was/were","She is never late."],["Between auxiliary and verb","I have never seen it. I can always help."]],
+ d:["She [always walks*|walks always] to school.","He [is never*|never is] angry.","I [usually have*|have usually] tea for breakfast.","They [often go*|go often] to the mountains.","We [can always*|always can] help you.","I [have never*|never have] been to Paris."],
+ gp:{q:["I {always} brush my teeth before bed.","My grandmother is {never} tired.","We {sometimes} eat out on Fridays.","She has {never} seen the sea.","Do you {often} play computer games?"],x:["ever"]},
+ o:["I usually get up at seven.","She is always very polite.","We never eat fast food."],
+ tf:[["He always is late.",0,"He is always late."],["I often visit my aunt.",1],["She never eats meat.",1],["They go always to school by bus.",0,"They always go to school by bus."],["I have never been there.",1],["We sometimes are bored.",0,"We are sometimes bored."]],
+ m:[["always","100%"],["usually","80%"],["often","60%"],["sometimes","40%"],["rarely","10%"],["never","0%"]],
+ qa:[["How often do you do sport? (usually / on Saturdays)",["I usually do sport on Saturdays."]],["Are you ever late for school? (No / never)",["No, I am never late.","No, I'm never late.","No, never."]],["Do you always do your homework? (Yes / always)",["Yes, I always do my homework.","Yes, I always do it.","Yes, I do."]]]},
+conj:{t:"and / but / or / so / because",
+ r:[["and = add · but = contrast · or = choice","I like tea but I don't like coffee."],["so = result","It was raining, so we stayed home."],["because = reason","We stayed home because it was raining."]],
+ d:["I was tired, [so*|because] I went to bed.","She's rich [but*|and] she isn't happy.","Do you want tea [or*|but] coffee?","He didn't come [because*|so] he was ill.","I bought apples [and*|or] bananas.","The bus was late, [so*|because] I took a taxi."],
+ gp:{q:["I love cats {but} my brother likes dogs.","Would you like to stay {or} go?","She studied hard, {so} she passed the exam.","I'm wearing a coat {because} it's cold.","We went to the park {and} played football."],x:["although"]},
+ o:["I called him but he didn't answer.","She was hungry so she made a sandwich.","We went home because it was late."],
+ tf:[["I was hungry, so I ate.",1],["He is poor but he is happy.",1],["I stayed home so I was ill.",0,"I stayed home because I was ill."],["Do you want juice or water?",1],["It was cold because I wore a hat.",0,"It was cold, so I wore a hat."],["I like reading and painting.",1]],
+ qa:[["Why are you tired? (because / didn't sleep well)",["Because I didn't sleep well.","I'm tired because I didn't sleep well."]],["Do you want tea or juice? (juice)",["Juice, please.","I want juice.","I'd like juice."]],["It started to rain. What did you do? (so / went home)",["It started to rain, so I went home.","So I went home.","I went home."]]]},
+whenif:{t:"when… / if… (+ present for the future)",
+ r:[["when = I'm sure it will happen","When I get home, I'll call you."],["if = maybe it will happen","If it rains, we'll stay at home."],["After when/if use present, not will","If you study (not will study), you'll pass."]],
+ d:["If it [rains*|will rain] tomorrow, we'll stay home.","When I [finish*|will finish] school, I'll go to university.","If you [hurry*|will hurry], you'll catch the bus.","I'll call you when I [arrive*|will arrive].","If I see Aibek, I [will tell*|tell] him.","What will you do if you [don't pass*|won't pass] the exam?"],
+ gp:{q:["If you {are} hungry, there's some soup in the fridge.","I'll wait {until} you come back.","{When} I grow up, I'll be a pilot.","If she {calls}, tell her I'm busy.","We'll go out if the weather {is} nice."],x:["will"]},
+ o:["If you need help, call me.","I will tell her when I see her.","If it snows, we will go skiing."],
+ tf:[["If it will rain, I'll take an umbrella.",0,"If it rains, I'll take an umbrella."],["When I get home, I'll eat.",1],["If you study, you'll pass.",1],["I'll call you when I will arrive.",0,"I'll call you when I arrive."],["If I'm late, start without me.",1],["When she come, we'll have dinner.",0,"When she comes, we'll have dinner."]],
+ qa:[["What will you do if it rains tomorrow? (stay home)",["If it rains, I'll stay home.","I'll stay home.","I will stay home."]],["What will you do when you finish school? (go to university)",["When I finish school, I'll go to university.","I'll go to university.","I will go to university."]],["What will happen if you don't sleep? (be tired)",["I'll be tired.","I will be tired.","If I don't sleep, I'll be tired."]]]},
+if2:{t:"If I had… / If I were… (imaginary)",
+ r:[["If + past, would + verb = imaginary situation","If I had a car, I would drive to work."],["If I were you… = advice","If I were you, I'd tell the teacher."],["Compare: If I win (possible) / If I won (unlikely)","If I won a million, I'd buy a house."]],
+ d:["If I [had*|have] more time, I would learn Chinese.","If I were rich, I [would*|will] travel the world.","If I [were*|am] you, I'd see a doctor.","What would you do if you [found*|find] a wallet?","I [would buy*|bought] a horse if I had money.","If she [knew*|knows] the answer, she would tell us."],
+ gp:{q:["If I {had} wings, I would fly to the mountains.","If I were you, I {would} say sorry.","She would come if she {wasn't} so busy.","What {would} you do if you won the lottery?","If we {lived} in Osh, we'd see Grandma more often."],x:["will"]},
+ o:["If I had a dog, I would walk it every day.","If I were you, I would go to bed.","What would you do if you were famous?"],
+ tf:[["If I have a million, I would buy a house.",0,"If I had a million, I would buy a house."],["If I were you, I'd take the job.",1],["I would help you if I could.",1],["If I would know, I'd tell you.",0,"If I knew, I'd tell you."],["What would you do if you saw a bear?",1],["If I was rich, I will buy a plane.",0,"If I were rich, I would buy a plane."]],
+ qa:[["What would you do if you had a lot of money? (buy a house)",["I would buy a house.","I'd buy a house.","If I had a lot of money, I would buy a house."]],["Give advice: your friend is tired. (If I were you…)",["If I were you, I would go to bed.","If I were you, I'd go to bed.","If I were you, I would rest.","If I were you, I'd rest."]],["Where would you live if you could choose? (in Istanbul)",["I would live in Istanbul.","I'd live in Istanbul."]]]},
+relative:{t:"who / which / that (relative clauses)",
+ r:[["who / that for people","The woman who lives next door is a doctor."],["which / that for things","The bus which goes to Osh leaves at 6."],["You can leave out who/which/that when it is the object","The book (that) I'm reading is great."]],
+ d:["A teacher is a person [who*|which] teaches.","This is the phone [which*|who] I bought yesterday.","I know a boy [who*|which] speaks five languages.","The cake [that*|who] Mum made was delicious.","Do you know the girl [who*|which] is singing?","Where is the book [that*|who] was on the table?"],
+ gp:{q:["A dentist is somebody {who} looks after your teeth.","The film {which} we saw was boring.","The man {who} called you is my uncle.","This is the house {that} my grandfather built.","Have you seen the photos {which} I took?"],x:["what"]},
+ o:["The girl who sits next to me is Aigerim.","The phone which I bought is very good.","I like people who are kind."],
+ tf:[["A nurse is a person which helps doctors.",0,"A nurse is a person who helps doctors."],["The book that I'm reading is good.",1],["The car who is outside is mine.",0,"The car which/that is outside is mine."],["I have a friend who lives in Turkey.",1],["This is the bag I bought.",1],["The man what called is my uncle.",0,"The man who called is my uncle."]],
+ qa:[["What is a pilot? (a person / fly planes)",["A pilot is a person who flies planes.","A person who flies planes."]],["Which bag is yours? (the bag / is on the chair)",["The bag which is on the chair.","The bag that is on the chair.","The one which is on the chair.","The one that is on the chair."]],["What is a fridge? (a machine / keeps food cold)",["A fridge is a machine which keeps food cold.","A fridge is a machine that keeps food cold.","A machine which keeps food cold.","A machine that keeps food cold."]]]},
+prep_time:{t:"at / on / in (time)",
+ r:[["at + clock times and night/weekend","at 7 o'clock, at night, at the weekend"],["on + days and dates","on Monday, on 31 August, on my birthday"],["in + months, years, seasons, parts of the day","in May, in 2026, in winter, in the morning"]],
+ d:["The lesson starts [at*|on] 9 o'clock.","My birthday is [in*|on] March.","We don't have school [on*|in] Sunday.","I was born [in*|on] 2012.","I can't sleep [at*|in] night.","Independence Day is [on*|in] 31 August."],
+ gp:{q:["I go running {in} the morning.","See you {on} Friday!","The shop closes {at} six.","It's very cold here {in} winter.","What do you do {at} the weekend?"],x:["by"]},
+ o:["We have English on Tuesday.","I get up at seven o'clock.","It often snows in January."],
+ tf:[["I'll see you in Monday.",0,"I'll see you on Monday."],["The film starts at 8.",1],["It's hot in summer.",1],["She was born on 2010.",0,"She was born in 2010."],["I study in the evening.",1],["We have a party in my birthday.",0,"We have a party on my birthday."]],
+ m:[["at","7 o'clock"],["on","Monday"],["in","July"],["in","2026"],["at","night"],["on","my birthday"],["in","winter"],["at","the weekend"]],
+ qa:[["When is your birthday? (in / on + month or date)",["My birthday is in May.","It's in May.","My birthday is on 5 May.","It's on 5 May."]],["What time do you get up? (at 7)",["I get up at 7.","I get up at seven.","At 7.","At seven."]],["When do you have English? (on Monday)",["I have English on Monday.","On Monday.","We have English on Monday."]]]},
+prep_place:{t:"in / at / on (place)",
+ r:[["in = inside","in the box, in Bishkek, in the kitchen"],["on = on a surface","on the table, on the wall, on the floor"],["at = a point or event","at the bus stop, at school, at a party"]],
+ d:["The milk is [in*|on] the fridge.","There's a picture [on*|in] the wall.","I'll meet you [at*|in] the bus stop.","My cousin lives [in*|at] Karakol.","She's [at*|in] work now.","The keys are [on*|at] the table."],
+ gp:{q:["The children are playing {in} the garden.","There's a fly {on} the ceiling!","Were you {at} the party last night?","Put the books {on} the shelf.","My dad is {at} home today."],x:["to"]},
+ o:["Your phone is on the sofa.","We waited at the station.","There are some apples in the bag."],
+ tf:[["The cat is in the roof.",0,"The cat is on the roof."],["She's at school now.",1],["I live on Bishkek.",0,"I live in Bishkek."],["There's a clock on the wall.",1],["We met at the cinema.",1],["The pen is at the box.",0,"The pen is in the box."]],
+ qa:[["Where is your phone? (on / the desk)",["It's on the desk.","It is on the desk.","My phone is on the desk."]],["Where do you live? (in / Bishkek)",["I live in Bishkek.","In Bishkek."]],["Where were you at 10 o'clock? (at / school)",["I was at school.","At school."]]]},
+prep_move:{t:"to / into / from · under / next to / between",
+ r:[["Movement: go to, come from, get into, get out of","We went to the market. She got into the car."],["Position: under, next to, between, opposite, behind, in front of","The bank is opposite the park."],["home without to: go home, come home","I went home early."]],
+ d:["We went [to*|at] the cinema.","She jumped [into*|in to] the lake.","I'm [from*|of] Kyrgyzstan.","The cat is [under*|between] the bed.","The pharmacy is [between*|next] the bank and the café.","He went [home*|to home] at five."],
+ gp:{q:["My desk is {next} to the window.","Get {out} of the car, please.","The bus goes {from} Bishkek to Osh.","The shoes are {under} the chair.","There's a big tree {in} front of our house."],x:["at"]},
+ o:["She walked into the room.","The school is opposite the mosque.","I sit between Aibek and Aigerim."],
+ tf:[["I go to home at four.",0,"I go home at four."],["The dog is under the table.",1],["She is from Talas.",1],["He got in to the taxi.",0,"He got into the taxi."],["The shop is next to the bank.",1],["We drove at Naryn.",0,"We drove to Naryn."]],
+ m:[["under","below"],["next to","beside"],["into","going inside"],["out of","going outside"],["opposite","on the other side"],["between","in the middle of two"]],
+ qa:[["Where is the cat? (under / the table)",["It's under the table.","It is under the table.","The cat is under the table."]],["Where are you from? (from / Kyrgyzstan)",["I'm from Kyrgyzstan.","I am from Kyrgyzstan."]],["Where did you go yesterday? (to / the park)",["I went to the park.","To the park."]]]},
+phrasal:{t:"Phrasal verbs (get up, put on…)",
+ r:[["verb + up/down/on/off/out/back/away","get up, sit down, turn on, take off"],["Object can go in the middle or at the end","Put on your coat. Put your coat on."],["With it/them → always in the middle","Put it on. (not Put on it)"]],
+ d:["I [get up*|get on] at seven every day.","Please [sit down*|sit up]. The lesson is starting.","It's cold. [Put on*|Put off] your jacket.","[Turn off*|Turn up] the light when you leave.","Where's my hat? I can't find it. – Look! I'll [look for it*|look it for].","Take your shoes off. Take [them off*|off them]."],
+ gp:{q:["The plane will take {off} in ten minutes.","Can you turn {on} the TV?","Please give the book {back} to me tomorrow.","Don't throw the bottle {away}. Recycle it.","My mum is looking {after} my baby brother."],x:["in"]},
+ o:["Please turn off your phone.","I got up very early today.","Put your hat on."],
+ tf:[["Put on it.",0,"Put it on."],["She got up at six.",1],["Turn off the light, please.",1],["Take off them.",0,"Take them off."],["Please sit down.",1],["I'm looking my keys for.",0,"I'm looking for my keys."]],
+ m:[["get up","leave your bed"],["sit down","take a seat"],["put on","wear (start)"],["take off","remove (clothes)"],["turn on","start a machine"],["look for","try to find"]],
+ qa:[["What time do you get up? (6:30)",["I get up at 6:30.","I get up at half past six.","At 6:30."]],["It's cold. What do you say to your friend? (put on / your coat)",["Put on your coat.","Put your coat on."]],["Your shoes are dirty. What does your mum say? (take off / them)",["Take them off.","Take them off, please."]]]}
+});
+
+</script>
+<script>
+const SECTIONS=[
+ ["Present",["be","be_q","pcont","pcont_q","psimp","psimp_neg","pres_vs","have"]],
+ ["Past",["waswere","past","past_neg","pastcont","pastcont_vs"]],
+ ["Present perfect",["pp","pp_adv","forsince","pp_vs"]],
+ ["Passive & future",["passive","fut_pc","goingto","will","will_going"]],
+ ["Modal verbs & imperatives",["can","must","should","haveto","wouldlike","imperative"]],
+ ["There is · It is",["thereis","it"]],
+ ["Questions & answers",["qwords","subjq","soneither"]],
+ ["Verb patterns",["to_ing","wantyou"]],
+ ["Pronouns & possessives",["pron","poss","sgen","myself","thisthat"]],
+ ["Nouns & articles",["aan_pl","countable","athe","theplaces"]],
+ ["Quantity",["someany","muchmany","fewlittle","alleveryeach","something"]],
+ ["Adjectives & adverbs",["adjadv","comparative","superlative","asas","tooenough"]],
+ ["Word order",["wo_obj","wo_freq"]],
+ ["Linking words & if",["conj","whenif","if2","relative"]],
+ ["Prepositions & phrasal verbs",["prep_time","prep_place","prep_move","phrasal"]]
+];
+const ORDER=SECTIONS.flatMap(s=>s[1]);
+const TABS=[["rule","Rule"],["ex1","Exercise 1"],["ex2","Exercise 2"],["ex3","Exercise 3"],["ex4","Exercise 4"],["game","Game"],["qa","Q&A"]];
+const app=document.getElementById("app"),back=document.getElementById("back"),homeBtn=document.getElementById("homeBtn"),crumb=document.getElementById("crumb");
+let stack=[],cur=null,sel=null,gameTimer=null;
+const h=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e};
+const norm=s=>s.toLowerCase().replace(/[’‘`]/g,"'").replace(/\bi am\b/g,"i'm").replace(/\bit is\b/g,"it's").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* progress (per viewer, optional) */
+let PROG={};try{PROG=JSON.parse(localStorage.getItem("gs-prog")||"{}")}catch(e){PROG={}}
+function save(id,tab,c,t){const k=id+":"+tab,p=Math.round(100*c/t);if(!(PROG[k]>=p)){PROG[k]=p;try{localStorage.setItem("gs-prog",JSON.stringify(PROG))}catch(e){}}}
+function starsFor(id){let s=0;["ex1","ex2","ex3","qa"].forEach(t=>{if((PROG[id+":"+t]||0)>=80)s++});return Math.min(3,Math.round(s*3/4))}
+function starEl(n){const s=h("span","stars");s.setAttribute("aria-label",n+" of 3 stars");for(let i=0;i<3;i++){const x=h("span",i<n?null:"off","★");s.append(x)}return s}
+
+/* board & teacher modes (remembered per viewer) */
+let MODE={board:false,teacher:false};try{Object.assign(MODE,JSON.parse(localStorage.getItem("gs-mode")||"{}"))}catch(e){}
+const boardBtn=document.getElementById("boardBtn"),teacherBtn=document.getElementById("teacherBtn");
+let rerender=null;
+function applyModes(){document.body.classList.toggle("board",!!MODE.board);document.body.classList.toggle("teacher",!!MODE.teacher);
+  boardBtn.setAttribute("aria-pressed",!!MODE.board);teacherBtn.setAttribute("aria-pressed",!!MODE.teacher);
+  try{localStorage.setItem("gs-mode",JSON.stringify(MODE))}catch(e){}}
+boardBtn.onclick=()=>{MODE.board=!MODE.board;applyModes()};
+teacherBtn.onclick=()=>{MODE.teacher=!MODE.teacher;applyModes();if(rerender)rerender()};
+applyModes();
+document.addEventListener("keydown",e=>{
+  if(/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName))return;
+  const nav=document.querySelector(".nav");if(!nav)return;
+  if(e.key=="ArrowRight"){const b=nav.querySelector("button:last-child");if(b&&!b.disabled)b.click()}
+  if(e.key=="ArrowLeft"){const b=nav.querySelector("button:first-child");if(b&&!b.disabled&&b.textContent.includes("Previous"))b.click()}});
+
+function teacherNotes(T0){
+  const d=h("details","tnotes");d.open=true;d.append(h("summary",null,"Teacher notes & answer key"));
+  const sec=(title,items,ordered)=>{d.append(h("h4",null,title));const l=h(ordered?"ol":"ul");items.forEach(x=>{const li=h("li");typeof x=="string"?li.textContent=x:li.append(...x);l.append(li)});d.append(l)};
+  sec("Warm-up: ask the class",T0.qa.map(q=>q[0].replace(/\s*\(.*\)\s*$/,"")));
+  sec("Board summary",T0.r.map(r=>r[0]+"  →  "+r[1]));
+  const wrongs=T0.tf.filter(x=>!x[1]);
+  if(wrongs.length)sec("Common mistakes",wrongs.map(([s,,f])=>[h("span","wrong",s),"  →  ",h("span","fix",f)]));
+  sec("Exercise 1 key",T0.d.map(s=>{const m=s.match(/^(.*)\[(.+)\](.*)$/);return (m[1]+m[2].split("|").find(o=>o.endsWith("*")).replace("*","")+m[3]).trim()}),true);
+  sec("Exercise 2 key",T0.gp.q.map(s=>s.replace(/\{(.+)\}/,"$1")+"").concat(["(extra word: "+(T0.gp.x||[]).join(", ")+")"]),true);
+  sec("Exercise 3 key",T0.o,true);
+  sec("Q&A model answers",T0.qa.map(q=>q[1][0]),true);
+  sec("Speaking follow-up",["Pairs: ask and answer the Q&A questions with your own information.","Each student writes two true and one false sentence using today's rule. The partner guesses the false one."]);
+  return d}
+
+function stopGame(){if(gameTimer){clearInterval(gameTimer);gameTimer=null}}
+back.onclick=()=>{stopGame();stack.pop();const f=stack.pop();f?go(f):home()};
+homeBtn.onclick=()=>{stopGame();home()};
+function go(fn){stack.push(fn);back.hidden=stack.length<2;homeBtn.hidden=stack.length<2;fn()}
+
+function home(){stack=[];go(()=>{
+  rerender=null;crumb.textContent="Grammar Steps · A1–A2";app.innerHTML="";
+  const top=h("div","top"),l=h("div");
+  l.append(h("h2",null,"Grammar practice for A1–A2"),h("p","lead","64 topics in 15 sections. Each topic has a short rule, three exercises, a game and questions to answer. Works with a mouse, a touchscreen or a smart board."));
+  const total=ORDER.reduce((a,id)=>a+starsFor(id),0),pr=h("div","prog");pr.append("Your stars: ",h("b",null,"★ "+total)," / "+ORDER.length*3);
+  top.append(l,pr);app.append(top);
+  const g=h("div","secs");
+  SECTIONS.forEach(([name,ids],si)=>{
+    const s=h("section","sec"),hd=h("header");hd.append(h("div","snum",si+1),h("h3",null,name));s.append(hd);
+    const ul=h("ul","tlist");
+    ids.forEach(id=>{const li=h("li"),b=h("button","tbtn");b.append(h("span",null,T[id].t),starEl(starsFor(id)));b.onclick=()=>go(()=>topic(id,"rule"));li.append(b);ul.append(li)});
+    const tb=h("button","stest","Section test");tb.onclick=()=>go(()=>secTest(si));
+    s.append(ul,tb);g.append(s)});
+  app.append(g)})}
+
+function sectionOf(id){return SECTIONS.findIndex(s=>s[1].includes(id))}
+
+function topic(id,tab){
+  stopGame();const T0=T[id],idx=ORDER.indexOf(id),si=sectionOf(id);sel=null;
+  crumb.textContent=SECTIONS[si][0]+" · "+T0.t;app.innerHTML="";
+  app.append(h("h2",null,T0.t));
+  const tabs=h("div","tabs");tabs.setAttribute("role","tablist");
+  TABS.forEach(([k,lab])=>{const b=h("button","tab",lab);b.setAttribute("role","tab");b.setAttribute("aria-selected",k==tab);
+    if((PROG[id+":"+k]||0)>=80){const d=h("span","dot"," ★");b.append(d)}
+    b.onclick=()=>{stack.pop();go(()=>topic(id,k))};tabs.append(b)});
+  app.append(tabs);
+  const card=h("div","card");app.append(card);
+  if(tab=="rule")ruleView(T0,card);
+  else if(tab=="game")gameMenu(id,T0,card);
+  else{
+    const spec={
+      ex1:{type:"drop",instr:"Choose the correct answer.",qs:T0.d},
+      ex2:{type:"gap",instr:"Complete the sentences with the words below. There is one extra word.",qs:T0.gp.q,extra:T0.gp.x},
+      ex3:{type:"order",instr:"Tap the words to put them in the correct order.",qs:T0.o},
+      ex4:{type:"sort",instr:"Are the sentences correct or wrong? Put them into the correct group.",cats:["correct ✓","wrong ✗"],items:Object.fromEntries(T0.tf.map(x=>[x[0],x[1]?0:1])),fix:Object.fromEntries(T0.tf.filter(x=>!x[1]).map(x=>[x[0],x[2]]))},
+      qa:{type:"qa",instr:"Answer the questions. Write full sentences. Use the words in brackets.",qs:T0.qa}}[tab];
+    exerciseInto(card,spec,(c,t)=>save(id,tab,c,t));
+    if(["ex2","ex3","ex4"].includes(tab))app.append(h("p","hint",tab!="ex3"?"Tip: tap a word, then tap a box. Or drag it with the mouse.":"Tip: tap a word to move it to the line. Tap it again to take it back."));
+  }
+  if(MODE.teacher)app.append(teacherNotes(T0));
+  const nav=h("div","nav"),p=h("button",null,"‹ Previous topic"),n=h("button",null,"Next topic ›");
+  p.disabled=idx==0;n.disabled=idx==ORDER.length-1;
+  p.onclick=()=>{stack.pop();go(()=>topic(ORDER[idx-1],"rule"))};n.onclick=()=>{stack.pop();go(()=>topic(ORDER[idx+1],"rule"))};
+  nav.append(p,n);app.append(nav);
+  rerender=()=>{stack.pop();go(()=>topic(id,tab))};
+  window.scrollTo(0,0)}
+
+function ruleView(T0,card){
+  card.append(h("p","instr","Read the rule and the examples. Then do the exercises."));
+  const r=h("div","rules");T0.r.forEach(([a,b])=>{const d=h("div","rule");d.append(h("b",null,a),h("i",null,b));r.append(d)});card.append(r);
+  const a=h("div","actions"),b=h("button","act","Start Exercise 1 ›");b.onclick=()=>{stack.pop();const id=Object.keys(T).find(k=>T[k]===T0);go(()=>topic(id,"ex1"))};a.append(b);card.append(a)}
+
+function exerciseInto(card,ex,onScore,shown){
+  card.append(h("p","instr",ex.instr));const body=h("div");card.append(body);
+  cur=BUILD[ex.type](ex,body);
+  const acts=h("div","actions"),sc=h("div","score"),out=h("output",null,"");sc.append("Score: ",out);
+  const bC=h("button","act","Check Answers"),bT=h("button","act alt","Try Again"),bS=h("button","act see","Show Answers");
+  bC.onclick=()=>{const[c,t]=cur.check();out.textContent=c+"/"+t;out.classList.remove("pop");void out.offsetWidth;out.classList.add("pop");onScore&&onScore(c,t)};
+  bT.onclick=()=>{card.innerHTML="";exerciseInto(card,ex,onScore)};
+  bS.onclick=()=>{card.innerHTML="";exerciseInto(card,ex,onScore,!shown)};
+  if(shown){cur.show();bS.textContent="Hide Answers"}
+  acts.append(sc,bC,bT,bS);card.append(acts)}
+
+/* section test: 10 random items from the section's choose-exercises */
+function secTest(si){
+  rerender=null;const [name,ids]=SECTIONS[si];crumb.textContent=name+" · Section test";app.innerHTML="";
+  app.append(h("h2",null,"Section test: "+name),h("p","lead","Ten questions mixed from all topics in this section."));
+  const pool=shuffle(ids.flatMap(id=>T[id].d)).slice(0,10);
+  const qs=pool.map(s=>{const m=s.match(/^(.*)\[(.+)\](.*)$/),opts=m[2].split("|"),a=opts.findIndex(o=>o.endsWith("*")),o=opts.map(x=>x.replace("*",""));
+    const ord=shuffle(o.map((x,i)=>i));return{t:m[1]+"___"+m[3],o:ord.map(i=>o[i]),a:ord.indexOf(a)}});
+  const card=h("div","card");app.append(card);
+  exerciseInto(card,{type:"mcq",instr:"Choose the correct answer.",qs},null);
+  const nav=h("div","nav"),again=h("button",null,"New test ↻");again.onclick=()=>{stack.pop();go(()=>secTest(si))};nav.append(h("span"),again);app.append(nav);window.scrollTo(0,0)}
+
+/* tap-or-drag chips */
+function chip(text){const c=h("span","chip",text);c.draggable=true;c.dataset.v=text;
+  c.onclick=e=>{e.stopPropagation();if(c.closest(".slot")&&!sel){c.closest(".slot")._home.append(c);return}
+    if(sel===c){clearSel();return}select(c)};
+  c.ondragstart=()=>select(c);return c}
+function select(c){document.querySelectorAll(".chip.sel").forEach(x=>x.classList.remove("sel"));sel=c;c.classList.add("sel");
+  document.querySelectorAll(".slot").forEach(s=>s.classList.add("target"))}
+function clearSel(){if(sel)sel.classList.remove("sel");sel=null;document.querySelectorAll(".slot.target").forEach(s=>s.classList.remove("target"))}
+function slot(bank){const s=h("span","slot");s._home=bank;
+  const place=()=>{if(!sel)return;const old=s.querySelector(".chip");if(old&&old!==sel)bank.append(old);s.append(sel);s.classList.remove("ok","bad");clearSel()};
+  s.onclick=place;s.ondragover=e=>e.preventDefault();s.ondrop=e=>{e.preventDefault();place()};return s}
+function bankEl(){const b=h("div","bank");b.onclick=()=>{if(sel){b.append(sel);clearSel()}};b.ondragover=e=>e.preventDefault();b.ondrop=e=>{e.preventDefault();if(sel){b.append(sel);clearSel()}};return b}
+const mark=(el,ok)=>{el.classList.remove("ok","bad");void el.offsetWidth;el.classList.add(ok?"ok":"bad");return ok?1:0};
+
+const BUILD={
+ sort(ex,body){const bank=bankEl(),grid=h("div","sortgrid"),slots=[],words=Object.keys(ex.items),fixes=h("div","qlist");fixes.hidden=true;
+  ex.cats.forEach((c,ci)=>{const col=h("div","col");col.append(h("h4",null,c));
+    words.filter(w=>ex.items[w]==ci).forEach(()=>{const s=slot(bank);s.dataset.cat=ci;slots.push(s);col.append(s)});grid.append(col)});
+  shuffle(words).forEach(w=>bank.append(chip(w)));body.append(grid,bank,fixes);
+  const showFix=()=>{fixes.innerHTML="";Object.entries(ex.fix||{}).forEach(([w,f])=>{const r=h("div","model");r.textContent="✗ "+w+"  →  ✓ "+f;fixes.append(r)});fixes.hidden=false};
+  return{check(){let c=0;slots.forEach(s=>{const ch=s.querySelector(".chip");c+=mark(s,!!ch&&ex.items[ch.dataset.v]==s.dataset.cat)});showFix();return[c,words.length]},
+   show(){ex.cats.forEach((_,ci)=>{const ss=slots.filter(s=>s.dataset.cat==ci);words.filter(w=>ex.items[w]==ci).forEach((w,j)=>{
+     const ch=[...body.querySelectorAll(".chip")].find(x=>x.dataset.v==w);ss[j].append(ch);mark(ss[j],true)})});clearSel();showFix()}}},
+ gap(ex,body){const bank=bankEl(),list=h("div","qlist"),slots=[],words=[];
+  ex.qs.forEach(q=>{const m=q.match(/^(.*)\{(.+)\}(.*)$/),row=h("div","q"),t=h("div","t"),s=slot(bank);
+    s.dataset.a=m[2];words.push(m[2]);slots.push(s);t.append(m[1],s,m[3]);row.append(t);list.append(row)});
+  shuffle(words.concat(ex.extra||[])).forEach(w=>bank.append(chip(w)));body.append(list,bank);
+  return{check(){let c=0;slots.forEach(s=>{const ch=s.querySelector(".chip");c+=mark(s,!!ch&&ch.dataset.v==s.dataset.a)});return[c,slots.length]},
+   show(){slots.forEach(s=>{const old=s.querySelector(".chip");if(old)bank.append(old)});
+     slots.forEach(s=>{const ch=[...bank.querySelectorAll(".chip")].find(x=>x.dataset.v==s.dataset.a);if(ch)s.append(ch);mark(s,true)});clearSel()}}},
+ drop(ex,body){const list=h("div","qlist"),sels=[];
+  ex.qs.forEach((q,i)=>{const m=q.match(/^(.*)\[(.+)\](.*)$/),row=h("div","q"),t=h("div","t"),s=h("select");s.id="dd"+i;
+    s.append(new Option("",""));shuffle(m[2].split("|")).forEach(o=>{const v=o.replace("*","");s.append(new Option(v,v));if(o.endsWith("*"))s.dataset.a=v});
+    s.onchange=()=>s.classList.remove("ok","bad");sels.push(s);t.append(m[1],s,m[3]);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;sels.forEach(s=>c+=mark(s,s.value==s.dataset.a));return[c,sels.length]},
+   show(){sels.forEach(s=>{s.value=s.dataset.a;mark(s,true)})}}},
+ order(ex,body){const list=h("div","qlist"),rows=[];
+  ex.qs.forEach(q=>{const words=q.replace(/[?.!]$/,"").split(" "),row=h("div","q"),t=h("div","t"),line=h("div","line"),bank=h("div","bank");
+    bank.style.marginTop="8px";
+    let sh=shuffle(words);for(let k=0;k<5&&sh.join(" ")==words.join(" ");k++)sh=shuffle(words);
+    sh.forEach(w=>{const c=h("span","chip",w);c.onclick=()=>{(c.parentNode===bank?line:bank).append(c);line.classList.remove("ok","bad")};bank.append(c)});
+    rows.push({line,bank,q});t.append(line,bank);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;rows.forEach(r=>{const s=[...r.line.children].map(x=>x.textContent).join(" ");c+=mark(r.line,norm(s)==norm(r.q))});return[c,rows.length]},
+   show(){rows.forEach(r=>{const all=[...r.line.children,...r.bank.children];r.q.replace(/[?.!]$/,"").split(" ").forEach(w=>{const i=all.findIndex(x=>x.textContent==w);if(i>-1)r.line.append(all.splice(i,1)[0])});mark(r.line,true)})}}},
+ mcq(ex,body){const list=h("div","qlist"),qs=[];
+  ex.qs.forEach(q=>{const row=h("div","q"),t=h("div","t"),opts=h("div","mcq"),st={pick:-1,btns:[]};
+    q.o.forEach((o,oi)=>{const b=h("button","opt",o);b.onclick=()=>{st.pick=oi;st.btns.forEach(x=>x.classList.remove("on","ok","bad"));b.classList.add("on")};st.btns.push(b);opts.append(b)});
+    qs.push([st,q.a,opts]);t.append(h("div",null,q.t),opts);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;qs.forEach(([st,a,opts])=>{if(st.pick<0){mark(opts,false);return}opts.classList.remove("ok","bad");c+=mark(st.btns[st.pick],st.pick==a)});return[c,qs.length]},
+   show(){qs.forEach(([st,a,opts])=>{opts.classList.remove("ok","bad");st.btns.forEach(b=>b.classList.remove("on","ok","bad"));st.pick=a;st.btns[a].classList.add("on");mark(st.btns[a],true)})}}},
+ qa(ex,body){const list=h("div","qlist"),ins=[];
+  ex.qs.forEach(([q,a],i)=>{const row=h("div","q"),t=h("div","t"),inp=h("input"),m=h("div","model");m.hidden=true;
+    inp.type="text";inp.id="qa"+i;inp.autocomplete="off";inp.spellcheck=false;inp.placeholder="Write your answer…";
+    inp.oninput=()=>{inp.classList.remove("ok","bad");m.hidden=true};ins.push([inp,a,m]);t.append(h("div",null,q),inp,m);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;ins.forEach(([i,a,m])=>{const ok=a.some(x=>norm(x)==norm(i.value));c+=mark(i,ok);if(!ok){m.textContent="Model answer: "+a[0];m.hidden=false}});return[c,ins.length]},
+   show(){ins.forEach(([i,a,m])=>{i.value=a[0];mark(i,true);m.hidden=true})}}}
+};
+
+/* ---------- games ---------- */
+function gameMenu(id,T0,card){
+  card.append(h("p","instr","Choose a game."));
+  const g=h("div","gpick");
+  const add=(t,d,fn)=>{const b=h("button","gcard");b.append(h("b",null,t),h("span",null,d));b.onclick=()=>{card.innerHTML="";fn(card,id,T0)};g.append(b)};
+  add("⏱ Speed race","Choose the right word as fast as you can. 45 seconds.",speedGame);
+  add("✓ ✗ Right or wrong?","Is the sentence correct? Decide quickly and see the fix.",tfGame);
+  if(T0.m)add("🃏 Memory match","Turn over two cards and find the pairs.",matchGame);
+  card.append(g)}
+function backToMenu(card,id,T0){const b=h("button","act alt","Other games");b.onclick=()=>{stopGame();card.innerHTML="";gameMenu(id,T0,card)};return b}
+function bestKey(id,g){return "gs-best:"+id+":"+g}
+function getBest(k){try{return +localStorage.getItem(k)||0}catch(e){return 0}}
+function setBest(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function resultView(card,id,T0,title,n,sub,again){
+  card.innerHTML="";const r=h("div","result");r.append(h("b",null,title),h("div","n",n),h("div",null,sub));
+  const a=h("div","actions"),p=h("button","act","Play again");p.onclick=()=>{card.innerHTML="";again(card,id,T0)};a.append(p,backToMenu(card,id,T0));r.append(a);card.append(r)}
+
+function speedGame(card,id,T0){
+  stopGame();const items=T0.d.map(s=>{const m=s.match(/^(.*)\[(.+)\](.*)$/),o=m[2].split("|");return{t:m[1]+"___"+m[3],o:o.map(x=>x.replace("*","")),a:o.find(x=>x.endsWith("*")).replace("*","")}});
+  // pull a few extra items from the same section for variety
+  const extra=SECTIONS[sectionOf(id)][1].filter(x=>x!=id).flatMap(x=>T[x].d).map(s=>{const m=s.match(/^(.*)\[(.+)\](.*)$/),o=m[2].split("|");return{t:m[1]+"___"+m[3],o:o.map(x=>x.replace("*","")),a:o.find(x=>x.endsWith("*")).replace("*","")}});
+  let deck=shuffle(items).concat(shuffle(extra)),i=0,score=0,streak=0,left=45;
+  const head=h("div","ghead"),sc=h("span",null,"Score: 0"),st=h("span",null,""),tm=h("span",null,"45 s");head.append(sc,st,tm);
+  const bar=h("div","timer"),fill=h("i");fill.style.width="100%";bar.append(fill);
+  const big=h("div","big"),btns=h("div","gbtns"),fb=h("div","fb");card.append(head,bar,big,btns,fb);
+  function next(){if(i>=deck.length){deck=deck.concat(shuffle(deck));}const q=deck[i++];big.textContent=q.t;btns.innerHTML="";
+    shuffle(q.o).forEach(o=>{const b=h("button","pick",o);b.onclick=()=>{if(o==q.a){score+=1+(streak>=3?1:0);streak++;fb.className="fb y";fb.textContent=streak>=3?"Correct! Streak bonus +1":"Correct!"}else{streak=0;fb.className="fb n";fb.textContent="✗ "+q.t.replace("___",q.a)}
+      sc.textContent="Score: "+score;st.textContent=streak>=2?"🔥 "+streak:"";next()};btns.append(b)})}
+  next();
+  gameTimer=setInterval(()=>{left--;tm.textContent=left+" s";fill.style.width=(left/45*100)+"%";
+    if(left<=0){stopGame();const k=bestKey(id,"speed"),best=Math.max(getBest(k),score);setBest(k,best);resultView(card,id,T0,"Time's up!",score,"Best score: "+best,speedGame)}},1000)}
+
+function tfGame(card,id,T0){
+  stopGame();const deck=shuffle(T0.tf);let i=0,score=0,left=40;
+  const head=h("div","ghead"),sc=h("span",null,"Score: 0 / "+deck.length),tm=h("span",null,"40 s");head.append(sc,tm);
+  const bar=h("div","timer"),fill=h("i");fill.style.width="100%";bar.append(fill);
+  const big=h("div","big"),btns=h("div","gbtns"),fb=h("div","fb");
+  const y=h("button","yes","✓ Correct"),n=h("button","no","✗ Wrong");btns.append(y,n);card.append(head,bar,big,btns,fb);
+  function end(){stopGame();const k=bestKey(id,"tf"),best=Math.max(getBest(k),score);setBest(k,best);resultView(card,id,T0,"Finished!",score+" / "+deck.length,"Best score: "+best,tfGame)}
+  function show(){if(i>=deck.length){end();return}big.textContent=deck[i][0]}
+  function answer(v){if(i>=deck.length)return;const [s,ok,fix]=deck[i];
+    if((v?1:0)===ok){score++;fb.className="fb y";fb.textContent=ok?"Yes, it's correct!":"Right, it's wrong. Correct: "+fix}
+    else{fb.className="fb n";fb.textContent=ok?"No — this sentence is correct.":"It's wrong. Correct: "+fix}
+    sc.textContent="Score: "+score+" / "+deck.length;i++;show()}
+  y.onclick=()=>answer(true);n.onclick=()=>answer(false);show();
+  gameTimer=setInterval(()=>{left--;tm.textContent=left+" s";fill.style.width=(left/40*100)+"%";if(left<=0)end()},1000)}
+
+function matchGame(card,id,T0){
+  stopGame();const pairs=T0.m.slice(0,8);let cards=[];pairs.forEach((p,pi)=>{cards.push({v:p[0],p:pi});cards.push({v:p[1],p:pi})});cards=shuffle(cards);
+  let open=[],found=0,moves=0,lock=false;
+  const head=h("div","ghead"),mv=h("span",null,"Moves: 0"),fd=h("span",null,"Pairs: 0 / "+pairs.length);head.append(mv,fd);
+  const grid=h("div","mgrid");card.append(head,grid);
+  cards.forEach(c=>{const b=h("button","mc",c.v);b.setAttribute("aria-label","Hidden card");c.el=b;
+    b.onclick=()=>{if(lock||b.classList.contains("up")||b.classList.contains("done"))return;b.classList.add("up");b.setAttribute("aria-label",c.v);open.push(c);
+      if(open.length==2){moves++;mv.textContent="Moves: "+moves;const[a,d]=open;
+        if(a.p==d.p&&a!==d){a.el.classList.replace("up","done");d.el.classList.replace("up","done");open=[];found++;fd.textContent="Pairs: "+found+" / "+pairs.length;
+          if(found==pairs.length){const k=bestKey(id,"match"),prev=getBest(k),best=prev?Math.min(prev,moves):moves;setBest(k,best);setTimeout(()=>resultView(card,id,T0,"All pairs found!",moves+" moves","Best: "+best+" moves",matchGame),600)}}
+        else{lock=true;setTimeout(()=>{a.el.classList.remove("up");d.el.classList.remove("up");a.el.setAttribute("aria-label","Hidden card");d.el.setAttribute("aria-label","Hidden card");open=[];lock=false},900)}}};
+    grid.append(b)});
+  const a=h("div","actions");a.append(backToMenu(card,id,T0));card.append(a)}
+
+const missing=ORDER.filter(id=>!T[id]);if(missing.length)console.error("Missing topics",missing);
+home();
+</script>
+
+</html>

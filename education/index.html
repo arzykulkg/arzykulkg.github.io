@@ -1,1 +1,57 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Education</title><style>body{margin:0;background:#0b0f1a;color:#fff;font-family:Arial,sans-serif;padding:28px 16px;max-width:560px;margin:auto}h1{font-size:34px;margin:0 0 18px}a{display:block;margin:12px 0;padding:22px 18px;border-radius:16px;color:#fff;text-decoration:none;font:700 22px Arial}small{display:block;font-weight:400;font-size:15px;opacity:.9;margin-top:5px}a.back{display:inline-block;background:none;padding:0;margin:0 0 14px;font:400 15px Arial;opacity:.8}</style></head><body><h1>🎓 Education</h1><a style="background:#6d4aff" href="global-english/">📘 Global English<small>Grade 7 · 8 · 9</small></a><a style="background:#c2438e" href="grammar-in-use/">📗 Grammar in Use<small>Essential Grammar in Use · 4th edition</small></a><a style="background:#00a8b0" href="liveclass/">🎓 Live Class<small>Join with the teacher’s code</small></a></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Education · Indigo Prime Academy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#f3f1ee;--panel:#fffdfb;--ink:#26303a;--muted:#6b7480;--line:#ddd6cf;--band:#ef6c1f;--unit:#4f74b8;--ex:#c0479a;--teal:#14919b;--green:#1f8a4c;--display:"Lexend",system-ui,sans-serif;--body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#16191d;--panel:#1f2328;--ink:#eceff2;--muted:#9aa3ad;--line:#363c44;--band:#d35f17;--unit:#7f9fe0;--ex:#d466b0;--teal:#4cc3cc;--green:#5fd18f}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.5 var(--body)}
+.band{background:var(--band);color:#fff}.in,.wrap{max-width:1100px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+.in{display:flex;align-items:center;gap:12px;padding-block:12px;min-height:56px}
+.band h1{font:600 1.05rem var(--display);margin:0;flex:1}
+.bb{font:600 .95rem var(--display);background:rgba(255,255,255,.18);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;text-decoration:none}
+.wrap{padding-block:26px 50px}
+h2{font:600 1.6rem var(--display);margin:0 0 6px}.lead{color:var(--muted);margin:0 0 22px}
+h3.sec{font:600 .8rem var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:30px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.cls{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;text-align:left;cursor:pointer;color:var(--ink);display:flex;gap:16px;align-items:center;text-decoration:none;transition:transform .15s}
+.cls:hover{transform:translateY(-2px);border-color:var(--band)}
+.num{flex:none;width:72px;height:72px;border:6px solid var(--unit);display:grid;place-items:center;font:600 2.1rem var(--display);color:var(--unit);background:var(--panel)}
+.cls b{display:block;font:600 1.2rem var(--display)}.cls span{color:var(--muted);font-size:.92rem}
+.cls .tag{display:block;font:600 .72rem var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--band)}
+.ico{flex:none;width:72px;height:72px;border-radius:14px;display:grid;place-items:center;font-size:2rem;color:#fff}
+.res{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:6px;color:var(--ink);text-decoration:none;transition:transform .15s}
+.res:hover{transform:translateY(-2px);border-color:var(--band)}
+.res b{font:600 1.2rem var(--display)}.res span{color:var(--muted);font-size:.95rem}
+.res .tag{font:600 .72rem var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--band)}
+</style></head><body>
+<div class="band"><div class="in"><button class="bb" id="back" hidden>‹ BACK</button><h1 id="crumb">Education · Indigo Prime Academy</h1></div></div>
+<main class="wrap" id="app"></main>
+<script>
+const G={7:{n:"Global English 7",lb:"books/lb7.html",wb:"books/wb7.html",db:"global-english/grade7.html",lbn:"Learner’s Book",c:"#4f74b8"},
+8:{n:"Global English 8",lb:"books/lb8.html",wb:"books/wb8.html",db:"global-english/grade8.html",lbn:"Learner’s Book",c:"#4f74b8"},
+9:{n:"Global English 9",lb:"books/lb9.html",wb:"books/wb9.html",db:"global-english/grade9.html",lbn:"Learner’s Book",c:"#4f74b8"},
+10:{n:"Cambridge IGCSE English as a Second Language",lb:"books/lb10.html",wb:"books/wb10.html",lbn:"Coursebook",c:"#4f74b8"}};
+const app=document.getElementById("app"),back=document.getElementById("back"),crumb=document.getElementById("crumb");
+const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+function link(cls,href,parts){const a=h("a",cls);a.href=href;parts.forEach(p=>a.append(p));return a}
+function home(){crumb.textContent="Education · Indigo Prime Academy";back.hidden=true;app.innerHTML="";
+ app.append(h("h2",null,"Choose your class"),h("p","lead","Pick a grade, then a book. Every unit has exercises you can check, flashcards and audio."));
+ const g=h("div","grid");
+ [7,8,9,10].forEach(k=>{const a=h("a","cls");a.href="#g"+k;const n=h("div","num",k),d=h("div");d.append(h("span","tag","Grade"),h("b",null,k==10?"IGCSE English":"Global English"),h("span",null,k==10?"Coursebook · Workbook · 20 units":"Learner’s Book · Workbook · 9 units"));a.append(n,d);g.append(a)});
+ app.append(g,h("h3","sec","Grammar & live lessons"));
+ const g2=h("div","grid");
+ [["grammar-steps/","Grammar Steps A1–A2","Short grammar lessons with practice","📘","#14919b"],["grammar-in-use/","Grammar in Use","Essential Grammar in Use · 4th edition","📗","#c0479a"],["liveclass/","Live Class","Join with the teacher’s code","🎓","#00a8b0"]].forEach(x=>{
+  const i=h("div","ico",x[3]);i.style.background=x[4];const d=h("div");d.append(h("b",null,x[1]),h("span",null,x[2]));g2.append(link("cls",x[0],[i,d]))});
+ app.append(g2)}
+function grade(k){const o=G[k];if(!o)return home();crumb.textContent="Grade "+k;back.hidden=false;app.innerHTML="";
+ app.append(h("h2",null,o.n),h("p","lead","Choose a resource."));
+ const g=h("div","grid");
+ const R=(href,tag,t,s)=>link("res",href,[h("span","tag",tag),h("b",null,t),h("span",null,s)]);
+ g.append(R(o.lb,"Interactive",o.lbn,k==10?"Vocabulary cards, matching, grammar, reading, listening":"Exercises with Check Answers"));
+ g.append(R(o.wb,"Interactive","Workbook",k==10?"Workbook pages, listening and a notebook for each unit":"Exercises with Check Answers"));
+ if(o.db)g.append(R(o.db,"Book pages",o.lbn+" · Designer Book","Book pages with audio, vocabulary and games"));
+ app.append(g)}
+function route(){const m=location.hash.match(/^#g(\d+)/);m?grade(m[1]):home()}
+back.onclick=()=>{location.hash="";};
+addEventListener("hashchange",route);route();
+</script></body></html>

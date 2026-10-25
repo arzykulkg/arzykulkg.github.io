@@ -4,3 +4,5 @@
    Карталар: window.BOOKMAPS = [ { src:"media/maps/karta.jpg", cap:"Сүрөттүн жазуусу" } ] */
 window.BIOS={};
 window.BOOKMAPS=[];
+
+window.GC_CODE=""; /* GoatCounter сайт коду (goatcounter.com'до катталгандан кийин), мисалы "arzykul" */

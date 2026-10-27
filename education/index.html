@@ -40,7 +40,7 @@ function home(){crumb.textContent="Education · Indigo Prime Academy";back.hidde
  [7,8,9,10].forEach(k=>{const a=h("a","cls");a.href="#g"+k;const n=h("div","num",k),d=h("div");d.append(h("span","tag","Grade"),h("b",null,k==10?"IGCSE English":"Global English"),h("span",null,k==10?"Coursebook · Workbook · 20 units":"Learner’s Book · Workbook · 9 units"));a.append(n,d);g.append(a)});
  app.append(g,h("h3","sec","Grammar & live lessons"));
  const g2=h("div","grid");
- [["grammar-steps/","Grammar Steps A1–A2","Short grammar lessons with practice","📘","#14919b"],["grammar-in-use/","Grammar in Use","Essential Grammar in Use · 4th edition","📗","#c0479a"],["liveclass/","Live Class","Join with the teacher’s code","🎓","#00a8b0"]].forEach(x=>{
+ [["grammar-steps/","Grammar Steps A1–A2","Short grammar lessons with practice","📘","#14919b"],["grammar-in-use/","Grammar in Use","Essential Grammar in Use · 4th edition","📗","#c0479a"],["grammar-in-use-5/","English Grammar in Use","Raymond Murphy · 5th edition · 145 units","📙","#e8672a"],["liveclass/","Live Class","Join with the teacher’s code","🎓","#00a8b0"]].forEach(x=>{
   const i=h("div","ico",x[3]);i.style.background=x[4];const d=h("div");d.append(h("b",null,x[1]),h("span",null,x[2]));g2.append(link("cls",x[0],[i,d]))});
  app.append(g2)}
 function grade(k){const o=G[k];if(!o)return home();crumb.textContent="Grade "+k;back.hidden=false;app.innerHTML="";

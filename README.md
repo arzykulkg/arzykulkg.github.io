@@ -1,6 +1,6 @@
 # Арзыкуловтордун санжырасы
 
-Site root = family tree. `education/` = class hub (Global English 7–10 interactive Learner’s/Coursebook + Workbook in `books/`, Grammar Steps A1–A2, Essential Grammar in Use, Live Class); not linked from the family tree. Student builds only – no answer keys.
+Site root = family tree. `education/` = class hub (Global English 7–10 interactive Learner’s/Coursebook + Workbook in `books/`, Grammar Steps A1–A2, Essential Grammar in Use (4th ed.), English Grammar in Use (5th ed., `grammar-in-use-5/`, 145 units + additional exercises + study guide), Live Class); not linked from the family tree. Student builds only – no answer keys.
 
 ## Features (v11)
 - Kyrgyz style (gold-green palette, ornament borders), light/dark, classic style switch (menu).

@@ -27,10 +27,10 @@ h3.sec{font:600 .8rem var(--display);letter-spacing:.1em;text-transform:uppercas
 <div class="band"><div class="in"><button class="bb" id="back" hidden>‹ BACK</button><h1 id="crumb">Education · Indigo Prime Academy</h1></div></div>
 <main class="wrap" id="app"></main>
 <script>
-const G={7:{n:"Global English 7",lb:"books/lb7.html",wb:"books/wb7.html",db:"global-english/grade7.html",lbn:"Learner’s Book",c:"#4f74b8"},
-8:{n:"Global English 8",lb:"books/lb8.html",wb:"books/wb8.html",db:"global-english/grade8.html",lbn:"Learner’s Book",c:"#4f74b8"},
-9:{n:"Global English 9",lb:"books/lb9.html",wb:"books/wb9.html",db:"global-english/grade9.html",lbn:"Learner’s Book",c:"#4f74b8"},
-10:{n:"Cambridge IGCSE English as a Second Language",lb:"books/lb10.html",wb:"books/wb10.html",lbn:"Coursebook",c:"#4f74b8"}};
+const G={7:{n:"Global English 7",lb:"gb/lb7/index.html",wb:"gb/wb7/index.html",cl:"books/lb7.html",cw:"books/wb7.html",lbn:"Learner’s Book"},
+8:{n:"Global English 8",lb:"gb/lb8/index.html",wb:"gb/wb8/index.html",cl:"books/lb8.html",cw:"books/wb8.html",lbn:"Learner’s Book"},
+9:{n:"Global English 9",lb:"gb/lb9/index.html",wb:"gb/wb9/index.html",cl:"books/lb9.html",cw:"books/wb9.html",lbn:"Learner’s Book"},
+10:{n:"Cambridge IGCSE English as a Second Language",lb:"gb/ig_cb/index.html",wb:"gb/ig_wb/index.html",cl:"books/lb10.html",cw:"books/wb10.html",lbn:"Coursebook"}};
 const app=document.getElementById("app"),back=document.getElementById("back"),crumb=document.getElementById("crumb");
 const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 function link(cls,href,parts){const a=h("a",cls);a.href=href;parts.forEach(p=>a.append(p));return a}
@@ -44,16 +44,12 @@ function home(){crumb.textContent="Education · Indigo Prime Academy";back.hidde
   const i=h("div","ico",x[3]);i.style.background=x[4];const d=h("div");d.append(h("b",null,x[1]),h("span",null,x[2]));g2.append(link("cls",x[0],[i,d]))});
  app.append(g2)}
 function grade(k){const o=G[k];if(!o)return home();crumb.textContent="Grade "+k;back.hidden=false;app.innerHTML="";
- app.append(h("h2",null,o.n),h("p","lead","Choose a resource."));
+ app.append(h("h2",null,o.n),h("p","lead","Choose a book. Each one opens its own home page with every study tool."));
  const R=(href,tag,t,s)=>link("res",href,[h("span","tag",tag),h("b",null,t),h("span",null,s)]);
  const sec=(t,items)=>{app.append(h("h3","sec",t));const g=h("div","grid");items.forEach(x=>g.append(x));app.append(g)};
- const e7=k<10;
- sec("Learner’s Book / Coursebook",[
-  R(o.lb,"Interactive · CD-ROM style",o.lbn+" – practice","One exercise per screen: match, drag, choose, type, plus games (word order, find the mistake, missing letters, guess the word, vocabulary wheel, sorting, picture quiz). Check Answers or See Next Answer (one answer at a time)"+(k==10?" · flashcards, grammar, reading, listening":"")),
-  ...(e7?[R(o.db,"Book view · Designer Book · Tests","Learner’s Book – full version","Original book pages with 🔍 activities, designer slides, games, audio, speaking, unit tests and worksheets")]:[])]);
- sec("Workbook",[R(o.wb,"Interactive · CD-ROM style","Workbook – practice",k==10?"Workbook pages, listening and a notebook for each unit":"Workbook exercises with Check Answers")]);
- sec("Live lessons",[R("liveclass/","Live Class","Join with the teacher’s code","Real-time class quiz on phones")]);
- app.append(g)}
+ sec(o.lbn,[R(o.lb,"Designer Book · flip-book · games","Open the "+o.lbn,"Interactive slides, original pages, Grammar Steps, dialogues, speaking, flashcards, dictionary, 30 games and Live Class"+(k<10?", unit tests and worksheets":"")),R(o.cl,"Interactive · CD-ROM style",o.lbn+" – quick practice","One exercise per screen with Check Answers or See Next Answer")]);
+ sec("Workbook",[R(o.wb,"Designer Book · flip-book · games","Open the Workbook","Workbook exercises with answer checking, original pages, dialogues, flashcards, dictionary, 30 games and Live Class"),R(o.cw,"Interactive · CD-ROM style","Workbook – quick practice","Workbook exercises with Check Answers")]);
+ sec("Live lessons",[R("liveclass/","Live Class","Join with the teacher’s code","Real-time class quiz on phones")])}
 function route(){const m=location.hash.match(/^#g(\d+)/);m?grade(m[1]):home()}
 back.onclick=()=>{location.hash="";};
 addEventListener("hashchange",route);route();

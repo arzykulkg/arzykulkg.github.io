@@ -168,10 +168,10 @@ function exercise(k,un,i){
     kb.onclick=()=>{kd.hidden=!kd.hidden;kb.textContent=kd.hidden?"Show answer key":"Hide answer key"};L.append(kb,kd)}
   if(!ex.img)two.style.gridTemplateColumns="1fr";two.append(L,Rt);card.append(two);
   const acts=h("div","actions"),sc=h("div","score"),out=h("output",null,"");sc.append("Score: ",out);
-  const bC=h("button","act","Check Answers"),bT=h("button","act alt","Try Again"),bS=h("button","act see","See Answers");
+  const bC=h("button","act","Check Answers"),bT=h("button","act alt","Try Again"),bS=h("button","act see","See Next Answer");
   bC.onclick=()=>{let c=0,t=0;ws.forEach(w=>{const r=w.check();c+=r[0];t+=r[1]});out.textContent=c+"/"+t;out.classList.remove("pop");void out.offsetWidth;out.classList.add("pop")};
   bT.onclick=()=>exercise(k,un,i);
-  bS.onclick=()=>{ws.forEach(w=>w.show());out.textContent=""};
+  bS.onclick=()=>{for(const w of ws){if(w.next&&w.next()){out.textContent="";return}}};
   acts.append(sc,bC,bT,bS);if(!ex.parts.every(x=>["flash","info","audio","pages","pad"].includes(x.kind)))card.append(acts);
   const nav=h("div","nav"),pv=h("button",null,"‹ Previous exercise"),nx=h("button",null,"Next exercise ›");
   pv.disabled=i==0;nx.disabled=i==un.ex.length-1;
@@ -221,6 +221,7 @@ const BUILD={
   body.append(list);
   const sent=s=>[...s.line.querySelectorAll(".chip")].map(c=>c.textContent).join(" ");
   return{check(){let c=0;its.forEach(s=>{c+=mark(s.line,norm(sent(s))===norm(s.a))});return[c,its.length]},
+   next(){for(const s of its){if(norm([...s.line.querySelectorAll('.chip')].map(c=>c.textContent).join(' '))!==norm(s.a)){const all=[...s.line.querySelectorAll('.chip'),...s.bank.querySelectorAll('.chip')];s.line.innerHTML='';s.a.split(' ').forEach(w=>{const i=all.findIndex(c=>c.textContent===w);if(i>=0){s.line.append(all[i]);all.splice(i,1)}});all.forEach(c=>s.bank.append(c));mark(s.line,true);return true}}return false},
    show(){its.forEach(s=>{const all=[...s.line.querySelectorAll(".chip"),...s.bank.querySelectorAll(".chip")];s.line.innerHTML="";s.a.split(" ").forEach(w=>{const i=all.findIndex(c=>c.textContent===w);if(i>=0){s.line.append(all[i]);all.splice(i,1)}});all.forEach(c=>s.bank.append(c));mark(s.line,true)})}}},
  mistake(p,body){const list=h("div","qlist"),its=[];
   p.items.forEach((it,n)=>{const row=h("div","q"),t=h("div","t"),st={pick:-1,els:[],it};row.dataset.l=n+1;
@@ -228,6 +229,7 @@ const BUILD={
    st.fx=h("div","exp","");st.fx.hidden=true;t.append(st.fx);row.append(t);list.append(row);its.push(st)});
   body.append(list);
   return{check(){let c=0;its.forEach(s=>{if(s.pick>=0){const ok=s.pick===s.it.bad;c+=mark(s.els[s.pick],ok);if(!ok)s.els[s.it.bad].classList.add("ok");s.fx.textContent="✔ "+s.it.fix;s.fx.hidden=false}});return[c,its.length]},
+   next(){for(const s of its){if(s.pick!==s.it.bad){s.els.forEach(e=>e.classList.remove('on','ok','bad'));s.pick=s.it.bad;mark(s.els[s.it.bad],true);s.fx.textContent='✔ '+s.it.fix;s.fx.hidden=false;return true}}return false},
    show(){its.forEach(s=>{s.els.forEach(e=>e.classList.remove("on","ok","bad"));s.pick=s.it.bad;mark(s.els[s.it.bad],true);s.fx.textContent="✔ "+s.it.fix;s.fx.hidden=false})}}},
  letters(p,body){const list=h("div","qlist"),its=[];
   p.items.forEach((it,n)=>{const row=h("div","q"),t=h("div","t"),box=h("div","lt"),ins=[];row.dataset.l=n+1;
@@ -236,6 +238,7 @@ const BUILD={
   body.append(list);
   const ok1=(it,ins,k)=>ins[k].value.toLowerCase()===it.w[it.hide[k]].toLowerCase();
   return{check(){let c=0;its.forEach(({it,ins})=>{let all=true;ins.forEach((x,k)=>{const o=ok1(it,ins,k);mark(x,o);if(!o)all=false});c+=all?1:0});return[c,its.length]},
+   next(){for(const {it,ins} of its){if(ins.some((x,k)=>x.value.toLowerCase()!==it.w[it.hide[k]].toLowerCase())){ins.forEach((x,k)=>{x.value=it.w[it.hide[k]];mark(x,true)});return true}}return false},
    show(){its.forEach(({it,ins})=>ins.forEach((x,k)=>{x.value=it.w[it.hide[k]];mark(x,true)}))}}},
  guess(p,body){const list=h("div","qlist"),its=[];
   p.items.forEach((it,n)=>{const row=h("div","q"),t=h("div","t"),st={it,got:new Set(),wrong:0,done:false,dead:false};row.dataset.l=n+1;
@@ -246,6 +249,7 @@ const BUILD={
    st.draw=draw;st.kb=kb;draw();t.append(h("div","exp",it.clue),word,kb,info);row.append(t);list.append(row);its.push(st)});
   body.append(list);
   return{check(){return[its.filter(s=>s.done).length,its.length]},
+   next(){for(const s of its){if(!s.done){[...s.it.w].forEach(c=>s.got.add(c.toLowerCase()));s.wrong=Math.min(s.wrong,5);s.draw();s.kb.querySelectorAll('button').forEach(b=>b.disabled=true);return true}}return false},
    show(){its.forEach(s=>{[...s.it.w].forEach(c=>s.got.add(c.toLowerCase()));s.wrong=Math.min(s.wrong,5);s.draw();s.kb.querySelectorAll("button").forEach(b=>b.disabled=true)})}}},
  wheel(p,body){const n=p.items.length,box=h("div","wheelbox"),wrap=h("div","wwrap"),wh=h("div","wheel"),cur=h("div","wclue","Press SPIN"),inp=h("input"),bs=h("button","act","SPIN"),res=h("div","exp");
   wh.style.background="conic-gradient("+p.items.map((_,i)=>"hsl("+(i*360/n|0)+" 70% 62%) "+(i*360/n)+"deg "+((i+1)*360/n)+"deg").join(",")+")";
@@ -259,6 +263,7 @@ const BUILD={
    setTimeout(()=>{cur.textContent="#"+(i+1)+": "+p.items[i].q},1500)};
   box.append(wrap,bs,cur,inp,res);body.append(box);
   return{check(){rec();let c=0,t=0;Object.keys(results).forEach(k=>{t++;if(results[k])c++});if(idx>=0&&inp.value.trim())mark(inp,!!results[idx]);if(idx>=0&&results[idx]===false)res.textContent="Answer: "+p.items[idx].a;return[c,Math.max(t,seen.size)]},
+   next(){if(idx>=0&&norm(inp.value)!==norm(p.items[idx].a)){inp.value=p.items[idx].a;mark(inp,true);return true}if(idx<0)cur.textContent='Spin first, then see the answer.';return false},
    show(){if(idx>=0){inp.value=p.items[idx].a;mark(inp,true)}else{cur.textContent="Spin first, then see the answer."}}}},
  sort(p,body){const bank=bankEl(),box=h("div","cats"),zones=[];
   p.cats.forEach((c,ci)=>{const z=h("div","zone"),dz=h("div","zdrop");z.append(h("b",null,c),dz);
@@ -266,6 +271,7 @@ const BUILD={
   shuffle(p.items).forEach(it=>bank.append(chip(it.t,String(it.c))));
   body.append(box,bank);
   return{check(){let c=0;zones.forEach(({dz,ci})=>dz.querySelectorAll(".chip").forEach(ch=>{const o=ch.dataset.v===String(ci);ch.classList.remove("ok","bad");ch.classList.add(o?"ok":"bad");c+=o?1:0}));return[c,p.items.length]},
+   next(){for(const ch of [...bank.querySelectorAll('.chip'),...zones.flatMap(({dz,ci})=>[...dz.querySelectorAll('.chip')].filter(c=>c.parentNode!==zones[+c.dataset.v].dz))]){zones[+ch.dataset.v].dz.append(ch);ch.classList.remove('bad');ch.classList.add('ok');return true}return false},
    show(){[...bank.querySelectorAll(".chip"),...zones.flatMap(({dz})=>[...dz.querySelectorAll(".chip")])].forEach(ch=>{zones[+ch.dataset.v].dz.append(ch);ch.classList.remove("bad");ch.classList.add("ok")})}}},
  pages(p,body){const g=h("div","wbpg");p.imgs.forEach((s,n)=>{const im=h("img");im.src=s;im.alt="Workbook page "+(n+1);im.loading="lazy";g.append(im)});body.append(g);return{check:()=>[0,0],show(){}}},
 
@@ -275,6 +281,7 @@ const BUILD={
     qs.push([st,q.a]);t.append(h("div",null,q.q),opts);if(q.ex){st.ex=h("div","exp","💡 "+q.ex);st.ex.hidden=true;t.append(st.ex)}row.append(t);list.append(row)});
   body.append(list);
   return{check(){let c=0;qs.forEach(([st,a])=>{if(st.pick>=0)c+=mark(st.btns[st.pick],st.pick==a);if(st.ex&&st.pick>=0){st.ex.hidden=false}});return[c,qs.length]},
+   next(){for(const [st,a] of qs){if(st.pick!==a){st.btns.forEach(b=>b.classList.remove("on","ok","bad"));st.pick=a;st.btns[a].classList.add("on");mark(st.btns[a],true);return true}}return false},
    show(){qs.forEach(([st,a])=>{st.btns.forEach(b=>b.classList.remove("on","ok","bad"));st.pick=a;st.btns[a].classList.add("on");mark(st.btns[a],true)})}}},
  seg(p,body){const bank=bankEl(),list=h("div","qlist"),slots=[],ws=[],words=[];
   p.lines.forEach(L=>{const row=h("div","q"),t=h("div","t");row.dataset.l=L.l||"•";
@@ -288,6 +295,7 @@ const BUILD={
   shuffle(words.concat(p.extra||[])).forEach(w=>bank.append(chip(w)));
   body.append(list);if(words.length)body.append(bank);
   return{check(){let c=0;slots.forEach(s=>{const ch=s.querySelector(".chip");c+=mark(s,!!ch&&ch.dataset.v===s.dataset.a)});ws.forEach(w=>c+=w.check());return[c,slots.length+ws.length]},
+   next(){for(const w of ws){if(!w.d){w.d=true;w.show();return true}}const nx=sl=>{for(const s of sl){const ch=s.querySelector('.chip');if(!ch||ch.dataset.v!==s.dataset.a){const c=[...document.querySelectorAll('.chip')].find(x=>x.dataset.v===s.dataset.a&&!(x.closest('.slot')&&x.closest('.slot').dataset.a===x.dataset.v));if(c){if(ch)bank.append(ch);s.append(c);mark(s,true);clearSel();return true}}}return false};return nx(slots)},
    show(){ws.forEach(w=>w.show());pack(slots,bank,s=>s.dataset.a)}}},
  lines(p,body){const bank=bankEl(),box=h("div"),slots=[];
   p.left.forEach((l,i)=>{const r=h("div","m"),s=slot(bank,true);s.dataset.a=p.a[i];slots.push(s);r.append(h("div",null,l),s);box.append(r)});
@@ -295,6 +303,7 @@ const BUILD={
   order.forEach(j=>bank.append(chip(p.right[j],String(j))));
   body.append(box,bank);
   return{check(){let c=0;slots.forEach(s=>{const ch=s.querySelector(".chip");c+=mark(s,!!ch&&ch.dataset.v===s.dataset.a)});return[c,slots.length]},
+   next(){const nx=sl=>{for(const s of sl){const ch=s.querySelector('.chip');if(!ch||ch.dataset.v!==s.dataset.a){const c=[...document.querySelectorAll('.chip')].find(x=>x.dataset.v===s.dataset.a&&!(x.closest('.slot')&&x.closest('.slot').dataset.a===x.dataset.v));if(c){if(ch)bank.append(ch);s.append(c);mark(s,true);clearSel();return true}}}return false};return nx(slots)},
    show(){pack(slots,bank,s=>s.dataset.a)}}}
 };
 home();

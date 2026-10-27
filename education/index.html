@@ -49,7 +49,7 @@ function grade(k){const o=G[k];if(!o)return home();crumb.textContent="Grade "+k;
  const sec=(t,items)=>{app.append(h("h3","sec",t));const g=h("div","grid");items.forEach(x=>g.append(x));app.append(g)};
  const e7=k<10;
  sec("Learner’s Book / Coursebook",[
-  R(o.lb,"Interactive · CD-ROM style",o.lbn+" – practice","One exercise per screen: match, drag, choose, type, plus games (word order, find the mistake, missing letters, guess the word, vocabulary wheel, sorting, picture quiz). Check Answers or See Answers"+(k==10?" · flashcards, grammar, reading, listening":"")),
+  R(o.lb,"Interactive · CD-ROM style",o.lbn+" – practice","One exercise per screen: match, drag, choose, type, plus games (word order, find the mistake, missing letters, guess the word, vocabulary wheel, sorting, picture quiz). Check Answers or See Next Answer (one answer at a time)"+(k==10?" · flashcards, grammar, reading, listening":"")),
   ...(e7?[R(o.db,"Book view · Designer Book · Tests","Learner’s Book – full version","Original book pages with 🔍 activities, designer slides, games, audio, speaking, unit tests and worksheets")]:[])]);
  sec("Workbook",[R(o.wb,"Interactive · CD-ROM style","Workbook – practice",k==10?"Workbook pages, listening and a notebook for each unit":"Workbook exercises with Check Answers")]);
  sec("Live lessons",[R("liveclass/","Live Class","Join with the teacher’s code","Real-time class quiz on phones")]);

@@ -38,11 +38,7 @@ function home(){crumb.textContent="Education · Indigo Prime Academy";back.hidde
  app.append(h("h2",null,"Choose your class"),h("p","lead","Pick a grade, then a book. Every unit has exercises you can check, flashcards and audio."));
  const g=h("div","grid");
  [7,8,9,10].forEach(k=>{const a=h("a","cls");a.href="#g"+k;const n=h("div","num",k),d=h("div");d.append(h("span","tag","Grade"),h("b",null,k==10?"IGCSE English":"Global English"),h("span",null,k==10?"Coursebook · Workbook · 20 units":"Learner’s Book · Workbook · 9 units"));a.append(n,d);g.append(a)});
- app.append(g,h("h3","sec","Original books · flip-book (all pages as printed)"));
- const g3=h("div","grid");
- [["gb/lb7/","Global English 7","Learner’s Book","7"],["gb/wb7/","Global English 7","Workbook","7"],["gb/lb8/","Global English 8","Learner’s Book","8"],["gb/wb8/","Global English 8","Workbook","8"],["gb/lb9/","Global English 9","Learner’s Book","9"],["gb/wb9/","Global English 9","Workbook","9"],["gb/ig_cb/","IGCSE English as a Second Language","Coursebook","10"],["gb/ig_wb/","IGCSE English as a Second Language","Workbook","10"]].forEach(x=>{
-  const i=h("div","ico","📖");i.style.background="#b8730b";const d=h("div");d.append(h("b",null,x[1]+" · "+x[2]),h("span",null,"Open the original pages"));g3.append(link("cls",x[0]+"index.html#flip",[i,d]))});
- app.append(g3,h("h3","sec","Grammar & live lessons"));
+ app.append(g,h("h3","sec","Grammar & live lessons"));
  const g2=h("div","grid");
  [["grammar-steps/","Grammar Steps A1–A2","Short grammar lessons with practice","📘","#14919b"],["grammar-in-use/","Grammar in Use","Essential Grammar in Use · 4th edition","📗","#c0479a"],["grammar-in-use-5/","English Grammar in Use","Raymond Murphy · 5th edition · 145 units","📙","#e8672a"],["practice-book/","English Practice 7–9 · Book & Workbook","Practice for every unit, 26 games and unit tests","📕","#7b57c8"],["practice-grammar/","English Practice 7–9 · Grammar & Vocabulary","Interactive exercises, games and unit tests","📓","#2f8f6b"],["liveclass/","Live Class","Join with the teacher’s code","🎓","#00a8b0"]].forEach(x=>{
   const i=h("div","ico",x[3]);i.style.background=x[4];const d=h("div");d.append(h("b",null,x[1]),h("span",null,x[2]));g2.append(link("cls",x[0],[i,d]))});

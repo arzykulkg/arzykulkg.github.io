@@ -583,7 +583,7 @@ function home(tab){stack=[function(){home(tab)}];setBack();ttl.textContent=D.tit
  h+='<h2 style="margin:18px 0 6px">Units</h2>'+'<div class="ug">'+D.units.map(function(u){return '<button class="uc" data-u="'+u.n+'"><b>'+u.n+'</b><span>'+esc(u.t)+'<small>'+u.l+' lessons · '+u.nw+' words</small></span></button>'}).join('')+'</div>';
  app.innerHTML=h;
  $('#b_deck').onclick=function(){openDesigner()};if($('#b_tests'))$('#b_tests').onclick=function(){openBookFrame(0,'#tests','📝 Tests & Worksheets')};
- $('#b_flip').onclick=function(){openFlip(0)};if(location.hash==='#flip'&&!window.__fl){window.__fl=1;openFlip(0)}$('#b_live').onclick=openLive;$('#b_gs').onclick=openGS;$('#b_gz').onclick=openGameZone;$('#b_dl').onclick=openDlgHub;$('#b_sp').onclick=openLabMenu;
+ $('#b_flip').onclick=function(){openFlip(0)};$('#b_live').onclick=openLive;$('#b_gs').onclick=openGS;$('#b_gz').onclick=openGameZone;$('#b_dl').onclick=openDlgHub;$('#b_sp').onclick=openLabMenu;
  $$('.uc',app).forEach(function(b){b.onclick=function(){openDesigner(+b.dataset.u)}})}
 home();
 </script></body></html>

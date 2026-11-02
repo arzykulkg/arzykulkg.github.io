@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en"><head><script src="/education/lock.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>English Practice Grades 7–9</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: classroom CD-ROM shell — indigo top band, grade tiles → resource menu → unit list with numbered boxes → one exercise per screen with a score/action row */
+:root{
+  --bg:#f1f0f6; --panel:#ffffff; --ink:#22223a; --muted:#666783; --line:#d8d6e6;
+  --band:#3b3f8f; --band-ink:#fff; --g7:#2f8f6b; --g8:#c4572b; --g9:#7a3fa6;
+  --grade:#3b3f8f; --gram:#d9682f; --voc:#9b3f8f; --unit:#4562b3;
+  --ok:#1f8a4c; --ok-bg:#e3f4ea; --bad:#c43a32; --bad-bg:#fbe6e4; --sel:#ffd98a;
+  --chip:#eceaf4; --chip-ink:#22223a; --star:#e1a019;
+  --display:"Lexend",system-ui,sans-serif; --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15151f; --panel:#1f1f2c; --ink:#ecebf5; --muted:#a3a3bd; --line:#363649; --band:#2c2f6e;
+  --g7:#4fc196; --g8:#ef8a5c; --g9:#b886e0; --gram:#f08c55; --voc:#d27cc5; --unit:#8fa6ec;
+  --ok:#5fd18f; --ok-bg:#183326; --bad:#ff8a80; --bad-bg:#3a1f1d; --sel:#7d6420; --chip:#2b2b3b; --chip-ink:#ecebf5; --star:#f2c14e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15151f; --panel:#1f1f2c; --ink:#ecebf5; --muted:#a3a3bd; --line:#363649; --band:#2c2f6e;
+  --g7:#4fc196; --g8:#ef8a5c; --g9:#b886e0; --gram:#f08c55; --voc:#d27cc5; --unit:#8fa6ec;
+  --ok:#5fd18f; --ok-bg:#183326; --bad:#ff8a80; --bad-bg:#3a1f1d; --sel:#7d6420; --chip:#2b2b3b; --chip-ink:#ecebf5; --star:#f2c14e; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.5}
+.band{background:var(--band);color:var(--band-ink)}
+.band .in,.wrap{max-width:1150px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band .in{display:flex;align-items:center;gap:10px;padding-block:12px;min-height:56px;flex-wrap:wrap}
+.band h1{font-family:var(--display);font-size:1.02rem;font-weight:600;margin:0;flex:1;min-width:160px}
+.bb{font:600 .88rem var(--display);background:rgba(255,255,255,.16);color:#fff;border:0;border-radius:6px;padding:8px 12px;cursor:pointer;flex:none}
+.bb[aria-pressed="true"]{background:#fff;color:var(--band)}
+.wrap{padding-block:24px 48px}
+h2{font-family:var(--display);font-weight:600;font-size:1.6rem;margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 22px;max-width:65ch}
+button{font-family:inherit}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--unit);outline-offset:2px}
+
+.grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.gt{border:0;border-radius:12px;padding:22px;text-align:left;color:#fff;cursor:pointer;display:grid;gap:4px;min-height:150px;align-content:end;transition:transform .15s}
+.gt:hover{transform:translateY(-3px)}
+.gt b{font:700 3rem/1 var(--display)}
+.gt span{font:600 1.1rem var(--display)}
+.gt small{opacity:.9;font-size:.92rem}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.rb{background:var(--panel);border:1px solid var(--line);border-left:8px solid var(--c,var(--unit));border-radius:10px;padding:18px;text-align:left;cursor:pointer;color:var(--ink);display:grid;gap:4px}
+.rb:hover{border-color:var(--c,var(--unit))}
+.rb b{font:600 1.15rem var(--display)}
+.rb span{color:var(--muted);font-size:.93rem}
+.units{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px 30px}
+.unit{display:flex;gap:16px;align-items:center}
+.unum{flex:none;width:66px;height:66px;border:6px solid var(--unit);display:grid;place-items:center;font:600 1.9rem var(--display);color:var(--c,var(--unit));background:var(--panel)}
+.unit h3{margin:0 0 2px;font:500 1.05rem var(--display);color:var(--unit)}
+.unit p{margin:0 0 6px;color:var(--muted);font-size:.9rem}
+.exbtns{display:flex;gap:8px;flex-wrap:wrap}
+.exb{background:var(--c,var(--voc));color:#fff;border:0;padding:6px 14px;font:500 .9rem var(--display);cursor:pointer;border-radius:3px}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}
+.instr{font-weight:700;margin:0 0 18px}
+.qlist{display:grid;gap:14px;counter-reset:q}
+.q{display:flex;gap:12px;align-items:flex-start}
+.q::before{counter-increment:q;content:counter(q);flex:none;width:30px;height:30px;border-radius:50%;background:var(--chip);color:var(--muted);display:grid;place-items:center;font:600 .85rem var(--display);margin-top:2px}
+.q .t{flex:1;min-width:0;line-height:2.1}
+.gapwrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:start}
+.gapwrap .bank{flex-direction:column;margin-top:0;min-width:170px}
+@media (max-width:760px){.gapwrap{grid-template-columns:minmax(0,1fr)}.gapwrap .bank{flex-direction:row}}
+.slot{display:inline-flex;align-items:center;justify-content:center;min-width:140px;min-height:40px;vertical-align:middle;border:2px dashed var(--line);border-radius:8px;padding:2px 4px;cursor:pointer}
+.slot.target{border-color:var(--gram);background:color-mix(in srgb,var(--gram) 10%,transparent)}
+.chip{display:inline-block;background:var(--chip);color:var(--chip-ink);border:1px solid var(--line);border-radius:7px;padding:6px 14px;font:500 1rem var(--display);cursor:grab;user-select:none;touch-action:manipulation;box-shadow:0 1px 0 var(--line);text-align:center}
+.chip.sel{background:var(--sel);border-color:var(--gram)}
+.bank{display:flex;flex-wrap:wrap;gap:10px;padding:14px;border-radius:8px;background:color-mix(in srgb,var(--chip) 60%,transparent);min-height:62px;margin-top:20px}
+.sortwrap{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:760px){.sortwrap{grid-template-columns:minmax(0,1fr)}}
+.sortgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.col h4{font:600 1rem var(--display);margin:0 0 8px;text-align:center;color:var(--muted)}
+.col .slot{display:flex;width:100%;margin-bottom:8px;min-width:0}
+.sortwrap .bank{margin-top:0}
+select,input[type=text]{font:inherit;font-size:1rem;color:var(--ink);background:var(--panel);border:2px solid var(--line);border-radius:7px;padding:5px 8px;max-width:100%}
+input[type=text]{width:100%;margin-top:6px}
+.mcq{display:inline-flex;gap:8px;flex-wrap:wrap;vertical-align:middle;margin:2px 4px;padding:2px;border-radius:9px;border:2px solid transparent}
+.opt{border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:3px 12px;cursor:pointer;font-size:1rem;line-height:1.6}
+.opt.on{border-color:var(--unit);background:color-mix(in srgb,var(--unit) 14%,transparent)}
+.ordrow{display:grid;gap:8px}
+.oline{display:flex;flex-wrap:wrap;gap:8px;min-height:50px;padding:8px;border:2px dashed var(--line);border-radius:8px}
+.obank{display:flex;flex-wrap:wrap;gap:8px}
+.ok{border-color:var(--ok)!important;background:var(--ok-bg)!important}
+.bad{border-color:var(--bad)!important;background:var(--bad-bg)!important;animation:shake .35s}
+.model{color:var(--ok);font-size:.92rem;font-weight:700;margin-top:4px}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
+.score{font:600 1.2rem var(--display);min-width:150px}
+.score output{display:inline-block;min-width:60px;border-bottom:2px solid var(--line);text-align:center;font-variant-numeric:tabular-nums}
+.score output.pop{animation:pop .4s}
+.act{border:0;border-radius:7px;padding:11px 18px;font:600 .95rem var(--display);cursor:pointer;color:#fff;background:var(--unit)}
+.act.alt{background:var(--chip);color:var(--chip-ink)}
+.act.see{background:var(--ok)}
+.nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:16px}
+.nav button{background:none;border:0;color:var(--unit);font:600 1rem var(--display);cursor:pointer;padding:6px 0}
+.nav button:disabled{opacity:.3;cursor:default}
+.hint{color:var(--muted);font-size:.9rem;margin-top:10px}
+/* games */
+.ghead{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:14px;font:600 1rem var(--display)}
+.timer{height:8px;border-radius:4px;background:var(--chip);overflow:hidden;margin-bottom:18px}
+.timer i{display:block;height:100%;background:var(--gram);transition:width .25s linear}
+.big{font:500 1.35rem var(--display);text-align:center;padding:22px 10px;min-height:96px;display:grid;place-items:center}
+.gbtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.gbtns button{min-width:140px;border:0;border-radius:10px;padding:14px 18px;font:600 1.05rem var(--display);cursor:pointer;color:#fff;background:var(--unit)}
+.fb{text-align:center;min-height:30px;margin-top:12px;font-weight:700}
+.fb.y{color:var(--ok)} .fb.n{color:var(--bad)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.mc{min-height:78px;border-radius:10px;border:2px solid var(--line);background:var(--voc);color:transparent;font:600 .98rem var(--display);cursor:pointer;padding:8px}
+.mc.up{background:var(--panel);color:var(--ink)}
+.mc.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ink);cursor:default}
+.scr{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.scr span{width:44px;height:50px;display:grid;place-items:center;border-radius:8px;background:var(--chip);font:700 1.4rem var(--display);text-transform:uppercase}
+.result{text-align:center;display:grid;gap:10px;justify-items:center;padding:16px}
+.result .n{font:700 2.4rem var(--display);color:var(--gram)}
+/* board mode */
+body.board{font-size:24px}
+body.board .wrap{max-width:1450px}
+body.board h2{font-size:2.2rem}
+body.board .chip{font-size:1.3rem;padding:10px 18px}
+body.board .slot{min-height:58px;min-width:190px}
+body.board select,body.board input[type=text]{font-size:1.3rem;padding:8px 12px}
+body.board .opt{font-size:1.25rem;padding:6px 16px}
+body.board .act{font-size:1.15rem;padding:15px 24px}
+body.board .q::before{width:40px;height:40px;font-size:1.1rem}
+body.board .big{font-size:2rem;min-height:140px}
+body.board .gbtns button{font-size:1.4rem;padding:20px 26px;min-width:200px}
+body.board .mc{min-height:110px;font-size:1.25rem}
+body.board .hint,body.board .lead{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:520px){.slot{min-width:100px}.q .t{line-height:1.9}}
+</style>
+
+<div class="band"><div class="in">
+  <button class="bb" id="back" hidden>‹ BACK</button>
+  <h1 id="crumb">English Practice · Grades 7–9</h1>
+  <button class="bb" id="boardBtn" aria-pressed="false">Board</button>
+  <button class="bb" id="homeBtn" hidden>HOME</button>
+</div></div>
+<main class="wrap" id="app"></main>
+
+<script>
+/* Grade 7 (A2) · original practice content */
+window.G=window.G||{};G[7]={level:"A2",units:[
+{n:1,name:"Free time",
+ g:{t:"Present simple / continuous",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["Aibek usually [plays*|is playing] chess after school.","Look! Your little brother [is climbing*|climbs] the tree.","I [don't watch*|am not watching] TV on weekdays.","What [are you reading*|do you read] at the moment?","My mum [goes*|is going] to the gym every Tuesday.","Shh! I [am listening*|listen] to the news."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["My sister|is learning|to play|the komuz|this year.","We|usually|go|to the mountains|in summer.","What|are you|doing|right now?","He|doesn't|like|playing|computer games."]}]},
+ v:{t:"Hobbies: play / go / do",m:[["play","chess"],["go","swimming"],["do","karate"],["play","the guitar"],["go","camping"],["do","yoga"]],ex:[
+  {type:"sort",instr:"Put the activities into the correct group.",cats:["play","go","do"],items:{"football":0,"chess":0,"the piano":0,"swimming":1,"skiing":1,"fishing":1,"judo":2,"gymnastics":2,"yoga":2}},
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["I {collect} old coins. I have 200!","My cousin loves {drawing} cartoons.","We go {hiking} in Ala-Archa every spring.","Do you want to {join} our photography club?","She spends hours {chatting} with friends online."],extra:["playing"]}]}},
+{n:2,name:"Family and friends",
+ g:{t:"Comparatives and superlatives",ex:[
+  {type:"choose",instr:"Choose the correct answers.",qs:["My brother is [taller*|more tall|tallest] than my dad.","Aigerim is the [funniest*|funnier|most funny] person in our class.","This puzzle is [more difficult*|difficulter|most difficult] than the last one.","Grandma's plov is the [best*|better|goodest] in the world!","My bag is [heavier*|more heavy|heaviest] than yours.","Who is the [youngest*|younger|most young] in your family?"]},
+  {type:"rewrite",instr:"Rewrite the sentences using the words given.",qs:[["My sister is 12. I am 14. (older)",["I am older than my sister.","I'm older than my sister."]],["Nobody in my class is taller than Bek. (tallest)",["Bek is the tallest in my class.","Bek is the tallest person in my class.","Bek is the tallest student in my class."]],["Maths is hard. Physics is harder. (more difficult)",["Physics is more difficult than maths."]],["My phone is not as new as yours. (newer)",["Your phone is newer than mine.","Your phone is newer than my phone."]]]}]},
+ v:{t:"Personality adjectives",m:[["kind","nice to others"],["lazy","doesn't like work"],["shy","quiet with new people"],["honest","tells the truth"],["funny","makes you laugh"],["rude","not polite"]],ex:[
+  {type:"sort",instr:"Put the words into the correct category, positive or negative.",cats:["positive","negative"],items:{"kind":0,"helpful":0,"honest":0,"cheerful":0,"patient":0,"lazy":1,"rude":1,"selfish":1,"bossy":1,"mean":1}},
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["He never tells lies. He is very {honest}.","She doesn't like talking to new people. She's {shy}.","My friend always waits for me. He's very {patient}.","Ermek makes everybody laugh. He's so {funny}!","Don't be {lazy}! Help me clean the room."],extra:["rude"]}]}},
+{n:3,name:"Food",
+ g:{t:"some / any / much / many",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["Is there [any*|some] milk in the fridge?","We need [some*|any] potatoes for the soup.","How [many*|much] eggs do we need?","There isn't [much*|many] bread left.","I'd like [some*|any] tea, please.","How [much*|many] sugar do you take?"]},
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["There are {a few} apples in the bowl.","Can I have {a little} honey in my tea?","We haven't got {any} rice.","There are {a lot of} people at the bazaar today.","How {much} water do you drink a day?"],extra:["many"]}]},
+ v:{t:"Food and containers",m:[["a bottle of","water"],["a loaf of","bread"],["a bowl of","soup"],["a cup of","tea"],["a piece of","cake"],["a kilo of","apples"]],ex:[
+  {type:"sort",instr:"Put the words into the correct group.",cats:["countable","uncountable"],items:{"apple":0,"egg":0,"onion":0,"sandwich":0,"rice":1,"milk":1,"bread":1,"butter":1,"honey":1}},
+  {type:"choose",instr:"Choose the correct word.",qs:["I bought a [carton*|loaf|bar] of juice.","Can you get a [bar*|bowl|slice] of chocolate?","She drank a [glass*|piece|loaf] of milk.","He ate two [slices*|bottles|cups] of pizza.","We need a [packet*|glass|slice] of pasta.","Pass me a [jar*|loaf|bar] of jam, please."]}]}},
+{n:4,name:"My town",
+ g:{t:"there is / there are + prepositions",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["There [is*|are] a big park near my house.","There [are*|is] two banks in our street.","The pharmacy is [next to*|between] the post office.","[Is*|Are] there a cinema in your town?","The café is [between*|next] the bank and the shop.","There [aren't*|isn't] any hotels here."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["There is|a bus stop|opposite|our school.","Are there|any|good restaurants|near here?","The library|is|behind|the museum.","There aren't|many|trees|in this street."]}]},
+ v:{t:"Places in town",m:[["library","borrow books"],["pharmacy","buy medicine"],["bakery","buy bread"],["stadium","watch a match"],["museum","see old things"],["post office","send a parcel"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["You can borrow books at the {library}.","We buy medicine at the {pharmacy}.","Let's watch the football match at the {stadium}.","I need to send this parcel. Where's the {post office}?","We saw very old coins in the {museum}."],extra:["bakery"]},
+  {type:"sort",instr:"Where can you do these things? Put them into the correct place.",cats:["at the bazaar","at the hospital","at the station"],items:{"buy fruit":0,"buy shoes":0,"see a doctor":1,"visit a patient":1,"catch a train":2,"buy a ticket":2}}]}},
+{n:5,name:"Journeys",
+ g:{t:"Past simple",ex:[
+  {type:"gap",instr:"Complete the sentences with the past simple verbs on the right. There is one extra word.",qs:["Last summer we {went} to Issyk-Kul.","I {took} a lot of photos.","My dad {drove} the car all day.","We {stayed} in a small guesthouse.","I {bought} a souvenir for my friend."],extra:["go"]},
+  {type:"rewrite",instr:"Make the sentences negative or questions using the words given.",qs:[["We visited Osh. (didn't)",["We didn't visit Osh.","We did not visit Osh."]],["She caught the bus. (Did)",["Did she catch the bus?"]],["They flew to Istanbul. (didn't)",["They didn't fly to Istanbul.","They did not fly to Istanbul."]],["You saw the lake. (Did)",["Did you see the lake?"]]]}]},
+ v:{t:"Transport and travel",m:[["by","bus"],["on","foot"],["get on","the train"],["get off","the bus"],["catch","a plane"],["miss","the bus"]],ex:[
+  {type:"choose",instr:"Choose the correct word.",qs:["We went to school [on*|by|in] foot.","She travelled to Talas [by*|on|with] car.","Hurry up or we'll [miss*|lose|leave] the bus!","Please [get off*|get out|go off] the bus at the next stop.","How long does the [journey*|travel|trip way] take?","I bought a return [ticket*|card|paper] to Osh."]},
+  {type:"sort",instr:"Put the words into the correct group.",cats:["on land","on water","in the air"],items:{"bus":0,"train":0,"taxi":0,"boat":1,"ferry":1,"ship":1,"plane":2,"helicopter":2}}]}},
+{n:6,name:"Stories",
+ g:{t:"Past continuous / past simple",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["I [was walking*|walked] home when it started to rain.","While we were having dinner, the lights [went*|were going] out.","What [were you doing*|did you do] at 9 o'clock last night?","She [was reading*|read] when I called her.","They [were playing*|played] football when Dad arrived.","He [fell*|was falling] and hurt his knee."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["I was|sleeping|when|the phone|rang.","While|she was|cooking,|she|burnt|her finger.","They|were|walking|in the park|when|it started|to snow.","What|were you|doing|when|I called?"]}]},
+ v:{t:"Weather",m:[["sunny","sun"],["rainy","rain"],["snowy","snow"],["windy","wind"],["cloudy","cloud"],["foggy","fog"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["Take an umbrella. It's {rainy} today.","It's {freezing}! Wear a hat and gloves.","I can't see the mountains because it's so {foggy}.","Hold your hat. It's very {windy}!","There was a big {storm} with thunder and lightning."],extra:["sunny"]},
+  {type:"sort",instr:"Put the words into the correct group.",cats:["hot weather","cold weather"],items:{"boiling":0,"sunny":0,"heatwave":0,"warm":0,"freezing":1,"icy":1,"snowy":1,"frost":1}}]}},
+{n:7,name:"The future",
+ g:{t:"going to / will",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["I've decided. I [am going to*|will] learn Turkish.","\"It's hot in here.\" \"I [will*|am going to] open the window.\"","Look at those clouds! It [is going to*|will] rain.","I think robots [will*|are going to] teach us one day.","We bought tickets. We [are going to*|will] see the concert.","Don't worry. I [won't*|am not going to] tell anyone. I promise."]},
+  {type:"rewrite",instr:"Rewrite the sentences using the words given.",qs:[["My plan is to become a vet. (going to)",["I'm going to become a vet.","I am going to become a vet."]],["I promise to help you tomorrow. (will)",["I will help you tomorrow.","I'll help you tomorrow."]],["Maybe it will snow tomorrow. (might)",["It might snow tomorrow."]],["I'm sure you'll pass. (definitely)",["You will definitely pass.","You'll definitely pass."]]]}]},
+ v:{t:"Jobs",m:[["vet","animals"],["pilot","planes"],["chef","food"],["dentist","teeth"],["farmer","fields"],["mechanic","cars"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["A {vet} looks after sick animals.","A {pilot} flies planes.","A {chef} cooks food in a restaurant.","A {mechanic} repairs cars.","A {journalist} writes for a newspaper."],extra:["nurse"]},
+  {type:"sort",instr:"Where do these people work?",cats:["indoors","outdoors"],items:{"teacher":0,"dentist":0,"programmer":0,"chef":0,"farmer":1,"shepherd":1,"builder":1,"gardener":1}}]}},
+{n:8,name:"Rules",
+ g:{t:"must / mustn't / have to / don't have to",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["You [mustn't*|don't have to] use your phone during the test.","It's Saturday. I [don't have to*|mustn't] get up early.","Students [must*|mustn't] wear a uniform.","She [has to*|have to] take her little brother to school.","You [don't have to*|mustn't] pay. The museum is free today.","We [mustn't*|don't have to] run in the corridor."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["You|mustn't|eat|in|the computer room.","Do you|have to|wear|a uniform?","My dad|has to|work|on Saturdays.","We|don't have to|bring|our books|tomorrow."]}]},
+ v:{t:"School",m:[["hand in","homework"],["take","an exam"],["pass","a test"],["make","a mistake"],["break","a rule"],["get","good marks"]],ex:[
+  {type:"choose",instr:"Choose the correct word.",qs:["Please [hand in*|give up|take off] your homework on Monday.","I hope I [pass*|win|succeed] the test.","Don't worry if you [make*|do|have] a mistake.","We [take*|make|write in] an exam at the end of the year.","Who [broke*|cut|made] the class rules?","She always [gets*|takes|wins] good marks in English."]},
+  {type:"sort",instr:"Put the school subjects into the correct group.",cats:["languages","sciences","arts"],items:{"English":0,"Kyrgyz":0,"Russian":0,"biology":1,"chemistry":1,"physics":1,"music":2,"art":2,"drama":2}}]}}
+]};
+
+</script>
+<script>
+/* Grade 8 (A2+/B1) · original practice content */
+window.G=window.G||{};G[8]={level:"A2+ / B1",units:[
+{n:1,name:"School life",
+ g:{t:"Present perfect: ever / never / just / already / yet",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["Have you [ever*|yet] been to a science fair?","I've [just*|yet] finished my project. It's ready!","She hasn't handed in her essay [yet*|already].","We've [already*|yet] learnt this rule.","I have [never*|ever] failed an exam.","Has the bell rung [yet*|just]?"]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["Have you|ever|won|a competition?","I|have|already|done|my homework.","The teacher|hasn't|marked|our tests|yet.","We|have just|started|a new topic."]}]},
+ v:{t:"School collocations",m:[["take","notes"],["revise","for a test"],["do","a project"],["give","a presentation"],["fail","an exam"],["pay","attention"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["Please {pay} attention. This is important.","I always take {notes} in history lessons.","We have to {revise} for the test on Friday.","Aigerim gave a great {presentation} about volcanoes.","If you don't study, you might {fail} the exam."],extra:["make"]},
+  {type:"sort",instr:"Put the words into the correct group.",cats:["people","places","things"],items:{"head teacher":0,"classmate":0,"tutor":0,"canteen":1,"laboratory":1,"gym":1,"timetable":2,"report card":2,"locker":2}}]}},
+{n:2,name:"Buildings",
+ g:{t:"Comparisons: as … as / -er than / the most",ex:[
+  {type:"choose",instr:"Choose the correct answers.",qs:["Our new gym is [much bigger*|more bigger|biggest] than the old one.","The library isn't as [quiet*|quieter|quietest] as I expected.","This is the [most modern*|modernest|more modern] building in Bishkek.","The canteen is [far*|very|more] better this year.","My school is the same age [as*|than|like] my dad.","It's the [least*|less|little] comfortable room in the building."]},
+  {type:"rewrite",instr:"Rewrite the sentences using the words given.",qs:[["The old school was smaller than the new one. (as big as)",["The old school wasn't as big as the new one.","The old school was not as big as the new one."]],["No building in the city is taller than this one. (tallest)",["This is the tallest building in the city."]],["The museum is more interesting than the zoo. (not as)",["The zoo is not as interesting as the museum.","The zoo isn't as interesting as the museum."]],["The two classrooms are the same size. (as big as)",["One classroom is as big as the other.","This classroom is as big as that one."]]]}]},
+ v:{t:"Describing buildings",m:[["modern","new style"],["ancient","very old"],["spacious","lots of space"],["cramped","too small"],["noisy","lots of sound"],["bright","full of light"]],ex:[
+  {type:"sort",instr:"Put the adjectives into the correct category, positive or negative.",cats:["positive","negative"],items:{"spacious":0,"bright":0,"comfortable":0,"modern":0,"cramped":1,"dark":1,"noisy":1,"run-down":1}},
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["The classroom is too {cramped} for 35 students.","The new library is {bright} with huge windows.","That old factory is completely {run-down}.","The hall is {spacious} enough for the whole school.","The {ancient} tower is more than 900 years old."],extra:["modern"]}]}},
+{n:3,name:"Communities",
+ g:{t:"Present perfect / past simple · for / since",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["We [have lived*|lived] in this district since 2019.","They [opened*|have opened] the new park last May.","I've known my neighbour [for*|since] six years.","[Have you ever helped*|Did you ever help] at a charity event?","The council [built*|has built] the bridge in 2015.","She has worked here [since*|for] January."]},
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["How {long} have you been a volunteer?","I've lived here {since} I was born.","He moved to Karakol two years {ago}.","We've had this problem {for} months.","{When} did the market open?"],extra:["yet"]}]},
+ v:{t:"Town problems and solutions",m:[["litter","rubbish on the street"],["traffic jam","too many cars"],["pollution","dirty air"],["graffiti","paint on walls"],["volunteer","works for free"],["recycle","use again"]],ex:[
+  {type:"sort",instr:"Put the words into the correct group.",cats:["problems","solutions"],items:{"litter":0,"traffic jams":0,"air pollution":0,"vandalism":0,"recycling bins":1,"cycle lanes":1,"public transport":1,"street lights":1}},
+  {type:"choose",instr:"Choose the correct word.",qs:["There's too much [litter*|garbage can|bin] in the park.","We should [plant*|grow up|build] more trees.","Many people [volunteer*|work free|help out of] at the animal shelter.","The [council*|counsel|consul] decides how to spend the money.","There's always a [traffic jam*|car queue|road crowd] at 8 am.","Please [recycle*|repeat|rebuild] your plastic bottles."]}]}},
+{n:4,name:"Advertising",
+ g:{t:"The passive (present and past)",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["These phones [are made*|make] in Korea.","The advert [was shown*|showed] on TV last night.","Millions of bottles [are sold*|sell] every day.","The shop [was opened*|opened] by a famous singer.","Our products [are tested*|test] carefully.","The first TV advert [was broadcast*|broadcast] in 1941."]},
+  {type:"rewrite",instr:"Rewrite the sentences in the passive using the words given.",qs:[["They sell fresh bread here. (is)",["Fresh bread is sold here."]],["A famous designer created this logo. (was)",["This logo was created by a famous designer."]],["People use this app all over the world. (is used)",["This app is used all over the world."]],["They delivered the parcels yesterday. (were)",["The parcels were delivered yesterday."]]]}]},
+ v:{t:"Shopping and adverts",m:[["discount","lower price"],["receipt","paper after paying"],["brand","company name"],["slogan","short catchy phrase"],["refund","money back"],["bargain","very cheap"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["Keep your {receipt} in case you want to return it.","There's a 20% {discount} on all shoes today.","Only 300 som? That's a real {bargain}!","The shoes broke, so I asked for a {refund}.","\"Just do it\" is a famous {slogan}."],extra:["brand"]},
+  {type:"choose",instr:"Choose the correct word.",qs:["Can I [try on*|try out|put in] this jacket?","Do you [take*|get|give] card payments?","It's [on sale*|in sale|at sale] — half price!","This T-shirt doesn't [fit*|match|suit size] me. It's too small.","Which [brand*|mark|label name] of trainers do you like?","The advert [persuaded*|forced|told] me to buy it."]}]}},
+{n:5,name:"Our environment",
+ g:{t:"First conditional / unless",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["If we [cut*|will cut] down the forests, animals will lose their homes.","If it doesn't rain, the plants [will die*|die].","We'll miss the bus [unless*|if] we hurry.","If you [recycle*|will recycle] paper, you'll save trees.","The lake will get dirty if people [throw*|will throw] rubbish in it.","[Unless*|If] we act now, it will be too late."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["If|we|save|water,|there|will be|enough|for everyone.","The glaciers|will melt|if|temperatures|keep|rising.","Unless|we|recycle,|the landfills|will|get bigger.","If|you|turn off|the lights,|you'll|save energy."]}]},
+ v:{t:"Environment collocations",m:[["save","energy"],["reduce","waste"],["protect","wildlife"],["plant","trees"],["climate","change"],["global","warming"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["We should {reduce} the amount of plastic we use.","Snow leopards are {endangered} animals.","Turn off the TV to {save} energy.","Cars cause a lot of air {pollution}.","Solar power is a kind of {renewable} energy."],extra:["waste"]},
+  {type:"sort",instr:"Put the actions into the correct group.",cats:["good for the planet","bad for the planet"],items:{"planting trees":0,"cycling to school":0,"reusing bags":0,"saving water":0,"dropping litter":1,"wasting food":1,"burning plastic":1,"leaving lights on":1}}]}},
+{n:6,name:"Health",
+ g:{t:"should / ought to / too / enough",ex:[
+  {type:"choose",instr:"Choose the correct answers.",qs:["You look pale. You [should*|shouldn't|ought] see a doctor.","You [shouldn't*|should|ought to] eat so much fast food.","He isn't fit [enough*|too|very] to run a marathon.","This bag is [too*|enough|so much] heavy for you.","You ought [to*|—|for] drink more water.","I didn't sleep [enough*|too|plenty] last night."]},
+  {type:"rewrite",instr:"Rewrite the sentences using the words given.",qs:[["It's a good idea to go to bed early. (should)",["You should go to bed early."]],["The water is very cold. We can't swim. (too)",["The water is too cold to swim in.","The water is too cold to swim.","The water is too cold for us to swim."]],["He's not tall enough to play basketball. (too short)",["He is too short to play basketball.","He's too short to play basketball."]],["Don't eat sweets before dinner. (shouldn't)",["You shouldn't eat sweets before dinner.","You should not eat sweets before dinner."]]]}]},
+ v:{t:"Health problems",m:[["headache","pain in your head"],["sore throat","hurts to swallow"],["cough","noise from your chest"],["temperature","feeling very hot"],["sprain","hurt your ankle"],["rash","red spots on skin"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["I've got a {sore throat}. It hurts when I swallow.","She has a high {temperature}. She feels very hot.","I fell and {sprained} my ankle.","Take this {medicine} three times a day.","You've got a bad {cough}. Have some honey and lemon."],extra:["rash"]},
+  {type:"sort",instr:"Put the words into the correct group.",cats:["healthy habits","unhealthy habits"],items:{"eating vegetables":0,"drinking water":0,"exercising":0,"sleeping 8 hours":0,"skipping breakfast":1,"too much screen time":1,"eating crisps":1,"staying up late":1}}]}},
+{n:7,name:"Technology",
+ g:{t:"Relative clauses: who / which / where / whose",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["A programmer is a person [who*|which] writes code.","This is the app [which*|who] helps me learn words.","That's the shop [where*|which] I bought my laptop.","She's the girl [whose*|who] brother is a robot engineer.","The phone [that*|who] I bought last year is broken.","Do you know anyone [who*|where] can fix computers?"]},
+  {type:"rewrite",instr:"Join the sentences using the words given.",qs:[["I have a friend. He builds robots. (who)",["I have a friend who builds robots."]],["This is the laptop. I use it for school. (which)",["This is the laptop which I use for school."]],["That's the café. We meet there after school. (where)",["That's the café where we meet after school.","That is the café where we meet after school."]],["He's the boy. His mum is a pilot. (whose)",["He's the boy whose mum is a pilot.","He is the boy whose mum is a pilot."]]]}]},
+ v:{t:"Technology verbs",m:[["download","an app"],["charge","a battery"],["log in","to an account"],["post","a photo"],["delete","a message"],["update","the software"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["My phone is dead. I need to {charge} it.","{Download} the app from the store.","Don't forget to {log out} on a school computer.","Did you {delete} that old photo?","Click here to {update} the software."],extra:["post"]},
+  {type:"choose",instr:"Choose the correct word.",qs:["Please [save*|keep|hold] your document before you close it.","I can't connect. The [Wi-Fi*|cable TV|radio] isn't working.","Type your [password*|passcard|keyword] to log in.","She [shared*|divided|split] the video with her friends.","The screen [froze*|stopped|cooled]. I had to restart it.","Never [click*|press on|touch] links from strangers."]}]}},
+{n:8,name:"Stories and feelings",
+ g:{t:"Past perfect",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["When we got to the station, the train [had left*|left].","She was tired because she [had worked*|has worked] all day.","I [had never seen*|never saw] snow before I came here.","After he [had finished*|finished had] his homework, he went out.","They were hungry because they [hadn't eaten*|didn't ate] lunch.","By the time I arrived, the film [had started*|has started]."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["The ground|was|wet|because|it had|rained|in the night.","When|we|arrived,|everyone|had|gone|home.","She|had never|flown|before|her trip|to Istanbul.","He|couldn't|pay|because|he had|lost|his wallet."]}]},
+ v:{t:"-ed / -ing adjectives",m:[["bored","boring"],["tired","tiring"],["excited","exciting"],["surprised","surprising"],["frightened","frightening"],["interested","interesting"]],ex:[
+  {type:"choose",instr:"Choose the correct word.",qs:["The film was so [boring*|bored]. I fell asleep.","I'm really [excited*|exciting] about the trip!","The news was very [surprising*|surprised].","She was [frightened*|frightening] of the dark.","Are you [interested*|interesting] in history?","Climbing the mountain was very [tiring*|tired]."]},
+  {type:"sort",instr:"Put the adjectives into the correct group.",cats:["describes a person's feeling","describes a thing or situation"],items:{"bored":0,"annoyed":0,"amazed":0,"embarrassed":0,"boring":1,"annoying":1,"amazing":1,"embarrassing":1}}]}}
+]};
+
+</script>
+<script>
+/* Grade 9 (B1) · original practice content */
+window.G=window.G||{};G[9]={level:"B1",units:[
+{n:1,name:"Who we are",
+ g:{t:"Present perfect simple / continuous",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["I [have been learning*|have learnt] English for six years.","She [has written*|has been writing] three books so far.","Your eyes are red. [Have you been crying*|Have you cried]?","We [have known*|have been knowing] each other since primary school.","How many cups of tea [have you drunk*|have you been drinking] today?","He's tired because he [has been training*|has trained] all morning."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["How long|have you|been|playing|the komuz?","I|have been|waiting|for you|for an hour.","She|has|visited|five countries|so far.","They|have been|building|that house|since March."]}]},
+ v:{t:"Character adjectives",m:[["ambitious","wants success"],["reliable","you can trust them"],["stubborn","won't change their mind"],["generous","likes giving"],["sensitive","easily upset"],["confident","believes in themselves"]],ex:[
+  {type:"sort",instr:"Put the words into the correct category, positive or negative.",cats:["positive","negative"],items:{"loyal":0,"sociable":0,"hard-working":0,"confident":0,"easy-going":0,"jealous":1,"arrogant":1,"lazy":1,"impatient":1,"moody":1}},
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["She always keeps her promises. She's very {reliable}.","He never changes his mind. He's so {stubborn}.","My grandmother gives everyone presents. She's {generous}.","He thinks he's better than everyone. He's {arrogant}.","She wants to be the director one day. She's very {ambitious}."],extra:["shy"]}]}},
+{n:2,name:"Then and now",
+ g:{t:"used to / would / past simple",ex:[
+  {type:"choose",instr:"Choose the correct answers.",qs:["When I was small, I [used to*|use to|was used to] be afraid of dogs.","Grandpa [would*|used|was] tell us stories every evening.","Did you [use to*|used to|using to] live in Osh?","We [didn't use to*|didn't used to|used not] have a car.","I [went*|used to go|would go] to Paris once, in 2022.","She [used to have*|would have|was having] long hair."]},
+  {type:"rewrite",instr:"Rewrite the sentences using the words given.",qs:[["I played with toy cars as a child, but I don't now. (used to)",["I used to play with toy cars."]],["My dad didn't wear glasses in the past. (use to)",["My dad didn't use to wear glasses."]],["Every summer my family went to the jailoo. (would)",["Every summer my family would go to the jailoo.","My family would go to the jailoo every summer."]],["Was there a cinema here in the past? (use to)",["Did there use to be a cinema here?"]]]}]},
+ v:{t:"Life stages",m:[["infancy","baby years"],["childhood","years as a child"],["adolescence","teenage years"],["adulthood","grown-up years"],["retire","stop working"],["grow up","become an adult"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["I spent my {childhood} in a small village.","Most people {retire} at around sixty.","Where did you {grow up}?","She {got married} when she was twenty-five.","{Adolescence} can be a difficult time."],extra:["infancy"]},
+  {type:"sort",instr:"Put the events into the order they usually happen in life.",cats:["early life","later life"],items:{"learn to walk":0,"start school":0,"make friends":0,"become a teenager":0,"get a job":1,"buy a house":1,"have grandchildren":1,"retire":1}}]}},
+{n:3,name:"News and media",
+ g:{t:"Reported speech",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["\"I'm tired.\" → She said she [was*|is] tired.","\"We will win.\" → They said they [would*|will] win.","\"I have finished.\" → He told me he [had finished*|has finished].","\"I can swim.\" → She said she [could*|can] swim.","\"I saw the news.\" → He said he [had seen*|has seen] the news.","He [told*|said] me that he was busy."]},
+  {type:"rewrite",instr:"Report the sentences using the words given.",qs:[["\"I live in Bishkek,\" said Aibek. (said)",["Aibek said he lived in Bishkek.","Aibek said that he lived in Bishkek."]],["\"I'm watching the match,\" Dad told me. (told)",["Dad told me he was watching the match.","Dad told me that he was watching the match."]],["\"We will call you,\" they said. (said)",["They said they would call me.","They said that they would call me."]],["\"I don't like the news,\" said Aigerim. (said)",["Aigerim said she didn't like the news.","Aigerim said that she didn't like the news."]]]}]},
+ v:{t:"Media words",m:[["headline","title of a news story"],["journalist","writes the news"],["podcast","audio show online"],["viewer","watches TV"],["fake news","false stories"],["editor","checks the articles"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["The {headline} was in big letters on the front page.","She's a {journalist} for a local newspaper.","I listen to a science {podcast} on the bus.","Always check the source. It might be {fake news}.","The {editor} decided not to publish the story."],extra:["viewer"]},
+  {type:"sort",instr:"Put the words into the correct group.",cats:["print","broadcast","online"],items:{"newspaper":0,"magazine":0,"radio":1,"TV channel":1,"blog":2,"podcast":2,"social media":2}}]}},
+{n:4,name:"Global issues",
+ g:{t:"Second conditional / wish",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["If I [were*|am] the president, I would build more schools.","If people recycled more, there [would*|will] be less rubbish.","I wish I [had*|have] more free time.","What would you do if you [found*|find] a lot of money?","If I [knew*|know] the answer, I'd tell you.","I wish it [wasn't*|isn't] so cold today."]},
+  {type:"rewrite",instr:"Rewrite the sentences using the words given.",qs:[["I don't have a bike, so I walk. (If)",["If I had a bike, I wouldn't walk.","If I had a bike, I would not walk.","If I had a bike, I would cycle."]],["I'm not tall. I want to be tall. (wish)",["I wish I were tall.","I wish I was tall."]],["My advice: talk to the teacher. (If I were you)",["If I were you, I would talk to the teacher.","If I were you, I'd talk to the teacher."]],["I can't speak Chinese. I'd like to. (wish)",["I wish I could speak Chinese."]]]}]},
+ v:{t:"Global issues",m:[["poverty","having no money"],["hunger","having no food"],["drought","no rain for a long time"],["flood","too much water"],["refugee","person who must leave home"],["charity","helps people in need"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["Millions of people live in {poverty}.","There was no rain for months. It was a terrible {drought}.","The river rose and caused a {flood}.","Our school raised money for a {charity}.","Clean water is a basic human {right}."],extra:["hunger"]},
+  {type:"choose",instr:"Choose the correct word.",qs:["We need to [raise*|rise|grow] awareness of the problem.","The government should [take*|make|do] action now.","They [donated*|borrowed|lent back] money to the hospital.","Climate change [affects*|effects|infects] everyone.","Many volunteers [took part*|took place|made part] in the clean-up.","We must [protect*|prevent|prepare] endangered species."]}]}},
+{n:5,name:"Inventions",
+ g:{t:"The passive (all tenses)",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["The telephone [was invented*|invented] by Bell.","A new bridge [is being built*|is building] at the moment.","The results [will be announced*|will announce] tomorrow.","Over 1,000 apps [have been downloaded*|have downloaded] today.","The museum [is visited*|visits] by thousands of tourists.","Our car [was being repaired*|was repairing] when the storm came."]},
+  {type:"rewrite",instr:"Rewrite the sentences in the passive using the words given.",qs:[["Scientists have discovered a new planet. (has been)",["A new planet has been discovered by scientists.","A new planet has been discovered."]],["They will open the new school in May. (will be)",["The new school will be opened in May."]],["Engineers are testing the robot. (is being)",["The robot is being tested by engineers.","The robot is being tested."]],["Someone stole my bike last night. (was)",["My bike was stolen last night."]]]}]},
+ v:{t:"Science and inventions",m:[["invent","make something new"],["discover","find something that exists"],["experiment","scientific test"],["patent","legal right to an invention"],["prototype","first model"],["breakthrough","big discovery"]],ex:[
+  {type:"choose",instr:"Choose the correct word.",qs:["Columbus didn't [discover*|invent|create] America — people already lived there.","Who [invented*|discovered|found] the light bulb?","Scientists did an [experiment*|experience|expert] in the lab.","The engineers built a [prototype*|protocol|pattern] of the new car.","The vaccine was a huge [breakthrough*|breakdown|breakout].","She took out a [patent*|parent|patient] on her invention."]},
+  {type:"sort",instr:"Put the inventions into the correct group.",cats:["before 1900","after 1900"],items:{"printing press":0,"telescope":0,"steam engine":0,"telephone":0,"internet":1,"smartphone":1,"television":1,"electric car":1}}]}},
+{n:6,name:"Future careers",
+ g:{t:"Future continuous / future perfect",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["This time next year I [will be studying*|will have studied] at university.","By 2030, I [will have finished*|will be finishing] school.","Don't call at 8. We [will be having*|will have had] dinner.","By the time you arrive, the meeting [will have ended*|will be ending].","In ten years, robots [will be doing*|will have been] many jobs.","By Friday, she [will have written*|will be writing] her CV."]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["This time|tomorrow|I|will be|flying|to Istanbul.","By the end|of the year,|we|will have|saved|enough money.","Will you|be|working|this weekend?","By 2035,|she|will have become|a doctor."]}]},
+ v:{t:"Work collocations",m:[["apply for","a job"],["earn","a salary"],["work","overtime"],["get","promoted"],["run","a business"],["be","self-employed"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["I'm going to {apply} for a summer job.","My aunt {runs} her own café.","He {earns} a good salary as an engineer.","Send your {CV} to the manager by Monday.","After three years, she got {promoted} to manager."],extra:["retire"]},
+  {type:"sort",instr:"Put the words into the correct group.",cats:["looking for a job","having a job"],items:{"interview":0,"CV":0,"application form":0,"job advert":0,"salary":1,"colleague":1,"promotion":1,"overtime":1}}]}},
+{n:7,name:"Travel and mysteries",
+ g:{t:"Modals of deduction: must / might / can't",ex:[
+  {type:"choose",instr:"Choose the correct answers.",qs:["The lights are off. They [must*|can't|might not] be out.","He's only 12. He [can't*|must|has to] be a driver!","I'm not sure where she is. She [might*|must|can't] be at the library.","You've been travelling all day. You [must*|can't|mustn't] be exhausted.","That [can't*|mustn't|must] be Aibek. He's in Moscow this week.","Take an umbrella. It [might*|must|can't] rain later."]},
+  {type:"rewrite",instr:"Rewrite the sentences using the words given.",qs:[["I'm sure he is tired. (must)",["He must be tired."]],["Maybe she is at home. (might)",["She might be at home."]],["I'm sure that isn't true. (can't)",["That can't be true."]],["Perhaps they are lost. (could)",["They could be lost."]]]}]},
+ v:{t:"Travel phrasal verbs",m:[["set off","start a journey"],["check in","arrive at a hotel"],["get back","return"],["look around","explore a place"],["pick up","collect someone"],["see off","say goodbye at the station"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["We {set off} at 5 am to avoid the traffic.","You can {check in} at the hotel after 2 pm.","My uncle will {pick up} us from the airport.","Let's {look around} the old town.","We {got back} home late on Sunday night."],extra:["take off"]},
+  {type:"choose",instr:"Choose the correct word.",qs:["Our flight was [delayed*|late away|postponed off] by two hours.","We stayed in a [hostel*|hospital|host] for students.","Don't forget your [passport*|passcard|password] at the border.","They went [sightseeing*|sight-looking|seeing sights] in Rome.","I always [pack*|fill|put] my suitcase the night before.","The [journey*|travel|voyage trip] from Bishkek to Osh takes 10 hours."]}]}},
+{n:8,name:"Achievements",
+ g:{t:"Verb patterns: -ing / to-infinitive",ex:[
+  {type:"drop",instr:"Choose the correct answers.",qs:["I'm looking forward to [meeting*|meet] you.","She managed [to finish*|finishing] the race.","Would you mind [closing*|to close] the door?","They decided [to start*|starting] a business.","He avoided [answering*|to answer] the question.","I can't afford [to buy*|buying] a new phone."]},
+  {type:"sort",instr:"Which verbs are followed by -ing and which by to + infinitive?",cats:["+ -ing","+ to + infinitive"],items:{"enjoy":0,"avoid":0,"finish":0,"mind":0,"suggest":0,"decide":1,"manage":1,"hope":1,"refuse":1,"promise":1}}]},
+ v:{t:"Success collocations",m:[["achieve","a goal"],["make","progress"],["take","a risk"],["give","up"],["win","an award"],["face","a challenge"]],ex:[
+  {type:"gap",instr:"Complete the sentences with the words on the right. There is one extra word.",qs:["Never {give} up on your dreams.","She finally {achieved} her goal of running a marathon.","You've {made} great progress this term!","Sometimes you have to {take} a risk.","He {won} an award for his science project."],extra:["did"]},
+  {type:"order",instr:"Put the words in the correct order to make sentences.",qs:["Hard work|is|the key|to|success.","She|faced|many challenges|but|never|gave up.","I|am|proud of|what|I have|achieved.","Learning|from|your mistakes|helps|you|improve."]}]}}
+]};
+
+</script>
+<script>
+const GC={7:"var(--g7)",8:"var(--g8)",9:"var(--g9)"};
+const app=document.getElementById("app"),back=document.getElementById("back"),homeBtn=document.getElementById("homeBtn"),crumb=document.getElementById("crumb"),boardBtn=document.getElementById("boardBtn");
+let stack=[],cur=null,sel=null,gameTimer=null;
+const h=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e};
+const norm=s=>s.toLowerCase().replace(/[’‘`]/g,"'").replace(/\bi am\b/g,"i'm").replace(/\bit is\b/g,"it's").replace(/\bthat is\b/g,"that's").replace(/\bhe is\b/g,"he's").replace(/\bshe is\b/g,"she's").replace(/\bi will\b/g,"i'll").replace(/\bi would\b/g,"i'd").replace(/\byou will\b/g,"you'll").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let BOARD=false;try{BOARD=localStorage.getItem("g79-board")=="1"}catch(e){}
+function applyBoard(){document.body.classList.toggle("board",BOARD);boardBtn.setAttribute("aria-pressed",BOARD);try{localStorage.setItem("g79-board",BOARD?"1":"0")}catch(e){}}
+boardBtn.onclick=()=>{BOARD=!BOARD;applyBoard()};applyBoard();
+function stopGame(){if(gameTimer){clearInterval(gameTimer);gameTimer=null}}
+back.onclick=()=>{stopGame();stack.pop();const f=stack.pop();f?go(f):home()};
+homeBtn.onclick=()=>{stopGame();home()};
+function go(fn){stopGame();stack.push(fn);back.hidden=stack.length<2;homeBtn.hidden=stack.length<2;fn();window.scrollTo(0,0)}
+function replace(fn){stack.pop();go(fn)}
+
+function home(){stack=[];go(()=>{
+  crumb.textContent="English Practice · Grades 7–9";app.innerHTML="";
+  app.append(h("h2",null,"Choose your grade"),h("p","lead","Interactive grammar and vocabulary exercises, games and unit tests. Use a mouse, a touchscreen or the smart board. Press Board for big text."));
+  const g=h("div","grades");
+  [7,8,9].forEach(n=>{const b=h("button","gt");b.style.background=GC[n];b.append(h("b",null,n),h("span",null,"Grade "+n),h("small",null,"Level "+G[n].level+" · "+G[n].units.length+" units"));b.onclick=()=>go(()=>gradeMenu(n));g.append(b)});
+  app.append(g)})}
+
+function gradeMenu(n){
+  crumb.textContent="Grade "+n;app.innerHTML="";app.style.setProperty("--c",GC[n]);
+  app.append(h("h2",null,"Grade "+n+" · Choose a resource"));
+  const r=h("div","res");
+  [["Interactive Grammar Exercises","Drop-downs, word order, rewrite sentences","var(--gram)",()=>list(n,"g")],
+   ["Interactive Vocabulary Exercises","Sort, gap-fill and choose the word","var(--voc)",()=>list(n,"v")],
+   ["Games","Speed race, memory match, word scramble","var(--g7)",()=>gamesMenu(n)],
+   ["Unit Tests","Ten mixed questions for each unit","var(--unit)",()=>testList(n)]].forEach(([t,d,c,fn])=>{
+    const b=h("button","rb");b.style.setProperty("--c",c);b.append(h("b",null,t),h("span",null,d));b.onclick=()=>go(fn);r.append(b)});
+  app.append(r)}
+
+function list(n,k){
+  const title=k=="g"?"Interactive Grammar Exercises":"Interactive Vocabulary Exercises";
+  crumb.textContent="Grade "+n+" · "+title;app.innerHTML="";app.append(h("h2",null,title));
+  const u=h("div","units");
+  G[n].units.forEach((un,ui)=>{const r=h("div","unit"),box=h("div","unum",un.n),info=h("div"),bs=h("div","exbtns");box.style.setProperty("--c",GC[n]);
+    un[k].ex.forEach((ex,i)=>{const b=h("button","exb","Exercise "+(i+1));b.style.setProperty("--c",k=="g"?"var(--gram)":"var(--voc)");b.onclick=()=>go(()=>exercise(n,k,ui,i));bs.append(b)});
+    info.append(h("h3",null,un.name),h("p",null,un[k].t),bs);r.append(box,info);u.append(r)});
+  app.append(u)}
+
+function flatList(n,k){const out=[];G[n].units.forEach((u,ui)=>u[k].ex.forEach((e,i)=>out.push([ui,i])));return out}
+
+function exercise(n,k,ui,i){
+  const un=G[n].units[ui],ex=un[k].ex[i];sel=null;
+  crumb.textContent="Grade "+n+" · Unit "+un.n+" · "+un[k].t;app.innerHTML="";
+  app.append(h("h2",null,(k=="g"?"Interactive Grammar Exercises":"Interactive Vocabulary Exercises")));
+  const card=h("div","card");app.append(card);exerciseInto(card,ex);
+  const fl=flatList(n,k),pos=fl.findIndex(([a,b])=>a==ui&&b==i);
+  const nav=h("div","nav"),p=h("button",null,"‹ Previous exercise"),nx=h("button",null,"Next exercise ›");
+  p.disabled=pos==0;nx.disabled=pos==fl.length-1;
+  p.onclick=()=>{const[a,b]=fl[pos-1];replace(()=>exercise(n,k,a,b))};nx.onclick=()=>{const[a,b]=fl[pos+1];replace(()=>exercise(n,k,a,b))};
+  nav.append(p,nx);app.append(nav);
+  if(["sort","gap","order"].includes(ex.type))app.append(h("p","hint","Tip: tap a word, then tap a box. Or drag it with the mouse. Tap a placed word to send it back."))}
+
+function exerciseInto(card,ex,shown){
+  card.innerHTML="";card.append(h("p","instr",ex.instr));const body=h("div");card.append(body);
+  cur=BUILD[ex.type](ex,body);
+  const acts=h("div","actions"),sc=h("div","score"),out=h("output",null,"");sc.append("Score: ",out);
+  const bC=h("button","act","Check Answers"),bT=h("button","act alt","Try Again"),bS=h("button","act see",shown?"Hide Answers":"See Answers");
+  bC.onclick=()=>{const[c,t]=cur.check();out.textContent=c+"/"+t;out.classList.remove("pop");void out.offsetWidth;out.classList.add("pop")};
+  bT.onclick=()=>exerciseInto(card,ex);
+  bS.onclick=()=>exerciseInto(card,ex,!shown);
+  acts.append(sc,bC,bT,bS);card.append(acts);if(shown)cur.show()}
+
+/* tap-or-drag chips */
+function chip(text){const c=h("span","chip",text);c.draggable=true;c.dataset.v=text;
+  c.onclick=e=>{e.stopPropagation();if(c.closest(".slot")&&!sel){c.closest(".slot")._home.append(c);return}
+    if(sel===c){clearSel();return}select(c)};
+  c.ondragstart=()=>select(c);return c}
+function select(c){document.querySelectorAll(".chip.sel").forEach(x=>x.classList.remove("sel"));sel=c;c.classList.add("sel");document.querySelectorAll(".slot").forEach(s=>s.classList.add("target"))}
+function clearSel(){if(sel)sel.classList.remove("sel");sel=null;document.querySelectorAll(".slot.target").forEach(s=>s.classList.remove("target"))}
+function slot(bank){const s=h("span","slot");s._home=bank;
+  const place=()=>{if(!sel)return;const old=s.querySelector(".chip");if(old&&old!==sel)bank.append(old);s.append(sel);s.classList.remove("ok","bad");clearSel()};
+  s.onclick=place;s.ondragover=e=>e.preventDefault();s.ondrop=e=>{e.preventDefault();place()};return s}
+function bankEl(){const b=h("div","bank");b.onclick=()=>{if(sel){b.append(sel);clearSel()}};b.ondragover=e=>e.preventDefault();b.ondrop=e=>{e.preventDefault();if(sel){b.append(sel);clearSel()}};return b}
+const mark=(el,ok)=>{el.classList.remove("ok","bad");void el.offsetWidth;el.classList.add(ok?"ok":"bad");return ok?1:0};
+const parseBr=s=>{const m=s.match(/^(.*)\[(.+)\](.*)$/),o=m[2].split("|");return{pre:m[1],post:m[3],opts:o.map(x=>x.replace("*","")),a:o.find(x=>x.endsWith("*")).replace("*","")}};
+
+const BUILD={
+ sort(ex,body){const bank=bankEl(),grid=h("div","sortgrid"),slots=[],words=Object.keys(ex.items),wrap=h("div","sortwrap");
+  ex.cats.forEach((c,ci)=>{const col=h("div","col");col.append(h("h4",null,c));
+    words.filter(w=>ex.items[w]==ci).forEach(()=>{const s=slot(bank);s.dataset.cat=ci;slots.push(s);col.append(s)});grid.append(col)});
+  shuffle(words).forEach(w=>bank.append(chip(w)));wrap.append(grid,bank);body.append(wrap);
+  return{check(){let c=0;slots.forEach(s=>{const ch=s.querySelector(".chip");c+=mark(s,!!ch&&ex.items[ch.dataset.v]==s.dataset.cat)});return[c,words.length]},
+   show(){ex.cats.forEach((_,ci)=>{const ss=slots.filter(s=>s.dataset.cat==ci);words.filter(w=>ex.items[w]==ci).forEach((w,j)=>{
+     const ch=[...body.querySelectorAll(".chip")].find(x=>x.dataset.v==w);ss[j].append(ch);mark(ss[j],true)})});clearSel()}}},
+ gap(ex,body){const bank=bankEl(),list=h("div","qlist"),slots=[],words=[],wrap=h("div","gapwrap");
+  ex.qs.forEach(q=>{const m=q.match(/^(.*)\{(.+)\}(.*)$/),row=h("div","q"),t=h("div","t"),s=slot(bank);
+    s.dataset.a=m[2];words.push(m[2]);slots.push(s);t.append(m[1],s,m[3]);row.append(t);list.append(row)});
+  shuffle(words.concat(ex.extra||[])).forEach(w=>bank.append(chip(w)));wrap.append(list,bank);body.append(wrap);
+  return{check(){let c=0;slots.forEach(s=>{const ch=s.querySelector(".chip");c+=mark(s,!!ch&&ch.dataset.v==s.dataset.a)});return[c,slots.length]},
+   show(){slots.forEach(s=>{const old=s.querySelector(".chip");if(old)bank.append(old)});
+     slots.forEach(s=>{const ch=[...bank.querySelectorAll(".chip")].find(x=>x.dataset.v==s.dataset.a);if(ch)s.append(ch);mark(s,true)});clearSel()}}},
+ drop(ex,body){const list=h("div","qlist"),sels=[];
+  ex.qs.forEach((q,i)=>{const p=parseBr(q),row=h("div","q"),t=h("div","t"),s=h("select");s.id="dd"+i;
+    s.append(new Option("",""));shuffle(p.opts).forEach(o=>s.append(new Option(o,o)));s.dataset.a=p.a;
+    s.onchange=()=>s.classList.remove("ok","bad");sels.push(s);t.append(p.pre,s,p.post);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;sels.forEach(s=>c+=mark(s,s.value==s.dataset.a));return[c,sels.length]},
+   show(){sels.forEach(s=>{s.value=s.dataset.a;mark(s,true)})}}},
+ choose(ex,body){const list=h("div","qlist"),qs=[];
+  ex.qs.forEach(q=>{const p=parseBr(q),row=h("div","q"),t=h("div","t"),opts=h("span","mcq"),st={pick:null,btns:[]};
+    shuffle(p.opts).forEach(o=>{const b=h("button","opt",o);b.onclick=()=>{st.pick=o;st.btns.forEach(x=>x.classList.remove("on","ok","bad"));opts.classList.remove("ok","bad");b.classList.add("on")};st.btns.push(b);opts.append(b)});
+    qs.push([st,p.a,opts]);t.append(p.pre,opts,p.post);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;qs.forEach(([st,a,opts])=>{opts.classList.remove("ok","bad");if(!st.pick){mark(opts,false);return}c+=mark(st.btns.find(b=>b.textContent==st.pick),st.pick==a)});return[c,qs.length]},
+   show(){qs.forEach(([st,a,opts])=>{opts.classList.remove("ok","bad");st.btns.forEach(b=>{b.classList.remove("on","ok","bad");if(b.textContent==a){b.classList.add("on");mark(b,true)}});st.pick=a})}}},
+ rewrite(ex,body){const list=h("div","qlist"),ins=[];
+  ex.qs.forEach(([q,a],i)=>{const row=h("div","q"),t=h("div","t"),inp=h("input"),m=h("div","model");m.hidden=true;
+    inp.type="text";inp.id="rw"+i;inp.autocomplete="off";inp.spellcheck=false;
+    inp.oninput=()=>{inp.classList.remove("ok","bad");m.hidden=true};ins.push([inp,a,m]);t.append(h("div",null,q),inp,m);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;ins.forEach(([i,a,m])=>{const ok=a.some(x=>norm(x)==norm(i.value));c+=mark(i,ok);if(!ok&&i.value.trim()){m.textContent="Possible answer: "+a[0];m.hidden=false}});return[c,ins.length]},
+   show(){ins.forEach(([i,a,m])=>{i.value=a[0];mark(i,true);m.hidden=true})}}},
+ order(ex,body){const list=h("div","qlist"),rows=[];
+  ex.qs.forEach(q=>{const parts=q.includes("|")?q.split("|"):q.split(" "),row=h("div","q"),t=h("div","t ordrow"),line=h("div","oline"),bank=h("div","obank");
+    let sh=shuffle(parts);for(let k=0;k<5&&sh.join("|")==parts.join("|");k++)sh=shuffle(parts);
+    sh.forEach(w=>{const c=h("span","chip",w);c.onclick=()=>{(c.parentNode===bank?line:bank).append(c);line.classList.remove("ok","bad")};bank.append(c)});
+    rows.push({line,bank,parts});t.append(bank,line);row.append(t);list.append(row)});
+  body.append(list);
+  return{check(){let c=0;rows.forEach(r=>{const s=[...r.line.children].map(x=>x.textContent).join(" ");c+=mark(r.line,norm(s)==norm(r.parts.join(" ")))});return[c,rows.length]},
+   show(){rows.forEach(r=>{const all=[...r.line.children,...r.bank.children];r.parts.forEach(w=>{const i=all.findIndex(x=>x.textContent==w);if(i>-1)r.line.append(all.splice(i,1)[0])});mark(r.line,true)})}}}
+};
+
+/* question pool for games/tests: bracket items + gap items turned into choices */
+function poolUnit(u){const out=[];["g","v"].forEach(k=>u[k].ex.forEach(e=>{
+  if(e.type=="drop"||e.type=="choose")e.qs.forEach(q=>{const p=parseBr(q);out.push({t:p.pre+"___"+p.post,o:p.opts,a:p.a})});
+  if(e.type=="gap"){const words=e.qs.map(q=>q.match(/\{(.+)\}/)[1]).concat(e.extra||[]);
+    e.qs.forEach(q=>{const m=q.match(/^(.*)\{(.+)\}(.*)$/);out.push({t:m[1]+"___"+m[3],o:[m[2]].concat(shuffle(words.filter(w=>w!=m[2])).slice(0,2)),a:m[2]})})}}));return out}
+
+function testList(n){
+  crumb.textContent="Grade "+n+" · Unit Tests";app.innerHTML="";app.append(h("h2",null,"Unit Tests"),h("p","lead","Ten questions mixed from the unit's grammar and vocabulary. A new test every time."));
+  const u=h("div","units");
+  G[n].units.forEach((un,ui)=>{const r=h("div","unit"),box=h("div","unum",un.n),info=h("div"),b=h("button","exb","Start test");box.style.setProperty("--c",GC[n]);b.style.setProperty("--c","var(--unit)");
+    b.onclick=()=>go(()=>unitTest(n,ui));info.append(h("h3",null,un.name),h("p",null,un.g.t+" · "+un.v.t),b);r.append(box,info);u.append(r)});
+  app.append(u)}
+function unitTest(n,ui){
+  const un=G[n].units[ui];crumb.textContent="Grade "+n+" · Unit "+un.n+" test";app.innerHTML="";
+  app.append(h("h2",null,"Unit "+un.n+" test: "+un.name));
+  const qs=shuffle(poolUnit(un)).slice(0,10).map(q=>"\u0000"+q.t.replace("___","["+q.o.map(o=>o==q.a?o+"*":o).join("|")+"]")).map(s=>s.slice(1));
+  const card=h("div","card");app.append(card);exerciseInto(card,{type:"choose",instr:"Choose the correct answer.",qs});
+  const nav=h("div","nav"),again=h("button",null,"New test ↻");again.onclick=()=>replace(()=>unitTest(n,ui));nav.append(h("span"),again);app.append(nav)}
+
+/* games */
+function gamesMenu(n){
+  crumb.textContent="Grade "+n+" · Games";app.innerHTML="";app.append(h("h2",null,"Games"),h("p","lead","Pick a unit range and a game. Great for warmers and fillers at the end of a lesson."));
+  const r=h("div","res");
+  [["⏱ Speed race","Choose the right answer as fast as you can. 60 seconds.","var(--gram)",()=>pickUnit(n,"speed")],
+   ["🃏 Memory match","Turn over two cards and find the pairs.","var(--voc)",()=>pickUnit(n,"match")],
+   ["🔤 Word scramble","Put the letters in order to make a word from the unit.","var(--g7)",()=>pickUnit(n,"scramble")]].forEach(([t,d,c,fn])=>{
+    const b=h("button","rb");b.style.setProperty("--c",c);b.append(h("b",null,t),h("span",null,d));b.onclick=()=>go(fn);r.append(b)});
+  app.append(r)}
+function pickUnit(n,game){
+  const names={speed:"Speed race",match:"Memory match",scramble:"Word scramble"};
+  crumb.textContent="Grade "+n+" · "+names[game];app.innerHTML="";app.append(h("h2",null,names[game]+": choose a unit"));
+  const u=h("div","units");
+  G[n].units.forEach((un,ui)=>{const r=h("div","unit"),box=h("div","unum",un.n),info=h("div"),b=h("button","exb","Play");box.style.setProperty("--c",GC[n]);
+    b.onclick=()=>go(()=>playGame(n,ui,game));info.append(h("h3",null,un.name),b);r.append(box,info);u.append(r)});
+  if(game=="speed"){const r=h("div","unit"),box=h("div","unum","★"),info=h("div"),b=h("button","exb","Play");b.onclick=()=>go(()=>playGame(n,-1,game));info.append(h("h3",null,"All units mixed"),b);r.append(box,info);u.append(r)}
+  app.append(u)}
+function playGame(n,ui,game){
+  const un=ui<0?null:G[n].units[ui];crumb.textContent="Grade "+n+(un?" · Unit "+un.n:" · All units");app.innerHTML="";
+  const card=h("div","card");app.append(card);({speed:speedGame,match:matchGame,scramble:scrambleGame})[game](card,n,ui)}
+function resultView(card,title,big,sub,again){
+  stopGame();card.innerHTML="";const r=h("div","result");r.append(h("b",null,title),h("div","n",big),h("div",null,sub));
+  const a=h("div","actions"),p=h("button","act","Play again");p.onclick=()=>{card.innerHTML="";again()};a.append(p);r.append(a);card.append(r)}
+function best(k,v,lower){let b=0;try{b=+localStorage.getItem(k)||0}catch(e){}const nb=!b?v:(lower?Math.min(b,v):Math.max(b,v));try{localStorage.setItem(k,nb)}catch(e){}return nb}
+
+function speedGame(card,n,ui){
+  const units=ui<0?G[n].units:[G[n].units[ui]];let deck=shuffle(units.flatMap(poolUnit)),i=0,score=0,streak=0,left=60;
+  const head=h("div","ghead"),sc=h("span",null,"Score: 0"),st=h("span"),tm=h("span",null,"60 s");head.append(sc,st,tm);
+  const bar=h("div","timer"),fill=h("i");fill.style.width="100%";bar.append(fill);
+  const big=h("div","big"),btns=h("div","gbtns"),fb=h("div","fb");card.append(head,bar,big,btns,fb);
+  function next(){if(i>=deck.length){deck=deck.concat(shuffle(deck))}const q=deck[i++];big.textContent=q.t;btns.innerHTML="";
+    shuffle(q.o).forEach(o=>{const b=h("button",null,o);b.onclick=()=>{if(o==q.a){score+=1+(streak>=3?1:0);streak++;fb.className="fb y";fb.textContent=streak>=3?"Correct! Streak bonus +1":"Correct!"}else{streak=0;fb.className="fb n";fb.textContent="✗ "+q.t.replace("___",q.a)}
+      sc.textContent="Score: "+score;st.textContent=streak>=2?"🔥 "+streak:"";next()};btns.append(b)})}
+  next();
+  gameTimer=setInterval(()=>{left--;tm.textContent=left+" s";fill.style.width=(left/60*100)+"%";
+    if(left<=0)resultView(card,"Time's up!",score,"Best: "+best("g79-sp-"+n+"-"+ui,score),()=>speedGame(card,n,ui))},1000)}
+
+function matchGame(card,n,ui){
+  const pairs=G[n].units[ui].v.m.slice(0,8);let cards=[];pairs.forEach((p,pi)=>{cards.push({v:p[0],p:pi});cards.push({v:p[1],p:pi})});cards=shuffle(cards);
+  let open=[],found=0,moves=0,lock=false;
+  const head=h("div","ghead"),mv=h("span",null,"Moves: 0"),fd=h("span",null,"Pairs: 0 / "+pairs.length);head.append(mv,fd);
+  const grid=h("div","mgrid");card.append(head,grid);
+  cards.forEach(c=>{const b=h("button","mc",c.v);b.setAttribute("aria-label","Hidden card");c.el=b;
+    b.onclick=()=>{if(lock||b.classList.contains("up")||b.classList.contains("done"))return;b.classList.add("up");b.setAttribute("aria-label",c.v);open.push(c);
+      if(open.length==2){moves++;mv.textContent="Moves: "+moves;const[a,d]=open;
+        if(a.p==d.p){a.el.classList.replace("up","done");d.el.classList.replace("up","done");open=[];found++;fd.textContent="Pairs: "+found+" / "+pairs.length;
+          if(found==pairs.length)setTimeout(()=>resultView(card,"All pairs found!",moves+" moves","Best: "+best("g79-m-"+n+"-"+ui,moves,true)+" moves",()=>matchGame(card,n,ui)),600)}
+        else{lock=true;setTimeout(()=>{[a,d].forEach(x=>{x.el.classList.remove("up");x.el.setAttribute("aria-label","Hidden card")});open=[];lock=false},900)}}};
+    grid.append(b)})}
+
+function scrambleGame(card,n,ui){
+  const u=G[n].units[ui];const words=[...new Set(u.v.ex.flatMap(e=>e.type=="gap"?e.qs.map(q=>q.match(/\{(.+)\}/)[1]):e.type=="sort"?Object.keys(e.items):e.type=="choose"?e.qs.map(q=>parseBr(q).a):[]).filter(w=>/^[a-z]{3,12}$/i.test(w)))];
+  const deck=shuffle(words).slice(0,8);let i=0,score=0,left=90;
+  const head=h("div","ghead"),sc=h("span",null,"Score: 0 / "+deck.length),tm=h("span",null,"90 s");head.append(sc,tm);
+  const bar=h("div","timer"),fill=h("i");fill.style.width="100%";bar.append(fill);
+  const scr=h("div","scr"),inp=h("input"),row=h("div","actions"),ok=h("button","act","Check"),skip=h("button","act alt","Skip"),fb=h("div","fb");
+  inp.type="text";inp.id="scr";inp.autocomplete="off";inp.spellcheck=false;inp.placeholder="Type the word…";row.append(ok,skip);
+  card.append(head,bar,scr,inp,row,fb);
+  function show(){if(i>=deck.length){resultView(card,"Finished!",score+" / "+deck.length,"Best: "+best("g79-sc-"+n+"-"+ui,score),()=>scrambleGame(card,n,ui));return}
+    const w=deck[i];let s=shuffle(w.split(""));for(let k=0;k<5&&s.join("")==w;k++)s=shuffle(w.split(""));scr.innerHTML="";s.forEach(ch=>scr.append(h("span",null,ch)));inp.value="";inp.focus()}
+  function check(){const w=deck[i];if(norm(inp.value)==norm(w)){score++;fb.className="fb y";fb.textContent="Correct: "+w}else{fb.className="fb n";fb.textContent="The word was: "+w}sc.textContent="Score: "+score+" / "+deck.length;i++;show()}
+  ok.onclick=check;inp.onkeydown=e=>{if(e.key=="Enter")check()};skip.onclick=()=>{fb.className="fb n";fb.textContent="The word was: "+deck[i];i++;show()};
+  show();
+  gameTimer=setInterval(()=>{left--;tm.textContent=left+" s";fill.style.width=(left/90*100)+"%";if(left<=0)resultView(card,"Time's up!",score+" / "+deck.length,"Best: "+best("g79-sc-"+n+"-"+ui,score),()=>scrambleGame(card,n,ui))},1000)}
+
+home();
+</script>
+
+</html>

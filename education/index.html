@@ -27,10 +27,10 @@ h3.sec{font:600 .8rem var(--display);letter-spacing:.1em;text-transform:uppercas
 <div class="band"><div class="in"><button class="bb" id="back" hidden>‹ BACK</button><h1 id="crumb">Education · Indigo Prime Academy</h1></div></div>
 <main class="wrap" id="app"></main>
 <script>
-const G={7:{n:"Global English 7",lb:"gb/lb7/index.html",wb:"gb/wb7/index.html",cl:"books/lb7.html",cw:"books/wb7.html",lbn:"Learner’s Book"},
-8:{n:"Global English 8",lb:"gb/lb8/index.html",wb:"gb/wb8/index.html",cl:"books/lb8.html",cw:"books/wb8.html",lbn:"Learner’s Book"},
-9:{n:"Global English 9",lb:"gb/lb9/index.html",wb:"gb/wb9/index.html",cl:"books/lb9.html",cw:"books/wb9.html",lbn:"Learner’s Book"},
-10:{n:"Cambridge IGCSE English as a Second Language",lb:"gb/ig_cb/index.html",wb:"gb/ig_wb/index.html",cl:"books/lb10.html",cw:"books/wb10.html",lbn:"Coursebook"}};
+const G={7:{n:"Global English 7",gs:"grammar-steps-g7/",gsn:32,lb:"gb/lb7/index.html",wb:"gb/wb7/index.html",cl:"books/lb7.html",cw:"books/wb7.html",lbn:"Learner’s Book"},
+8:{n:"Global English 8",gs:"grammar-steps-g8/",gsn:35,lb:"gb/lb8/index.html",wb:"gb/wb8/index.html",cl:"books/lb8.html",cw:"books/wb8.html",lbn:"Learner’s Book"},
+9:{n:"Global English 9",gs:"grammar-steps-g9/",gsn:31,lb:"gb/lb9/index.html",wb:"gb/wb9/index.html",cl:"books/lb9.html",cw:"books/wb9.html",lbn:"Learner’s Book"},
+10:{n:"Cambridge IGCSE English as a Second Language",gs:"grammar-steps-g10/",gsn:29,lb:"gb/ig_cb/index.html",wb:"gb/ig_wb/index.html",cl:"books/lb10.html",cw:"books/wb10.html",lbn:"Coursebook"}};
 const app=document.getElementById("app"),back=document.getElementById("back"),crumb=document.getElementById("crumb");
 const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 function link(cls,href,parts){const a=h("a",cls);a.href=href;parts.forEach(p=>a.append(p));return a}
@@ -49,6 +49,7 @@ function grade(k){const o=G[k];if(!o)return home();crumb.textContent="Grade "+k;
  const sec=(t,items)=>{app.append(h("h3","sec",t));const g=h("div","grid");items.forEach(x=>g.append(x));app.append(g)};
  sec(o.lbn,[R(o.lb,"Designer Book · flip-book · games","Open the "+o.lbn,"Interactive slides, original pages, Grammar Steps, dialogues, speaking, flashcards, dictionary, 30 games and Live Class"+(k<10?", unit tests and worksheets":"")),R(o.cl,"Interactive · CD-ROM style",o.lbn+" – quick practice","One exercise per screen with Check Answers or See Next Answer")]);
  sec("Workbook",[R(o.wb,"Designer Book · flip-book · games","Open the Workbook","Workbook exercises with answer checking, original pages, dialogues, flashcards, dictionary, 30 games and Live Class"),R(o.cw,"Interactive · CD-ROM style","Workbook – quick practice","Workbook exercises with Check Answers")]);
+ sec("Grammar Steps",[R(o.gs,"Grammar Steps · by book","Grammar Steps · "+o.n,o.gsn+" topics from this book: rule, exercises, game and Q&A")]);
  sec("Live lessons",[R("liveclass/","Live Class","Join with the teacher’s code","Real-time class quiz on phones")])}
 function route(){const m=location.hash.match(/^#g(\d+)/);m?grade(m[1]):home()}
 back.onclick=()=>{location.hash="";};

@@ -202,12 +202,12 @@ function gunluk(){app.innerHTML='';app.append(el('h1',null,'Күндөлүк'),e
 
 /* ---------- Куран ---------- */
 function gkuran(){page('Куран','Күндөлүк окулуучу сүрөлөр. Сүрөнү басыңыз: бүт сүрө бир баракта, угуу (Мишари жана Абдулла Алтун) баскычтары менен.');
-  var S=[[36,'Ясин','يس','83 аят'],[56,'Вакиа','الواقعة','96 аят'],[67,'Мулк','الملك','30 аят. Тирмизи (2891): 30 аяттуу бир сүрө өзүнө окуган адамга шапаат кылып, ал кечирилген; бул — Мулк сүрөсү деп түшүндүрүлгөн'],[48,'Фатх','الفتح','29 аят. Бухари (4177): Пайгамбарыбыз ﷺ «Бүгүн кечинде мага бир сүрө түштү, ал мага дүйнөдөн жана андагылардын баарынан сүйүктүү» деп, Фатх сүрөсүн окуган']];
+  var S=[[36,'Ясин','يس','83 аят'],[56,'Вакиа','الواقعة','96 аят'],[67,'Мулк','الملك','30 аят. Тирмизи (2891): 30 аяттуу бир сүрө өзүнө окуган адамга шапаат кылып, ал кечирилген; бул — Мулк сүрөсү деп түшүндүрүлгөн'],[18,'Кахф','الكهف','110 аят. Жума күнү окуу сунушталат'],[75,'Кыяамат','القيامة','40 аят'],[48,'Фатх','الفتح','29 аят. Бухари (4177): Пайгамбарыбыз ﷺ «Бүгүн кечинде мага бир сүрө түштү, ал мага дүйнөдөн жана андагылардын баарынан сүйүктүү» деп, Фатх сүрөсүн окуган']];
   S.forEach(function(s){var c=el('a','card tile');c.href='#/gsure/'+s[0];c.style.cssText='display:block;text-decoration:none;color:inherit;margin-bottom:12px';
     c.append(el('div','ar sm',s[2]),el('h3',null,s[1]+' сүрөсү'),el('p',null,s[3]));app.append(c)})}
 
 /* ---------- Сүрө: бир баракта, угуу менен ---------- */
-var YTID={36:'pliYejp0qh8',48:'u0NBO0z0h9o',56:'34HfE-zMefM',67:'-2PCPx7ZISE'},NAME={36:'Ясин',48:'Фатх',56:'Вакиа',67:'Мулк'};
+var YTID={36:'pliYejp0qh8',48:'u0NBO0z0h9o',56:'34HfE-zMefM',67:'-2PCPx7ZISE',75:'JQFfEp6BtlU'},NAME={18:'Кахф',36:'Ясин',48:'Фатх',56:'Вакиа',67:'Мулк',75:'Кыяамат'};
 var curAud=null,curYT=null,ytReady=null;
 function stopAll(){if(curAud){curAud.pause();curAud=null}if(curYT&&curYT.pauseVideo){try{curYT.pauseVideo()}catch(e){}}}
 function ytApi(){if(ytReady)return ytReady;ytReady=new Promise(function(ok){if(window.YT&&YT.Player)return ok();var t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.append(t);window.onYouTubeIframeAPIReady=ok});return ytReady}
@@ -226,14 +226,14 @@ function gsure(){var n=+(location.hash.replace(/^#\/?/,'').split('/')[1]||36);if
   r1.append(pb,sb,ms);
   /* Абдулла Алтун (YouTube) */
   var r2=el('div');r2.style.cssText='display:flex;align-items:center;gap:10px;flex-wrap:wrap';
-  var yb=el('button','btn','▶ Абдулла Алтун');var ys=el('button','chip','■ Токтотуу');var ym=el('span','vtr','');
+  var yb=el('button','btn','▶ Абдулла Алтун');if(!YTID[n]){yb.disabled=true;yb.style.opacity='.5'}var ys=el('button','chip','■ Токтотуу');var ym=el('span','vtr','');
   var yh=el('div');yh.style.cssText='width:100%;max-width:360px;aspect-ratio:16/9;margin-top:8px;display:none;border-radius:10px;overflow:hidden';var yd=el('div');yd.id='ytp';yh.append(yd);
   var playing=false,created=false;
   function mk(){if(created)return Promise.resolve();created=true;yh.style.display='block';return ytApi().then(function(){return new Promise(function(ok){curYT=new YT.Player('ytp',{videoId:YTID[n],width:'100%',height:'100%',playerVars:{playsinline:1,rel:0},events:{onReady:ok,onStateChange:function(e){if(e.data===0||e.data===2){yb.textContent=e.data===2?'▶ Улантуу':'▶ Абдулла Алтун';playing=false}if(e.data===1){yb.textContent='⏸ Тындыруу';playing=true}},onError:function(){ym.innerHTML='';var a=el('a',null,'YouTube\'да ачуу');a.href='https://www.youtube.com/watch?v='+YTID[n];a.target='_blank';ym.append(a)}}})})})}
   yb.onclick=function(){if(au)au.pause();pb.textContent='▶ Мишари Рашид';mk().then(function(){if(playing)curYT.pauseVideo();else curYT.playVideo()})};
   ys.onclick=function(){if(curYT&&curYT.stopVideo){curYT.stopVideo();yb.textContent='▶ Абдулла Алтун'}};
-  r2.append(yb,ys,ym);box.append(r1,r2,yh);app.append(box);
-  var yl=el('a','vtr','YouTube\'да ачуу ↗');yl.href='https://www.youtube.com/watch?v='+YTID[n];yl.target='_blank';yl.rel='noopener';yl.style.cssText='display:block;margin-top:6px;font-size:13px';box.append(yl);
+  if(!YTID[n])ym.textContent='Абдулла Алтундун бул сүрөгө видеосу кошула элек';r2.append(yb,ys,ym);box.append(r1,r2,yh);app.append(box);
+  if(YTID[n]){var yl=el('a','vtr','YouTube\'да ачуу ↗');yl.href='https://www.youtube.com/watch?v='+YTID[n];yl.target='_blank';yl.rel='noopener';yl.style.cssText='display:block;margin-top:6px;font-size:13px';box.append(yl)}
   /* Бир барактык текст */
   qSura(n).then(function(d){
     var c=el('div','card');c.style.marginBottom='14px';

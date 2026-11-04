@@ -1086,7 +1086,7 @@ if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){navigato
     else if(k==="me"){if(ME&&nodeMap[ME])fvGo(ME);else openPick(function(id){ME=id;store("arzykul_me",ME);fvGo(id);toast("Сиз белгиленди")})}
   });
   var _rev=reveal;reveal=function(id,js){if(document.body.classList.contains("fv"))fvGo(id);else _rev(id,js)};
-  var mv=document.createElement("button");mv.id="m7";$("#menu").insertBefore(mv,$("#m6"));
+  var mv=document.createElement("button");mv.id="m7";mv.style.display="none";$("#menu").insertBefore(mv,$("#m6"));
   mv.addEventListener("click",function(){setView(document.body.classList.contains("fv")?"list":"fv")});
   function setView(v){
     var on=v==="fv";document.body.classList.toggle("fv",on);try{localStorage.setItem("arzykul_view",v)}catch(e){}
@@ -1094,7 +1094,7 @@ if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){navigato
     if(on){if(cur){var c=cur;cur=null;fvGo(c)}window.scrollTo(0,0);crumbs(cur||TREE.id);setTimeout(lines,60)}
     else{_rev(cur||TREE.id)}
   }
-  var V="fv";try{V=localStorage.getItem("arzykul_view")||"fv"}catch(e){}
+  var V="fv";try{localStorage.setItem("arzykul_view","fv")}catch(e){}
   setTimeout(function(){
     var id=nodeMap.arzykul?"arzykul":TREE.id;
     if(location.hash.length>1){var h=decodeURIComponent(location.hash.slice(1));if(nodeMap[h])id=h}

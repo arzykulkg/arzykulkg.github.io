@@ -203,7 +203,7 @@ function gunluk(){app.innerHTML='';app.append(el('h1',null,'Күндөлүк'),e
 /* ---------- Куран ---------- */
 function gkuran(){page('Куран','Күндөлүк окулуучу сүрөлөр. Басып, Куранды окуу бетин ачыңыз (Ислам сайтына өтөт).');
   var S=[[36,'Ясин','يس','83 аят'],[56,'Вакиа','الواقعة','96 аят'],[67,'Мулк','الملك','30 аят. Тирмизи (2891): 30 аяттуу бир сүрө өзүнө окуган адамга шапаат кылып, ал кечирилген; бул — Мулк сүрөсү деп түшүндүрүлгөн'],[48,'Фатх','الفتح','29 аят. Бухари (4177): Пайгамбарыбыз ﷺ «Бүгүн кечинде мага бир сүрө түштү, ал мага дүйнөдөн жана андагылардын баарынан сүйүктүү» деп, Фатх сүрөсүн окуган']];
-  S.forEach(function(s){var c=el('a','card tile');c.x+s[0];c.style.cssText='display:block;text-decoration:none;color:inherit;margin-bottom:12px';
+  S.forEach(function(s){var c=el('a','card tile');c.href='/islam/#/kuran/'+s[0];c.style.cssText='display:block;text-decoration:none;color:inherit;margin-bottom:12px';
     c.append(el('div','ar sm',s[2]),el('h3',null,s[1]+' сүрөсү'),el('p',null,s[3]));app.append(c)})}
 
 /* ---------- Чегеле ---------- */

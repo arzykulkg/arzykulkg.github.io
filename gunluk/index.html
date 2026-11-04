@@ -275,15 +275,42 @@ var NABI=[
  ['Сулайман а.с.','Сулайманнын дубасы',[[27,19,19],[38,35,35]]],
  ['Иса а.с.','Исанын дубасы',[[5,114,114]]],
  ['Мухаммад ﷺ','Пайгамбарыбыздын ﷺ Куран дубалары',[[2,201,201],[20,114,114],[23,118,118],[17,80,80]]]];
-function gnabi(){page('Пайгамбарлардын дубалары','Курандын өзүндө сакталган пайгамбарлардын дубалары: арабчасы жана кыргызча мааниси. Куранда дубасы тике айтылган пайгамбарлар гана камтылган; андай дубалар 14 пайгамбарда бар, андыктан 25 толбойт.');
+var NBN={'Адам а.с.':'АДАМ (а.с)','Нух а.с.':'НУХ (а.с)','Ибрахим а.с.':'ИБРАХИМ (а.с)','Лут а.с.':'ЛУТ (а.с)','Йакуб а.с.':'ЯКУП (а.с)','Йусуф а.с.':'ЮСУФ (а.с)','Шуайб а.с.':'ШУАЙБ (а.с)','Аййуб а.с.':'АЙЮБ (а.с)','Йунус а.с.':'ЮНУС (а.с)','Муса а.с.':'МУСА (а.с)','Закарийа а.с.':'ЗАКАРИЯ (а.с)','Сулайман а.с.':'СУЛАЙМАН (а.с)','Иса а.с.':'ИСА (а.с)','Мухаммад ﷺ':'МУХАММАД (с.а.в)'};
+function nbWrap(ctx,text,maxW){var w=text.split(' '),lines=[],cur='';w.forEach(function(x){var t=cur?cur+' '+x:x;if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=x}else cur=t});if(cur)lines.push(cur);return lines}
+function nbDraw(name,ar,kg,src){
+  var W=1080,H=1080,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
+  var g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,'#d8c2a0');g.addColorStop(.5,'#f1e6d2');g.addColorStop(1,'#c8ad86');c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.globalAlpha=.25;c.fillStyle='#fff';c.beginPath();c.arc(180,900,260,0,7);c.fill();c.beginPath();c.arc(930,160,220,0,7);c.fill();c.globalAlpha=1;
+  var px=90,py=90,pw=W-180,ph=H-180;c.fillStyle='rgba(255,252,246,.86)';c.beginPath();c.roundRect(px,py,pw,ph,46);c.fill();
+  c.textAlign='center';c.fillStyle='#1f5a43';c.font='bold 54px Georgia,serif';c.fillText(name+'дын',W/2,py+110);c.fillText('ДУБАСЫ',W/2,py+176);
+  c.strokeStyle='#6b7a6f';c.lineWidth=2;c.beginPath();c.moveTo(px+120,py+212);c.lineTo(px+pw-120,py+212);c.stroke();
+  var y=py+300;c.fillStyle='#1d2b26';c.direction='rtl';c.font='46px Amiri,serif';var al=nbWrap(c,ar,pw-140).slice(0,5);
+  al.forEach(function(l){c.fillText(l,W/2,y);y+=78});
+  c.direction='ltr';y+=22;c.font='italic 38px Georgia,serif';c.fillStyle='#2b3a33';var kl=nbWrap(c,'«'+kg.replace(/\s+/g,' ')+'»',pw-140);
+  var maxL=Math.max(2,Math.floor((py+ph-90-y)/50));if(kl.length>maxL){kl=kl.slice(0,maxL);kl[maxL-1]=kl[maxL-1].replace(/\s*\S*$/,'')+'…'}
+  kl.forEach(function(l){c.fillText(l,W/2,y);y+=50});
+  c.font='24px system-ui,sans-serif';c.fillStyle='#7b867f';c.fillText(src+' · Arzykul.kg · Күндөлүк',W/2,py+ph-34);
+  return cv}
+function nbcard(name,ar,kg,src){
+  var wrapEl=el('div','nb-wrap'),card=el('div','nb-card'),pan=el('div','nb-pan');
+  pan.append(el('div','nb-ttl',name+'дын'),el('div','nb-ttl',' ДУБАСЫ'),el('hr'),el('div','nb-ar',ar),el('div','nb-kg','«'+kg+'»'),el('div','nb-src',src+' · Arzykul.kg'));
+  card.append(pan);wrapEl.append(card);
+  var row=el('div');row.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 18px';
+  var dl=el('button','chip','🖼 Сүрөт катары сактоо');
+  dl.onclick=function(){var go=function(){var cv=nbDraw(name,ar,kg,src);cv.toBlob(function(bl){var f=new File([bl],'dubasy.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f]}).catch(function(){})}else{var u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download='dubasy-'+name.split(' ')[0].toLowerCase()+'.png';document.body.append(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000)}})};
+    (document.fonts&&document.fonts.load?document.fonts.load('40px Amiri').then(go,go):go())};
+  var cp=el('button','chip','📋 Көчүрүү');cp.onclick=function(){copyText(cp,ar+'\n'+kg+'\n('+src+')')};
+  row.append(dl,cp);wrapEl.append(row);return wrapEl}
+(function(){var st=document.createElement('style');st.textContent='.nb-card{aspect-ratio:1/1;max-width:520px;margin:0 auto;border-radius:18px;padding:7%;background:radial-gradient(circle at 15% 85%,rgba(255,255,255,.35) 0 26%,transparent 27%),radial-gradient(circle at 88% 12%,rgba(255,255,255,.3) 0 22%,transparent 23%),linear-gradient(135deg,#d8c2a0,#f1e6d2 50%,#c8ad86);box-shadow:0 8px 24px rgba(0,0,0,.14);container-type:inline-size;display:flex}.nb-pan{flex:1;background:rgba(255,252,246,.86);border-radius:5cqw;padding:6cqw 7cqw;display:flex;flex-direction:column;text-align:center;overflow:hidden}.nb-ttl{font:700 5.4cqw Georgia,serif;color:#1f5a43;line-height:1.25}.nb-pan hr{border:0;border-top:2px solid #6b7a6f;margin:3cqw 8cqw}.nb-ar{font:5.2cqw/1.9 Amiri,serif;color:#1d2b26;direction:rtl;margin:2cqw 0}.nb-kg{font:italic 3.8cqw/1.45 Georgia,serif;color:#2b3a33;flex:1;overflow:hidden}.nb-src{font:2.4cqw system-ui,sans-serif;color:#7b867f;margin-top:2cqw}.nb-wrap{margin-bottom:6px}';document.head.append(st)})();
+function gnabi(){page('Пайгамбарлардын дубалары','Курандын өзүндө сакталган пайгамбарлардын дубалары: сүрөт-карточка түрүндө. «Сүрөт катары сактоо» баскычы менен карточканы сүрөт кылып сактап же достор менен бөлүшө аласыз. Куранда дубасы тике айтылган пайгамбарлар гана камтылган; андай дубалар 14 пайгамбарда бар, андыктан 25 толбойт.');
   var wrap=el('div');app.append(wrap);
-  var seen={};
   NABI.forEach(function(p){
     var sec=el('div');sec.append(el('h2',null,p[0]));wrap.append(sec);
-    p[2].forEach(function(r){qSura(r[0]).then(function(d){
-      var ar=d.a.slice(r[1]-1,r[2]).join(' '),kg=d.kg.slice(r[1]-1,r[2]).join(' ');
-      var c=card({title:p[1],src:'Куран, '+(r[1]===r[2]?r[0]+':'+r[1]:r[0]+':'+r[1]+'–'+r[2]),ar:ar,kg:kg});
-      var a=el('a','btn o','📖 Сүрөдө ачуу');a.x+r[0]+'/'+r[1];a.style.cssText='display:inline-block;margin-left:8px';c.append(a);sec.append(c)}).catch(function(){})})})}
+    p[2].forEach(function(r,idx){var slot=el('div');slot.style.order=idx;sec.append(slot);qSura(r[0]).then(function(d){
+      var ar=d.a.slice(r[1]-1,r[2]).join(' '),kg=d.kg.slice(r[1]-1,r[2]).join(' ').replace(/\s+/g,' ');
+      var src='Куран, '+(r[1]===r[2]?r[0]+':'+r[1]:r[0]+':'+r[1]+'–'+r[2]);
+      slot.append(nbcard(NBN[p[0]]||p[0],ar,kg,src));
+      var a=el('a','btn o','📖 Сүрөдө ачуу');a.href='/islam/#/kuran/'+r[0]+'/'+r[1];a.style.cssText='display:inline-block;margin:-10px 0 18px';slot.append(a)}).catch(function(){})})})}
 
 /* ---------- Ашара-и мубашшара ---------- */
 function gasere(){page('Ашара-и мубашшара','Пайгамбарыбыз ﷺ тирүүсүндө эле бейиш менен сүйүнчүлөгөн он сахабы.');

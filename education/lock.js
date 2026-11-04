@@ -2,7 +2,7 @@
    exam.json: {"locked":true|false,"message":"...","gate":true|false}. Passwords are checked as SHA-256 hashes in the browser
    (basic protection only). Students' password opens the site; the teacher password also bypasses the exam lock. */
 (function(){
-var HS="4bd42384c2bd93c0c653afb88f319970a5f610878b50f116fa60e46b5aec37f9",HT="4bd42384c2bd93c0c653afb88f319970a5f610878b50f116fa60e46b5aec37f9",KS="edu-pass",KT="exam-ok";
+var HS="dccc5d01dabcd1c0b9fa89c91e7f4bde603121ee0172b4ff394e6bb30d295e41",HT="4bd42384c2bd93c0c653afb88f319970a5f610878b50f116fa60e46b5aec37f9",KS="edu-pass",KT="exam-ok";
 function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 var teacher=get(KT)===HT,student=teacher||get(KS)===HS;

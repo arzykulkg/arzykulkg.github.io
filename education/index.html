@@ -45,7 +45,7 @@ function home(){crumb.textContent="Education · Indigo Prime Academy";back.hidde
  app.append(g2);
  app.append(h("h3","sec","Кыргыз тили"));
  const g3=h("div","grid");
- [["kyrgyz-tili-7/","Кыргыз тили · 7-класс","Интерактивдүү көнүгүүлөр, оюндар жана тест","📗","#0f7a55"],["kyrgyz-tili-8/","Кыргыз тили · 8-класс","Интерактивдүү көнүгүүлөр, оюндар жана тест","📘","#c8932b"]].forEach(x=>{
+ [["kyrgyz-tili/","Кыргыз тили · 7–8-класс","Көнүгүүлөр, 26 оюн, тесттер, командалык мелдеш, сөздүк, медалдар","🏆","#3b3f8f"],["kyrgyz-tili-7/","Кыргыз тили · 7-класс (китеп боюнча)","Интерактивдүү көнүгүүлөр, оюндар жана тест","📗","#0f7a55"],["kyrgyz-tili-8/","Кыргыз тили · 8-класс (китеп боюнча)","Интерактивдүү көнүгүүлөр, оюндар жана тест","📘","#c8932b"]].forEach(x=>{
   const i=h("div","ico",x[3]);i.style.background=x[4];const d=h("div");d.append(h("b",null,x[1]),h("span",null,x[2]));g3.append(link("cls",x[0],[i,d]))});
  app.append(g3)}
 function grade(k){const o=G[k];if(!o)return home();crumb.textContent="Grade "+k;back.hidden=false;app.innerHTML="";

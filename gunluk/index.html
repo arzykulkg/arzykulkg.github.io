@@ -188,6 +188,7 @@ var TILES=[
  ['📖','Куран','Ясин, Вакиа, Мулк жана Фатх сүрөлөрү','#/gkuran'],
  ['📝','Ибадат эсеби','Күндөлүк жана жумалык эсеп','#/gcetele'],
  ['📿','Тасбихат','Намаздан кийинки тасбихтер жана сандары','#/gtesbihat'],
+ ['📿','Зикирматик','Жалпы зикирматик: санагыч, максат, 16 даяр зикир','#/gzikirmatik'],
  ['🌿','Зикирлер','Арабча, кыргызча, хадиси жана пазилети; ар бирине зикирматик','#/gzikir'],
  ['🌅','Эртең жана кечки дубалар','Хадистерден тандалган дубалар','#/gdua'],
  ['🕋','Пайгамбарлардын дубалары','Курандагы пайгамбарлардын дубалары','#/gnabi'],
@@ -296,7 +297,54 @@ function gasere(){page('Ашара-и мубашшара','Пайгамбары�
   }
 
 
-var R={'':gunluk,gunluk:gunluk,gkuran:gkuran,gcetele:gcetele,gtesbihat:gtesbihat,gzikir:gzikir,gdua:gdua,gnabi:gnabi,gasere:gasere};
+L.kg.goal='🎯 Максат';L.kg.goalq='Максаттагы сан (0 = максатсыз):';L.kg.reset='↺ Нөлгө келтирүү';L.kg.tot='Бул зикирде жалпы';L.kg.undo='↶ Артка кайтаруу';L.kg.vc='📴 Титирөө өчүрүлгөн';L.kg.vo='📳 Титирөө күйгүзүлгөн';L.kg.zh='Зикирматик';L.kg.zl='Басыңыз жана санаңыз. Эсептегич ушул түзмөктө сакталат.';L.kg.tap='басыңыз';
+L.kg.z={sub:'Субханаллах',hmd:'Альхамдулиллах',ekb:'Аллаху акбар',ist:'Астагфируллах',lel:'Лаа илааха иллаллах',sal:'Салават',hql:'Лаа хавла вала куввата илла билла',cus:'Эркин эсептегич'};Object.assign(L.kg.z,{g1:"Эки жеңил сөз",g2:"Субханаллахи ва бихамдихи — күнүнө жүз жолу",g4:"Төртүнчү зикир: Ла илаха иллаллах (жүз жолу)",g7:"Астагфируллах (истигфар)",g8:"Рабби игфир ли ва туб алайя",g9:"Юнус пайгамбардын зикири",g12:"Жувайрия хадисиндеги зикир",g13:"Хасбуналлаху ва ни’мал-вакил",g14:"Салават (Ибрахим салавады)"});
+var ZK=[
+ {id:'sub',ar:'سُبْحَانَ اللّٰه',tr:'Sübhânallah',t:33},
+ {id:'hmd',ar:'اَلْحَمْدُ لِلّٰه',tr:'Elhamdülillâh',t:33},
+ {id:'ekb',ar:'اَللّٰهُ أَكْبَر',tr:'Allâhu ekber',t:34},
+ {id:'ist',ar:'أَسْتَغْفِرُ اللّٰه',tr:'Estağfirullâh',t:100},
+ {id:'lel',ar:'لَا إِلٰهَ إِلَّا اللّٰه',tr:'Lâ ilâhe illallâh',t:100},
+ {id:'sal',ar:'اَللّٰهُمَّ صَلِّ عَلٰى سَيِّدِنَا مُحَمَّد',tr:'Salavât-ı şerîfe',t:100},
+ {id:'hql',ar:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللّٰه',tr:'Lâ havle velâ kuvvete illâ billâh',t:100},
+ {id:"g1",ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ",tr:"Эки жеңил сөз",t:33},
+ {id:"g2",ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",tr:"Субханаллахи ва бихамдихи — күнүнө жүз жолу",t:100},
+ {id:"g4",ar:"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",tr:"Төртүнчү зикир: Ла илаха иллаллах (жүз жолу)",t:100},
+ {id:"g7",ar:"أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",tr:"Астагфируллах (истигфар)",t:100},
+ {id:"g8",ar:"رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",tr:"Рабби игфир ли ва туб алайя",t:100},
+ {id:"g9",ar:"لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",tr:"Юнус пайгамбардын зикири",t:33},
+ {id:"g12",ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",tr:"Жувайрия хадисиндеги зикир",t:3},
+ {id:"g13",ar:"حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",tr:"Хасбуналлаху ва ни’мал-вакил",t:33},
+ {id:"g14",ar:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",tr:"Салават (Ибрахим салавады)",t:10},
+ {id:'cus',ar:'',tr:'Serbest sayaç',t:0}
+];
+Object.assign(L.kg.z,{g1:"Эки жеңил сөз",g2:"Субханаллахи ва бихамдихи — күнүнө жүз жолу",g4:"Төртүнчү зикир: Ла илаха иллаллах (жүз жолу)",g7:"Астагфируллах (истигфар)",g8:"Рабби игфир ли ва туб алайя",g9:"Юнус пайгамбардын зикири",g12:"Жувайрия хадисиндеги зикир",g13:"Хасбуналлаху ва ни’мал-вакил",g14:"Салават (Ибрахим салавады)"});
+function zikir(){app.innerHTML='';var S=ls('zk')||{cur:'sub',c:{},tg:{},tot:{},vib:1};
+ var today=new Date().toISOString().slice(0,10);if(S.day!==today){S.day=today;S.today=0}
+ var wrap=h('div',{class:'zk'});app.append(h('h1',null,tx('zh')),h('p',{class:'lead'},tx('zl')),wrap);
+ function save(){ls('zk',S)}
+ function cur(){return ZK.filter(function(z){return z.id===S.cur})[0]}
+ function tgt(){var z=cur();return S.tg[z.id]!=null?S.tg[z.id]:z.t}
+ function draw(){wrap.innerHTML='';var z=cur(),n=S.c[z.id]||0,T=tgt();
+  var lst=h('div',{class:'zl'});ZK.forEach(function(x){lst.append(h('span',{class:'chip'+(x.id===S.cur?' on':''),onclick:function(){S.cur=x.id;save();draw()}},L[lang].z[x.id]))});
+  var big=h('button',{class:'zbig',id:'zb','aria-label':'Say'},[h('div',{class:'n'},String(n)),h('div',{class:'t'},T?'/ '+T:tx('tap'))]);
+  var ring=h('div',{class:'ring'},h('i'));ring.firstChild.style.width=T?Math.min(100,n/T*100)+'%':'0';
+  function tick(){n=(S.c[z.id]||0)+1;S.c[z.id]=n;S.tot[z.id]=(S.tot[z.id]||0)+1;S.today=(S.today||0)+1;save();
+   big.firstChild.textContent=n;ring.firstChild.style.width=T?Math.min(100,n/T*100)+'%':'0';tt.textContent=S.today;tl.textContent=S.tot[z.id]||0;
+   if(S.vib&&navigator.vibrate)navigator.vibrate(T&&n%T===0?[80,60,80]:12);
+   if(T&&n%T===0){big.classList.remove('pulse');void big.offsetWidth;big.classList.add('pulse')}}
+  big.addEventListener('click',tick);
+  var tt=h('b',null,String(S.today||0)),tl=h('b',null,String(S.tot[z.id]||0));
+  wrap.append(lst,z.ar?h('div',{class:'zar'},z.ar):'',h('div',{class:'ztr'},L[lang].z[z.id]),big,ring,
+   h('div',{class:'row',style:'justify-content:center'},[
+    h('button',{class:'btn o',onclick:function(){if((S.c[z.id]||0)>0){S.c[z.id]--;S.tot[z.id]=Math.max(0,(S.tot[z.id]||0)-1);S.today=Math.max(0,(S.today||0)-1);save();draw()}}},tx('undo')),
+    h('button',{class:'btn o',onclick:function(){S.c[z.id]=0;save();draw()}},tx('reset')),
+    h('button',{class:'btn o',onclick:function(){var v=prompt(tx('goalq'),T);if(v===null)return;v=Math.max(0,parseInt(v)||0);S.tg[z.id]=v;save();draw()}},tx('goal')),
+    h('button',{class:'btn o',onclick:function(){S.vib=S.vib?0:1;save();draw()}},S.vib?tx('vo'):tx('vc'))]),
+   h('div',{class:'zs'},[h('div',{class:'card'},[tt,h('span',null,tx('today'))]),h('div',{class:'card'},[tl,h('span',null,tx('tot'))])]))}
+ draw()}
+function gzikirmatik(){zikir();var b=el('a','btn o','‹ Күндөлүк');b.href='#/';b.style.cssText='display:inline-block;margin-bottom:12px';app.insertBefore(b,app.firstChild)}
+var R={'':gunluk,gunluk:gunluk,gkuran:gkuran,gcetele:gcetele,gtesbihat:gtesbihat,gzikir:gzikir,gdua:gdua,gnabi:gnabi,gasere:gasere,gzikirmatik:gzikirmatik};
 function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];(R[r]||gunluk)();window.scrollTo(0,0)}
 addEventListener('hashchange',route);
 var st=document.createElement('style');st.textContent='.gk-ctr{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0;padding:10px;border-radius:12px;background:color-mix(in srgb,var(--g,#0f5c4a) 8%,transparent)}.gk-ctr.done{background:color-mix(in srgb,#2e9e5b 18%,transparent)}.gk-btn{width:84px;height:84px;border-radius:50%;border:0;background:var(--g,#0f5c4a);color:#fff;font:700 28px system-ui;cursor:pointer;touch-action:manipulation}.gk-btn:active{transform:scale(.94)}.gk-ci{flex:1;min-width:140px}.gk-lab{display:block;font-size:13px;opacity:.85;margin-bottom:6px}.gk-bar{height:8px;border-radius:4px;background:rgba(128,128,128,.25);overflow:hidden}.gk-bar i{display:block;height:100%;background:var(--gold,#b8892b);width:0;transition:width .2s}.gk-virtue{margin:8px 0;padding:10px 12px;border-left:4px solid var(--gold,#b8892b);border-radius:8px;background:color-mix(in srgb,var(--gold,#b8892b) 10%,transparent);font-size:15px}.gk-t{margin:0 0 6px}.gk-tr{margin:6px 0;font-style:italic;opacity:.9}.gk-note{border-color:var(--gold);font-size:13px;margin-bottom:12px}';

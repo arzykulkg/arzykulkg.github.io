@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ky"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f5c4a"><title>Күндөлүк</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#f6f1e4;--card:#fffdf7;--ink:#1d2b26;--mut:#6b756f;--g:#0f5c4a;--g2:#167a62;--gold:#c9a227;--line:#e5dcc3;--sh:0 6px 22px rgba(15,60,48,.10)}
+:root[data-theme=dark]{--bg:#0e1a17;--card:#152722;--ink:#e9efe9;--mut:#9bb0a6;--g:#2fb08f;--g2:#3ccaa4;--gold:#e8c766;--line:#24403a;--sh:0 6px 22px rgba(0,0,0,.4)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+header{position:sticky;top:0;z-index:20;background:var(--g);color:#fff;padding:env(safe-area-inset-top) 16px 0}
+.hd{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:12px;height:56px}
+.logo{font:700 22px Amiri,serif;display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none}
+.logo svg{width:30px;height:30px}
+.sp{flex:1}.tm{background:rgba(255,255,255,.15);border:0;color:#fff;border-radius:10px;padding:7px 11px;font-size:15px;font-weight:600;cursor:pointer}.tm+.tm{margin-left:4px}
+nav{max-width:980px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+nav a{color:#d6efe7;text-decoration:none;padding:8px 14px;border-radius:999px;white-space:nowrap;font-weight:600;font-size:15px}
+nav a.on{background:#fff;color:var(--g)}
+main{max-width:980px;margin:0 auto;padding:20px 16px 90px}
+h1{font:700 30px Amiri,serif;margin:6px 0 4px;color:var(--g)}h2{font-size:19px;margin:22px 0 10px}
+.lead{color:var(--mut);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--sh)}
+.tile{display:block;text-decoration:none;color:inherit;transition:transform .15s}.tile:hover{transform:translateY(-3px)}
+.tile .ic{font-size:34px}.tile b{display:block;font-size:18px;margin:6px 0 2px}.tile span{color:var(--mut);font-size:14px}
+.bk{display:flex;flex-direction:column;gap:6px}.bk .cv{height:120px;border-radius:12px;background:linear-gradient(135deg,var(--g),var(--g2));color:#e8c766;display:flex;align-items:center;justify-content:center;font:700 40px Amiri,serif}
+.bk b{font-size:16px;line-height:1.3}.bk small{color:var(--mut)}
+.btn{display:inline-block;border:0;border-radius:11px;background:var(--g);color:#fff;font:600 15px Inter,sans-serif;padding:10px 16px;cursor:pointer;text-decoration:none}
+.btn.o{background:transparent;color:var(--g);border:1.5px solid var(--g)}.btn.g{background:var(--gold);color:#2a2100}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px;color:var(--ink)}.chip.on{background:var(--g);color:#fff;border-color:var(--g)}
+input[type=search],input[type=text],textarea,select{width:100%;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);padding:11px 14px;font:inherit}
+.empty{text-align:center;color:var(--mut);padding:40px 10px;border:2px dashed var(--line);border-radius:16px}
+.ov{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column}
+.ov .bar{background:var(--g);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top))}
+.ov iframe{flex:1;border:0;width:100%;background:#fff}
+.post h3{margin:0 0 4px;font-size:19px}.post .meta{color:var(--mut);font-size:13px;margin-bottom:8px}.post p{margin:0 0 10px;white-space:pre-line}
+/* audio */
+.trk{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;cursor:pointer}.trk:hover,.trk.on{background:color-mix(in srgb,var(--g) 10%,transparent)}
+.trk .pl{width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(0,0,0,.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.player .in{max-width:980px;margin:0 auto}.player audio{width:100%;height:38px}
+/* zikir */
+.zk{max-width:520px;margin:0 auto;text-align:center}
+.zar{font:700 40px/1.5 Amiri,serif;color:var(--g);margin:4px 0}.ztr{color:var(--mut);margin:0 0 8px}
+.zbig{width:min(70vw,280px);height:min(70vw,280px);border-radius:50%;border:0;margin:14px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,var(--g2),var(--g));color:#fff;box-shadow:0 14px 40px rgba(15,92,74,.45),inset 0 -8px 20px rgba(0,0,0,.2);cursor:pointer;user-select:none;touch-action:manipulation;transition:transform .06s}
+.zbig:active{transform:scale(.96)}.zbig .n{font:700 78px/1 Inter,sans-serif}.zbig .t{opacity:.85;margin-top:6px}
+.ring{width:100%;height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 14px}.ring i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--g2));width:0;transition:width .15s}
+.zl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+.zs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}.zs .card{padding:10px 16px;min-width:110px}.zs b{font-size:22px;display:block}.zs span{font-size:12px;color:var(--mut)}
+.pulse{animation:pu .6s}@keyframes pu{0%{box-shadow:0 0 0 0 rgba(201,162,39,.8)}100%{box-shadow:0 0 0 40px rgba(201,162,39,0)}}
+
+.ar{font:400 30px/2.1 Amiri,'Traditional Arabic',serif;direction:rtl;text-align:right;color:var(--ink);margin:0}
+.ar.sm{font-size:25px}.vtr{color:var(--mut);margin:4px 0 0}.vn{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;border-radius:50%;background:var(--g);color:#fff;font:600 13px Inter;margin-right:8px;flex:none}
+.ay{padding:14px 4px;border-bottom:1px solid var(--line)}.ay .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.bism{text-align:center;font:400 30px/2 Amiri,serif;color:var(--g);margin:10px 0 4px}
+.sl{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;cursor:pointer;text-decoration:none;color:inherit;border:1px solid var(--line);background:var(--card)}.sl:hover{border-color:var(--g)}
+.sl .no{width:38px;height:38px;border-radius:10px;background:color-mix(in srgb,var(--g) 14%,transparent);color:var(--g);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}.sl b{display:block}.sl small{color:var(--mut)}
+.pn{font:700 24px Amiri,serif;color:var(--g);margin:26px 0 8px;border-bottom:2px solid var(--gold);padding-bottom:4px}
+.dua{margin-bottom:12px}.dua .ref{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.2px}.dua .nt{font-weight:600;margin:0 0 6px}
+.oz{text-align:center;display:block;text-decoration:none;color:inherit}.oz .az{font:700 44px Amiri,serif;color:var(--g);line-height:1.4}.oz b{font-size:19px;display:block}.oz span{color:var(--mut);font-size:14px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
+
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 18px;border-radius:12px;z-index:99;font-size:14px}
+.ay.pl{background:color-mix(in srgb,var(--gold) 20%,transparent);border-radius:12px}mark{background:var(--gold);color:#2a2100;border-radius:3px;padding:0 2px}
+.pr{display:flex;justify-content:space-between;padding:11px 6px;border-bottom:1px solid var(--line);font-size:17px}.pr:last-child{border:0}.pr.now{background:color-mix(in srgb,var(--g) 14%,transparent);border-radius:10px;color:var(--g)}
+.bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--g)}
+.qdial{position:relative;width:200px;height:200px;border-radius:50%;border:3px solid var(--g);margin:10px auto}.qdial .qn{position:absolute;top:4px;left:50%;transform:translateX(-50%);font-weight:700;color:var(--mut)}
+.qarrow{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;font-size:60px;color:var(--gold);line-height:1;padding-top:22px;transition:transform .2s}
+select,input[type=number]{font:inherit;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.ctr{padding:10px 0;border-bottom:1px solid var(--line)}.ctr:last-child{border:0}.ctr.done .bar i{background:var(--gold)}.ctt{border-collapse:collapse;font-size:13px;width:100%}.ctt th,.ctt td{border:1px solid var(--line);padding:4px 6px;text-align:center}.ctt td:first-child{text-align:left;white-space:nowrap}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 110px}
+i.th{color:#9e9e9e}i.tl,i.ts{color:#9e9e9e}i.tn{color:#2e7d32}i.tp{color:#00897b}i.to{color:#ef6c00}i.tm{color:#c62828}i.tq{color:#1565c0}i.tf{color:#8e24aa}i.tc{color:#6a1b9a}i.ta{color:#d81b60}i.tu{color:#ad1457}i.tw{color:#ec407a}i.td{color:#5d4037}i.tb{color:#795548}i.ti{color:#00838f}i.tg{color:#ff6f00}
+.ar i{font-style:normal}.tjl{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:4px 10px;margin:8px 0;font-size:14px}.tjl i{font-style:normal;font-size:18px}
+.wbw{display:flex;flex-wrap:wrap;direction:rtl;gap:6px;margin:6px 0}.wd{border:1px solid var(--line);border-radius:10px;padding:6px 8px;text-align:center;min-width:64px;direction:ltr;background:var(--card)}.wa{font:400 22px/1.9 Amiri,serif;direction:rtl}.wt{font-size:12px;color:var(--gold);font-weight:600}.wm{font-size:12px;color:var(--mut)}
+.nm{cursor:pointer;position:relative}.nm .mn{display:block;text-align:center;margin-top:6px;color:var(--mut)}.grid.hm .nm .mn{display:none}.grid.hm .nm.sh .mn{display:block}
+a[href="#/dinle"],a[href="#/yazilar"],a[href="#/cetele"],a[href="#/men"]{display:none!important}
+</style></head><body>
+<header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>Күндөлүк</a><span class="sp"></span><a class="tm" href="/" style="text-decoration:none;display:grid;place-items:center" title="Башкы бет">⌂</a><a class="tm" href="/islam/" style="text-decoration:none;display:grid;place-items:center;font-size:13px" title="Ислам">Ислам</a><button class="tm" id="tm">🌙</button></div></header>
+<main id="app"></main>
+<script>
+"use strict";
+var lang='kg',L={kg:{copied:'✓ Көчүрүлдү',today:'Бүгүн'}};function tx(k){return L.kg[k]}
+var app;
+var $=function(s,r){return(r||document).querySelector(s)};
+function h(t,a,c){var e=document.createElement(t);if(a)for(var k in a){if(k==='class')e.className=a[k];else if(k==='html')e.innerHTML=a[k];else if(k.slice(0,2)==='on')e.addEventListener(k.slice(2),a[k]);else e.setAttribute(k,a[k])}
+ [].concat(c==null?[]:c).forEach(function(x){e.append(x&&x.nodeType?x:document.createTextNode(x))});return e}
+function ls(k,v){try{if(v===undefined){var r=localStorage.getItem(k);return r==null?null:JSON.parse(r)}localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function today(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function toast(m){var t=h('div',{class:'toast'},m);document.body.append(t);setTimeout(function(){t.remove()},2600)}
+function copyText(btn,t){var done=function(){var o=btn.textContent;btn.textContent=tx('copied');setTimeout(function(){btn.textContent=o},1500)};
+ if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,function(){});else{var ta=h('textarea');ta.value=t;document.body.append(ta);ta.select();try{document.execCommand('copy');done()}catch(e){}ta.remove()}}
+Object.assign(L.kg,{t9:'Ибадат эсеби',d9:'Күндүк/жумалык ибадат эсеби, Google таблицага автоматтык жазылат',
+ ct_h:'Ибадат эсеби',ct_wk:'Жума',ct_goal:'Максат',ct_day:'Күнүнө',ct_save:'💾 Сактоо жана таблицага жөнөтүү',ct_nolink:'⚠️ Google таблица менен байланыш азырынча киргизилген жок. Төмөндөгү «Google таблица менен байланыш» бөлүмүнө веб даректи жана жашыруун ачкычты киргизиңиз; болбосо маалымат ушул түзмөктө гана калат.',ct_pre:'📥 Сайттан алуу',ct_prn:'Бүгүнкү окуу: {a} аят · угуу: {m} мүн → KK жана Dinleme талааларына жазылды.',
+ ct_sent:'Таблицага жазылды ✓',ct_pend:'Сакталды (таблица менен байланыш жок/ката). Кийин кайра жөнөтүлөт.',ct_tot:'Упай',ct_sum:'Жумалык жыйынтык',ct_chk:'Аткарылды (жума ичинде)',
+ ct_set:'⚙️ Google таблица менен байланыш',ct_url:'Apps Script веб дареги',ct_key:'Жашыруун ачкыч',ct_sheet:'Барак аты (бош болсо шилтемедеги барак)',ct_person:'Таблицадагы блогуңуз',ct_ratio:'Канча аят = 1 KK',ct_test:'Байланышты текшерүү',ct_ok:'Байланыш бар ✓',ct_bad:'Байланыш түзүлгөн жок же ачкыч туура эмес',ct_copy:'📋 Скрипт кодун көчүрүү',
+ ct_mm:'Таблицадагы дата дал келген жок ({d}). Башка жуманын барагы болушу мүмкүн; барак атын жөндөөдөн өзгөртүңүз.',ct_err:{'bad-key':'Жашыруун ачкыч туура эмес','no-sheet':'Барак табылган жок','no-person':'Таблицада бул ат табылган жок','no-day':'Күндүн сабы табылган жок'},
+ ct_help:['1) script.new ачыңыз (өз Google аккаунтуңуз менен), кодду коюңуз.','2) KEY сабына өз жашыруун сөзүңүздү жазыңыз.','3) Deploy → New deployment → Web app: «Execute as: Me», «Who has access: Anyone». Уруксат бериңиз.','4) Чыккан веб даректи жана ошол эле жашыруун сөздү төмөнкүгө киргизиңиз, «Байланышты текшерүү» басыңыз.'],
+ nav:['Башкы бет','📚 Китептер','🎧 Угуу','✍️ Макалалар','🤲 Дубалар','⭐ Атайын','🕌 Намаз','📝 Эсеп','👤 Менин','📿 Зикирматик']});
+app=document.getElementById('app');
+var th=ls('th')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+function setTh(t){th=t;document.documentElement.dataset.theme=t;document.getElementById('tm').textContent=t==='dark'?'☀️':'🌙';ls('th',t)}setTh(th);document.getElementById('tm').onclick=function(){setTh(th==='dark'?'light':'dark')};
+var CT_NUM=[['KK',3],['Ris',3],['Pır',3],['Okuma kitap',10],['Cevşen',25],['Tesbihat',5],['Dinleme',15],['Teheccüt',1],['Duha',1],['Evvabin',1],['Hacet',1],['Kaza',5],['Oruç (Week)',2,1],['Meal',3]],
+ CT_CHK=['Teheccüd','Fetih','Yasin','Mülk','Kehf','Enbiya 81-94','Tevhidname'];
+var CTL={'KK':'КК','Ris':'Рисале','Pır':'Пыр','Okuma kitap':'Китеп окуу','Cevşen':'Жавшан','Tesbihat':'Тасбих','Dinleme':'Угуу','Teheccüt':'Тажажжуд','Duha':'Духа','Evvabin':'Аввабин','Hacet':'Ажат','Kaza':'Казаа','Oruç (Week)':'Ороо (жумасына)','Meal':'Котормо','Teheccüd':'Тажажжуд','Fetih':'Фатх','Yasin':'Ясин','Mülk':'Мулк','Kehf':'Кахф','Enbiya 81-94':'Анбия 81-94','Tevhidname':'Тавхиднаама'};function ctl(k){return CTL[k]||k}
+function ymd(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function pd(s){var p=s.split('-');return new Date(+p[0],p[1]-1,+p[2])}
+function wd(d){return (d.getDay()+6)%7+1}
+function dmS(d){return d.getDate()+'.'+(d.getMonth()+1)}
+function ctSend(date,store){var S=ls('ctset')||{};if(!S.url)return Promise.resolve({ok:false,error:'no-url'});var D=store.days[date]||{v:{},c:{}},d=pd(date),pay={key:S.key,sheet:S.sheet||'',person:S.person||'Name 3',weekday:wd(d),dm:dmS(d),values:D.v,checks:{}};
+ CT_CHK.forEach(function(k){pay.checks[k]=!!D.c[k]});
+ return fetch(S.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(pay)}).then(function(r){return r.json()}).catch(function(){return{ok:false,error:'net'}})}
+var autoSave=function(){};
+function cetele(){app.innerHTML='';var sel=ls('ctsel')||today(),ST=ls('ct')||{days:{}},GO=ls('ctgoal')||{};ls('ctsel',null);
+ var d=pd(sel),mon=new Date(d);mon.setDate(d.getDate()-(wd(d)-1));var wk=[];for(var i=0;i<7;i++){var x=new Date(mon);x.setDate(mon.getDate()+i);wk.push(ymd(x))}
+ var D=ST.days[sel]=ST.days[sel]||{v:{},c:{}};
+ app.append(h('h1',null,tx('ct_h')));
+ if(!(ls('ctset')||{}).url)app.append(h('div',{class:'card',style:'border-color:#c0392b;margin-bottom:10px'},tx('ct_nolink')));
+ app.append(h('div',{class:'row',style:'justify-content:space-between;margin-bottom:8px'},[h('button',{class:'btn o',onclick:function(){var x=pd(sel);x.setDate(x.getDate()-1);ls('ctsel',ymd(x));cetele()}},'‹'),h('b',null,dmS(d)+' · '+['Дш','Шш','Шр','Бш','Жм','Иш','Жк'][wd(d)-1]+(sel===today()?' · '+tx('today'):'')),h('button',{class:'btn o',onclick:function(){var x=pd(sel);x.setDate(x.getDate()+1);ls('ctsel',ymd(x));cetele()}},'›')]));
+ var inputs={},card=h('div',{class:'card'});app.append(card);
+ function wsum(k){var s=0;wk.forEach(function(dd){var v=(ST.days[dd]||{v:{}}).v[k];s+=+v||0});return s}
+ function tgt(r){return GO[r[0]]!=null?GO[r[0]]:(r[2]?r[1]:r[1]*7)}
+ function refresh(){var tot=0;CT_NUM.forEach(function(r){tot+=+D.v[r[0]]||0});totEl.textContent=tx('ct_tot')+': '+tot;
+  CT_NUM.forEach(function(r){var w=wsum(r[0]),t=tgt(r),el=bars[r[0]];el.firstChild.style.width=Math.min(100,w/t*100)+'%';el.nextSibling.textContent=w+' / '+t;el.parentNode.classList.toggle('done',w>=t)})}
+ var bars={},totEl=h('b',{style:'color:var(--g)'});
+ CT_NUM.forEach(function(r){var k=r[0],inp=h('input',{type:'number',min:0,step:'any',value:D.v[k]!=null?D.v[k]:'',style:'width:78px;text-align:center'});inputs[k]=inp;
+  inp.oninput=function(){D.v[k]=inp.value===''?null:+inp.value;refresh();autoSave()};
+  function bump(n){inp.value=Math.max(0,(+inp.value||0)+n);inp.oninput()}
+  var bar=h('div',{class:'bar'},h('i'));bars[k]=bar;
+  card.append(h('div',{class:'ctr'},[h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},[h('div',null,[h('b',null,ctl(k)),h('small',{style:'color:var(--mut);display:block'},(r[2]?tx('ct_wk'):tx('ct_day'))+': '+r[1])]),h('div',{class:'row',style:'flex-wrap:nowrap;gap:4px'},[h('button',{class:'chip',onclick:function(){bump(-1)}},'−'),inp,h('button',{class:'chip',onclick:function(){bump(1)}},'+')])]),bar,h('small',{style:'color:var(--mut)'},'')]))});
+ var ck=h('div',{class:'card'});app.append(h('h2',null,tx('ct_chk')),ck);
+ var links={Fetih:48,Yasin:36,'Mülk':67};
+ CT_CHK.forEach(function(k){var cb=h('input',{type:'checkbox',style:'width:20px;height:20px;margin-right:10px'});cb.checked=!!D.c[k];cb.onchange=function(){D.c[k]=cb.checked;autoSave()};ck.append(h('label',{style:'display:flex;align-items:center;padding:7px 0;cursor:pointer'},[cb,h('span',{style:'flex:1'},ctl(k)),links[k]?h('a',{href:'/islam/#/kuran/'+links[k],class:'chip',style:'text-decoration:none'},'📖'):''])) });
+ var msg=h('p',{class:'lead',style:'margin:8px 0'});
+ var pre=h('button',{class:'btn o',onclick:function(){var a=Object.keys(ls('rd')||{}).length,ra=+((ls('ctset')||{}).ratio)||10.3,td=(ls('rdd')||{})[sel]||0,m=Math.round(((ls('lis')||{})[sel]||0)/60);
+   var kk=Math.round(td/ra*10)/10;inputs.KK.value=kk;D.v.KK=kk;inputs.Dinleme.value=m;D.v.Dinleme=m;refresh();autoSave();var _m=tx('ct_prn').replace('{a}',td).replace('{m}',m);setTimeout(function(){msg.textContent=_m},50)}},tx('ct_pre'));
+ var doSave=function(){ST.days[sel]=D;ls('ct',ST);msg.textContent='…';ctSend(sel,ST).then(function(r){if(r.ok){D.sent=Date.now();ls('ct',ST);msg.textContent=tx('ct_sent')+' ('+r.sheet+', '+r.rowDate+')'}else if(r.error==='date-mismatch')msg.textContent=tx('ct_mm').replace('{d}',r.rowDate+' ≠ '+dmS(d));else if(r.error==='no-url'||r.error==='net')msg.textContent=tx('ct_pend');else msg.textContent=(tx('ct_err')[r.error]||r.error)})};
+ var atm=0;autoSave=function(){clearTimeout(atm);msg.textContent='⏳';atm=setTimeout(doSave,1200)};
+ var sv=h('button',{class:'btn',onclick:doSave},tx('ct_save'));
+ app.append(h('div',{class:'ctl',style:'margin-top:12px'},[totEl]),h('div',{class:'row'},[pre,sv]),msg);
+ /* haftalık özet */
+ var tb=h('table',{class:'ctt'}),hd=h('tr',null,[h('th',null,'')]);['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'].forEach(function(n){hd.append(h('th',null,n))});hd.append(h('th',null,'Σ'));tb.append(hd);
+ CT_NUM.forEach(function(r){var tr=h('tr',null,[h('td',null,ctl(r[0]))]);wk.forEach(function(dd){tr.append(h('td',{style:dd===sel?'background:color-mix(in srgb,var(--gold) 25%,transparent)':''},String(((ST.days[dd]||{v:{}}).v[r[0]])||'')))});tr.append(h('td',null,h('b',null,String(wsum(r[0])))));tb.append(tr)});
+ app.append(h('h2',null,tx('ct_sum')+' ('+dmS(pd(wk[0]))+'–'+dmS(pd(wk[6]))+')'),h('div',{style:'overflow-x:auto'},tb));refresh();
+ /* ayarlar */
+ var S=ls('ctset')||{},f=function(k,l,t,ph){var i=h('input',{type:t||'text',value:S[k]||'',placeholder:ph||'',style:'width:100%'});i.oninput=function(){S[k]=i.value.trim();ls('ctset',S)};return h('label',{style:'display:block;margin:8px 0'},[h('small',{style:'color:var(--mut)'},l),i])};
+ var tr2=h('p',null),set=h('details',{class:'card',style:'margin-top:16px'},[h('summary',{style:'cursor:pointer;font-weight:700'},tx('ct_set')),h('ol',{style:'color:var(--mut);padding-left:18px'},tx('ct_help').map(function(s){return h('li',null,s.replace(/^\d\) /,''))})),
+  h('button',{class:'chip',onclick:function(){var b=this;fetch('cetele.gs').then(function(r){return r.text()}).then(function(t){copyText(b,t)})}},tx('ct_copy')),
+  f('url',tx('ct_url'),'url','https://script.google.com/macros/s/…/exec'),f('key',tx('ct_key'),'password'),f('sheet',tx('ct_sheet')),f('person',tx('ct_person'),'text','Name 3'),f('ratio',tx('ct_ratio'),'number','10.3'),
+  h('button',{class:'btn o',onclick:function(){var s=ls('ctset')||{};tr2.textContent='…';fetch(s.url+(s.url.indexOf('?')>=0?'&':'?')+'key='+encodeURIComponent(s.key||'')).then(function(r){return r.json()}).then(function(j){tr2.textContent=j.ok&&j.keyOk?tx('ct_ok'):tx('ct_bad')}).catch(function(){tr2.textContent=tx('ct_bad')})}},tx('ct_test')),tr2]);
+ app.append(set)}
+var QC={};function qSura(n){var k=('00'+n).slice(-3);return QC[n]?Promise.resolve(QC[n]):fetch('/islam/data/quran/'+k+'.json').then(function(r){return r.json()}).then(function(d){return QC[n]=d})}
+/* Күндөлүк бөлүмү: Куран сүрөлөрү, чегеле, тасбихат, зикирлер, эртең-кечки дубалар, пайгамбарлардын дубалары, ашара-и мубашшара */
+var NOTE='Бул бөлүмдөгү кыргызча котормолор жардамчы мүнөздө. Хадистердин булактары көрсөтүлгөн; китептеги тексттер менен салыштырып, молдо же илимпоз менен текшерүүнү сунуштайбыз.';
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function today(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function getC(id){try{var o=JSON.parse(localStorage.getItem('gk_'+id)||'null');if(o&&o.d===today())return o.n}catch(e){}return 0}
+function setC(id,n){try{localStorage.setItem('gk_'+id,JSON.stringify({d:today(),n:n}))}catch(e){}}
+function counter(id,target,hadithNum){
+  var n=getC(id),box=el('div','gk-ctr');
+  var info=el('div','gk-ci'),bar=el('div','gk-bar'),fill=el('i');bar.append(fill);
+  var btn=el('button','gk-btn','0'),rst=el('button','chip','↺ Нөлгө'),lab=el('span','gk-lab');
+  function paint(){btn.textContent=n;fill.style.width=Math.min(100,n/target*100)+'%';
+    lab.textContent=(hadithNum?'Хадис боюнча: ':'Сунуш: ')+target+' жолу · '+n+' / '+target;box.classList.toggle('done',n>=target)}
+  btn.onclick=function(){n++;setC(id,n);paint();if(n===target&&navigator.vibrate)navigator.vibrate(120)};
+  rst.onclick=function(){n=0;setC(id,0);paint()};
+  info.append(lab,bar);box.append(btn,info,rst);paint();return box}
+function card(o){
+  var c=el('div','card dua gk-card');c.style.marginBottom='12px';
+  if(o.title)c.append(el('h3','gk-t',o.title));
+  if(o.src)c.append(el('div','ref','Булак: '+o.src));
+  if(o.ar){var a=el('p','ar sm',o.ar);c.append(a)}
+  if(o.tr)c.append(el('p','gk-tr',o.tr));
+  if(o.kg)c.append(el('p','vtr',o.kg));
+  if(o.virtue){var v=el('div','gk-virtue');v.append(el('b',null,'Пазилети: '),document.createTextNode(o.virtue));c.append(v)}
+  if(o.n)c.append(counter(o.id,o.n,o.hn));
+  if(o.ar){var cp=el('button','chip','📋 Көчүрүү');cp.onclick=function(){copyText(cp,o.ar+'\n'+(o.kg||''))};c.append(cp)}
+  return c}
+function page(title,lead){app.innerHTML='';app.append(el('h1',null,title));if(lead)app.append(el('p','lead',lead));
+  var back=el('a','btn o','‹ Күндөлүк');back.href='#/';back.style.marginBottom='12px';back.style.display='inline-block';app.append(back);
+  app.append(el('div','card gk-note',NOTE))}
+
+/* ---------- Күндөлүк хаби ---------- */
+var TILES=[
+ ['📖','Куран','Ясин, Вакиа, Мулк жана Фатх сүрөлөрү','#/gkuran'],
+ ['📝','Ибадат эсеби','Күндөлүк жана жумалык эсеп','#/gcetele'],
+ ['📿','Тасбихат','Намаздан кийинки тасбихтер жана сандары','#/gtesbihat'],
+ ['🌿','Зикирлер','Арабча, кыргызча, хадиси жана пазилети; ар бирине зикирматик','#/gzikir'],
+ ['🌅','Эртең жана кечки дубалар','Хадистерден тандалган дубалар','#/gdua'],
+ ['🕋','Пайгамбарлардын дубалары','Курандагы пайгамбарлардын дубалары','#/gnabi'],
+ ['⭐','Ашара-и мубашшара','Бейишке сүйүнчү кабар берилген он сахабы','#/gasere']];
+function gunluk(){app.innerHTML='';app.append(el('h1',null,'Күндөлүк'),el('p','lead','Ар күнү кылууга ылайыктуу ибадаттар: Куран, зикир, дуба жана тасбихат.'));
+  var g=el('div','grid');TILES.forEach(function(x){var a=el('a','card tile');a.href=x[3];a.style.textDecoration='none';a.style.color='inherit';
+    a.append(el('div','ti',x[0]),el('h3',null,x[1]),el('p',null,x[2]));g.append(a)});app.append(g)}
+
+/* ---------- Куран ---------- */
+function gkuran(){page('Куран','Күндөлүк окулуучу сүрөлөр. Басып, Куранды окуу бетин ачыңыз (Ислам сайтына өтөт).');
+  var S=[[36,'Ясин','يس','83 аят'],[56,'Вакиа','الواقعة','96 аят'],[67,'Мулк','الملك','30 аят. Тирмизи (2891): 30 аяттуу бир сүрө өзүнө окуган адамга шапаат кылып, ал кечирилген; бул — Мулк сүрөсү деп түшүндүрүлгөн'],[48,'Фатх','الفتح','29 аят. Бухари (4177): Пайгамбарыбыз ﷺ «Бүгүн кечинде мага бир сүрө түштү, ал мага дүйнөдөн жана андагылардын баарынан сүйүктүү» деп, Фатх сүрөсүн окуган']];
+  S.forEach(function(s){var c=el('a','card tile');c.x+s[0];c.style.cssText='display:block;text-decoration:none;color:inherit;margin-bottom:12px';
+    c.append(el('div','ar sm',s[2]),el('h3',null,s[1]+' сүрөсү'),el('p',null,s[3]));app.append(c)})}
+
+/* ---------- Чегеле ---------- */
+function gcetele(){cetele();var b=el('a','btn o','‹ Күндөлүк');b.href='#/';b.style.cssText='display:inline-block;margin-bottom:12px';app.insertBefore(b,app.firstChild)}
+
+/* ---------- Тасбихат ---------- */
+function gtesbihat(){page('Тасбихат','Парз намаздан кийин окулуучу зикирлер. Ар бир зикирдин жанында санагыч бар.');
+  var L=[
+  {id:'tb1',ar:'أَسْتَغْفِرُ اللَّهَ',tr:'Астагфируллах',kg:'Аллахтан кечирим сурайм.',n:3,hn:1,src:'Муслим (591)',virtue:'Пайгамбарыбыз ﷺ намаздан соң үч жолу «Астагфируллах» деп, андан кийин төмөнкү дубаны окучу.'},
+  {id:'tb2',ar:'اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ',tr:'Аллахумма антас-саламу ва минкас-салам, табаракта йа зал-жалали вал-икрам',kg:'Оо, Аллахым! Сен Саламсың, тынчтык Сенден. Улуу жана сыйлуу Зат Сен, береке Сенде.',n:1,hn:1,src:'Муслим (591)'},
+  {id:'tb3',ar:'سُبْحَانَ اللَّهِ',tr:'Субханаллах',kg:'Аллах ар кандай кемчиликтен ыйык.',n:33,hn:1,src:'Бухари (843), Муслим (595-596)',virtue:'Ар намаздан кийин 33 жолу Субханаллах, 33 жолу Алхамдулиллах, 33–34 жолу Аллаху акбар айтса, күнөөлөрү деңиздин көбүгүндөй болсо да кечирилет (Муслим 597).'},
+  {id:'tb4',ar:'الْحَمْدُ لِلَّهِ',tr:'Алхамдулиллах',kg:'Бардык мактоолор Аллахка.',n:33,hn:1,src:'Бухари (843), Муслим (595-596)'},
+  {id:'tb5',ar:'اللَّهُ أَكْبَرُ',tr:'Аллаху акбар',kg:'Аллах эң улуу.',n:34,hn:1,src:'Муслим (596)',virtue:'Саны 33+33+34 болуп, жыйынтыгында жүзгө толот.'},
+  {id:'tb6',ar:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',tr:'Ла илаха иллаллаху вахдаху ла шарика лах, лахул-мулку ва лахул-хамду ва хува ала кулли шайин кадир',kg:'Аллахтан башка Кудай жок; Ал жалгыз, шериги жок. Бийлик Анын, мактоо Анын, жана Ал бардык нерсеге күчү жеткен.',n:1,hn:1,src:'Муслим (597)',virtue:'Жүзгө толтуруу үчүн ушуну окуган адамдын күнөөлөрү деңиздин көбүгүндөй болсо да кечирилет.'},
+  {id:'tb7',ar:'اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ',tr:'Аллахумма аин-ни ала зикрика ва шукрика ва хусни ибадатик',kg:'Оо, Аллахым! Мени Сени эскерүүгө, Сага шүгүр кылууга жана Сага жакшы ибадат кылууга жардам бер.',n:1,hn:1,src:'Абу Дауд (1522), Насаи (1303)',virtue:'Пайгамбарыбыз ﷺ Муаз ибн Жабалга ар намаздан кийин муну окууну өсият кылган.'}];
+  L.forEach(function(x){app.append(card(x))});
+  var k=card({title:'Аятул-Курси',src:'Насаи (Амалул-явм валь-лайла, 100)',kg:'Ар намаздан кийин Аятул-Курси (Бакара сүрөсү, 255-аят) окулат. Хадис боюнча аны окуган адам менен бейиштин ортосунда өлүмдөн башка тоскоолдук калбайт.',n:1,id:'tb8',hn:1});
+  var a=el('a','btn g','📖 Аятул-Курсини ачуу (Бакара 255)');a.href='/islam/#/kuran/2/255';a.style.cssText='display:inline-block;margin:6px 0';k.append(a);app.append(k);
+  app.append(card({title:'Ихлас, Фалак, Нас',src:'Абу Дауд (1523), Тирмизи (2903)',kg:'Ар намаздан кийин Кул Хуваллаху ахад, Кул аузу би раббил-фалак жана Кул аузу би раббин-нас сүрөлөрүн окуу өсият кылынган.',n:1,id:'tb9',hn:1}))}
+
+/* ---------- Зикирлер ---------- */
+var ZIK=[
+ {id:'z1',title:'Эки жеңил сөз',ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ',tr:'Субханаллахи ва бихамдихи, субханаллахил-азим',kg:'Аллах ар кандай кемчиликтен ыйык, Ага мактоолор болсун; улуу Аллах ыйык.',n:33,hn:0,src:'Бухари (6406), Муслим (2694)',virtue:'Пайгамбарыбыз ﷺ: «Тилге жеңил, таразага оор, Рахманга сүйүктүү эки сөз бар: ушул сөздөр». Хадисте белгилүү сан жок, сунуш: 33 жолу.'},
+ {id:'z2',title:'Субханаллахи ва бихамдихи — күнүнө жүз жолу',ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',tr:'Субханаллахи ва бихамдихи',kg:'Аллах ыйык, Ага мактоолор болсун.',n:100,hn:1,src:'Бухари (6405), Муслим (2691)',virtue:'Күнүнө жүз жолу айткан адамдын күнөөлөрү деңиздин көбүгүндөй болсо да кечирилет.'},
+ {id:'z3',title:'Лаа хавла ва лаа куввата илла биллах',ar:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',tr:'Ла хавла ва ла куввата илла биллах',kg:'Аллахтын жардамысыз өзгөрүүгө да, күчкө да ээ эмеспиз.',n:33,hn:0,src:'Бухари (6384), Муслим (2704)',virtue:'Пайгамбарыбыз ﷺ: «Бул — бейиштин кенчтеринен бир кенч». Сан белгиленген эмес, сунуш: 33.'},
+ {id:'z4',title:'Төртүнчү зикир: Ла илаха иллаллах (жүз жолу)',ar:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',tr:'Ла илаха иллаллаху вахдаху ла шарика лах, лахул-мулку ва лахул-хамду ва хува ала кулли шайин кадир',kg:'Аллахтан башка Кудай жок; Ал жалгыз, шериги жок. Бийлик жана мактоо Анын, Ал бардык нерсеге күчү жеткен.',n:100,hn:1,src:'Бухари (3293), Муслим (2691)',virtue:'Күнүнө жүз жолу окуган адамга он кул азат кылгандай сооп жазылат, жүз жакшылык жазылып, жүз күнөөсү өчүрүлөт жана ошол күнү кечке чейин шайтандан коргоо болот.'},
+ {id:'z5',title:'Ла илаха иллаллах — он жолу',ar:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',tr:'Ла илаха иллаллаху вахдаху ла шарика лах…',kg:'(Жогорудагы зикирдин өзү.)',n:10,hn:1,src:'Бухари (6404), Муслим (2693)',virtue:'Он жолу окуган адам Исмаилдын урпагынан төрт кулду азат кылгандай болот.'},
+ {id:'z6',title:'Эң артыкча зикир',ar:'لَا إِلَهَ إِلَّا اللَّهُ',tr:'Ла илаха иллаллах',kg:'Аллахтан башка Кудай жок.',n:100,hn:0,src:'Тирмизи (3383)',virtue:'Пайгамбарыбыз ﷺ: «Эң артыкча зикир — Ла илаха иллаллах». Сан белгиленген эмес, сунуш: 100.'},
+ {id:'z7',title:'Астагфируллах (истигфар)',ar:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ',tr:'Астагфируллаха ва атубу илайх',kg:'Аллахтан кечирим сурайм жана Ага тообо кылам.',n:100,hn:1,src:'Муслим (2702)',virtue:'Пайгамбарыбыз ﷺ: «Оо, адамдар! Аллахка тообо кылгыла, мен күнүнө жүз жолу Ага тообо кылам».'},
+ {id:'z8',title:'Рабби игфир ли ва туб алайя',ar:'رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ',tr:'Раббиғ-фир ли ва туб алайя иннака антат-таввабур-рахим',kg:'Раббим! Мени кечир жана тообомду кабыл кыл. Сен тообону кабыл кылуучу, Мээримдүүсүң.',n:100,hn:1,src:'Абу Дауд (1516), Тирмизи (3434)',virtue:'Абдуллах ибн Умар: «Биз Пайгамбарыбыздын ﷺ бир отурушта муну жүз жолу айтканын санап жүрдүк».'},
+ {id:'z9',title:'Юнус пайгамбардын зикири',ar:'لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ',tr:'Ла илаха илла анта субханака инни кунту миназ-залимин',kg:'Сенден башка Кудай жок, Сен ыйыксың, мен залимдерден болуп калдым.',n:33,hn:0,src:'Тирмизи (3505), Анбия 87',virtue:'Пайгамбарыбыз ﷺ: «Зуннундун (Юнус а.с.) балыктын курсагында айткан дубасы: мусулман киши аны менен бир нерсеге дуба кылса, Аллах албетте кабыл кылат». Сан белгиленген эмес, сунуш: 33.'},
+ {id:'z10',title:'Алхамдулиллах',ar:'الْحَمْدُ لِلَّهِ',tr:'Алхамдулиллах',kg:'Бардык мактоолор Аллахка.',n:33,hn:0,src:'Муслим (223)',virtue:'Пайгамбарыбыз ﷺ: «Алхамдулиллах таразаны толтурат». Сан белгиленген эмес, сунуш: 33.'},
+ {id:'z11',title:'Субханаллах — жүз жолу',ar:'سُبْحَانَ اللَّهِ',tr:'Субханаллах',kg:'Аллах ар кандай кемчиликтен ыйык.',n:100,hn:1,src:'Муслим (2698)',virtue:'Күнүнө жүз жолу Субханаллах айткан адамга миң жакшылык жазылат же миң күнөөсү өчүрүлөт.'},
+ {id:'z12',title:'Жувайрия хадисиндеги зикир',ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ',tr:'Субханаллахи ва бихамдихи адада халкихи ва рида нафсихи ва зината аршихи ва мидада калиматихи',kg:'Аллахты Анын жаратуусунун санындай, Ал ыраазы боло турган даражада, Аршынын салмагындай жана сөздөрүнүн сыясындай ыйык деп мактайм.',n:3,hn:1,src:'Муслим (2726)',virtue:'Пайгамбарыбыз ﷺ Жувайрия (р.а.) ага эртең намаздан кийин айткан сөздөрдүн ордуна ушул сөздөр, үч жолу, алардын баарынан салмактуу экенин билдирген.'},
+ {id:'z13',title:'Хасбуналлаху ва ни’мал-вакил',ar:'حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ',tr:'Хасбуналлаху ва ни’мал-вакил',kg:'Бизге Аллах жетиштүү, Ал эң жакшы коргоочу.',n:33,hn:0,src:'Бухари (4563), Али Имран 173',virtue:'Ибрахим пайгамбарды отко салганда жана сахабалар кыйынчылыкта турганда ушуну айткан. Сан белгиленген эмес, сунуш: 33.'},
+ {id:'z14',title:'Салават (Ибрахим салавады)',ar:'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ',tr:'Аллахумма солли ала Мухаммадин ва ала али Мухаммад, кама соллайта ала Ибрахима ва ала али Ибрахима, иннака хамидун мажид. Аллахумма барик ала Мухаммадин ва ала али Мухаммад, кама барокта ала Ибрахима ва ала али Ибрахима, иннака хамидун мажид',kg:'Оо, Аллахым! Ибрахимге жана анын үй-бүлөсүнө салават айткандай, Мухаммадга жана анын үй-бүлөсүнө да салават айт. Албетте, Сен мактоого татыктуу, улуусуң. Оо, Аллахым! Ибрахимге жана анын үй-бүлөсүнө береке бергендей, Мухаммадга жана анын үй-бүлөсүнө да береке бер. Албетте, Сен мактоого татыктуу, улуусуң.',n:10,hn:0,src:'Бухари (3370), Муслим (408)',virtue:'Пайгамбарыбыз ﷺ: «Ким мага бир жолу салават айтса, Аллах ага он жолу салават (рахмат) жиберет» (Муслим 408). Сан белгиленген эмес, сунуш: 10.'}
+];
+function gzikir(){page('Зикирлер','Ар бир зикирдин арабчасы, окулушу, мааниси, булагы жана пазилети. Ар бирине өзүнчө зикирматик бар; эсеп күн сайын нөлдөн башталат.');
+  ZIK.forEach(function(x){app.append(card(x))});
+  var a=el('a','btn g','📿 Жалпы зикирматик (Ислам сайты)');a.href='/islam/#/zikirmatik';a.style.cssText='display:inline-block;margin-top:6px';app.append(a)}
+
+/* ---------- Эртең-кечки дубалар ---------- */
+var DUA=[
+ ['Эртең жана кечинде',[
+  {id:'d1',title:'Ихлас, Фалак, Нас — үч жолудан',ar:'قُلْ هُوَ اللَّهُ أَحَدٌ ‏— ‏قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ‏— ‏قُلْ أَعُوذُ بِرَبِّ النَّاسِ',kg:'Ихлас, Фалак жана Нас сүрөлөрү: эртең менен жана кечинде ар бирин үч жолу окуу.',n:3,hn:1,src:'Абу Дауд (5082), Тирмизи (3575)',virtue:'Эртең менен жана кечинде үч жолу окуган адамга бардык нерседен жетиштүү болот.'},
+  {id:'d2',title:'Аятул-Курси',kg:'Эртең менен жана кечинде Аятул-Курсини окуу (Бакара, 255).',n:1,hn:1,src:'Табарани, Хаким',virtue:'Эртең менен окуган адам кечке чейин, кечинде окуган адам эртеңке чейин жиндерден коргоодо болот деп риваят кылынган. Бул хадистин деңгээли жөнүндө молдодон сураңыз.'},
+  {id:'d3',title:'Эртең менен (Муслим 2723)',ar:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ',kg:'Эртеңге чыктык, бийлик да Аллахка эртеңге чыкты. Мактоо Аллахка. Аллахтан башка Кудай жок, Ал жалгыз, шериги жок. Бийлик Анын, мактоо Анын, Ал бардык нерсеге күчү жеткен. Раббим! Мен Сенден бул күндүн жакшылыгын жана андан кийинкинин жакшылыгын сурайм, бул күндүн жамандыгынан жана андан кийинкинин жамандыгынан Сага сыйынам. Раббим! Жалкоолуктан жана карылыктын жаман кесепетинен Сага сыйынам. Раббим! От азабынан жана кабыр азабынан Сага сыйынам.',n:1,hn:1,src:'Муслим (2723)'},
+  {id:'d4',title:'Кечинде (Муслим 2723)',ar:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ',kg:'Кечке кирдик, бийлик да Аллахка кечке кирди… (жогорудагы дуба сыяктуу; «бул күн» ордуна «бул түн» айтылат).',n:1,hn:1,src:'Муслим (2723)'},
+  {id:'d5',title:'Сайидул-истигфар',ar:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ',kg:'Оо, Аллахым! Сен менин Раббимсиң, Сенден башка Кудай жок. Мени Сен жараттың, мен Сенин кулуңмун, күчүм жеткенче Сага берген убадама бекем болом. Кылган жамандыгымдан Сага сыйынам. Сенин берген нээматыңды таанып, күнөөмдү моюндайм. Мени кечир, анткени Сенден башка күнөөнү кечирүүчү жок.',n:1,hn:1,src:'Бухари (6306)',virtue:'Пайгамбарыбыз ﷺ: «Ким аны күндүз ишенип окуп, ошол күнү кечке чейин өлсө, бейишке кирет; ким аны түндө ишенип окуп, эртеңке чейин өлсө, бейишке кирет».'},
+  {id:'d6',title:'Бисмиллаһиллази ла йадурру…',ar:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ',kg:'Аты менен жерде да, асманда да эч нерсе зыян бере албаган Аллахтын атынан баштайм. Ал Угуучу, Билүүчү.',n:3,hn:1,src:'Абу Дауд (5088), Тирмизи (3388)',virtue:'Эртең менен жана кечинде үч жолу окуган адамга эч нерсе зыян бербейт.'},
+  {id:'d7',title:'Раздыйту биллахи раббан…',ar:'رَضِيتُ بِاللَّهِ رَبًّا وَبِالْإِسْلَامِ دِينًا وَبِمُحَمَّدٍ نَبِيًّا',kg:'Аллахты Раб катары, Исламды дин катары жана Мухаммадды пайгамбар катары кабыл алып, ыраазы болдум.',n:3,hn:1,src:'Абу Дауд (5072), Тирмизи (3389)',virtue:'Эртең менен жана кечинде үч жолу окуган адамды Кыяматта ыраазы кылуу Аллахтын милдетинде болот деп айтылган.'},
+  {id:'d8',title:'Аллахумма бика асбахна',ar:'اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ',kg:'Оо, Аллахым! Сенин жардамың менен эртеңге чыктык, Сенин жардамың менен кечке кирдик, Сенин эркиң менен жашайбыз жана өлөбүз, Сага кайра тирилип барабыз. (Кечинде: «Бика амсайна ва бика асбахна… ва илайкал-масир» айтылат.)',n:1,hn:1,src:'Тирмизи (3391)'},
+  {id:'d9',title:'Аллахумма афини фи бадани',ar:'اللَّهُمَّ عَافِنِي فِي بَدَنِي اللَّهُمَّ عَافِنِي فِي سَمْعِي اللَّهُمَّ عَافِنِي فِي بَصَرِي لَا إِلَهَ إِلَّا أَنْتَ',kg:'Оо, Аллахым! Денемди аман кыл. Оо, Аллахым! Угушумду аман кыл. Оо, Аллахым! Көзүмдү аман кыл. Сенден башка Кудай жок.',n:3,hn:1,src:'Абу Дауд (5090)'},
+  {id:'d10',title:'Афу жана афият дубасы',ar:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ',kg:'Оо, Аллахым! Мен Сенден дүйнөдө да, акыретте да кечирим жана аманчылык сурайм.',n:1,hn:1,src:'Абу Дауд (5074), Ибн Мажа (3871)',virtue:'Пайгамбарыбыз ﷺ эртең жана кечинде бул дубаны таштаган эмес.'},
+  {id:'d11',title:'Субханаллахи ва бихамдихи — жүз жолу',ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',kg:'Аллах ыйык, Ага мактоолор болсун.',n:100,hn:1,src:'Муслим (2692)',virtue:'Эртең менен жана кечинде жүз жолу айтса, Кыяматта андан жакшы нерсе алып келген эч ким болбойт, өзү сыяктуу же андан көп айткандан башка.'}]]];
+function gdua(){page('Эртең жана кечки дубалар','Хадистерде эртең менен жана кечинде окууга сунушталган дубалар. Эртең намаздан кийин жана асрдан кийин окуу сунушталат.');
+  DUA.forEach(function(g){app.append(el('h2',null,g[0]));g[1].forEach(function(x){app.append(card(x))})})}
+
+/* ---------- Пайгамбарлардын дубалары (Куран аяттарынан) ---------- */
+var NABI=[
+ ['Адам а.с.','Адам, Хаванын дубасы',[[7,23,23]]],
+ ['Нух а.с.','Нухтун дубалары',[[11,47,47],[71,28,28]]],
+ ['Ибрахим а.с.','Ибрахимдин дубалары',[[14,40,41],[2,127,128],[26,83,89]]],
+ ['Лут а.с.','Луттун дубасы',[[26,169,169]]],
+ ['Йакуб а.с.','Якубдун Аллахка арызы',[[12,86,86]]],
+ ['Йусуф а.с.','Юсуфтун дубасы',[[12,101,101]]],
+ ['Шуайб а.с.','Шуайбдын дубасы',[[7,89,89]]],
+ ['Аййуб а.с.','Аюбдун дубасы',[[21,83,83]]],
+ ['Йунус а.с.','Юнустун дубасы',[[21,87,87]]],
+ ['Муса а.с.','Мусанын дубалары',[[20,25,28],[28,16,16],[28,24,24]]],
+ ['Закарийа а.с.','Закариянын дубалары',[[3,38,38],[21,89,89]]],
+ ['Сулайман а.с.','Сулайманнын дубасы',[[27,19,19],[38,35,35]]],
+ ['Иса а.с.','Исанын дубасы',[[5,114,114]]],
+ ['Мухаммад ﷺ','Пайгамбарыбыздын ﷺ Куран дубалары',[[20,114,114],[23,118,118],[17,80,80]]]];
+function gnabi(){page('Пайгамбарлардын дубалары','Курандын өзүндө сакталган пайгамбарлардын дубалары: арабчасы жана кыргызча мааниси. Куранда дубасы тике айтылган пайгамбарлар гана камтылган; андай дубалар 14 пайгамбарда бар, андыктан 25 толбойт.');
+  var wrap=el('div');app.append(wrap);
+  var seen={};
+  NABI.forEach(function(p){
+    var sec=el('div');sec.append(el('h2',null,p[0]));wrap.append(sec);
+    p[2].forEach(function(r){qSura(r[0]).then(function(d){
+      var ar=d.a.slice(r[1]-1,r[2]).join(' '),kg=d.kg.slice(r[1]-1,r[2]).join(' ');
+      var c=card({title:p[1],src:'Куран, '+(r[1]===r[2]?r[0]+':'+r[1]:r[0]+':'+r[1]+'–'+r[2]),ar:ar,kg:kg});
+      var a=el('a','btn o','📖 Сүрөдө ачуу');a.x+r[0]+'/'+r[1];a.style.cssText='display:inline-block;margin-left:8px';c.append(a);sec.append(c)}).catch(function(){})})})}
+
+/* ---------- Ашара-и мубашшара ---------- */
+function gasere(){page('Ашара-и мубашшара','Пайгамбарыбыз ﷺ тирүүсүндө эле бейиш менен сүйүнчүлөгөн он сахабы.');
+  var N=[['Абу Бакр ас-Сиддик','Биринчи халифа'],['Умар ибн аль-Хаттаб','Экинчи халифа'],['Усман ибн Аффан','Үчүнчү халифа'],['Али ибн Абу Талиб','Төртүнчү халифа'],['Талха ибн Убайдуллах',''],['Зубайр ибн аль-Аввам',''],['Абдурахман ибн Ауф',''],['Саад ибн Абу Ваккас',''],['Саид ибн Зайд',''],['Абу Убайда ибн аль-Жаррах','«Бул үммөттүн аманатчысы»']];
+  var c=el('div','card dua');c.style.marginBottom='12px';
+  c.append(el('div','ref','Булак: Абу Дауд (4649), Тирмизи (3747)'));
+  var ol=el('ol');ol.style.cssText='margin:8px 0;padding-left:22px;line-height:1.9';
+  N.forEach(function(x){var li=el('li');li.append(el('b',null,x[0]));if(x[1])li.append(document.createTextNode(' — '+x[1]));ol.append(li)});
+  c.append(ol,el('p','vtr','Пайгамбарыбыз ﷺ: «Абу Бакр бейиште, Умар бейиште, Осмон бейиште, Али бейиште, Талха бейиште, Зубайр бейиште, Абдурахман бейиште, Саад бейиште, Саид бейиште, Абу Убайда бейиште».'));
+  app.append(c);
+  }
+
+
+var R={'':gunluk,gunluk:gunluk,gkuran:gkuran,gcetele:gcetele,gtesbihat:gtesbihat,gzikir:gzikir,gdua:gdua,gnabi:gnabi,gasere:gasere};
+function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];(R[r]||gunluk)();window.scrollTo(0,0)}
+addEventListener('hashchange',route);
+var st=document.createElement('style');st.textContent='.gk-ctr{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0;padding:10px;border-radius:12px;background:color-mix(in srgb,var(--g,#0f5c4a) 8%,transparent)}.gk-ctr.done{background:color-mix(in srgb,#2e9e5b 18%,transparent)}.gk-btn{width:84px;height:84px;border-radius:50%;border:0;background:var(--g,#0f5c4a);color:#fff;font:700 28px system-ui;cursor:pointer;touch-action:manipulation}.gk-btn:active{transform:scale(.94)}.gk-ci{flex:1;min-width:140px}.gk-lab{display:block;font-size:13px;opacity:.85;margin-bottom:6px}.gk-bar{height:8px;border-radius:4px;background:rgba(128,128,128,.25);overflow:hidden}.gk-bar i{display:block;height:100%;background:var(--gold,#b8892b);width:0;transition:width .2s}.gk-virtue{margin:8px 0;padding:10px 12px;border-left:4px solid var(--gold,#b8892b);border-radius:8px;background:color-mix(in srgb,var(--gold,#b8892b) 10%,transparent);font-size:15px}.gk-t{margin:0 0 6px}.gk-tr{margin:6px 0;font-style:italic;opacity:.9}.gk-note{border-color:var(--gold);font-size:13px;margin-bottom:12px}';
+document.head.append(st);
+route();
+
+</script></body></html>

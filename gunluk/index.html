@@ -193,6 +193,8 @@ var TILES=[
  ['🌅','Эртең жана кечки дубалар','Хадистерден тандалган дубалар','#/gdua'],
  ['🕋','Пайгамбарлардын дубалары','Курандагы пайгамбарлардын дубалары','#/gnabi'],
  ['📜','Жавшан','Жавшан-ул-кабир: 100 бап, 10 бөлүм, окуу эсеби','#/gcevsen'],
+ ['⚔️','Бадр сахабалары','Ашаби Бадр: 32 бет, окуу эсеби','#/gbedir'],
+ ['🌹','Ухуд шейиттери','Шухада-и Ухуд: 8 бет, окуу эсеби','#/guhud'],
  ['⭐','Ашара-и мубашшара','Бейишке сүйүнчү кабар берилген он сахабы','#/gasere']];
 function gunluk(){app.innerHTML='';app.append(el('h1',null,'Күндөлүк'),el('p','lead','Ар күнү кылууга ылайыктуу ибадаттар: Куран, зикир, дуба жана тасбихат.'));
   var g=el('div','grid');TILES.forEach(function(x){var a=el('a','card tile');a.href=x[3];a.style.textDecoration='none';a.style.color='inherit';
@@ -328,6 +330,23 @@ function gcevsen(){page('Жавшан-ул-кабир','Жавшан — 100 б�
   var r=el('button','chip','↺ Баштан баштоо');r.onclick=function(){if(confirm('Эсепти нөлгө түшүрөлүбү?')){st={};try{localStorage.removeItem(K)}catch(e){}app.innerHTML='';gcevsen()}};app.append(r);
   app.append(el('p','vtr','Булак: herkul.org/cevsen (шилтеме гана берилди). Бул бетте текст көчүрүлгөн эмес.'));upd()}
 
+/* ---------- Бадр / Ухуд (herkul.org шилтемелери) ---------- */
+function gtrack(title,lead,base,labels,key){page(title,lead);
+  var st={};try{st=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+  var info=el('div','card');info.style.marginBottom='12px';var bar=el('div');bar.style.cssText='height:10px;border-radius:5px;background:rgba(0,0,0,.1);overflow:hidden;margin:6px 0';var fill=el('div');fill.style.cssText='height:100%;background:#1f5a43;width:0';bar.append(fill);var cnt=el('b');info.append(el('div',null,'Окуу эсеби'),bar,cnt);app.append(info);
+  function upd(){var n=labels.filter(function(x,i){return st[i+1]}).length;cnt.textContent=n+' / '+labels.length+' бет окулду';fill.style.width=(n*100/labels.length)+'%'}
+  labels.forEach(function(lb,i){var c=el('div','card');c.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap';
+    var cb=document.createElement('input');cb.type='checkbox';cb.checked=!!st[i+1];cb.style.cssText='width:22px;height:22px';
+    cb.onchange=function(){if(cb.checked)st[i+1]=today();else delete st[i+1];try{localStorage.setItem(key,JSON.stringify(st))}catch(e){}upd()};
+    var t=el('div',null);t.style.flex='1';t.append(el('b',null,lb));
+    var a=el('a','btn','📖 Окуу');a.href=base+'/'+(i+1);a.target='_blank';a.rel='noopener';c.append(cb,t,a);app.append(c)});
+  var r=el('button','chip','↺ Баштан баштоо');r.onclick=function(){if(confirm('Эсепти нөлгө түшүрөлүбү?')){try{localStorage.removeItem(key)}catch(e){}app.innerHTML='';gtrack(title,lead,base,labels,key)}};app.append(r);
+  app.append(el('p','vtr','Булак: '+base.replace('https://','')+' (шилтеме гана берилди). Бул бетте текст көчүрүлгөн эмес.'));upd()}
+function gbedir(){var L=[];for(var i=1;i<=32;i++)L.push(i+'-бет');
+  gtrack('Бадр сахабалары','Бадр согушуна катышкан сахабалардын аты аталып, алар аркылуу жалбарылган дуба. Текст herkul.org сайтынын автордук укугундагы материал, ошондуктан көчүрбөй, ар бетине шилтеме койдум. Басып ошол сайтта окуңуз.','https://herkul.org/ashabibedir',L,'bd_prog')}
+function guhud(){var L=[];for(var i=0;i<7;i++)L.push((i+1)+'-бет: '+(i*10+1)+'–'+(i*10+10)+'-шейиттер');L.push('8-бет: дуба');
+  gtrack('Ухуд шейиттери','Ухуд согушунда шейит болгон сахабалардын аты аталып, алар аркылуу жалбарылган дуба. Текст herkul.org сайтынын автордук укугундагы материал, ошондуктан көчүрбөй, ар бетине шилтеме койдум. Басып ошол сайтта окуңуз.','https://herkul.org/suhedaiuhud',L,'uh_prog')}
+
 /* ---------- Ашара-и мубашшара ---------- */
 function gasere(){page('Ашара-и мубашшара','Пайгамбарыбыз ﷺ тирүүсүндө эле бейиш менен сүйүнчүлөгөн он сахабы.');
   var N=[['Абу Бакр ас-Сиддик','Биринчи халифа'],['Умар ибн аль-Хаттаб','Экинчи халифа'],['Усман ибн Аффан','Үчүнчү халифа'],['Али ибн Абу Талиб','Төртүнчү халифа'],['Талха ибн Убайдуллах',''],['Зубайр ибн аль-Аввам',''],['Абдурахман ибн Ауф',''],['Саад ибн Абу Ваккас',''],['Саид ибн Зайд',''],['Абу Убайда ибн аль-Жаррах','«Бул үммөттүн аманатчысы»']];
@@ -387,7 +406,7 @@ function zikir(){app.innerHTML='';var S=ls('zk')||{cur:'sub',c:{},tg:{},tot:{},v
    h('div',{class:'zs'},[h('div',{class:'card'},[tt,h('span',null,tx('today'))]),h('div',{class:'card'},[tl,h('span',null,tx('tot'))])]))}
  draw()}
 function gzikirmatik(){zikir();var b=el('a','btn o','‹ Күндөлүк');b.href='#/';b.style.cssText='display:inline-block;margin-bottom:12px';app.insertBefore(b,app.firstChild)}
-var R={'':gunluk,gunluk:gunluk,gkuran:gkuran,gcetele:gcetele,gtesbihat:gtesbihat,gzikir:gzikir,gdua:gdua,gnabi:gnabi,gasere:gasere,gcevsen:gcevsen,gzikirmatik:gzikirmatik};
+var R={'':gunluk,gunluk:gunluk,gkuran:gkuran,gcetele:gcetele,gtesbihat:gtesbihat,gzikir:gzikir,gdua:gdua,gnabi:gnabi,gasere:gasere,gcevsen:gcevsen,gbedir:gbedir,guhud:guhud,gzikirmatik:gzikirmatik};
 function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];(R[r]||gunluk)();window.scrollTo(0,0)}
 addEventListener('hashchange',route);
 var st=document.createElement('style');st.textContent='.gk-ctr{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0;padding:10px;border-radius:12px;background:color-mix(in srgb,var(--g,#0f5c4a) 8%,transparent)}.gk-ctr.done{background:color-mix(in srgb,#2e9e5b 18%,transparent)}.gk-btn{width:84px;height:84px;border-radius:50%;border:0;background:var(--g,#0f5c4a);color:#fff;font:700 28px system-ui;cursor:pointer;touch-action:manipulation}.gk-btn:active{transform:scale(.94)}.gk-ci{flex:1;min-width:140px}.gk-lab{display:block;font-size:13px;opacity:.85;margin-bottom:6px}.gk-bar{height:8px;border-radius:4px;background:rgba(128,128,128,.25);overflow:hidden}.gk-bar i{display:block;height:100%;background:var(--gold,#b8892b);width:0;transition:width .2s}.gk-virtue{margin:8px 0;padding:10px 12px;border-left:4px solid var(--gold,#b8892b);border-radius:8px;background:color-mix(in srgb,var(--gold,#b8892b) 10%,transparent);font-size:15px}.gk-t{margin:0 0 6px}.gk-tr{margin:6px 0;font-style:italic;opacity:.9}.gk-note{border-color:var(--gold);font-size:13px;margin-bottom:12px}';

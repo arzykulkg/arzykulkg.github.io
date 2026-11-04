@@ -1,6 +1,6 @@
 # Арзыкуловтордун санжырасы
 
-Site root = small hub (cards: `sanjyra/` family tree, `islam/` Islam site; `education/` is not linked, direct URL only). Old links `/#id` forward to `/sanjyra/#id`; `/family/` redirects to `/sanjyra/`. `education/` = class hub (Global English 7–10 interactive Learner’s/Coursebook + Workbook in `books/`, Grammar Steps A1–A2, Essential Grammar in Use (4th ed.), English Grammar in Use (5th ed., `grammar-in-use-5/`, same Global-style engine as Essential Grammar in Use: book view, Designer Book, flip-book, 145 dialogues, flashcards, game zone, live class), Live Class); not linked from the family tree. Student builds only – no answer keys.
+Site root = small hub (cards: `sanjyra/` family tree, `islam/` Islam site; `education/` card is shown (password gate + exam lock via lock.js)). Old links `/#id` forward to `/sanjyra/#id`; `/family/` redirects to `/sanjyra/`. `education/` = class hub (Global English 7–10 interactive Learner’s/Coursebook + Workbook in `books/`, Grammar Steps A1–A2, Essential Grammar in Use (4th ed.), English Grammar in Use (5th ed., `grammar-in-use-5/`, same Global-style engine as Essential Grammar in Use: book view, Designer Book, flip-book, 145 dialogues, flashcards, game zone, live class), Live Class); not linked from the family tree. Student builds only – no answer keys.
 
 ## Features (v11)
 - Kyrgyz style (gold-green palette, ornament borders), light/dark, classic style switch (menu).
@@ -21,3 +21,5 @@ Site root = small hub (cards: `sanjyra/` family tree, `islam/` Islam site; `educ
 
 ## Mobile UI (v11.1)
 Bottom nav (Дарак · Издөө · Бутактар · Кошуу · Меню), smart search (ө/о, ү/у, ң/н ignored; "Камалидин Карим" finds by father's name; recent searches), branches list, and a safe "Маалымат кошуу / ката билдирүү" form that prepares a WhatsApp message for the admin (nothing is written to the public tree). Optional: set `window.ADMIN_WA="996XXXXXXXXX"` in `sanjyra/data/bios.js` to send suggestions straight to one WhatsApp number.
+
+- `education/kyrgyz-tili-7/`, `education/kyrgyz-tili-8/` — Кыргыз тили 7/8 interactive practice (lock.js gate included).

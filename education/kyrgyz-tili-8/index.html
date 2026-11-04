@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ky"><head><script src="/education/lock.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#d62839">
+<title>Кыргыз тили · 8-класс</title>
+<style>:root{--red:#d62839;--red2:#a81c2c;--gold:#f8b500;--gold2:#ffe08a;--blue:#14507a;--blue2:#1d77ad;--cream:#fff8ec;--ink:#2b1b17;--mut:#7a6a60;--ok:#1f9d55;--no:#d62839;--card:#fff;--line:#eadfce;--r:18px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}html.big{font-size:20px}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 1rem/1.5 system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans',sans-serif;padding-bottom:84px;min-height:100vh}
+h1,h2,h3{font-family:Georgia,'Noto Serif','Times New Roman',serif;margin:0;line-height:1.2}
+button{font:inherit;color:inherit;cursor:pointer}
+#top{position:sticky;top:0;z-index:30;background:var(--red);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top));box-shadow:0 4px 18px rgba(168,28,44,.35)}
+#top .lg{width:38px;height:38px;flex:none}
+#top .tt{flex:1;min-width:0}#top .tt b{display:block;font:800 1.05rem Georgia,serif;letter-spacing:.02em}#top .tt small{opacity:.9;font-size:.74rem}
+#top button{border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:12px;min-width:44px;height:40px;font-weight:700}
+#top::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:6px;background:repeating-linear-gradient(90deg,var(--gold) 0 14px,var(--blue) 14px 28px,var(--cream) 28px 42px)}
+#app{max-width:860px;margin:0 auto;padding:22px 14px 30px}
+.hero{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:26px;padding:26px 22px;position:relative;overflow:hidden;margin-bottom:22px}
+.hero h2{font-size:2rem;margin-bottom:6px}.hero p{margin:0;opacity:.95;max-width:520px}
+.hero svg.tn{position:absolute;right:-30px;top:-30px;width:190px;height:190px;opacity:.28}
+.hero .row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:100px;background:var(--gold);color:#3a2600;font-weight:700;font-size:.9rem;border:0}
+.chip.w{background:#fff;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tcard{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--r);border:1px solid var(--line);overflow:hidden;position:relative;box-shadow:0 6px 18px rgba(80,50,20,.07);transition:transform .15s}
+.tcard:active{transform:scale(.98)}
+.tcard .band{height:96px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#fff;font:800 2.6rem Georgia,serif;background:var(--c)}
+.tcard .band span{font-size:3rem;filter:drop-shadow(0 3px 6px rgba(0,0,0,.25))}
+.tcard .bd{padding:14px 16px 16px}.tcard h3{font-size:1.15rem}.tcard small{color:var(--mut)}
+.bar{height:8px;border-radius:5px;background:#f0e6d6;margin-top:10px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--red));border-radius:5px;transition:width .5s}
+h2.sec{font-size:1.35rem;margin:26px 0 12px;color:var(--blue)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;text-align:center;text-decoration:none;color:inherit;font-weight:700;display:block}
+.tile em{display:block;font-style:normal;font-size:2rem;margin-bottom:4px}.tile small{display:block;color:var(--mut);font-weight:400}
+.crumb{display:flex;gap:6px;align-items:center;font-size:.85rem;color:var(--mut);margin-bottom:14px;flex-wrap:wrap}.crumb a{color:var(--blue);text-decoration:none;font-weight:700}
+.lhead{border-radius:22px;padding:22px 20px;color:#fff;background:var(--c,var(--blue));margin-bottom:16px;position:relative;overflow:hidden}
+.lhead h2{font-size:1.7rem}.lhead .sub{opacity:.95;margin-top:4px}.lhead .num{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;opacity:.9;font-weight:700}
+.gram{background:#fff;border-left:6px solid var(--gold);border-radius:12px;padding:12px 14px;margin-bottom:14px;box-shadow:0 3px 10px rgba(80,50,20,.06)}
+.gram b{color:var(--red2)}
+.task{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;margin-bottom:14px;box-shadow:0 4px 14px rgba(80,50,20,.05)}
+.task.done{border-color:#bfe3cc}
+.th{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.th .ic{flex:none;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--blue);color:#fff}
+.th .ic svg{width:22px;height:22px}
+.th .ic.pair{background:#e8744a}.th .ic.write{background:var(--red)}.th .ic.group{background:#7b4fd1}.th .ic.think{background:var(--blue2)}.th .ic.read{background:#2d8a6e}.th .ic.listen{background:#c2185b}.th .ic.game{background:var(--gold);color:#3a2600}
+.th h3{font-size:1.02rem;font-family:system-ui,sans-serif;font-weight:700;line-height:1.35}.th h3 b{color:var(--red2);margin-right:4px}
+.box{background:#e9f2fb;border:1.5px dashed #86b3d9;border-radius:12px;padding:10px 12px;margin:10px 0;font-size:.95rem}
+.box table{border-collapse:collapse;width:100%}.box td,.box th{border:1px solid #b8d3ea;padding:6px 8px;text-align:left;vertical-align:top}.box th{background:#cfe3f5}
+.box.y{background:#fff6d9;border-color:#e6c25a}.box.r{background:#fdecee;border-color:#e59aa3}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.btn{border:0;border-radius:12px;padding:10px 16px;font-weight:700;background:var(--blue);color:#fff;min-height:44px}
+.btn.g{background:#efe5d3;color:var(--ink)}.btn.r{background:var(--red)}.btn.ok{background:var(--ok)}
+.btn.s{min-height:36px;padding:6px 12px;font-size:.88rem}
+.res{font-weight:800;margin-left:auto}.res.good{color:var(--ok)}.res.mid{color:#b8860b}.res.bad{color:var(--no)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.vc{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.vc .e{font-size:2rem}.vc b{font-size:1.05rem}.vc i{font-style:normal;color:var(--red2);font-weight:600;display:none}.vc s{text-decoration:none;color:var(--mut);font-size:.85rem;display:none}
+.vc.on{border-color:var(--gold);background:#fffaf0}.vc.on i,.vc.on s{display:block}
+.line{display:flex;gap:10px;margin:8px 0;align-items:flex-start}
+.line .sp{flex:none;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
+.line.B .sp{background:var(--red)}
+.line .tx{flex:1;background:#f7f1e6;border-radius:4px 14px 14px 14px;padding:8px 12px}.line.B .tx{background:#fdeceb;border-radius:14px 4px 14px 14px}
+.line.hid .tx{filter:blur(6px);cursor:pointer}
+.say{border:0;background:none;font-size:1.1rem;padding:2px 6px;opacity:.75}
+.txt p{margin:.5em 0}.txt{font-size:1.05rem;line-height:1.65}
+.w.k{border-bottom:1.5px dotted var(--blue2);cursor:pointer}.w.k:active{background:var(--gold2)}
+.hl{background:#fff1b8;border-radius:4px}
+#tip{position:fixed;z-index:80;background:var(--ink);color:#fff;border-radius:12px;padding:8px 12px;font-size:.92rem;max-width:230px;box-shadow:0 8px 24px rgba(0,0,0,.35);display:none}
+#tip b{color:var(--gold)}#tip button{border:0;background:none;color:#fff;margin-left:6px}
+.q{margin:12px 0}.q>p{margin:0 0 6px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:6px}
+.o{text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;min-height:44px}
+.o.sel{border-color:var(--blue2);background:#e9f2fb}.o.ok{border-color:var(--ok);background:#e3f6ea}.o.no{border-color:var(--no);background:#fde9ec}
+.tfb{display:flex;gap:8px}.tfb .o{flex:1;text-align:center}
+.q .fx{font-size:.9rem;color:var(--ok);margin-top:4px;display:none}.q.show .fx{display:block}
+.gp{line-height:2.4}
+.gp input,.gp select{font:inherit;border:0;border-bottom:2px solid var(--blue2);background:#f2f8fd;border-radius:6px 6px 0 0;padding:2px 6px;margin:0 2px;min-width:70px;max-width:100%}
+.gp input.ok,.gp select.ok{border-color:var(--ok);background:#e3f6ea}.gp input.no,.gp select.no{border-color:var(--no);background:#fde9ec}
+.gp .ans{color:var(--ok);font-weight:700;font-size:.85rem}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+.mt .o{padding:8px 10px;font-size:.95rem;position:relative}
+.mt .o[data-p]::after{content:attr(data-p);position:absolute;right:6px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--blue2);color:#fff;font-size:.72rem;display:flex;align-items:center;justify-content:center;font-weight:800}
+.wch{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;min-height:40px}
+.wc{border:1.5px solid var(--blue2);background:#fff;border-radius:10px;padding:6px 10px;color:var(--blue)}
+.ansline{border-bottom:2px solid var(--line);min-height:44px;padding:4px 0;margin:6px 0;display:flex;flex-wrap:wrap;gap:6px;border-radius:4px}
+.ansline.ok{border-color:var(--ok)}.ansline.no{border-color:var(--no)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:10px}
+.col{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:110px;background:#fffdf8}.col h4{margin:0 0 6px;font-size:.95rem;color:var(--blue)}
+.col.can{border-color:var(--blue2);background:#eef6fc}
+textarea,input.tx{width:100%;font:inherit;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:#fffdf8;resize:vertical}
+textarea:focus,input.tx:focus{outline:2px solid var(--blue2);border-color:transparent}
+.cluster{display:flex;flex-direction:column;align-items:center;gap:12px}
+.cc{width:110px;height:110px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font:800 1.1rem Georgia,serif;padding:8px}
+.cb{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;width:100%}
+.cb input{text-align:center;border-radius:100px;border:2px solid var(--blue2);padding:10px;font:inherit;background:#fff;width:100%}
+.cb input[disabled]{background:#e9f2fb;font-weight:700}
+.dt{width:100%;border-collapse:collapse}.dt th{background:#cfe3f5;padding:6px;font-size:.9rem}.dt td{border:1px solid var(--line);padding:2px}.dt textarea{border:0;border-radius:0;min-height:90px}
+.lights{display:flex;gap:12px;justify-content:center}
+.lt{width:84px;height:84px;border-radius:50%;border:4px solid transparent;font-size:2.4rem;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.lt.sel{border-color:var(--ink);transform:scale(1.1)}
+.lights+.cap{text-align:center;color:var(--mut);font-size:.9rem;margin-top:8px}
+.prov{background:linear-gradient(135deg,#fff7de,#fff);border:1.5px solid var(--gold);border-radius:14px;padding:12px 14px;margin:8px 0;cursor:pointer}
+.prov b{font-family:Georgia,serif;font-size:1.1rem;color:var(--red2);display:block}.prov span{display:none;margin-top:6px;color:var(--blue)}.prov.on span{display:block}
+.sub{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+#bn{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -6px 20px rgba(80,50,20,.1)}
+#bn a{flex:1;text-align:center;text-decoration:none;color:var(--mut);padding:8px 2px 7px;font-size:.7rem;font-weight:700;min-height:56px}
+#bn a em{display:block;font-style:normal;font-size:1.35rem}#bn a.on{color:var(--red)}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:100px;opacity:0;transition:.3s;z-index:90;pointer-events:none;font-weight:600;max-width:90vw;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%)}
+/* games */
+.gwrap{background:#fff;border-radius:22px;border:1px solid var(--line);padding:16px;margin-bottom:14px}
+.setup label{display:block;font-weight:700;margin:12px 0 6px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}.seg button{border:1.5px solid var(--line);background:#fff;border-radius:100px;padding:8px 14px;font-weight:600}.seg button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.arena{background:linear-gradient(#bfe4ff 0 62%,#9ad07a 62%);border-radius:18px;overflow:hidden;position:relative}
+.arena svg{display:block;width:100%;height:auto}
+.rope{transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
+.score{display:flex;justify-content:space-between;font-weight:800;margin:10px 0}
+.score .a{color:var(--blue)}.score .b{color:var(--red)}
+.turn{padding:6px 14px;border-radius:100px;display:inline-block;font-weight:800;color:#fff;margin:8px 0}
+.qbox{border:3px solid var(--tc,var(--blue));border-radius:16px;padding:14px;margin-top:8px}
+.qbox h3{font-family:system-ui;font-size:1.1rem;margin-bottom:10px}
+.bone{width:130px;height:130px;margin:0 auto;display:block;transition:transform 1s cubic-bezier(.2,.9,.3,1)}
+.faces{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.faces div{text-align:center;border:2px solid var(--line);border-radius:12px;padding:8px 2px;font-size:.78rem;background:#fff}.faces div.on{border-color:var(--red);background:#fdecee;transform:scale(1.06)}
+.faces b{display:block;font-size:1rem;color:var(--red2)}
+.win{text-align:center;padding:20px}.win h2{font-size:1.8rem;color:var(--red)}
+.rid{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.rid .ans{display:none;margin-top:8px;font-weight:800;color:var(--ok)}.rid.on .ans{display:block}
+.srch{width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);font:inherit;margin-bottom:12px}
+.dr{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line)}.dr b{min-width:110px}.dr span{flex:1;color:var(--red2)}.dr small{color:var(--mut)}
+@media(max-width:520px){.mt{gap:8px}.hero h2{font-size:1.6rem}}
+.mt .ml,.mt .mr{display:flex;flex-direction:column;gap:8px}.mt .o{width:100%}
+</style></head><body>
+<div id="top"><div class="lg"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="6"><circle cx="50" cy="50" r="42"/><circle cx="50" cy="50" r="11"/><path d="M50 8v84M8 50h84M20 20l60 60M80 20 20 80"/></svg></div><div class="tt"><b>Кыргыз тили 8</b><small>Интерактивдүү окуу китеби</small></div><button id="bign" aria-label="Чоң тамга">A+</button></div>
+<div id="app"></div>
+<nav id="bn"><a href="#/" data-k="home"><em>🏠</em>Башкы</a><a href="#/dict" data-k="dict"><em>📖</em>Сөздүк</a><a href="#/games" data-k="games"><em>🎮</em>Оюндар</a><a href="#/proverbs" data-k="prov"><em>📜</em>Макал</a><a href="#/me" data-k="me"><em>⭐</em>Мен</a></nav>
+<div id="toast"></div>
+<script>window.BOOK={themes:[],
+proverbs:[
+{ky:"Ар бир кесип — ардактуу.",m:"Ар бир кесипти сыйлоо керек, анткени баары эл үчүн пайдалуу."},
+{ky:"Өнөрлүү өргө сүрөйт.",m:"Кесип, өнөр билген адам өсөт, алдыга озот."},
+{ky:"Өнөр алды — кызыл тил.",m:"Тилди жакшы билген адам ар кандай ишке жетише алат."},
+{ky:"Туулган жердин топурагы — алтын.",m:"Мекенди, туулган жерди баалоо керек."},
+{ky:"Башка жерде султан болгончо, өз жериңде ултан бол.",m:"Чет жерде бийик болгондон, өз элиңде жөнөкөй болгонуң жакшы."},
+{ky:"Атың барда жер тааны, атаң барда эл тааны.",m:"Жаш кезиңде жерди, элди көбүрөөк таанып-билип ал."},
+{ky:"Ырыс алды — ынтымак.",m:"Бакыттын башы — бирдиктүү болуу, ынтымак."},
+{ky:"Биринчи байлык — ден соолук.",m:"Ден соолук — эң чоң байлык."},
+{ky:"Дениң таза болсо, дилиң да таза болот.",m:"Ден соолугу бекем адамдын ой-пикири да таза болот."},
+{ky:"Даны жоктун — наны жок, наны жоктун — жаны жок.",m:"Дан өспөсө нан болбойт, нан жок болсо адам жашай албайт."},
+{ky:"Сен деген сенек сөз, сиз деген сылык сөз.",m:"Улуу адамга «сиз» деп сылык кайрылуу керек."},
+{ky:"Ит үрөт, кербен жүрөт.",m:"Башкалардын сөзүнө көңүл бурбай, өз жолуңдан жүр."},
+{ky:"Ок өтпөс бек бол да, жоо өтпөс чеп бол.",m:"Мекенди коргой турган күчтүү, бекем бол."},
+{ky:"Балалуу үй — базар, баласыз үй — мазар.",m:"Бала бар үй шаңдуу болот, бала жок үй тынч жана муңдуу болот."},
+{ky:"Китеп — билимдин булагы.",m:"Китеп окугандан көп нерсе билип аласың."},
+{ky:"Жети өлчөп, бир кес.",m:"Бир иш кылардан мурун жакшылап ойлонуп, даярдан."}
+],
+gloss:[["кыргыз тили","кыргызский язык"],["сабак","урок"],["суроо","вопрос"],["жооп","ответ"],["текст","текст"],["сүйлөм","предложение"],["сөз","слово"],["макал","пословица"],["табышмак","загадка"],["диалог","диалог"],["тема","тема"],["мектеп","школа"],["окуучу","ученик"],["мугалим","учитель"],["эне","мать"],["ата","отец; дед"],["бала","ребёнок"],["үй","дом"],["тоо","гора"],["суу","вода"],["жер","земля, место"],["эл","народ"],["өлкө","страна"],["мекен","родина"],["шаар","город"],["айыл","село"],["китеп","книга"],["адам","человек"],["жакшы","хороший"],["жаман","плохой"],["чоң","большой"],["кичинекей","маленький"],["көп","много"],["аз","мало"],["ооба","да"],["жок","нет"],["эмне үчүн","почему"],["себеби","потому что"],["анткени","потому что"],["менен","с, посредством"],["үчүн","для"],["жөнүндө","о, об"],["тууралуу","про, о"],["аркылуу","через"],["боюнча","по"],["сыяктуу","как, подобно"],["кайда","где, куда"],["качан","когда"],["ким","кто"],["эмне","что"],["кандай","какой, как"],["канча","сколько"],["кайсы","который"]]};
+
+BOOK.themes.push({n:1,color:"#14507a",em:"🧭",en:"Саякат",ky:"Туулган жерге саякат. Жандооч сөздөр",
+intro:"Жандооч сөздөр (менен, тууралуу, жөнүндө, аркылуу, үчүн, сыяктуу) менен сүйлөм түзүп, Кыргызстандын тарыхый жерлери жөнүндө айтып берүүнү үйрөнөбүз.",
+gloss:[["жандооч","послелог"],["жайгашкан","расположен"],["расмий","официальный"],["маалымат","информация, справка"],["калк","население, народ"],["борбор","столица, центр"],["чектеш-","граничить"],["чек ара","граница"],["түндүк","север"],["түштүк","юг"],["чыгыш","восток"],["батыш","запад"],["эгемендүүлүк","независимость"],["өргүү","отпуск"],["кербен","торговый караван"],["кербен сарай","постоялый двор"],["кербенчи","караванщик"],["соодагер","торговец"],["дубал","стена"],["чеп","крепость"],["кумпа","купол"],["бөлмө","комната"],["коридор","коридор"],["уламыш","легенда"],["аңыз","предание"],["кан","хан"],["кандык","ханство"],["кичүү","младший"],["улуу","старший"],["эстелик","памятник"],["тарых","история"],["тарыхый","исторический"],["чакыруу","приглашение"],["урматтуу","уважаемый"],["саякат","путешествие"],["саякатчы","путешественник"],["турист","турист"],["унаа","транспорт"],["учак","самолёт"],["поезд","поезд"],["кооз","красивый"],["бийик","высокий"],["бийиктик","высота"],["деңиз деңгээли","уровень моря"],["изилдөө","исследование"],["изилдөөчү","исследователь"],["курулган","построен"],["талкаланган","разрушен"],["ырахат","удовольствие"],["жоокер","воин"],["душман","враг"],["коргон-","защищаться"],["тонойт","грабит"],["талап-тонойт","грабит"],["мунара","башня"],["чарчы","квадратный"],["тик бурчтуу","прямоугольный"],["шыбалган","оштукатурен"],["оймо-чийме","орнамент, узор"],["Нарын","Нарын"],["Ысык-Көл","Иссык-Куль"],["Бурана","Бурана"],["Сулайман-Тоо","Сулайман-Тоо"],["Манас","Манас"]],
+lessons:[
+{id:"t1l1",title:"Кыргызстан жөнүндө маалымат",ky:"Кайталоо: жандооч сөздөр",
+ gram:"<b>менен</b> (с), <b>тууралуу / жөнүндө</b> (о, про), <b>аркылуу</b> (через), <b>боюнча</b> (по), <b>үчүн</b> (для), <b>сыяктуу</b> (как). Алар <b>атооч жөндөмөдөгү</b> сөз менен колдонулат: <i>Асан менен ойнодум. Ысык-Көл жөнүндө айтып бердим.</i>",
+ lex:"жайгашкан жери, расмий маалымат, калк, борбор, чек ара, эгемендүүлүк, өргүү, чакыруу, урматтуу, саякатчы",
+ tasks:[
+ {t:"vocab",i:"think",h:"Жаңы сөздөр менен таанышкыла. Басканда котормосу чыгат.",w:[["жайгашкан","расположен","","📍"],["расмий маалымат","официальная справка","","📄"],["калк","население","","👥"],["борбор","столица","","🏛️"],["чектешет","граничит","","🧱"],["эгемендүүлүк","независимость","","🇰🇬"],["жайкы өргүү","летний отпуск","","🏖️"],["саякатчы","путешественник","","🧳"],["туристтер","туристы","","📸"],["унаа","транспорт","","🚙"],["кербен","торговый караван","","🐪"],["кооз","красивый","","🌄"],["урматтуу","уважаемый","","🤝"],["чакыруу","приглашение","","✉️"],["тарыхый жер","историческое место","","🏰"],["уламыш","легенда","","📜"]]},
+ {t:"box",html:"<table><tr><th>Жандооч</th><th>Орусча</th><th>Мисал</th></tr><tr><td><b>менен</b></td><td>с / на</td><td>Атам <b>менен</b> бардым. Унаа <b>менен</b> бардык.</td></tr><tr><td><b>тууралуу, жөнүндө</b></td><td>о, про</td><td>Ысык-Көл <b>жөнүндө</b> айтып берем.</td></tr><tr><td><b>аркылуу</b></td><td>через</td><td>Коридор <b>аркылуу</b> кирет.</td></tr><tr><td><b>боюнча</b></td><td>по</td><td>Текст <b>боюнча</b> жооп бер.</td></tr><tr><td><b>үчүн</b></td><td>для, ради</td><td>Эссе <b>үчүн</b> маалымат издедим.</td></tr><tr><td><b>сыяктуу</b></td><td>как, подобно</td><td>Сен Тамара <b>сыяктуу</b> окуйсуң.</td></tr></table>"},
+ {t:"match",i:"pair",h:"Жандоочтун орусча маанисин тапкыла.",pairs:[["менен","с (вместе)"],["жөнүндө","о, об"],["аркылуу","через"],["үчүн","для"],["сыяктуу","как, подобно"],["боюнча","по"]]},
+ {t:"gap",i:"write",h:"Туура жандоочту тандагыла.",items:["Мен Ысык-Көл [жөнүндө*|менен|үчүн] эссе жаздым.","Биз саякатка унаа [менен*|аркылуу|боюнча] бардык.","Ал тоолор [аркылуу*|тууралуу|сыяктуу] басып өттү.","Текст [боюнча*|менен|аркылуу] суроолорго жооп бергиле.","Мен саякатчылар [тууралуу*|аркылуу|менен] китеп окудум.","Бул жер Ысык-Көл [сыяктуу*|менен|үчүн] кооз."]},
+ {t:"dialogue",i:"listen",h:"Диалогду уккула. Ролдорго бөлүнүп ойногула.",lines:[["Өскөнбек","Тамара, сага кайсы өлкө жагат?"],["Тамара","Кыргызстан."],["Руслан","Эмне үчүн?"],["Тамара","Себеби Кыргызстан менин туулуп өскөн жерим. Менин өлкөм кооз жаратылышы менен даңктуу. Кыргызстанда тарыхый жерлер бар."],["Руслан","Жайында кайда бардың?"],["Тамара","Ошко бардык, анткени ал жакта Сулайман-Тоо бар. Өскөнбек, сен жайында кайда бардың?"],["Өскөнбек","Жай мезгили келгенде адамдар көлгө барышат. Биз Ысык-Көлгө бардык."],["Руслан","Ата-энем жайкы өргүүгө чыгышып, Нарынга бардык. Анткени ал жакта Таш-Рабат бар."]]},
+ {t:"tf",i:"pair",h:"Диалог боюнча <b>туура</b> же <b>ката</b> экенин белгилегиле.",qs:[{s:"Тамарага Кыргызстан жагат.",a:true},{s:"Өскөнбек жайында Ошко барды.",a:false,fix:"Өскөнбек Ысык-Көлгө барды."},{s:"Руслан ата-энеси менен Нарынга барды.",a:true},{s:"Сулайман-Тоо Нарын облусунда жайгашкан.",a:false,fix:"Сулайман-Тоо Ошто жайгашкан."}]},
+ {t:"read",i:"read",h:"Расмий маалыматты окугула.",title:"Кыргызстан жөнүндө расмий маалымат",text:["Кыргызстан Орто Азияда жайгашкан. Анын борбору — Бишкек шаары. Өлкөнүн аянты 199,9 миң чарчы километр, калкы 6 миллиондон ашык.","Кыргызстандын мамлекеттик тили — кыргыз тили, расмий тили — орус тили. Өлкө 1991-жылы 31-августта эгемендүүлүгүн алган.","Кыргыз элинин «Манас», «Семетей», «Сейтек» деген чоң эпостору бар. Өлкөдө кооз тарыхый жерлер көп: Бурана мунарасы, Сулайман-Тоо, Таш-Рабат, Саймалуу-Таш."],qs:[{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Кыргызстандын борбору кайсы шаар?",o:["Бишкек","Ош","Нарын","Каракол"],a:0},{q:"Кыргызстан кайсы жерде жайгашкан?",o:["Орто Азияда","Түштүк Америкада","Европада","Африкада"],a:0},{q:"Кыргызстан эгемендүүлүгүн качан алган?",o:["1991-жылы","1945-жылы","2000-жылы","1975-жылы"],a:0},{q:"Төмөнкүлөрдүн кайсынысы кыргыз элинин эпосу эмес?",o:["«Эрте келген турналар»","«Манас»","«Семетей»","«Сейтек»"],a:0}]}]},
+ {t:"order",i:"write",h:"Сөздөрдү туура тартипке коюп, сүйлөм түзгүлө.",items:["Бишкек Кыргызстандын борбору.","Мен Таш-Рабат жөнүндө айтып берем.","Биз Нарынга унаа менен бардык.","Кыргызстан Орто Азияда жайгашкан."]},
+ {t:"write",i:"write",h:"Иш кагазы: чакыруу жазгыла (2–4 сүйлөм).",prompt:"Чакыруунун аталышы, ким чакырылат, кайда жана качан болот, ким чакырат. Үлгү: <i>Чакыруу! Урматтуу туристтер! Сиздерди Таш-Рабат тарыхый эстелигин көрүүгө саякатка чакырабыз. Саякат 16-июлда Нарын облусунда өтөт.</i>",min:30,sample:"Чакыруу! Урматтуу досторум! Сиздерди Ысык-Көлгө саякатка чакырабыз. Саякат 15-июлда өтөт. Баары унаа менен барабыз. Сүзүү үчүн кийим алгыла."},
+ {t:"prov",i:"read",h:"Макалдарды окугула. Маанисин айтып бергиле.",ids:[3,5,6],order:2},
+ {t:"light",h:"Светофор аркылуу сабакта аткарган жумушуңду баала."}]},
+
+{id:"t1l2",title:"Таш-Рабат: уламыш жана тарых",ky:"Тарыхый жер жөнүндө айтып беребиз",
+ gram:"<b>көздөй, карай</b> (в сторону, к) — табыш жөндөмөдөгү сөз менен: <i>коридорду көздөй, тоону карай</i>. <b>Ким аркылуу? Эмне аркылуу?</b>",
+ lex:"кербен сарай, чеп, дубал, кумпа, мунара, оймо-чийме, талап-тонойт, талкаланган, изилдөө",
+ tasks:[
+ {t:"vocab",i:"think",h:"Уламыштагы жана текстегги сөздөр.",w:[["кербен сарай","постоялый двор","","🏰"],["кербенчи","караванщик","","🐪"],["соодагер","торговец","","🧑‍💼"],["чеп коргон","укрепление","","🧱"],["дубал","стена","","🧱"],["кумпа","купол","","🕌"],["мунара","башня","","🗼"],["оймо-чийме","орнамент","","🎨"],["талап-тонойт","грабит","","⚔️"],["талкаланган калдык","руины","","🪨"],["кол өнөрчү","мастер-ремесленник","","🛠️"],["жөндөмдүү","способный","","💡"],["ырахат алат","получает удовольствие","","😊"],["изилдейт","исследует","","🔍"],["эстелик","памятник","","🗿"],["саржан","сажень (мера длины)","","📏"]]},
+ {t:"box",html:"<p><b>Ким? Эмне? + көздөй / карай</b> (табыш жөндөмөсү: кимди? эмнени?)</p><p>Мен коридор<b>ду көздөй</b> барам.<br>Сен бөлмө<b>нү карай</b> киресиң.<br>Алар тоо<b>ну карай</b> басышат.</p><p><b>аркылуу</b>: Ал коридор <b>аркылуу</b> залга кирет. Биз жолдор <b>аркылуу</b> барабыз.</p>"},
+ {t:"gap",i:"write",h:"Сөздөрдү туура формада жазгыла. Үлгү: <i>тоо → тоону карай</i>.",items:["Кербен сарайды [көздөй/карай] барабыз.","Биз жолдо[ну/ды] карай баратабыз.","Ал бөлмө[нү] көздөй басты.","Таш-Рабатка тоолор [аркылуу] бардык.","Ал Ысык-Көл [жөнүндө/тууралуу] айтып берди."]},
+ {t:"read",i:"read",h:"Уламышты окугула. Окуп жатканда ар бир тыныштан кийин суроолорго жооп бергиле.",title:"Таш-Рабат (уламыш)",text:["Байыркы бир заманда күчтүү кан жашаган экен. Анын эки уулу болгон. Кан эки баласын тең жакшы көргөндүктөн, кимисин өтө жакшы көрөрүн айта албай калган.","Бир жолу кан улуу уулун чакырып: «Мен карып калдым. Сен эмнеге жөндөмдүү экениңди көрсөтчү», — дейт. Улуу уулу: «Биздин кандык бай, бирок дагы бай боло алат. Мен соодага жарактуу буюмдарды кербендер менен чет жерлерге жөнөтөм, соодагерлерди чакырып, алар эс алуучу кербен сарай курам», — дейт.","Кан көп өтпөй каза болот. Уулу кербен сарай куруу үчүн мамлекетинин эң мыкты чебер уустарын чогултат. Көп жылдар бою таш кербен сарай курулат. Аны көргөндүн баарынын көзү тоюп калат: дубалдары бекем, бөлмөлөрү кенен болот. Соодагерлер Таш-Рабатка атайын келип, анын меймандостугунан ырахат алышат.","Кан жыл сайын байып, эл жакшы жашай баштайт. Бирок кан каза болуп, анын ордун кичүү иниси ээлейт. Ал аскер чогултуп, тынч жолдо баратган кербендерди талап-тоной баштайт. Кошуна кандыктар ага каршы согушка чыгып, жоокерлерин жеңишет. Таш-Рабаттын ордунда талкаланган калдыктар гана калат."],qs:[{t:"mc",i:"think",h:"Уламыш боюнча туура жоопту тандагыла.",qs:[{q:"Кандын улуу уулу эмне курмак болду?",o:["Кербен сарай","Мектеп","Көпүрө","Мечит"],a:0},{q:"Кербен сарайды ким курган?",o:["Кандын улуу уулу","Кичүү иниси","Душмандар","Соодагерлер"],a:0},{q:"Кичүү иниси эмне кылды?",o:["Кербендерди талап-тоноду","Мектеп курду","Кербен сарайды кеңейтти","Соода кылды"],a:0},{q:"Таш-Рабаттын ордунда эмне калды?",o:["Талкаланган калдыктар","Жаңы шаар","Көл","Бак"],a:0}]},{t:"open",i:"pair",h:"Жуп менен талкуулагыла.",qs:["Кандын улуу уулунун оюна кошуласыңбы? Эмне үчүн?","Кичүү инисинин катасы эмнеде болду?","Эгер сен кандын ордунда болсоң, эмне кылмаксың?"]}]},
+ {t:"read",i:"read",h:"Таш-Рабаттын архитектурасы жөнүндө окугула.",title:"Таш-Рабат — тарыхый эстелик",text:["Таш-Рабат — Нарын облусунда, деңиз деңгээлинен 3500 метр бийиктикте жайгашкан байыркы кербен сарай. Ал Кара-Коюн капчыгайына жакын, суунун сол жагында турат. Эстелик XV кылымда курулган деп эсептелет.","Имарат жонулган таштардан курулган. Анын маңдай жагы чыгыш тарапка каратылган. Имаратта 40 же 41 бөлмө бар дешет: аларды санаган сайын ар кандай чыгат. Негизги залга узун коридор аркылуу киришет. Залдын төбөсү кумпа менен жабылган, ал оймо-чиймелер менен кооздолгон.","Таш-Рабаттын сүрөтү Кыргызстандын 20 сомдук акчасында бар."],qs:[{t:"tf",i:"pair",h:"<b>Туура</b> же <b>ката</b>.",qs:[{s:"Таш-Рабат Нарын облусунда жайгашкан.",a:true},{s:"Таш-Рабаттын маңдай жагы батыш тарапка каратылган.",a:false,fix:"Маңдай жагы чыгыш тарапка каратылган."},{s:"Негизги залга узун коридор аркылуу киришет.",a:true},{s:"Таш-Рабаттын сүрөтү 100 сомдук акчада бар.",a:false,fix:"20 сомдук акчада бар."}]}]},
+ {t:"sort",i:"think",h:"Сөздөрдү бөлгүлө: уламыш (аңгеме) же архитектура (имарат).",cols:["Уламыш","Архитектура"],items:[["кан",0],["кичүү ини",0],["согуш",0],["талап-тонойт",0],["кумпа",1],["коридор",1],["оймо-чийме",1],["жонулган таш",1],["бөлмө",1]]},
+ {t:"act",i:"group",h:"Топтук иш: «Бир тарыхый жер жөнүндө кыскача айтып бергиле».",html:"<p>Бурана мунарасы, Сулайман-Тоо, Саймалуу-Таш же Манас күмбөзү жөнүндө таблица толтургула: <i>Кайда жайгашкан? Эмнеси менен кызыктуу? Мен эмнени билгим келет?</i> Анан класска <b>жөнүндө</b>, <b>аркылуу</b>, <b>көздөй</b> сөздөрүн колдонуп айтып бергиле.</p>"},
+ {t:"diary",i:"write",h:"Күндөлүк: «Мен тема боюнча эмнелерди билем / билгим келет / билдим?»",cols:["Билем","Билгим келет","Билдим"]},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t1l3",title:"Кайталоо: Менин өлкөм",ky:"Жандооч сөздөрдү бекемдейбиз",review:true,
+ gram:"Кайталоо: <b>менен, тууралуу, жөнүндө, аркылуу, боюнча, үчүн, сыяктуу, көздөй, карай</b>.",
+ tasks:[
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Ал досу ___ театрга барды.",o:["менен","жөнүндө","аркылуу","боюнча"],a:0},{q:"Мугалим Таш-Рабат ___ айтып берди.",o:["жөнүндө","менен","көздөй","сыяктуу"],a:0},{q:"Биз коридор ___ залга киребиз.",o:["аркылуу","жөнүндө","үчүн","менен"],a:0},{q:"Бул сүйлөмдө ___ жандооч бар: «Ал тоону карай басты».",o:["карай","менен","үчүн","боюнча"],a:0},{q:"Эне ___ белек алдым.",o:["үчүн","аркылуу","боюнча","карай"],a:0}]},
+ {t:"match",i:"pair",h:"Жупташтыргыла: синонимдер.",pairs:[["бөтөн жерлер","чет өлкөлөр"],["жөндөмдүү","шыктуу"],["рабат","кербен сарай"],["чеп","бекем дубал"],["кооз","сулуу"]]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Кыргызстан Орто Азияда [жайгашкан].","Бишкек — Кыргызстандын [борбору].","Мен Ысык-Көл [жөнүндө] эссе жазам.","Туристтер Таш-Рабатка унаа [менен] барышат.","Биз тоону [карай] басып жатабыз."]},
+ {t:"game",i:"game",h:"Оюндарды ойногула!",theme:1,gs:["tug","chuko","quiz"]},
+ {t:"act",i:"group",h:"Долбоор: «Саякат боюнча маалымат баракчасы» (топ менен)",html:"<ol><li>Кыргызстандын бир жерин тандагыла (Ысык-Көл, Сон-Көл, Ала-Арча, Таш-Рабат...).</li><li>Баракчага жазгыла: кайда жайгашкан, кантип барабыз (унаа <b>менен</b>), эмнеси менен кызыктуу.</li><li>Класска кыргызча айтып бергиле.</li></ol>"},
+ {t:"light",h:"Светофор аркылуу теманы баала."}]}
+],
+pool:[
+{c:"v",q:"«Борбор» деген сөздүн орусча котормосу:",o:["столица","граница","народ","путешествие"]},
+{c:"v",q:"Кербендер эс алган имарат:",o:["кербен сарай","мектеп","дарыкана","стадион"]},
+{c:"v",q:"Кыргызстандын мамлекеттик тили:",o:["кыргыз тили","орус тили","англис тили","кытай тили"]},
+{c:"v",q:"«Эгемендүүлүк» деген сөз эмнени билдирет?",o:["независимость","транспорт","отпуск","праздник"]},
+{c:"v",q:"Саякатка чыккан адамды ____ дейбиз.",o:["саякатчы","мугалим","дарыгер","соодагер"]},
+{c:"g",q:"Мен досум ____ кинотеатрга бардым.",o:["менен","жөнүндө","аркылуу","боюнча"]},
+{c:"g",q:"Ал Ысык-Көл ____ айтып берди.",o:["жөнүндө","менен","үчүн","сыяктуу"]},
+{c:"g",q:"Биз тоолор ____ басып өттүк.",o:["аркылуу","жөнүндө","менен","боюнча"]},
+{c:"g",q:"Бул белек сен ____.",o:["үчүн","аркылуу","боюнча","карай"]},
+{c:"g",q:"Кербен жолду ____ жөнөдү. (жол)",o:["көздөй","менен","жөнүндө","боюнча"]},
+{c:"c",q:"Таш-Рабат кайсы облустун аймагында жайгашкан?",o:["Нарын","Ош","Баткен","Талас"]},
+{c:"c",q:"Кыргыз элинин улуу эпосу:",o:["«Манас»","«Илиада»","«Шахнаме»","«Гамлет»"]},
+{c:"c",q:"Кыргызстан эгемендүүлүгүн кайсы жылы алган?",o:["1991","1945","1975","2005"]},
+{c:"c",q:"Ысык-Көл Кыргызстандын кайсы тарабында жайгашкан?",o:["Чыгышында","Батышында","Түштүгүндө","Түндүгүндө"]},
+{c:"c",q:"«Туулган жердин топурагы — алтын» деген макал эмне жөнүндө?",o:["Мекенди баалоо жөнүндө","Соода жөнүндө","Ооруу жөнүндө","Ата-эне жөнүндө"]}
+],
+speak:["Кыргызстан жөнүндө 3 сүйлөм айтып бер.","Жайында кайда барганың жөнүндө айтып бер.","Таш-Рабат уламышын өз сөзүң менен айтып бер.","Туристке Кыргызстанга кандай кеңеш берет элең?","«Менен», «жөнүндө», «аркылуу» сөздөрү менен сүйлөм түз.","Туулган жериң жөнүндө айтып бер."],
+riddles:[
+{q:"Бутум жок, бирок узун созулуп жатам. Мени менен кербендер, унаалар жүрөт. Мен эмнемин?",a:"Жол",ky:"Бир жерден экинчи жерге алып барат."},
+{q:"Тоонун койнунда таштан курулганмын, кербендер менин үйүмдө түнөгөн. Мен эмнемин?",a:"Таш-Рабат (кербен сарай)",ky:"Нарын облусунда жайгашкан."},
+{q:"Саякатчынын чөнтөгүндө жүрөм, жолун көрсөтөм, бирок сүйлөбөйм. Мен эмнемин?",a:"Карта",ky:"Жерди сүрөттөп көрсөтөт."}
+]});
+
+BOOK.themes.push({n:2,color:"#d62839",em:"👨‍👩‍👧",en:"Үй-бүлө",ky:"Адамдын мүнөзүнө эмнелер таасир этет",
+intro:"Сүйлөмдүн баш мүчөлөрү (ээ, баяндооч) жана айкындооч мүчөлөрү (аныктооч, толуктооч, бышыктооч). Үй-бүлө жана адамдын мүнөзү жөнүндө сүйлөйбүз.",
+gloss:[["үй-бүлө","семья"],["үй-бүлөлүк дарак","семейное древо"],["муун","поколение"],["чоң ата","дедушка"],["чоң эне","бабушка (по отцу)"],["таене","бабушка (по матери)"],["небере","внук, внучка"],["чөбөрө","правнук"],["эже","старшая сестра"],["байке","старший брат"],["ини","младший брат"],["карындаш","младшая сестра"],["кенже","младший, последыш"],["ортончу","средний"],["мүнөз","характер"],["мүнөздөмө","характеристика"],["сапат","качество"],["жакшы сапат","положительное качество"],["терс сапат","отрицательное качество"],["ак көңүл","добродушный"],["ак жүрөк","добросердечный"],["жүрөгү жумшак","мягкосердечный"],["мээримдүү","ласковый, любящий"],["мээримсиз","бессердечный"],["эмгекчил","трудолюбивый"],["жалкоо","ленивый"],["меймандос","гостеприимный"],["чынчыл","честный, справедливый"],["алдамчы","обманщик"],["калпычы","лжец"],["сынчы","критикан"],["мактанчаак","хвастливый"],["даттанчаак","жалобщик"],["уялчаак","стеснительный"],["урушчаак","скандальный"],["куу","хитрый"],["ачуулуу","злой, вспыльчивый"],["кыялы чукул","вспыльчивый"],["күлкүлүү","смешной"],["шайыр","весёлый"],["кичи пейил","скромный"],["боорукер","сострадательный"],["берешен","щедрый"],["сылык","вежливый"],["ыймандуу","нравственный, совестливый"],["ыймансыз","бессовестный"],["орой","грубый"],["таарынчаак","обидчивый"],["ыйлаак","плакса"],["коркок","трусливый"],["сүрдүү","суровый"],["айкөл","великодушный"],["эгоист","эгоист"],["тапкыч","находчивый"],["адамкерчиликтүү","гуманный"],["жоопкерчиликтүү","ответственный"],["кам көр-","заботиться"],["багат","кормит, растит"],["коргойт","защищает"],["сооротот","утешает"],["сагынат","скучает"],["тарбиялайт","воспитывает"],["эркелетет","балует, ласкает"],["маанай","настроение"],["мамиле","отношение"],["уруш-талаш","ссора"],["жылмай-","улыбаться"],["өзгөрт-","изменять"],["таасир","влияние"],["тарбия","воспитание"],["тукум","род, наследственность"],["акын","поэт"],["эскерүү","воспоминание"],["санааркайт","беспокоится"],["чаалыкты","устал"],["ыйык","священный"],["абайла-","беречь"]],
+lessons:[
+{id:"t2l1",title:"Сенин үй-бүлөң кандай?",ky:"Сүйлөмдүн баш мүчөлөрү: ээ жана баяндооч",
+ gram:"Сүйлөмдүн баш мүчөлөрү: <b>ЭЭ</b> (Ким? Эмне? Кимдер? Эмнелер?) жана <b>БАЯНДООЧ</b> (Эмне кылат? Эмне кылды? Эмне кылышат?). Мисалы: <i>Эне (ээ) сүйөт (баяндооч).</i>",
+ lex:"күлкүлүү, шайыр, кичи пейил, боорукер, ак көңүл, бактылуу, кам көрөт, багат, жардам берет, коргойт, сооротот, сагынат, тарбиялайт, орой",
+ tasks:[
+ {t:"vocab",i:"think",h:"Үй-бүлө жөнүндө сөздөрдү үйрөнгүлө.",w:[["күлкүлүү","смешной","","😄"],["шайыр","весёлый","","😊"],["кичи пейил","скромный","","🙂"],["боорукер","сострадательный","","🤲"],["ак көңүл","добродушный","","💛"],["бактылуу","счастливый","","🌈"],["кам көрөт","заботится","","🤗"],["багат","растит, кормит","","🍲"],["жардам берет","помогает","","🤝"],["коргойт","защищает","","🛡️"],["сооротот","утешает","","🫂"],["сагынат","скучает","","💭"],["тарбиялайт","воспитывает","","📚"],["орой","грубый","","😠"],["үй-бүлө","семья","","👨‍👩‍👧"],["муун","поколение","","🌳"]]},
+ {t:"box",html:"<p><b>Ээ</b> — ким? эмне? &nbsp; <b>Баяндооч</b> — эмне кылат?</p><table><tr><th>Ээ</th><th>Баяндооч</th></tr><tr><td>Эне</td><td>сүйөт, кам көрөт</td></tr><tr><td>Ата</td><td>иштейт, багат, коргойт</td></tr><tr><td>Балдар</td><td>жардам беришет</td></tr></table><p>Бирдик: <i>жашайт</i> — көптүк: <i>жашашат</i>.</p>"},
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Атамдын атасы мага ким болот?",o:["чоң ата","таенем","байке","чоң эне"],a:0},{q:"Энемдин энеси мага ким болот?",o:["таене","чоң ата","эже","карындаш"],a:0},{q:"Чоң атамдын чоң атасы мага ким болот?",o:["баба (ата-бабам)","байкем","иним","таенем"],a:0},{q:"Үй-бүлөлүк дарак эмнени көрсөтөт?",o:["үй-бүлө мүчөлөрүнүн ортосундагы туугандыкты","өлкөнүн картасын","сабактын тартибин","аба ырайын"],a:0}]},
+ {t:"sort",i:"think",h:"Сөздөрдү бөлгүлө: ээ же баяндооч.",cols:["Ээ (ким? эмне?)","Баяндооч (эмне кылат?)"],items:[["эне",0],["балдар",0],["чоң ата",0],["эжем",0],["багат",1],["сагынат",1],["тарбиялайт",1],["жардам берет",1],["коргойт",1]]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү туура сөз менен толуктагыла.",items:["Менин байкем абдан [шайыр*|орой|ачуулуу]. Ал секиргенде жаш баладай кыйкырат.","Менин эжем өтө [мээримдүү*|жалкоо|урушчаак]. Ал эч качан бизди жалгыз таштабайт.","Менин досум [ачуулуу*|күлкүлүү|шайыр], эгерде кимдир бирөө туура эмес кылса.","Сен өтө [мактанчаак*|уялчаак|боорукер], өз оюңду бербей талашасың.","Мен абдан [жалкоо*|эмгекчил|меймандос], көчөгө баргым келбесе, эч ким мени мажбурлай албайт."]},
+ {t:"cluster",i:"group",h:"<b>Үй-бүлө</b> деген сөзгө ассоциацияларыңарды жазгыла.",center:"үй-бүлө",slots:6,seed:["сүйүү","үй"]},
+ {t:"read",i:"read",h:"Адамдардын мүнөздөмөсүн окугула.",title:"Адамдын сапаттары",text:["Элибиз илгертен адамдагы сапаттарды оң жана терс деп экиге бөлөт.","Берешен адам колундагы барын муктаж адамдарга, жакындарына бөлүп берет. Сылык адам улуу-кичүүгө бирдей сылык кайрылат, дайыма салам берүүнү унутпайт. Кыргыз элинде «Сен деген сенек сөз, сиз деген сылык сөз» деген макал бар.","Сынчы адамдар экиге бөлүнөт: бири калыс баа берет, экинчиси өзүнүн башындагы төөнү көрбөй, бирөөнүн башындагы чөптү көрөт. Калпычы адам «Аткарам, оңой иш» деп ишендирет, бирок иш убактысында жок болуп калат.","Илгери терс сапаттары бар адамдарды аксакалдар эл ичинде тарбиялап, туура жолго салышкан. Ыймандуу адам өзүнүн жакшы сапаттарын балдарына өткөрүп берет."],qs:[{t:"tf",i:"pair",h:"<b>Туура</b> же <b>ката</b>.",qs:[{s:"Берешен адам колундагысын муктаж адамдарга бөлүп берет.",a:true},{s:"Сылык адам улууларга салам бербейт.",a:false,fix:"Сылык адам дайыма салам берет."},{s:"Калпычы адам убадасын аткарат.",a:false,fix:"Калпычы убадасын аткарбайт, жок болуп калат."},{s:"Илгери аксакалдар терс сапаттуу адамдарды тарбиялашкан.",a:true}]},{t:"open",i:"pair",h:"Талкуулагыла.",qs:["Адамдардын кайсы сапаттары сага жагат? Эмне үчүн?","Кайсы сапатты досторго эң маанилүү деп эсептейсиң?"]}]},
+ {t:"match",i:"pair",h:"Антонимдерин тапкыла.",pairs:[["ак көңүл","кара жүрөк"],["чынчыл","алдамчы"],["эмгекчил","жалкоо"],["ыймандуу","ыймансыз"],["ачуулуу","жумшак"],["мээримдүү","мээримсиз"]]},
+ {t:"write",i:"write",h:"Досуңдун үй-бүлөсү жөнүндө жазгыла (4–5 сүйлөм).",prompt:"Үлгү: <i>Менин досумдун ата-энеси ... адамдар деп ойлойм, анткени алар ... Алардын мага болгон мамилеси ... .</i>",min:30,sample:"Менин досумдун ата-энеси абдан боорукер адамдар деп ойлойм, анткени алар ар дайым башкаларга жардам беришет. Алардын мага болгон мамилеси жылуу. Мен да ушундай үй-бүлө болсун деп кыялданам."},
+ {t:"light",h:"Светофор аркылуу сабакта аткарган жумушуңду баала."}]},
+
+{id:"t2l2",title:"Адамдын мүнөзү",ky:"Айкындооч мүчөлөр: аныктооч, толуктооч, бышыктооч",
+ gram:"<b>Аныктооч</b> — Кандай? Кайсы? Канча? (<i>мээримдүү эне</i>). <b>Толуктооч</b> — Кимди? Эмнени? Кимге? (<i>балдарды багат</i>). <b>Бышыктооч</b> — Кантип? Качан? Кайда? Канчалык? (<i>үйдө көп сүйлөйт</i>).",
+ lex:"ак ниет, мээримдүү, эмгекчил, меймандос, чынчыл, жалкоо, сүрдүү, мактанчаак, даттанчаак, уялчаак, урушчаак, куу, ачуулуу",
+ tasks:[
+ {t:"vocab",i:"think",h:"Мүнөздү сүрөттөгөн сөздөр.",w:[["ак ниет","чистосердечный","","🕊️"],["мээримдүү","ласковый","","💗"],["эмгекчил","трудолюбивый","","⚒️"],["меймандос","гостеприимный","","🍵"],["чынчыл","честный","","⚖️"],["жалкоо","ленивый","","🛋️"],["сүрдүү","суровый","","😐"],["мактанчаак","хвастливый","","📣"],["даттанчаак","жалобщик","","😟"],["уялчаак","стеснительный","","😳"],["урушчаак","скандальный","","💢"],["куу","хитрый","","🦊"],["ачуулуу","вспыльчивый","","😡"],["берешен","щедрый","","🎁"],["сылык","вежливый","","🙇"],["таарынчаак","обидчивый","","😢"]]},
+ {t:"box",html:"<table><tr><th>Мүчө</th><th>Суроо</th><th>Мисал</th></tr><tr><td><b>Аныктооч</b></td><td>кандай? кайсы? канча?</td><td><u>Мээримдүү</u> эне балдарын эркелетет.</td></tr><tr><td><b>Толуктооч</b></td><td>кимди? эмнени? кимге?</td><td>Эне <u>балдарын</u> эркелетет.</td></tr><tr><td><b>Бышыктооч</b></td><td>кантип? качан? кайда?</td><td>Ал <u>үйдө</u> көп сүйлөйт.</td></tr></table>"},
+ {t:"sort",i:"think",h:"Сөздөрдү суроосуна карап бөлгүлө.",cols:["Аныктооч (кандай?)","Толуктооч (кимди? эмнени?)","Бышыктооч (кантип? кайда?)"],items:[["мээримдүү",0],["эмгекчил",0],["шайыр",0],["балдарды",1],["апасын",1],["тамакты",1],["үйдө",2],["көп",2],["эртең менен",2],["жай",2]]},
+ {t:"read",i:"read",h:"Окугула. Суроолорго жооп бергиле.",title:"Кичинекей Турар",text:["Апам мээримдүү, мүнөзү жумшак, ак жүрөк эле. Ал каза болгондо Турар 4,5 жашта болчу. Күнүгө кечинде: «Апам тиякта караңгыда жалгыз коркот. Жүргүлө, барып алып келели», — деп ыйлачу.","Турар кичинекейинен эле абдан акылдуу, шайыр бала болгон. Айылдын көчөлөрү баткак эле. Турар басып токтоп, баспай калат. «Ой, Туке, баспайсыңбы!» — десем: «Эжеке, көлөчүмдү баткак бербей жатат», — деп күлдүрчү.","Кичинекей Турар биз жашаган көчөнү: «Бул менин көчөм», — деп келчү. Сары-Булак айылынын борбордук көчөсү азыр «Турар Кожомбердиев көчөсү» деп аталат.","(Акын Турар Кожомбердиевдин эжесинин эскерүүсүнөн)"],qs:[{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Апасы каза болгондо Турар канча жашта болчу?",o:["4,5 жашта","10 жашта","15 жашта","1 жашта"],a:0},{q:"Турар эжесин эмне деп күлдүргөн?",o:["«Көлөчүмдү баткак бербей жатат»","«Мен мектепке барам»","«Апам келди»","«Мен чарчадым»"],a:0},{q:"Азыр Сары-Булак айылынын борбордук көчөсү кандай аталат?",o:["Турар Кожомбердиев көчөсү","Манас көчөсү","Чүй проспекти","Ала-Тоо көчөсү"],a:0}]},{t:"tf",i:"pair",h:"Каталарды таап оңдогула: <b>туура</b> же <b>ката</b>.",qs:[{s:"Апасы каза болгондо Турар 10 жашта болгон.",a:false,fix:"Турар 4,5 жашта болгон."},{s:"Анда айылдын көчөлөрү таза болчу.",a:false,fix:"Көчөлөр баткак болчу."},{s:"Турар кичинекейинен эле акылдуу, шайыр болгон.",a:true},{s:"Кичинекей Турар: «Бул менин көчөм», — деп келчү.",a:true}]},{t:"open",i:"pair",h:"Жуп менен талкуулагыла.",qs:["Кичинекей Турардын кайсы мүнөздөрү сага жакты? Эмне үчүн?","Сенин апаң кандай адам?"]}]},
+ {t:"poem",i:"read",h:"Ырдан үзүндү окугула. Маанисин түшүндүргүлө.",title:"«Эне жүрөгү» поэмасынан (Т. Кожомбердиев)",lines:["Камын көрүп жүрө берип балдардын,","Калбай калат чаалыкканы эсинде.","Кенжесине суук тийип калдыбы?","Ортончусу сабагына бардыбы?"]},
+ {t:"gap",i:"write",h:"Сүйлөмдөгү мүчөнү аныктагыла: <b>ээ</b>, <b>баяндооч</b>, <b>аныктооч</b> же <b>толуктооч</b>?",items:["«Мээримдүү эне балдарын багат» деген сүйлөмдө <b>эне</b> — [ээ*|баяндооч|аныктооч|толуктооч].","Ушул сүйлөмдө <b>багат</b> — [баяндооч*|ээ|аныктооч|толуктооч].","Ушул сүйлөмдө <b>мээримдүү</b> — [аныктооч*|ээ|баяндооч|толуктооч].","Ушул сүйлөмдө <b>балдарын</b> — [толуктооч*|ээ|баяндооч|аныктооч]."]},
+ {t:"dialogue",i:"listen",h:"Таене жөнүндө диалог. Ролдорго бөлүнүп ойногула.",lines:[["А","Бул ким?"],["Б","Бул менин таенем. Ал тоодо жашайт."],["А","Абдан кооз жер. Таенең ким менен жашайт?"],["Б","Кызы менен жашайт. Таенемдин небереси да, чөбөрөсү да бар."],["А","Анын мүнөзү кандай?"],["Б","Таенем абдан ак көңүл, мээримдүү, эмгекчил адам."],["А","Кызыктуу экен."]]},
+ {t:"act",i:"pair",h:"Оюн: «Ким экенин тап!» (жуп менен)",html:"<p>Бир окуучу таанымал адамдын мүнөзүн сүрөттөйт (аты-жөнүн айтпай): <i>Ал эмгекчил, акылдуу, мээримдүү...</i> Экинчиси ким экенин табат. Анан ролдорду алмаштыргыла.</p>"},
+ {t:"prov",i:"read",h:"Макалдарды окугула.",ids:[10,13],order:2},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t2l3",title:"Кайталоо: Менин үй-бүлөм",ky:"Сүйлөм мүчөлөрүн кайталайбыз",review:true,
+ gram:"Кайталоо: <b>ээ, баяндооч, аныктооч, толуктооч, бышыктооч</b> жана мүнөздү билдирген сөздөр.",
+ tasks:[
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Сүйлөмдүн ээси кайсы суроого жооп берет?",o:["Ким? Эмне?","Кандай?","Кайда?","Канча?"],a:0},{q:"Баяндооч кайсы суроого жооп берет?",o:["Эмне кылат?","Ким?","Кайсы?","Качан?"],a:0},{q:"«Эмгекчил» деген сөздүн антоними:",o:["жалкоо","шайыр","мээримдүү","сылык"],a:0},{q:"«Ак көңүл» деген сөз каймана мааниде эмнени билдирет?",o:["жүрөгү таза, боорукер адам","ак түстөгү көз","көзү начар адам","кыйын адам"],a:0},{q:"«Сенек сөз» менен «сылык сөз» кайсы макалда келет?",o:["Сен деген сенек сөз, сиз деген сылык сөз","Ырыс алды — ынтымак","Жети өлчөп, бир кес","Китеп — билимдин булагы"],a:0}]},
+ {t:"sort",i:"think",h:"Мүнөз сөздөрүн <b>оң</b> жана <b>терс</b> деп бөлгүлө.",cols:["Оң сапат","Терс сапат"],items:[["берешен",0],["сылык",0],["чынчыл",0],["эмгекчил",0],["калпычы",1],["жалкоо",1],["мактанчаак",1],["ачуулуу",1]]},
+ {t:"gap",i:"write",h:"Үлгү боюнча сүйлөм түзүү үчүн сөздөрдү толуктагыла.",items:["Эне [балдарын] кам көрөт.","Ата үй-бүлөнү [багат].","Балдар апасына жардам [беришет].","Таенем абдан [мээримдүү] адам.","Биз ата-энебизди [сагынабыз]."]},
+ {t:"game",i:"game",h:"Оюндарды ойногула!",theme:2,gs:["tug","chuko","quiz"]},
+ {t:"act",i:"group",h:"Долбоор: «Менин үй-бүлөлүк дарагым»",html:"<ol><li>Үй-бүлөңөрдүн дарагын жети муунга чейин тартып, ар бир адамга бир мүнөздүү сапатты жазгыла.</li><li>Класска: <i>Менин чоң атам ... Ал ... адам.</i> деп айтып бергиле.</li></ol>"},
+ {t:"light",h:"Светофор аркылуу теманы баала."}]}
+],
+pool:[
+{c:"v",q:"«Эмгекчил» деген сөздүн антоними:",o:["жалкоо","шайыр","мээримдүү","меймандос"]},
+{c:"v",q:"«Чынчыл» деген сөздүн антоними:",o:["алдамчы","боорукер","шайыр","эмгекчил"]},
+{c:"v",q:"Конокту жакшы тосуп алган адам ____.",o:["меймандос","ачуулуу","уялчаак","жалкоо"]},
+{c:"v",q:"Эне менен атанын энеси ____.",o:["чоң эне же таене","карындаш","байке","небере"]},
+{c:"v",q:"Бир үй-бүлөдөгү муундарды көрсөткөн сүрөт:",o:["үй-бүлөлүк дарак","карта","жаңылык","өтүнүч кат"]},
+{c:"g",q:"«Эне балдарын багат» деген сүйлөмдө «эне» — ____.",o:["ээ","баяндооч","аныктооч","бышыктооч"]},
+{c:"g",q:"«Эмне кылат?» деген суроого жооп берген мүчө:",o:["баяндооч","ээ","аныктооч","толуктооч"]},
+{c:"g",q:"«Мээримдүү эне» — «мээримдүү» кайсы мүчө?",o:["аныктооч","ээ","баяндооч","бышыктооч"]},
+{c:"g",q:"«Ал үйдө көп сүйлөйт» — «үйдө» кайсы мүчө?",o:["бышыктооч","ээ","баяндооч","аныктооч"]},
+{c:"g",q:"Балдар жардам ____. (көптүк)",o:["беришет","берет","берди","бермек"]},
+{c:"c",q:"«Сен деген сенек сөз, сиз деген сылык сөз» деген макалдын мааниси:",o:["Улууга сылык кайрылуу керек","Көп сүйлөө керек","Эрте турууну билүү керек","Тамак бышыруу керек"]},
+{c:"c",q:"Сары-Булак айылынын борбордук көчөсү кимдин атынан аталат?",o:["Турар Кожомбердиев","Манас","Токтогул","Курманжан датка"]},
+{c:"c",q:"Кыргыздарда «жети ата» деген эмне?",o:["Жети муундагы ата-бабалар","Жети тууган бала","Жети айыл","Жети өнөр"]},
+{c:"c",q:"«Балалуу үй — базар» деген макал эмне жөнүндө?",o:["Балдар бар үй шаңдуу болот","Базарга баруу керек","Үй сатуу керек","Көп иштөө керек"]},
+{c:"c",q:"Кыргыз үй-бүлөсүндө улууларга кандай мамиле кылуу керек?",o:["Сый менен","Тоотпой","Корксуз","Бийлик менен"]}
+],
+speak:["Үй-бүлөң жөнүндө 3 сүйлөм айтып бер.","Апаңдын мүнөзүн сүрөттөп бер.","Досуңдун мүнөзү кандай? Айтып бер.","«Ээ» жана «баяндооч» менен сүйлөм түз.","Адамдын кайсы сапаттары сага жагат?","Чоң атаң же таенең жөнүндө айтып бер."],
+riddles:[
+{q:"Үйдүн ичинде жылуулук, ар дайым сени ойлойт, ооруп калсаң жаныңда. Ал ким?",a:"Эне",ky:"Эң жакын адам."},
+{q:"Бир тамырдан өскөн жети бутак, ар биринде өз ысымы бар. Бул эмне?",a:"Үй-бүлөлүк дарак (шежире)",ky:"Муундарды көрсөтөт."},
+{q:"Мен сөз эмесмин, бирок сени сыйлап «сиз» деп айтам. Мени ким колдонот?",a:"Сылык адам",ky:"Макалда айтылат."}
+]});
+
+BOOK.themes.push({n:3,color:"#2d8a6e",em:"🛠️",en:"Кесип",ky:"Менин келечектеги кесибиме кайсы сабактар керектүү?",
+intro:"Кесиптер жана мектеп сабактары жөнүндө сүйлөйбүз. Аныктооч (кандай? кайсы? канча? канчанчы? кимдин?) жана анын милдетин аткарган сөз түркүмдөрү менен таанышабыз.",
+gloss:[["кесип","профессия"],["өнөр","ремесло, искусство"],["жөндөм","способность"],["шык","талант, способность"],["шыктуу","способный"],["тандоо","выбор"],["танда-","выбирать"],["келечек","будущее"],["болочок","будущее"],["кыял","мечта"],["кыялдан-","мечтать"],["дарыгер","врач"],["доктур","доктор"],["мугалим","учитель"],["инженер","инженер"],["котормочу","переводчик"],["тилмеч","переводчик, толмач"],["журналист","журналист"],["редактор","редактор"],["акын","поэт"],["жазуучу","писатель"],["окумуштуу","учёный"],["программист","программист"],["дизайнер","дизайнер"],["экскурсовод","экскурсовод"],["дипломат","дипломат"],["филолог","филолог"],["биолог","биолог"],["химик","химик"],["энергетик","энергетик"],["экономист","экономист"],["предмет","предмет"],["сабак","урок; стебель"],["математика","математика"],["физика","физика"],["химия","химия"],["биология","биология"],["информатика","информатика"],["адабият","литература"],["тарых","история"],["география","география"],["чет тил","иностранный язык"],["дене тарбия","физкультура"],["талап","требование"],["тажрыйба","опыт"],["билим","знание, образование"],["жогорку окуу жайы","вуз"],["окуу жайы","учебное заведение"],["интернатура","интернатура"],["ийгилик","успех"],["мүмкүнчүлүк","возможность"],["жеңилдик","облегчение, льгота"],["ойго салат","заставляет задуматься"],["түйшөлтөт","беспокоит"],["чыдамкай","терпеливый"],["чыдамкайлык","терпение"],["аракетчилдик","старание, усердие"],["эмгекчилдик","трудолюбие"],["жооптуу","ответственный"],["олуттуу","серьёзный, важный"],["маселе","задача, вопрос"],["өмүр","жизнь"],["узартат","продлевает"],["айыктырат","излечивает"],["чарба","хозяйство"],["тармак","отрасль"],["ишмердик","деятельность"],["эмгек","труд"],["лирика","лирика"],["чыгарма","произведение"],["ыр жыйнагы","сборник стихов"],["обончу","композитор"],["адабий сыйлык","литературная премия"]],
+lessons:[
+{id:"t3l1",title:"Кесип тандоо",ky:"Аныктооч: кандай? кайсы? канча?",
+ gram:"<b>Аныктооч</b> заттын сынын, санын, иретин же кимге таандык экенин билдирет: <b>Кандай? Кайсы? Канча? Канчанчы? Кимдин? Эмненин?</b> Мисалы: <i>Мага кыргыз тили жана адабияты предметтери жагат.</i>",
+ lex:"кесип, жөндөм, өнөр, танда-, умтул-, өмүр, узак, узарт-, айыктыр-, тажрыйба, талап",
+ tasks:[
+ {t:"vocab",i:"think",h:"Кесиптер жана сабактар.",w:[["дарыгер","врач","","👩‍⚕️"],["мугалим","учитель","","👨‍🏫"],["котормочу","переводчик","","🌐"],["программист","программист","","💻"],["журналист","журналист","","📰"],["энергетик","энергетик","","⚡"],["дизайнер","дизайнер","","✂️"],["экскурсовод","экскурсовод","","🗺️"],["дипломат","дипломат","","🏛️"],["акын","поэт","","🪶"],["жөндөм","способность","","💡"],["тажрыйба","опыт","","📈"],["талап","требование","","📋"],["тандоо","выбор","","☑️"],["өнөр","ремесло, искусство","","🪡"],["ийгилик","успех","","🏆"]]},
+ {t:"match",i:"pair",h:"Макалды анын маанисине жупташтыргыла.",pairs:[["Ар бир кесип — ардактуу.","Баары эл үчүн керек, баарын сыйла"],["Өнөрлүү өргө сүрөйт.","Кесип билген адам өсөт"],["Өнөр алды — кызыл тил.","Тилди жакшы билген адам ийгиликке жетет"]]},
+ {t:"mc",i:"think",h:"Төмөнкү макалдардын кайсынысы кесипке байланыштуу эмес?",qs:[{q:"Кесипке байланыштуу эмес макалды тапкыла.",o:["Ырыс алды — ынтымак.","Ар бир кесип ардактуу.","Өнөрүң болсо, өргө чап.","Өнөрлүү өргө сүрөйт."],a:0}]},
+ {t:"box",html:"<p>Келечектеги кесибиң эмнеден көз каранды?</p><ul><li>кесиптер тууралуу маалыматты билүү</li><li>жеке пландар жана кызыкчылык</li><li>жөндөм жана шык</li><li>үй-бүлөнүн, мугалимдин пикири</li></ul><p><b>Эрежелер:</b> 1) Кесиптер жөнүндө көп билгиле. 2) Өз кызыкчылыгыңды, шыгыңды, ден соолугуңду эске алгыла. 3) Кесиптин канчалык керектүүлүгүн билгиле. 4) Ата-эне, мугалим жана дарыгер менен кеңешкиле. 5) Тандаган кесибиңди эң мыкты үйрөнгүлө.</p>"},
+ {t:"read",i:"read",h:"Окугула. Суроолорго жооп бергиле.",title:"Жакшы көргөн сабак кесипти аныктай алабы?",text:["Биология сабагын жакшы көргөндөр көбүнчө медицина же айыл чарба тармагын тандашат. Информатиканы жактырган окуучулар программист, робототехник кесибин жактырышат. Физиканы жактыргандар энергетик боло алышат, ал эми химияны сүйгөндөр химик-технолог.","Математиканы жактыргандар экономист, каржы адиси же IT кызматкери боло алышат. Адабиятты жактыргандар журналист, редактор же сценарист болушат. Алар билим берүү тармагында да иштей алышат.","Бүгүн дүйнө тез өзгөрүүдө, ошондуктан өзүңөргө: «Мен жакшы көргөн предметти окуп жатып, кайсы көндүмдөрдү өнүктүрдүм?» деген суроону бергиле. Мисалы, алгебра менен геометрия системалуу ой жүгүртүүнү өнүктүрөт. Тарых башка элдердин маданиятын түшүнүүгө жардам берет."],qs:[{t:"match",i:"pair",h:"Сабакты кесип менен жупташтыргыла.",pairs:[["биология","дарыгер, айыл чарба адиси"],["информатика","программист"],["физика","энергетик"],["химия","химик-технолог"],["адабият","журналист, редактор"],["математика","экономист, IT адиси"]]},{t:"open",i:"pair",h:"Суроолорго жооп бергиле.",qs:["Сен кайсы предметтерге кызыгасың?","Келечекте кайсы кесиптер абдан керек болот деп ойлойсуң?"]}]},
+ {t:"gap",i:"write",h:"Суроолорго жооп жазгыла. Үлгү: <i>Дарыгер болуш үчүн биология сабагын жакшы окуш керек.</i>",items:["Котормочу болуш үчүн [чет тилдерди/тил сабактарын] жакшы окуш керек.","Программист болуш үчүн [информатиканы/математиканы] жакшы окуш керек.","Дарыгер болуш үчүн [биологияны/химияны] жакшы окуш керек.","Журналист болуш үчүн [адабиятты/кыргыз тилин] жакшы окуш керек."]},
+ {t:"sort",i:"think",h:"Суроосуна карап бөлгүлө: <b>кандай?</b> же <b>канча?</b>",cols:["Кандай?","Канча?"],items:[["жооптуу кесип",0],["кызыктуу сабак",0],["мыкты дарыгер",0],["үч предмет",1],["он эки жумуш",1],["беш окуучу",1]]},
+ {t:"write",i:"write",h:"Өзүң үчүн кесип тандоо планын жазгыла (4–5 сүйлөм).",prompt:"Үлгү: <i>Мен келечекте ... болгум келет. Ал үчүн ... сабагын жакшы окуш керек. Мен ... жөндөмүм бар.</i>",min:30,sample:"Мен келечекте программист болгум келет. Ал үчүн информатиканы жана математиканы жакшы окуш керек. Менин компьютер менен иштөөгө жөндөмүм бар. Мен англис тилин да жакшы үйрөнөм."},
+ {t:"prov",i:"read",h:"Макалдарды окугула.",ids:[0,1,2],order:2},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t3l2",title:"Менин кыялым",ky:"Аныктоочтун милдетин аткарган сөз түркүмдөрү",
+ gram:"Аныктооч болуп <b>сын атооч</b> (кандай? — <i>мыкты дарыгер</i>), <b>сан атооч</b> (канча? канчанчы? — <i>үч кесип, үчүнчү сабак</i>), <b>атоочтук</b> (<i>иштеген адам</i>) жана <b>ээлик</b> (кимдин? — <i>Русландын кыялы</i>) келет.",
+ lex:"кыял, кыялдан-, чет өлкө, тилмеч, чыдамкай, аракет, эмгекчил, олуттуу, маселе, адабий сыйлык, чыгарма, ыр жыйнагы",
+ tasks:[
+ {t:"vocab",i:"think",h:"Текстте кездешүүчү сөздөр.",w:[["кыял","мечта","","💭"],["кыялдан-","мечтать","","✨"],["чет өлкө","заграница","","🌍"],["тилмеч","переводчик, толмач","","🗣️"],["чыдамкай","терпеливый","","🪨"],["аракет","старание","","🏃"],["эмгекчил","трудолюбивый","","⚒️"],["олуттуу","серьёзный","","🎯"],["маселе","вопрос, задача","","❓"],["жогорку окуу жайы","вуз","","🎓"],["ыр жыйнагы","сборник стихов","","📖"],["адабий сыйлык","литературная премия","","🏅"],["чыгарма","произведение","","📝"],["обончу","композитор","","🎼"],["жаратуучу","создатель","","🎨"],["лирика","лирика","","💞"]]},
+ {t:"box",html:"<table><tr><th>Сөз түркүмү</th><th>Суроо</th><th>Мисал</th></tr><tr><td>Сын атооч</td><td>кандай?</td><td><u>олуттуу</u> маселе</td></tr><tr><td>Сан атооч</td><td>канча? канчанчы?</td><td><u>үч</u> кесип, <u>үчүнчү</u> сабак</td></tr><tr><td>Атоочтук</td><td>кандай?</td><td><u>иштеген</u> адам</td></tr><tr><td>Ээлик</td><td>кимдин? эмненин?</td><td><u>Русландын</u> кыялы</td></tr></table>"},
+ {t:"read",i:"read",h:"Русландын кыялы жөнүндө окугула.",title:"Русландын кыялдануусу",text:["Руслан 8-класста окуйт. Ал саякаттаганды жакшы көрөт. Чоңойгондо чет өлкөлөргө барууну кыялданат. Руслан чет жактагы элдердин жашоосу менен таанышууну самайт.","Учак менен же унаанын ар башка түрлөрү менен алыска жөнөгүсү келет. Чоң шаарларды аралап, бийик имараттарды, тарыхый эстеликтерди көрсө, кандай укмуш! Ошол өлкөлөрдө жашаган адамдар менен эркин сүйлөшкүсү келет. Руслан келечекте котормочу болсом дейт.","Котормочу болуш үчүн Руслан англис тили сабагын жакшы окушу керек. Эгерде англис тилин жаман окуса, анда котормочу боло албайт. Руслан мектепти бүтүрүп, жогорку окуу жайына тапшырат. Котормочулук кесип эмгекчилдикти, чыдамкайлыкты жана аракетчилдикти талап кылат."],qs:[{t:"tf",i:"pair",h:"<b>Туура</b> же <b>ката</b>.",qs:[{s:"Руслан 8-класста окуйт.",a:true},{s:"Руслан чет өлкөлөргө барууну кыялданат.",a:true},{s:"Котормочулук кесип эч кандай сапат талап кылбайт.",a:false,fix:"Ал эмгекчилдик, чыдамкайлык жана аракетчилдикти талап кылат."},{s:"Руслан келечекте дарыгер болгусу келет.",a:false,fix:"Руслан котормочу болгусу келет."}]},{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Руслан эмне жөнүндө кыялданат?",o:["Котормочу болуу жөнүндө","Футболчу болуу жөнүндө","Дарыгер болуу жөнүндө","Токочу болуу жөнүндө"],a:0},{q:"Котормочу болуш үчүн кайсы сабакты жакшы окуш керек?",o:["Чет тилин","Дене тарбиясын","Сүрөт сабагын","Музыканы"],a:0}]}]},
+ {t:"gap",i:"write",h:"Суроолорго жараша сөздөрдү тандагыла.",items:["Руслан [кимдин*|канча|кандай] досу? — Русландын досу.","Бул [кандай*|канчанчы|кимдин] кесип? — жооптуу кесип.","Менин [канча*|кимдин|кандай] досум бар? — үч дос.","Ал [канчанчы*|кандай|кимдин] сабакта окуп жатат? — үчүнчү сабакта."]},
+ {t:"dialogue",i:"listen",h:"Диалогду уккула жана ролдорго бөлүнүп ойногула.",lines:[["Фуркан","Өскөнбек, сен келечекте ким болгуң келет?"],["Өскөнбек","Мен дарыгер болгум келет. Сен кайсы кесипти тандайсың?"],["Фуркан","Мен котормочу болгум келет. Ар кандай тилдерди билгим келет."],["Өскөнбек","Менин атам инженер, апам мектепте иштейт. Кесиптер адамдар үчүн абдан пайдалуу."],["Фуркан","Туура айтасың. Эгерде апаң мектепте иштебесе, балдарды ким окутмак?"],["Өскөнбек","Ошондуктан ар бир кесип — ардактуу."]]},
+ {t:"read",i:"read",h:"Акын жөнүндө маалымат.",title:"Байдылда Сарногоев (1932–2004)",text:["Байдылда Сарногоев 1932-жылы 14-январда Талас облусунун Талас районундагы Будёновка айылында туулган. Он үч жашынан баштап ыр жаза баштаган.","1956-жылы Москвадагы А. М. Горький атындагы адабият институтун бүтүргөн. Анын «Шумкар» аттуу алгачкы ыр жыйнагы 1952-жылы жарык көргөн.","Акындын көптөгөн ырлары музыкага салынган. 1986-жылы А. Осмонов атындагы адабий сыйлыкка ээ болгон. Ал 2004-жылы дүйнөдөн кайткан."],qs:[{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Акын канча жашынан ыр жаза баштаган?",o:["13 жашынан","5 жашынан","20 жашынан","30 жашынан"],a:0},{q:"Анын алгачкы ыр жыйнагы кандай аталат?",o:["«Шумкар»","«Манас»","«Ак кеме»","«Жамийла»"],a:0},{q:"Акын кайсы жылы дүйнөдөн кайткан?",o:["2004","1932","1986","1956"],a:0}]}]},
+ {t:"match",i:"pair",h:"Синоним жуптарын тапкыла.",pairs:[["жашоо","өмүр"],["болочок","келечек"],["эл","калк"],["тилмеч","котормочу"],["пайдалуу","керектүү"],["эмгек","жумуш"]]},
+ {t:"diary",i:"write",h:"Күндөлүк: кесип тандоо боюнча өзүңдүн ойлоруң.",cols:["Мен билем","Мен билгим келет","Мен билдим"]},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t3l3",title:"Кайталоо: Кесип таануу",ky:"Аныктоочту кайталайбыз",review:true,
+ gram:"Кайталоо: <b>аныктооч</b> жана кесип аталыштары.",
+ tasks:[
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Аныктооч кайсы суроолорго жооп берет?",o:["кандай? кайсы? канча? кимдин?","ким? эмне?","эмне кылат?","кантип? качан?"],a:0},{q:"«Үч окуучу» деген сөз айкашында «үч» — ____.",o:["сан атооч (аныктооч)","ээ","баяндооч","бышыктооч"],a:0},{q:"«Русландын кыялы» — «Русландын» ____.",o:["кимдин? — ээлик (аныктооч)","ким? — ээ","эмне кылат? — баяндооч","кантип? — бышыктооч"],a:0},{q:"Адамдын өмүрүн сактап, ооруну айыктырган адам:",o:["дарыгер","дизайнер","программист","акын"],a:0}]},
+ {t:"sort",i:"think",h:"Кесип менен ага керектүү сабакты бөлгүлө.",cols:["Чет тили","Информатика / математика"],items:[["котормочу",0],["дипломат",0],["экскурсовод",0],["программист",1],["робототехник",1],["экономист",1]]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Мен келечекте дарыгер [болгум] келет.","Ал үчүн биология сабагын жакшы [окуш] керек.","Өнөрлүү [өргө] сүрөйт.","Ар бир кесип — [ардактуу].","Кесип тандоо — өтө [жооптуу] маселе."]},
+ {t:"game",i:"game",h:"Оюндарды ойногула!",theme:3,gs:["tug","chuko","quiz"]},
+ {t:"act",i:"group",h:"Долбоор: «Кесиптер күнү» (топ менен)",html:"<ol><li>Ар бир топ бир кесипти тандайт (дарыгер, мугалим, инженер, котормочу...).</li><li>Кесиптин талаптарын жана ага керектүү сабактарды жазат.</li><li>Класска: <i>Дарыгер болуш үчүн ... сабагын жакшы окуш керек.</i> деп таанытат.</li></ol>"},
+ {t:"light",h:"Светофор аркылуу теманы баала."}]}
+],
+pool:[
+{c:"v",q:"Адамдын өмүрүн сактап, ооруну айыктыруучу адам:",o:["дарыгер","дизайнер","акын","экскурсовод"]},
+{c:"v",q:"Бир тилден экинчи тилге которгон адам:",o:["котормочу","мугалим","шофёр","токойчу"]},
+{c:"v",q:"«Келечек» деген сөздүн синоними:",o:["болочок","кыял","өнөр","тажрыйба"]},
+{c:"v",q:"«Жалкоо» деген сөздүн антоними:",o:["эмгекчил","жооптуу","олуттуу","кыйын"]},
+{c:"v",q:"«Кесип» деген сөздүн орусча котормосу:",o:["профессия","мечта","будущее","опыт"]},
+{c:"g",q:"«Мыкты дарыгер» деген сөз айкашында «мыкты» — ____.",o:["аныктооч","ээ","баяндооч","толуктооч"]},
+{c:"g",q:"«Канчанчы?» деген суроого жооп берген сөз:",o:["үчүнчү","үч","үчөө","үчтөн"]},
+{c:"g",q:"«Кимдин китеби?» — «____ китеби».",o:["Асанын","Асанга","Асанды","Асандан"]},
+{c:"g",q:"Дарыгер болуш үчүн биологияны жакшы ____ керек.",o:["окуш","окуйт","окуду","окуп"]},
+{c:"g",q:"Мен келечекте котормочу ____ келет.",o:["болгум","болду","болсо","болот"]},
+{c:"c",q:"«Өнөр алды — кызыл тил» деген макал эмне жөнүндө?",o:["Тилди билүү жөнүндө","Дарыгер жөнүндө","Спорт жөнүндө","Жол жөнүндө"]},
+{c:"c",q:"Кыргыз элинде «Ар бир кесип — ____» деген макал бар.",o:["ардактуу","оңой","узун","кымбат"]},
+{c:"c",q:"«Шумкар» аттуу ыр жыйнагынын автору:",o:["Байдылда Сарногоев","Алыкул Осмонов","Чыңгыз Айтматов","Аалы Токомбаев"]},
+{c:"c",q:"Кыргызстанда кайсы эпос дүйнөгө белгилүү?",o:["«Манас»","«Калевала»","«Рамаяна»","«Беовульф»"]},
+{c:"c",q:"«Манас» эпосун айтуучу адамды кыргызча ким деп аташат?",o:["Манасчы","Күүчү","Комузчу","Токойчу"]}
+],
+speak:["Келечектеги кесибиң жөнүндө айтып бер.","Ал кесип үчүн кайсы сабактар керек?","Досуңдун кыялы жөнүндө айтып бер.","«Ар бир кесип ардактуу» деген макалды түшүндүр.","Ата-энеңдин кесибин айтып бер.","Эмне үчүн кесип тандоо маанилүү?"],
+riddles:[
+{q:"Мен дарыгер эмесмин, бирок билимге жол ачам. Сабак берем. Мен ким?",a:"Мугалим",ky:"Мектепте иштейт."},
+{q:"Эки тилде сүйлөйм, бирок мен өзүм өз сөзүмдү айтпайм, башкалардын сөзүн котором. Мен ким?",a:"Котормочу",ky:"Тилдерди билет."},
+{q:"Төрт бурчтуу, ичинде барак көп, колго алып окуйсуң, ичинде сабак бар. Мен эмнемин?",a:"Китеп",ky:"Билимдин булагы."}
+]});
+
+BOOK.themes.push({n:4,color:"#7b4fd1",em:"🏔️",en:"Кыргызстан",ky:"Сейрек кездешүүчү жаныбарлар",
+intro:"Кыргызстандын жаратылышы, канаттуулар жана сейрек кездешүүчү жаныбарлар жөнүндө сүйлөйбүз. Атоочтук (сайраган чымчык) жана мезгил бышыктооч (качан? жайында) менен иштейбиз.",
+gloss:[["жаратылыш","природа"],["канаттуу","птица"],["чымчык","воробей, птичка"],["куш","птица"],["шумкар","сокол"],["ак шумкар","белый кречет (сокол)"],["бүркүт","беркут"],["көгүчкөн","голубь"],["күкүк","кукушка"],["кекилик","кеклик (куропатка)"],["улар","улар (горная индейка)"],["турна","журавль"],["ак куу","лебедь"],["каз","гусь"],["үйрөк","утка"],["илбирс","снежный барс"],["аюу","медведь"],["күрөң аюу","бурый медведь"],["карышкыр","волк"],["түлкү","лиса"],["кой","овца"],["тоо эчки","горный козёл"],["марал","марал"],["кочкор","баран"],["Марко Поло кочкору","баран Марко Поло"],["жаныбар","животное"],["айбан","животное, зверь"],["сейрек","редкий"],["сейрек кездешет","встречается редко"],["Кызыл китеп","Красная книга"],["азайып баратат","сокращается"],["жоголуп бара жатат","исчезает"],["коргоо","охрана, защита"],["корго-","защищать"],["сакта-","сохранять"],["аймак","территория, регион"],["байырла-","обитать"],["мекенде-","обитать"],["жайла-","жить на летних пастбищах"],["жойло-","пастись на пастбище"],["сайра-","петь (о птицах)"],["сайраган","поющий"],["уя","гнездо"],["жумуртка","яйцо"],["канат","крыло"],["тумшук","клюв"],["куйрук","хвост"],["бут","нога"],["тоют","корм"],["шарт","условие"],["аба ырайы","погода"],["суук","холодно, холод"],["кыш","зима"],["жай","лето"],["жаз","весна"],["күз","осень"],["кыштайт","зимует"],["мезгил","время года, период"],["жайында","летом"],["кышында","зимой"],["жазында","весной"],["күзүндө","осенью"],["эртең менен","утром"],["кечинде","вечером"],["бийик тоо","высокие горы"],["чоку","вершина"],["улуттук парк","национальный парк"],["кен байлык","полезные ископаемые"],["тоо-кен","горные породы"],["чөл","пустыня"],["токой","лес"],["көл","озеро"],["дарыя","река"],["мөңгү","ледник"],["Ала-Тоо","Ала-Тоо"],["Тянь-Шань","Тянь-Шань"]],
+lessons:[
+{id:"t4l1",title:"Кыргызстанда жашаган канаттуулар",ky:"Атоочтук: сайраган чымчык, жайлаган мал",
+ gram:"<b>Атоочтук</b> — этиштен жасалып, зат атоочту аныктайт: <b>-ган, -ген, -гон, -гөн, -кан...</b> <i>сайра-ган чымчык, жай-лаган мал, учкан куш</i>. Суроосу: <b>кандай? кайсы?</b>",
+ lex:"канаттуу, сайраган, учкан, жайлаган, жойлогон, уя, жумуртка, тумшук, куйрук, шумкар, көгүчкөн, күкүк",
+ tasks:[
+ {t:"vocab",i:"think",h:"Канаттууларга байланыштуу сөздөр.",w:[["шумкар","сокол","","🦅"],["бүркүт","беркут","","🦅"],["көгүчкөн","голубь","","🕊️"],["күкүк","кукушка","","🐦"],["кекилик","кеклик","","🐤"],["турна","журавль","","🦢"],["ак куу","лебедь","","🦢"],["чымчык","воробей, птичка","","🐦"],["уя","гнездо","","🪺"],["жумуртка","яйцо","","🥚"],["канат","крыло","","🪽"],["тумшук","клюв","","🐦"],["куйрук","хвост","","🐾"],["сайраган","поющий","","🎶"],["учкан","летящий","","☁️"],["сейрек","редкий","","💎"]]},
+ {t:"box",html:"<p><b>Атоочтук</b> = этиштин уңгусу + <b>-ган / -ген / -гон / -гөн</b> (үнсүздөн кийин <b>-кан / -кен</b> ж.б.)</p><table><tr><th>Этиш</th><th>Атоочтук</th><th>Сөз айкашы</th></tr><tr><td>сайра-</td><td>сайраган</td><td>сайраган чымчык</td></tr><tr><td>уч-</td><td>учкан</td><td>учкан куш</td></tr><tr><td>жайла-</td><td>жайлаган</td><td>тоодо жайлаган мал</td></tr><tr><td>иште-</td><td>иштеген</td><td>иштеген адам</td></tr></table>"},
+ {t:"gap",i:"write",h:"Атоочтукту жасагыла. Үлгү: <i>сайра- → сайраган чымчык</i>.",items:["уч- → [учкан] куш","жайла- → [жайлаган] мал","иште- → [иштеген] адам","окуй- → [окуган] бала","кел- → [келген] конок"]},
+ {t:"sort",i:"think",h:"Сөздөрдү бөлгүлө: атоочтук же зат атооч.",cols:["Атоочтук","Зат атооч"],items:[["сайраган",0],["учкан",0],["жайлаган",0],["жумуртка",1],["тумшук",1],["куйрук",1],["канат",1]]},
+ {t:"read",i:"read",h:"Окугула. Суроолорго жооп бергиле.",title:"Кыргызстандагы канаттуулар",text:["Кыргызстанда канаттуулардын 400дөн ашык түрү бар. Алардын ичинен 57си Кыргызстандын Кызыл китебине киргизилген.","Кыргызстандын жаратылышы канаттуулар үчүн ыңгайлуу. Кышында аба ырайы башка өлкөлөргө салыштырмалуу суук эмес. Ысык-Көл кышында тоңбойт, ошондуктан суу куштары көп кыштайт. Азык-тоют шарты да жакшы.","Кыргыздар шумкарды жогору баалашат. Ошондуктан Кыргызстандын эң жогорку мамлекеттик сыйлыгы «Ак-Шумкар» деп аталат."],qs:[{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Кыргызстанда канаттуулардын канча түрү бар?",o:["400дөн ашык","10го жакын","100гө жакын","50"],a:0},{q:"Алардын ичинен канчасы Кызыл китепке киргизилген?",o:["57си","5и","500ү","12си"],a:0},{q:"Эң жогорку мамлекеттик сыйлык кимдин атынан аталган?",o:["Ак шумкардын","Күкүктүн","Көгүчкөндүн","Чымчыктын"],a:0}]},{t:"open",i:"pair",h:"Жуп менен талкуулагыла.",qs:["Канаттууларды эмне үчүн коргоо керек?","Кыргызстанда дагы кандай канаттууларды билесиң?"]}]},
+ {t:"match",i:"pair",h:"Макалдарды маанисине жупташтыргыла.",pairs:[["Туулган жердин топурагы — алтын.","Мекенди баалоо керек"],["Башка жерде султан болгончо, өз жериңде ултан бол.","Өз элиңде жашаганың жакшы"],["Атың барда жер тааны, атаң барда эл тааны.","Жаш кезде жерди таанып ал"]]},
+ {t:"write",i:"write",h:"Канаттуулар үчүн ыңгайлуу дагы бир шартты жазгыла.",prompt:"Үлгү: <i>Кыргызстанда канаттуулардын жашоосу үчүн жакшы шарттар бар. 1) Кышында аба ырайы өтө суук эмес. 2) Азык-тоют шарты ыңгайлуу. 3) ...</i>",min:25,sample:"3) Тоолордо, көлдөрдө жана токойлордо жашаганга жер көп. 4) Эл канаттууларды жакшы көрөт жана коргойт."},
+ {t:"prov",i:"read",h:"Макалдарды окугула.",ids:[3,4],order:2},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t4l2",title:"Сейрек кездешүүчү жаныбарлар",ky:"Мезгил бышыктооч: качан? кайсы мезгилде?",
+ gram:"<b>Мезгил бышыктооч</b> — <b>Качан? Кайсы мезгилде? Качанга чейин?</b> суроолоруна жооп берет: <i>жайында, кышында, жазында, күзүндө, эртең менен, кечинде, жыл сайын</i>.",
+ lex:"Кызыл китеп, сейрек, азайып баратат, байырлайт, мекендейт, илбирс, күрөң аюу, Марко Поло кочкору, коргоо, сактоо",
+ tasks:[
+ {t:"vocab",i:"think",h:"Сейрек жаныбарлар.",w:[["илбирс","снежный барс","","🐆"],["күрөң аюу","бурый медведь","","🐻"],["Марко Поло кочкору","баран Марко Поло","","🐏"],["тоо эчки","горный козёл","","🐐"],["бүркүт","беркут","","🦅"],["ак шумкар","белый кречет","","🪶"],["Кызыл китеп","Красная книга","","📕"],["сейрек","редкий","","💎"],["азайып баратат","сокращается","","📉"],["жоголуп бара жатат","исчезает","","⚠️"],["байырлайт","обитает","","🏞️"],["мекендейт","обитает","","🌲"],["коргоо","охрана","","🛡️"],["сактоо","сохранение","","🤲"],["улуттук парк","национальный парк","","🏕️"],["тоо-кен","горные породы","","⛰️"]]},
+ {t:"box",html:"<table><tr><th>Мезгил</th><th>Мисал</th></tr><tr><td><b>Жайында</b> (лето)</td><td>Жайында мал жайлоодо жайлайт.</td></tr><tr><td><b>Кышында</b> (зима)</td><td>Илбирс кышында ылдый түшөт.</td></tr><tr><td><b>Жазында</b>, <b>күзүндө</b></td><td>Күзүндө канаттуулар жылуу жакка учат.</td></tr><tr><td><b>Эртең менен, кечинде</b></td><td>Эртең менен чымчыктар сайрайт.</td></tr></table><p>Суроо: <b>Качан?</b> <b>Кайсы мезгилде?</b></p>"},
+ {t:"match",i:"pair",h:"Мезгилди жупташтыргыла.",pairs:[["жайында","летом"],["кышында","зимой"],["жазында","весной"],["күзүндө","осенью"],["эртең менен","утром"],["кечинде","вечером"]]},
+ {t:"read",i:"read",h:"Окугула.",title:"Илбирс — тоолордун ээси",text:["Илбирс — Кыргызстандын тоолорунда жашаган сейрек кездешүүчү жырткыч жаныбар. Ал бийик аскалуу жерлерди жактырат. Жайында илбирс бийик тоолордо жүрөт, ал эми кышында ылдыйраак түшөт.","Азыр илбирстердин саны азайып баратат. Ошондуктан алар Кыргызстандын Кызыл китебине киргизилген. Алардын мекендеген аймагы улуттук парктарда сакталат.","Кызыл китепте дагы көптөгөн жаныбарлар жана куштар бар. Кыргызстандын эң алгачкы Кызыл китеби 1985-жылы түзүлгөн."],qs:[{t:"tf",i:"pair",h:"<b>Туура</b> же <b>ката</b>.",qs:[{s:"Илбирс — сейрек кездешүүчү жаныбар.",a:true},{s:"Илбирс кышында бийик тоолорго чыгат.",a:false,fix:"Кышында ылдыйраак түшөт."},{s:"Илбирс Кызыл китепке киргизилген.",a:true},{s:"Кыргызстандын алгачкы Кызыл китеби 1985-жылы түзүлгөн.",a:true}]},{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Илбирс жайында кайда жүрөт?",o:["Бийик тоолордо","Шаарда","Көлдө","Өрүктө"],a:0},{q:"Илбирстин мекендеген аймагы кайда сакталат?",o:["Улуттук парктарда","Базарда","Мектепте","Үйдө"],a:0}]}]},
+ {t:"gap",i:"write",h:"Мезгил бышыктоочту жазгыла.",items:["Жылкычылар [жайында] жайлоодо жашашат.","Илбирс [кышында] ылдыйраак түшөт.","Чымчыктар [эртең менен] сайрайт.","Канаттуулар [күзүндө] жылуу жакка учат.","Нооруз [жазында] майрамдалат."]},
+ {t:"sort",i:"think",h:"Сөздөрдү бөлгүлө: жаныбар же канаттуу.",cols:["Жаныбар","Канаттуу"],items:[["илбирс",0],["күрөң аюу",0],["тоо эчки",0],["кочкор",0],["шумкар",1],["бүркүт",1],["көгүчкөн",1],["кекилик",1]]},
+ {t:"act",i:"group",h:"Топтук иш: «Кызыл китеп баракчасы»",html:"<p>Бир сейрек жаныбарды тандагыла (илбирс, күрөң аюу, Марко Поло кочкору, ак шумкар). Баракчага жазгыла: <i>Кимдин аты? Кайда жашайт? Качан кайда жүрөт? Эмне үчүн коргош керек?</i> Мезгил бышыктооч сөздөрүн (жайында, кышында) колдонгула.</p>"},
+ {t:"write",i:"write",h:"Туристтердин пикирин жазгыла (иш кагазы): «Кыргызстандын жаратылышы мага жакты» (3–4 сүйлөм).",prompt:"Кыргызстанга келген турист катары кыска пикир жазгыла.",min:25,sample:"Мен Кыргызстанга жайында келдим. Тоолору абдан бийик, абасы таза, көлдөрү кооз. Мага жаратылышы өзгөчө жакты. Бул жерди коргоо керек."},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t4l3",title:"Кайталоо: Кыргызстандын жаратылышы",ky:"Атоочтук жана мезгил бышыктооч",review:true,
+ gram:"Кайталоо: <b>атоочтук</b> (сайраган), <b>мезгил бышыктооч</b> (жайында).",
+ tasks:[
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Атоочтук кайсы суроого жооп берет?",o:["кандай? кайсы?","ким?","качан?","кайда?"],a:0},{q:"«Жайында» — кайсы мүчө?",o:["мезгил бышыктооч","ээ","баяндооч","аныктооч"],a:0},{q:"«Сайраган чымчык» — «сайраган» — ____.",o:["атоочтук","зат атооч","сан атооч","байланыштыргыч"],a:0},{q:"Кызыл китепке эмне киргизилет?",o:["Сейрек жана жоголуп бара жаткан жаныбарлар","Мектеп сабактары","Тамак рецептери","Футбол эрежелери"],a:0},{q:"«Сейрек» деген сөздүн антоними:",o:["көп","аз","кичине","жаңы"],a:0}]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Тоодо жайлаган мал — [жайлаган] мал.","Илбирс Кызыл [китепке] киргизилген.","Чымчыктар [эртең менен] сайрайт.","Кыргызстандын [жаратылышы] абдан кооз.","Биз жаныбарларды [коргойбуз]."]},
+ {t:"match",i:"pair",h:"Жупташтыргыла.",pairs:[["сейрек","мало встречается"],["байырлайт","обитает"],["азайып баратат","сокращается"],["коргоо","охрана"],["жаратылыш","природа"]]},
+ {t:"game",i:"game",h:"Оюндарды ойногула!",theme:4,gs:["tug","chuko","quiz"]},
+ {t:"act",i:"group",h:"Долбоор: «Жаратылышты коргойбуз» (топ менен)",html:"<ol><li>Плакат жасагыла: <i>Сейрек жаныбарларды коргойлу!</i></li><li>3–4 сүйлөм жазгыла: кайсы жаныбар, кайда жашайт, эмне үчүн сейрек.</li><li>Класска кыргызча таанытып бергиле.</li></ol>"},
+ {t:"light",h:"Светофор аркылуу теманы баала."}]}
+],
+pool:[
+{c:"v",q:"«Сейрек» деген сөздүн орусча котормосу:",o:["редкий","высокий","красивый","большой"]},
+{c:"v",q:"Көп жылдар бою жашаган жерин ____ деп айтабыз.",o:["мекен","базар","жол","сабак"]},
+{c:"v",q:"Жоголуп бара жаткан жаныбарлар жазылган китеп:",o:["Кызыл китеп","Окуу китеби","Сөздүк","Календарь"]},
+{c:"v",q:"Куштун үйү кандай аталат?",o:["уя","казан","чатыр","үй-бүлө"]},
+{c:"v",q:"«Ак-Шумкар» — бул ____.",o:["эң жогорку мамлекеттик сыйлык","кино","спорт оюну","кыштак"]},
+{c:"g",q:"«Сайраган чымчык» деген сөз айкашында «сайраган» — ____.",o:["атоочтук","ээ","баяндооч","толуктооч"]},
+{c:"g",q:"Жайлоого чыккан (жайла- + ган) мал: ____ мал.",o:["жайлаган","жайлайт","жайлады","жайлап"]},
+{c:"g",q:"«Качан?» деген суроого жооп берген сөз:",o:["жайында","тоодо","чоң","төрт"]},
+{c:"g",q:"Илбирс ____ ылдыйраак түшөт.",o:["кышында","кыш","кыштоо","кышта эле"]},
+{c:"g",q:"«Эртең менен» — ____ бышыктооч.",o:["мезгил","орун","иш-аракет","себеп"]},
+{c:"c",q:"Кыргызстандын Кызыл китеби эң алгач кайсы жылы түзүлгөн?",o:["1985","1991","1945","2010"]},
+{c:"c",q:"Кыргыз элинде кайсы куш жогору бааланат?",o:["Шумкар","Чымчык","Тоок","Ордок"]},
+{c:"c",q:"Илбирс кайсы жерлерде жашайт?",o:["Бийик аскалуу тоолордо","Чөлдө","Деңизде","Шаарда"]},
+{c:"c",q:"Ысык-Көл кышында:",o:["тоңбойт","толук тоңот","кургайт","жок болот"]},
+{c:"c",q:"Кыргызстандагы эң белгилүү тоо тизмеги:",o:["Тянь-Шань (Ала-Тоо)","Анд","Альп","Гималай"]}
+],
+speak:["Илбирс жөнүндө 3 сүйлөм айтып бер.","Кыргызстанда кайсы канаттууларды билесиң?","Жайында кайда барганың жөнүндө айтып бер.","Эмне үчүн жаныбарларды коргош керек?","«Кызыл китеп» деген эмне?","Мезгил бышыктоочтор менен 3 сүйлөм түз."],
+riddles:[
+{q:"Тоонун ээси, кардай ак, бирок жырткыч. Аскадан аска ашат. Мен ким?",a:"Илбирс",ky:"Кызыл китепте бар."},
+{q:"Кыргыздар аны жогору баалашат, жогорку сыйлык анын атынан аталган. Мен ким?",a:"Ак шумкар",ky:"Куш."},
+{q:"Канатым бар, бирок самолёт эмесмин. Дарактын бутагына уя салам, эртең менен сайрайм. Мен киммин?",a:"Куш",ky:"Учат жана сайрайт."}
+]});
+
+BOOK.themes.push({n:5,color:"#e8744a",em:"🩺",en:"Ден соолук",ky:"Оорулардын түрлөрү. Сактануу жана айыгуу жолдору",
+intro:"Ден соолукту сактоо, оорулар, дарыгерде жана ооруканада сүйлөшүү. Шарттуу сүйлөмдөр (эгерде ... -са) жана «-ыш керек» түзүлүшү менен иштейбиз.",
+gloss:[["ден соолук","здоровье"],["дени сак","здоровый"],["оору","болезнь"],["оорулуу","больной"],["ооруп калды","заболел"],["оору-","болеть"],["баш оору","головная боль"],["тиш оору","зубная боль"],["ичи оору","болит живот"],["тамак оору","боль в горле"],["суук тийди","простудился"],["жөтөл","кашель"],["табы көтөрүлдү","поднялась температура"],["температура","температура"],["өлчө-","измерять"],["кан басым","давление"],["жүрөк","сердце"],["дарыгер","врач"],["терапевт","терапевт"],["медайым","медсестра"],["дары","лекарство"],["дарыкана","аптека"],["эмкана","поликлиника"],["оорукана","больница"],["каттоочу","регистратор"],["катта-","регистрировать"],["кабыл ал-","принять"],["чакырык","вызов"],["дарек","адрес"],["батир","квартира"],["үч маал","три раза"],["чечин-","раздеться"],["тыңша-","слушать (сердце)"],["айык-","выздоравливать"],["айыктыр-","лечить, излечить"],["дарыла-","лечиться, лечить"],["оңол-","поправиться"],["жугуштуу","инфекционный"],["капысынан","внезапно"],["чыйрык-","знобить"],["калтыра-","дрожать"],["алсыздан-","слабеть"],["көңүл айны-","тошнить"],["кус-","рвать (тошнить)"],["кескин","резко"],["диагноз","диагноз"],["сактан-","беречься"],["алдын ал-","предупредить"],["тазалык","чистота"],["колду жуу","мыть руки"],["бет аарчы","носовой платок, салфетка"],["тамеки","табак, сигарета"],["зыяндуу","вредный"],["пайдалуу","полезный"],["дене тарбия","физкультура"],["тамактануу","питание"],["машык-","тренироваться"],["сейилде-","гулять"],["жаркылда-","сиять"],["бекем","крепкий"],["кор болбо-","не будь унижен"],["кем болбо-","не будь в нужде"],["кээде","иногда"],["жаш кез","молодость"],["өс-","расти"]],
+lessons:[
+{id:"t5l1",title:"Ден соолук — зор байлык",ky:"Пайдалуу жана зыяндуу адаттар",
+ gram:"<b>-ыш керек / -баш керек</b> (надо / не надо): <i>Ден соолукту бекемдеш керек. Тамеки чекпеш керек.</i> Шарт: <b>эгерде ... -са</b>: <i>Эгерде ооруп калсаң, дарыгерге бар.</i>",
+ lex:"ден соолук, дени сак, зыяндуу, пайдалуу, дене тарбия, тамактануу, тазалык, тамеки, бекем, жугуштуу",
+ tasks:[
+ {t:"vocab",i:"think",h:"Ден соолук жөнүндө сөздөр.",w:[["ден соолук","здоровье","","💪"],["дени сак","здоровый","","😊"],["оорулуу","больной","","🤒"],["пайдалуу","полезный","","✅"],["зыяндуу","вредный","","⛔"],["дене тарбия","физкультура","","🏃"],["туура тамактануу","правильное питание","","🥗"],["тазалык","чистота","","🧼"],["сейилдөө","прогулка","","🚶"],["таза аба","свежий воздух","","🌬️"],["тамеки чегүү","курение","","🚭"],["бекем","крепкий","","🛡️"],["жугуштуу оору","инфекционная болезнь","","🦠"],["колду жуу","мыть руки","","🙌"],["бет аарчы","носовой платок","","🧻"],["дарыгер","врач","","👩‍⚕️"]]},
+ {t:"sort",i:"think",h:"Эмнелер ден соолукка пайдалуу? Эмнелер зыяндуу? Бөлгүлө.",cols:["Пайдалуу 👍","Зыяндуу 👎"],items:[["дене тарбия",0],["туура тамактануу",0],["убагында уктоо",0],["спорт менен машыгуу",0],["сейилдөө",0],["таза абада ойноо",0],["тазалыкты сактоо",0],["телевизорду көп көрүү",1],["компьютердин алдында көп отуруу",1],["таттуу суусундуктарды көп ичүү",1],["тамеки чегүү",1],["алкоголь ичүү",1]]},
+ {t:"box",html:"<p><b>-ыш керек</b> = надо: ден соолукту бекемдеш керек, таза жүрүш керек.<br><b>-баш керек</b> = не надо: тамеки чекпеш керек.</p><p><b>Эгерде ... -са, ...</b><br>Эгерде колуңду жуусаң, жугуштуу ооруга чалдыкпайсың.<br>Эгерде ооруп калсаң, дарыгерге барышың керек.</p>"},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Ден соолукту бекем[деш] керек.","Тамеки чек[пеш] керек.","Эгерде ооруп [калсаң], дарыгерге бар.","Эгерде колуңду [жуусаң], ооруга чалдыкпайсың.","Эгерде көп [уктасаң], чарчоо басылат."]},
+ {t:"poem",i:"read",h:"Алыкул Осмоновдун ырын көркөм окугула.",title:"Ден соолук (А. Осмонов)",lines:["Жаш кезиңден жаркылдап,","Жакшы болсо ден соолук,","Кор болбойсуң өскөндө","Бирде жатып, бирде ооруп.","Бала кезден жаркылдап,","Бекем болсо ден соолук,","Кем болбойсуң өскөндө","Кээде жатып, кээде ооруп."]},
+ {t:"tf",i:"pair",h:"Ыр боюнча <b>туура</b> же <b>ката</b>.",qs:[{s:"Ден соолук жакшы болсо, өскөндө кор болбойсуң.",a:true},{s:"Ден соолугу бекем адам кээде ооруп калат.",a:true},{s:"Ден соолугуң начар болсо, өскөндө кор болбойсуң.",a:false,fix:"Ден соолук начар болсо, кор болуп калат."},{s:"Акын ырында жаш балдарга кайрылат.",a:true}]},
+ {t:"open",i:"think",h:"Ыр боюнча суроолорго жооп бергиле.",qs:["Акындын айтканы боюнча, ден соолук бекем болсо эмне болот?","Сен ден соолугуңду кантип бекемдейсиң?","Оорусаң эмне кыласың?"]},
+ {t:"cluster",i:"group",h:"Ырдын мазмуну боюнча кластер түзгүлө: <b>«Ден соолук»</b>.",center:"Ден соолук",slots:6,seed:["спорт","тазалык"]},
+ {t:"match",i:"pair",h:"Макалдарды маанисине жупташтыргыла.",pairs:[["Биринчи байлык — ден соолук.","Ден соолук эң чоң байлык"],["Дениң таза болсо, дилиң да таза болот.","Таза, бекем адамдын ою да таза"],["Даны жоктун — наны жок, наны жоктун — жаны жок.","Дан жок болсо нан жок, нан жок болсо жашоо жок"]]},
+ {t:"prov",i:"read",h:"Макалдарды окугула.",ids:[7,8],order:2},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t5l2",title:"Ооруканада",ky:"Дарыгерде жана дарыканада",
+ gram:"<b>-ган, -ып калды</b> (ооруп калды), <b>-ыңыз</b> / <b>-ыңыз, сураныч</b> (сылык өтүнүч): <i>Чечинип отуруңуз. Дарыны үч маал ичиңиз.</i>",
+ lex:"оорукана, эмкана, каттоочу, терапевт, температура, кан басым, чакырык, дарек, дары, рецепт, кабыл алуу",
+ tasks:[
+ {t:"vocab",i:"think",h:"Ооруканада колдонулган сөздөр.",w:[["оорукана","больница","","🏥"],["эмкана","поликлиника","","🏨"],["каттоочу","регистратор","","🗂️"],["терапевт","терапевт","","🩺"],["медайым","медсестра","","💉"],["дарыкана","аптека","","💊"],["дары","лекарство","","💊"],["кабыл алуу","приём","","🕒"],["чакырык","вызов","","📞"],["дарек","адрес","","📍"],["кан басым","давление","","❤️"],["температура","температура","","🌡️"],["өлчөйт","измеряет","","📏"],["чечинүү","раздеваться","","👕"],["тыңшайт","слушает","","👂"],["үч маал","три раза","","3️⃣"]]},
+ {t:"dialogue",i:"listen",h:"Биринчи диалогду уккула. Ролдорго бөлүнүп ойногула.",lines:[["Каттоочу","Саламатсызбы! Каттоочу угуп жатат."],["Оорулуу","Саламатсызбы! Мен дарыгерди үйгө чакыргым келет."],["Каттоочу","Дарегиңизди айтыңыз."],["Оорулуу","Бишкек шаары, Ала-Тоо көчөсү, 15-үй, 7-батир."],["Каттоочу","Эмнеңиз ооруйт?"],["Оорулуу","Табым көтөрүлдү, башым ооруп жатат."],["Каттоочу","Жакшы. Дарыгер саат үчтө келет."],["Оорулуу","Рахмат, көп рахмат!"]]},
+ {t:"mc",i:"think",h:"Диалог боюнча туура жоопту тандагыла.",qs:[{q:"Диалогдо кимдер сүйлөшүп жатат?",o:["каттоочу менен оорулуу","дарыгер менен окуучу","апа менен бала","соодагер менен сатып алуучу"],a:0},{q:"Оорулуу эмне кылгысы келет?",o:["Дарыгерди үйгө чакыргысы келет","Дарыканага баргысы келет","Спорт менен машыккысы келет","Көчөдө сейилдегиси келет"],a:0},{q:"Оорулуунун эмнеси ооруйт?",o:["Башы ооруйт, табы көтөрүлгөн","Тиши ооруйт","Бутуму сынган","Колу жарадар"],a:0}]},
+ {t:"dialogue",i:"listen",h:"Экинчи диалог: дарыгердин кабыл алуусунда.",lines:[["Дарыгер","Киргиле, отургула. Кандай даттануу бар?"],["Оорулуу","Башым айланып, жүрөгүм кыйналып жатат."],["Дарыгер","Кан басымыңызды өлчөйлү. Чечинип, жатыңыз, сизди тыңшайм."],["Оорулуу","Кандай экен, доктор?"],["Дарыгер","Кан басымыңыз бир аз жогору. Дарыны үч маал ичиңиз жана көп эс алыңыз."],["Оорулуу","Рахмат. Дарыны кайдан алам?"],["Дарыгер","Дарыканадан. Мына рецепт."]]},
+ {t:"order",i:"write",h:"Сөздөрдү туура тартипке койгула.",items:["Дарыгерди үйгө чакыргым келет.","Дарыны үч маал ичиңиз.","Эгерде ооруп калсаң, дарыгерге бар.","Эмканада каттоочу бар."]},
+ {t:"read",i:"read",h:"Жугуштуу оорулардын этаптары жөнүндө окугула.",title:"Ооруп калуунун алдын алуу",text:["Жугуштуу оору капысынан башталат. Адамдын денеси ысыйт, чыйрыктырат, калтырайт, башы ооруйт. Ал алсызданып, көңүлү айныйт.","Оору күчөгөндө дарттын бардык белгилери ачык көрүнөт, температура көтөрүлөт. Диагнозду так коюуга болот.","Оору аякташында белгилери жоголо баштайт, температура төмөндөйт. Адам айыгат.","Жугуштуу оорулардан сактануу үчүн колду жууш керек, жөтөлгөндө бет аарчы колдонуш керек, кир колдор менен бетти кармабаш керек."],qs:[{t:"sort",i:"think",h:"Белгилерди этаптарга бөлгүлө.",cols:["Башталышы","Күчөшү","Аякташы"],items:[["капысынан башталат",0],["чыйрыктырат",0],["температура көтөрүлөт",1],["белгилери ачык болот",1],["температура төмөндөйт",2],["белгилери жоголот",2]]},{t:"open",i:"pair",h:"Талкуулагыла.",qs:["Жугуштуу ооруга чалдыкпаш үчүн эмне кылыш керек?"]}]},
+ {t:"match",i:"pair",h:"Антонимдерин жупташтыргыла.",pairs:[["пайдалуу","зыяндуу"],["оорулуу","дени сак"],["тез","жай"],["арзан","кымбат"],["дарылайт","ооруйт"],["бузулат","оңолот"]]},
+ {t:"act",i:"pair",h:"Ролдук оюн: «Дарыгерде» (жуп менен)",html:"<p>А — оорулуу: <i>Башым ооруйт. Табым көтөрүлдү...</i> Б — дарыгер: <i>Дарыны үч маал ичиңиз. Көп эс алыңыз. Эгерде ооруп калсаңыз...</i> Анан ролдорду алмаштыргыла.</p>"},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t5l3",title:"Кайталоо: Дени сак жашайлы",ky:"Ден соолук темасын бекемдейбиз",review:true,
+ gram:"Кайталоо: <b>-ыш керек / -баш керек</b>, <b>эгерде -са</b>, оорулардын аталыштары.",
+ tasks:[
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Төмөнкү макалдардын кайсынысы ден соолукка байланыштуу эмес?",o:["Ар бир кесип — ардактуу","Биринчи байлык — ден соолук","Дениң таза болсо, дилиң да таза болот","Ден соолук — зор байлык"],a:0},{q:"Тамеки чеккен балдар ...",o:["сабагында начар окушат, ден соолугу бузулат","ден соолугу бекемделет","спортко жакшы болот","кыйын болушат"],a:0},{q:"Эгерде ооруп калсаң, ____.",o:["дарыгерге барышың керек","сейилдебей калышың керек","ичпей калышың керек","көп иштешиң керек"],a:0},{q:"«Жугуштуу оору» деген эмне?",o:["Бирөөдөн башкага жуккан оору","Бутуң сынганда болгон оору","Жүрөк оорусу","Тиш оорусу"],a:0}]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Ден соолукту [бекемдеш] керек.","Колуңарды [жуугула].","Жөтөлгөндө бет [аарчы] колдонгула.","Эгерде температураң [көтөрүлсө], дарыгерге бар.","Дарыны үч [маал] ичиш керек."]},
+ {t:"game",i:"game",h:"Оюндарды ойногула!",theme:5,gs:["tug","chuko","quiz"]},
+ {t:"act",i:"group",h:"Долбоор: «Ден соолук плакаты» (топ менен)",html:"<ol><li>Плакатта 5 кеңеш жазгыла: <i>... -ыш керек. ... -баш керек. Эгерде ... -са, ...</i></li><li>Сүрөт тартып кооздогула.</li><li>Класска кыргызча таанытып бергиле.</li></ol>"},
+ {t:"light",h:"Светофор аркылуу теманы баала."}]}
+],
+pool:[
+{c:"v",q:"Дарыны сатып алуучу жай:",o:["дарыкана","базар","китепкана","стадион"]},
+{c:"v",q:"Ооруган адамдарды дарылаган адам:",o:["дарыгер","мугалим","учкуч","инженер"]},
+{c:"v",q:"«Зыяндуу» деген сөздүн антоними:",o:["пайдалуу","жаман","чоң","оор"]},
+{c:"v",q:"«Баш оору» деген сөздүн орусча котормосу:",o:["головная боль","зубная боль","кашель","температура"]},
+{c:"v",q:"Дене табы көтөрүлсө ____ өлчөйбүз.",o:["температураны","базарды","китепти","жолду"]},
+{c:"g",q:"Ден соолукту бекем____ керек.",o:["деш","дейт","деди","деп"]},
+{c:"g",q:"Тамеки чек____ керек.",o:["пеш","еш","ти","ет"]},
+{c:"g",q:"Эгерде ооруп ____, дарыгерге бар.",o:["калсаң","калды","калып","калат"]},
+{c:"g",q:"Дарыны үч маал ____. (сылык өтүнүч)",o:["ичиңиз","ичет","ичти","ичмек"]},
+{c:"g",q:"Ал ооруп ____. (заболел)",o:["калды","калсын","калса","калган"]},
+{c:"c",q:"«Ден соолук» ырынын автору:",o:["Алыкул Осмонов","Чыңгыз Айтматов","Тоголок Молдо","Токтогул"]},
+{c:"c",q:"Кыргыз макалы: «Биринчи байлык — ____».",o:["ден соолук","акча","тамак","китеп"]},
+{c:"c",q:"Кымыз эмнеден жасалат?",o:["Бээнин сүтүнөн","Төөнүн канынан","Койдун жүнүнөн","Буудайдан гана"]},
+{c:"c",q:"Жайлоодо абасы кандай?",o:["Таза жана салкын","Чаң жана ысык","Азык жок","Түтүн"]},
+{c:"c",q:"Баланын ден соолугуна эмне жакшы таасир этет?",o:["Үй-бүлөдөгү жылуу мамиле","Уруш-талаш","Көп кыйкыруу","Жалгыздык"]}
+],
+speak:["Ден соолукту сактоонун 3 жолун айтып бер.","Дарыгерде эмне деп айтасың?","Эгерде ооруп калсаң, эмне кыласың?","Жугуштуу оорудан кантип сактанабыз?","Сен кандай адаттарды пайдалуу деп эсептейсиң?","«Биринчи байлык — ден соолук» деген макалды түшүндүр."],
+riddles:[
+{q:"Ак халат кийип, оорулууну дарылайт. Ал ким?",a:"Дарыгер",ky:"Ооруканада иштейт."},
+{q:"Көз эмес, бирок бардыгын көрсөтөт: табыңды өлчөйт. Мен эмнемин?",a:"Термометр",ky:"Дене табын өлчөйт."},
+{q:"Мени колуң менен жууйсуң, кир кетет, ооруу кетет. Мен эмнемин?",a:"Самын",ky:"Таза болуу үчүн."}
+]});
+
+BOOK.themes.push({n:6,color:"#b8860b",em:"🛒",en:"Соода-сатык",ky:"Айыл чарба дүкөнү",
+intro:"Дан өсүмдүктөрү, айыл чарба дүкөнү жана соода жөнүндө сүйлөйбүз. Иш кагазы — буйрутма жазууну үйрөнөбүз.",
+gloss:[["соода","торговля"],["сатык","продажа"],["соодагер","торговец"],["сатуучу","продавец"],["сатып алуучу","покупатель"],["дүкөн","магазин"],["базар","базар"],["баа","цена"],["баасы","цена (его)"],["арзан","дешёвый"],["кымбат","дорогой"],["акча","деньги"],["сом","сом"],["тыйын","тыйын"],["төлө-","платить"],["сат-","продавать"],["сатып ал-","покупать"],["насыя","кредит"],["арзандатуу","скидка"],["чек","чек"],["кайтарым акча","сдача"],["айыл чарба","сельское хозяйство"],["чарба","хозяйство"],["ферма","ферма"],["фермер","фермер"],["дан","зерно"],["дан өсүмдүктөрү","зерновые"],["буудай","пшеница"],["жүгөрү","кукуруза"],["күрүч","рис"],["арпа","ячмень"],["нан","хлеб"],["унаа","транспорт"],["үрөн","семена"],["өнүү","прорастание"],["өн-","прорастать"],["түптөн-","куститься"],["бышат","созревает"],["үшүк","мороз"],["ным","влага"],["кургакчылык","засуха"],["тамак-аш булалары","пищевые волокна"],["көмүртек","углевод"],["белок","белок"],["май","масло, жир"],["калий","калий"],["витамин","витамин"],["айда-","пахать"],["огород","огород"],["жабдык","оборудование"],["дан майдалагыч","зернодробилка"],["тоют кескич","корморезка"],["уй саагыч аппарат","доильный аппарат"],["буйрутма","заявка, заказ"],["арыз","заявление"],["сунуш","предложение"],["сураныч","просьба"],["мекеме","учреждение"],["колу","подпись"],["датасы","дата"],["кимге","кому"],["кимден","от кого"],["аталышы","название"],["текст","текст"],["тоют","корм"],["мал","скот"],["уй","корова"],["кой","овца"],["жылкы","лошадь"],["эт","мясо"],["сүт","молоко"],["жумуртка","яйцо"],["бал","мёд"],["картошка","картофель"],["пияз","лук"],["сабиз","морковь"],["кант","сахар"],["туз","соль"],["чай","чай"]],
+lessons:[
+{id:"t6l1",title:"Дан өсүмдүктөрү",ky:"Дан өстүрүү жана сатуу",
+ gram:"<b>Сан атооч</b> жана <b>канча?</b> суроосу: <i>үч килограмм буудай, беш миң сом</i>. Шарттуу сүйлөм: <i>Эгерде үрөн жакшы болсо, түшүм мол болот.</i>",
+ lex:"буудай, жүгөрү, күрүч, арпа, үрөн, өн-, түптөн-, бышат, үшүк, ным, тамак-аш булалары, көмүртек",
+ tasks:[
+ {t:"vocab",i:"think",h:"Дан өсүмдүктөрү жөнүндө сөздөр.",w:[["буудай","пшеница","","🌾"],["жүгөрү","кукуруза","","🌽"],["күрүч","рис","","🍚"],["арпа","ячмень","","🌾"],["үрөн","семена","","🌱"],["өнөт","прорастает","","🌿"],["түптөнөт","куститься","","🌾"],["бышат","созревает","","🌞"],["үшүк","мороз","","❄️"],["ным","влага","","💧"],["кургакчылык","засуха","","🏜️"],["тамак-аш булалары","пищевые волокна","","🥣"],["көмүртек","углевод","","⚡"],["белок","белок","","🥚"],["май","масло, жир","","🧈"],["огород","огород","","🥬"]]},
+ {t:"match",i:"pair",h:"Дан өсүмдүгүн мүнөздөмөсү менен жупташтыргыла.",pairs:[["жүгөрү","жылуулукту жактырат, 10–12 күндө өнөт"],["күрүч","суукта үшүк алып кетет"],["арпа","үшүккө чыдамдуу, кургакчылыкты көтөрөт"],["буудай","нымды жакшы колдонот, көп түптөнөт, эрте бышат"]]},
+ {t:"read",i:"read",h:"Окугула. Суроолорго жооп бергиле.",title:"Дан өсүмдүктөрүн кантип өстүрөт?",text:["Жүгөрү жылуулукту жактырат. Айдагандан кийин 10–12 күндө өнүп чыгат. Оптималдуу температура — 20–24 градус. Жүгөрүнү огородго да өстүрсө болот.","Күрүч суукта үшүк алып кетет. Ошондуктан үрөнүн 10–12 градус жылуулукта өстүрөт.","Арпа күздүк буудайдан 7–12 күн мурдараак өнүп чыгат. Ал үшүккө чыдамдуу, кургакчылыкты да жакшы көтөрөт.","Буудай жаз жана күз мезгилиндеги нымды жакшы колдонот. Ал көп түптөнүп, эрте бышат."],qs:[{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Кайсы дан өсүмдүгү суукта үшүк алып кетет?",o:["Күрүч","Арпа","Буудай","Жүгөрү"],a:0},{q:"Кайсы өсүмдүк кургакчылыкты да жакшы көтөрөт?",o:["Арпа","Күрүч","Жүгөрү","Баары"],a:0},{q:"Жүгөрүнүн оптималдуу температурасы:",o:["20–24 градус","1–2 градус","50 градус","0 градус"],a:0},{q:"Кайсы дан өсүмдүгү көп түптөнүп, эрте бышат?",o:["Буудай","Күрүч","Жүгөрү","Арпа"],a:0}]},{t:"tf",i:"pair",h:"<b>Туура</b> же <b>ката</b>.",qs:[{s:"Жүгөрү жылуулукту жактырат.",a:true},{s:"Күрүч суукта жакшы өсөт.",a:false,fix:"Күрүч суукта үшүк алып кетет."},{s:"Арпа үшүккө чыдамдуу.",a:true},{s:"Буудай кечигип бышат.",a:false,fix:"Буудай эрте бышат."}]}]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Жүгөрү [жылуулукту] жактырат.","Күрүч суукта [үшүк] алып кетет.","Арпа [кургакчылыкты] да жакшы көтөрөт.","Буудай эрте [бышат].","Эгерде үрөн жакшы болсо, түшүм [мол] болот."]},
+ {t:"sort",i:"think",h:"Дан өсүмдүктөрүн бөлгүлө: жылуулукту жактырат же сууктан коркпойт.",cols:["Жылуулукту жактырат","Суукка чыдайт"],items:[["жүгөрү",0],["күрүч",0],["арпа",1],["буудай",1]]},
+ {t:"order",i:"write",h:"Сүйлөмдөрдү түзгүлө.",items:["Жүгөрү жылуулукту жактырат.","Арпа үшүккө чыдамдуу.","Буудай эрте бышат.","Күрүч суукта үшүк алып кетет."]},
+ {t:"open",i:"pair",h:"Суроолорго жооп бергиле.",qs:["Кыргызстанда кайсы дан өсүмдүктөрү өстүрүлөт?","Эмне үчүн дан өсүмдүктөрү керек?","Үйүңөрдө нандан башка дан азыктары барбы?"]},
+ {t:"write",i:"write",h:"Бир дан өсүмдүгү жөнүндө 5 сүйлөм жазгыла.",prompt:"Үлгү: <i>Буудай жаз жана күз мезгилиндеги нымды жакшы колдонот. Ал эрте бышат.</i>",min:30,sample:"Жүгөрү жылуулукту жактырат. Аны огородго да өстүрсө болот. Жүгөрү 10–12 күндө өнүп чыгат. Кыргызстанда жүгөрү көп өстүрүлөт. Мен жүгөрүнү кайнатып жегенди жакшы көрөм."},
+ {t:"prov",i:"read",h:"Макалды окугула.",ids:[9],order:1},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t6l2",title:"Айыл чарба дүкөнү",ky:"Иш кагазы: буйрутма",
+ gram:"<b>Буйрутма</b> — иш кагазы: <b>Кимге?</b> <b>Кимден?</b> <b>Аталышы</b>, <b>Текст</b>, <b>Колу</b>, <b>Датасы</b>. Суроо: <i>Бул канча сом? Баасы канча?</i>",
+ lex:"арыз, мекеме, сунуш, сураныч, буйрутма, жабдык, дан майдалагыч, тоют кескич, уй саагыч аппарат, баа, арзан, кымбат, төлөө",
+ tasks:[
+ {t:"vocab",i:"think",h:"Дүкөндөгү жана иш кагаздагы сөздөр.",w:[["айыл чарба дүкөнү","магазин сельхозтоваров","","🏪"],["фермер","фермер","","👨‍🌾"],["жабдык","оборудование","","🛠️"],["дан майдалагыч","зернодробилка","","⚙️"],["тоют кескич","корморезка","","✂️"],["уй саагыч аппарат","доильный аппарат","","🐄"],["буйрутма","заявка","","📝"],["арыз","заявление","","📄"],["сунуш","предложение","","💡"],["сураныч","просьба","","🙏"],["мекеме","учреждение","","🏢"],["колу","подпись","","✍️"],["датасы","дата","","📅"],["баасы","цена","","🏷️"],["арзан","дешёвый","","👍"],["кымбат","дорогой","","💎"]]},
+ {t:"box",html:"<p><b>Буйрутма (үлгү):</b></p><table><tr><td><b>Кимге кайрылат?</b></td><td>«Фермер» айыл чарба жабдыктары дүкөнүнө</td></tr><tr><td><b>Кимден?</b></td><td>Биримкулов Сыдыктан</td></tr><tr><td><b>Аталышы</b></td><td>Буйрутма</td></tr><tr><td><b>Текст</b></td><td>Жеке фермер чарба үчүн дан майдалагыч, тоют кескич жана уй саагыч аппарат сатып алам.</td></tr><tr><td><b>Колу</b></td><td>(колу)</td></tr><tr><td><b>Датасы</b></td><td>25.11.2021</td></tr></table>"},
+ {t:"dialogue",i:"listen",h:"Дүкөндө. Ролдорго бөлүнүп ойногула.",lines:[["Сатуучу","Саламатсызбы! Эмне алгыңыз келет?"],["Фермер","Саламатсыз! Мага тоют кескич керек. Анын баасы канча?"],["Сатуучу","Он эки миң беш жүз сом."],["Фермер","Бир аз кымбат экен. Арзандатуу барбы?"],["Сатуучу","Эки аппарат алсаңыз, жүз сом арзандатабыз."],["Фермер","Макул. Эки аппарат алам. Накталай төлөйм."],["Сатуучу","Мына чек жана кайтарым акчаңыз."]]},
+ {t:"mc",i:"think",h:"Диалог боюнча жооп бергиле.",qs:[{q:"Фермер эмне алгысы келди?",o:["Тоют кескич","Үрөн","Нан","Кийим"],a:0},{q:"Эмнеге арзандатуу беришет?",o:["Эки аппарат алса","Эртең келсе","Көп сүйлөсө","Колу менен төлөсө"],a:0},{q:"Фермер кантип төлөйт?",o:["Накталай","Насыя менен","Өзү менен алып кетет","Төлөбөйт"],a:0}]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Мага тоют кескич [керек].","Анын [баасы] канча?","Бир аз [кымбат] экен.","Эки аппарат алсаңыз, [арзандатабыз].","Мына [чек] жана кайтарым акчаңыз."]},
+ {t:"match",i:"pair",h:"Сөздөрдүн котормосун тапкыла.",pairs:[["буйрутма","заявка"],["сунуш","предложение"],["арыз","заявление"],["мекеме","учреждение"],["сураныч","просьба"]]},
+ {t:"write",i:"write",h:"Иш кагазы: буйрутма жазгыла.",prompt:"Айыл чарба дүкөнүнөн бир нерсе (үрөн, жабдык, тоют) сатып алуу үчүн буйрутма жазгыла: <i>Кимге? Кимден? Аталышы: Буйрутма. Текст. Колу. Датасы.</i>",min:30,sample:"«Алтын дан» дүкөнүнө. Кимден: Асанов Бакыт. Буйрутма. Мен чарба үчүн 50 кг буудай үрөнү жана 20 кг жүгөрү үрөнүн сатып алгым келет. (колу) 10.03.2026."},
+ {t:"act",i:"group",h:"Топтук иш: «Айыл чарба дүкөнү» (ролдук оюн)",html:"<p>Класста дүкөн кургула. Бир топ — сатуучулар (баа тизмеси: буудай, жүгөрү, үрөн, жабдык), экинчи топ — фермерлер. <i>Эмне алгыңыз келет? Баасы канча? Арзандатуу барбы?</i> деп сүйлөшүп, буйрутма жазгыла.</p>"},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t6l3",title:"Кайталоо: Соода-сатык",ky:"Дан жана буйрутма боюнча кайталоо",review:true,
+ gram:"Кайталоо: дан өсүмдүктөрү, буйрутма, баа жөнүндө суроо.",
+ tasks:[
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Буйрутмада кайсы бөлүк жок?",o:["Жомок","Кимге кайрылат","Датасы","Колу"],a:0},{q:"«Кымбат» деген сөздүн антоними:",o:["арзан","чоң","жаңы","таза"],a:0},{q:"Баа жөнүндө кандай суроо коёбуз?",o:["Анын баасы канча?","Сен кимсиң?","Кайда барасың?","Качан келдиң?"],a:0},{q:"«Даны жоктун — наны жок» макалынын мааниси:",o:["Дан жок болсо нан да жок","Көп сүйлөө керек","Базарга баруу керек","Эрте туруу керек"],a:0}]},
+ {t:"gap",i:"write",h:"Текстти толуктагыла.",items:["Мен базарга [бардым]. Ал жерден буудай [алдым]. Анын баасы [арзан] болду. Сатуучу мага чек [берди]."]},
+ {t:"game",i:"game",h:"Оюндарды ойногула!",theme:6,gs:["tug","chuko","quiz"]},
+ {t:"act",i:"group",h:"Долбоор: «Менин чарбам» (топ менен)",html:"<ol><li>Кыял чарба ойлоп тапкыла (ферма, бакча, дүкөн).</li><li>Баа тизмесин жана буйрутма жазгыла.</li><li>Класска кыргызча таанытып бергиле.</li></ol>"},
+ {t:"light",h:"Светофор аркылуу теманы баала."}]}
+],
+pool:[
+{c:"v",q:"Дан өсүмдүктөрүн тандагыла:",o:["буудай","алма","картошка","сабиз"]},
+{c:"v",q:"«Кымбат» деген сөздүн антоними:",o:["арзан","чоң","узун","жаңы"]},
+{c:"v",q:"Бирөөдөн бир нерсе алуу үчүн жазылган иш кагазы:",o:["буйрутма","жомок","ыр","макал"]},
+{c:"v",q:"Сатуучу менен сүйлөшүү кайда болот?",o:["дүкөндө","китепканада","көлдө","стадионда"]},
+{c:"v",q:"«Баа» деген сөздүн орусча котормосу:",o:["цена","погода","задача","профессия"]},
+{c:"g",q:"Анын ____ канча?",o:["баасы","баа","баалар","баасыз"]},
+{c:"g",q:"Мага үрөн ____. (нужны)",o:["керек","кылат","берет","жок"]},
+{c:"g",q:"Эгерде үрөн жакшы ____, түшүм мол болот.",o:["болсо","болду","болуп","болот"]},
+{c:"g",q:"Ал базарга ____. (пошёл)",o:["барды","барат","барса","барып"]},
+{c:"g",q:"Үч килограмм буудай ____ сом турат.",o:["беш жүз","баасыз","жакшы","кымбат"]},
+{c:"c",q:"Кыргызстандын акча бирдиги:",o:["сом","тенге","рубль","доллар"]},
+{c:"c",q:"«Даны жоктун — наны жок» деген макал эмне жөнүндө?",o:["Дан менен нандын мааниси жөнүндө","Спорт жөнүндө","Кино жөнүндө","Жол жөнүндө"]},
+{c:"c",q:"Кыргыздын салттуу даамы:",o:["боорсок","пицца","суши","тако"]},
+{c:"c",q:"Кыргызстандагы эң белгилүү чоң базар:",o:["Ош базары","Бангкок базары","Токио рыногу","Нью-Йорк рыногу"]},
+{c:"c",q:"Мал (ат) базары Кыргызстандын кайсы шаарында белгилүү?",o:["Каракол","Лондон","Париж","Токио"]}
+],
+speak:["Базарда эмне сатып алганың жөнүндө айтып бер.","Дан өсүмдүктөрү жөнүндө 3 сүйлөм айт.","Дүкөндө баасын кантип сурайсың?","Буйрутма кантип жазылат?","Арзан жана кымбат деген эмне?","Кыргыз нанын жөнүндө айтып бер."],
+riddles:[
+{q:"Жерге себилет, жаз келгенде өнөт, күз келгенде бышат. Нанга айланат. Мен эмнемин?",a:"Буудай",ky:"Дан өсүмдүгү."},
+{q:"Менин алтын сарыгым бар, сабагым узун, башым чоң, жылуулукту жакшы көрөм. Мен эмнемин?",a:"Жүгөрү",ky:"Дан өсүмдүгү."},
+{q:"Мени сатып алганда баасын сурашат. Мен сандан турам. Мен эмнемин?",a:"Баа",ky:"Сом менен өлчөнөт."}
+]});
+
+BOOK.themes.push({n:7,color:"#c2185b",em:"🎬",en:"Кызыгуулар",ky:"Кино жана улуу адамдардын кызыкчылыгы",
+intro:"Кызыгуулар, кино, китеп жана улуу адамдар: Манасчы, Чыңгыз Айтматов жана «Ак кеме» тасмасы. Салыштыруу («-раак», «караганда») жана бышыктооч+баяндооч менен иштейбиз.",
+gloss:[["кызыгуу","интерес"],["кызык-","интересоваться"],["кызыктуу","интересный"],["кызыксыз","неинтересный"],["кино","кино"],["кинотасма","фильм"],["тасма","фильм, лента"],["көркөм тасма","художественный фильм"],["даректүү тасма","документальный фильм"],["жомок","сказка"],["фантастика","фантастика"],["күлкүлүү","смешной"],["кооз","красивый"],["сахна","сцена"],["театр","театр"],["актёр","актёр"],["режиссёр","режиссёр"],["каарман","герой"],["башкы роль","главная роль"],["премьера","премьера"],["фестиваль","фестиваль"],["сыйлык","награда"],["гран-при","гран-при"],["китеп","книга"],["повесть","повесть"],["аңгеме","рассказ"],["ыр","песня, стих"],["эпос","эпос"],["манасчы","сказитель «Манаса»"],["импровизатор","импровизатор"],["тулпар","скакун"],["чоро","соратник, богатырь (Манаса)"],["улуу","великий"],["залкар","великий"],["тилмеч","переводчик, толмач"],["которуу","переводить"],["которгон","переведённый, переводил"],["тил","язык"],["эне тил","родной язык"],["чет тил","иностранный язык"],["аксакал","аксакал, старейшина"],["боз үй","юрта"],["жылкычы","коневод, конюх"],["айгыр","жеребец"],["ветеринар","ветеринар"],["уулуу","ядовитый"],["чөп","трава"],["шалбаа","луг"],["сөзмө-сөз","слово в слово"],["суктан-","восхищаться"],["эстен кетпейт","не забудется"],["укмуш","удивительно"],["таң кал-","удивляться"],["жакында","недавно, скоро"],["көптөн бери","давно, уже давно"],["кайра","снова, обратно"],["алыс","далеко"],["караганда","по сравнению, чем"],["жеңил","лёгкий"],["оор","тяжёлый"],["кыйын","трудный, сильный"],["кирешелүү","прибыльный"],["даңк","слава"],["дүйнөгө белгилүү","известный миру"],["кылым","век"],["Гомер","Гомер"]],
+lessons:[
+{id:"t7l1",title:"Сен эмнеге кызыгасың?",ky:"Манас — элдик театр",
+ gram:"<b>Салыштыруу:</b> <b>-раак / -ыраак</b> жана <b>караганда</b>: <i>«Ак кеме» «Эрте келген турналарга» караганда кызыктуураак.</i> Суроо: <b>Эмнеге кызыгасың?</b> — <i>Мен кино көрүүгө кызыгам.</i>",
+ lex:"кызыгуу, кино, жомок, фантастика, каарман, актёр, театр, импровизатор, манасчы, залкар, суктануу",
+ tasks:[
+ {t:"vocab",i:"think",h:"Кызыгуу жана кино жөнүндө сөздөр.",w:[["кызыгуу","интерес","","✨"],["кинотасма","фильм","","🎬"],["жомок","сказка","","🧚"],["фантастика","фантастика","","🚀"],["каарман","герой","","🦸"],["актёр","актёр","","🎭"],["режиссёр","режиссёр","","🎥"],["театр","театр","","🎪"],["манасчы","сказитель","","🎙️"],["импровизатор","импровизатор","","🎶"],["залкар","великий","","🌟"],["эпос","эпос","","📜"],["тулпар","скакун","","🐎"],["чоро","соратник Манаса","","⚔️"],["суктануу","восхищение","","🤩"],["китеп","книга","","📚"]]},
+ {t:"dialogue",i:"listen",h:"Диалог: кызыгуулар. Ролдорго бөлүнүп ойногула.",lines:[["Өскөнбек","Сен эмнеге кызыгасың?"],["Жамал","Мен кино көрүүгө кызыгам."],["Өскөнбек","Сага кайсы фильмдер жагат?"],["Жамал","Мага жомок тасмалар жагат. Сен кандай китептерге кызыгасың?"],["Өскөнбек","Мен тарыхый китептерди окугандан ырахат алам."],["Жамал","Жакшы көргөн актёруң ким?"],["Өскөнбек","Менин жакшы көргөн актёрум — комедияда ойногон жигит."]]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла: <b>караганда</b> менен.",items:["«Эрте келген турналар» «Ак кемеге» [караганда] кирешелүү.","Дудук киного караганда үндүү тасманы жасоо [жеңилирээк].","Ушул китеп анчалык [кызыктуураак] эмес."]},
+ {t:"box",html:"<table><tr><th>Сын атооч</th><th>Салыштыруу даражасы</th></tr><tr><td>кызыктуу</td><td>кызыктуу<b>раак</b></td></tr><tr><td>жеңил</td><td>жеңил<b>ирээк</b></td></tr><tr><td>оор</td><td>оор<b>ураак</b></td></tr><tr><td>күлкүлүү</td><td>күлкүлүү<b>рөөк</b></td></tr></table><p>Мисал: Кино китепке <b>караганда</b> кызыктуураак.</p>"},
+ {t:"read",i:"read",h:"Окугула.",title:"Элдик театрдын эң башкы үлгүсү — «Манас»",text:["«Манас» айтып жатканда манасчы бир эле мезгилде театр, импровизатор жана актёр болуп аткарат. Манасчы окуяларды өзү аралашып жүргөндөй айтат. Аны угуп отурган эл окуяны кино көргөндөй элестетет.","Саякбай Каралаев улуу манасчы болгон. Ал «Манас» айтканда күн күркүрөп, шамал болуп, Манас өзү жанына келип калгандай сезилчү экен. Манастын чоролору минген тулпарлардын дүбүртү угулуп тургандай болчу дешет.","Мухтар Ауэзов Саякбай Каралаевди «XX кылымдын Гомери» деп атаган."],qs:[{t:"tf",i:"pair",h:"<b>Туура</b>, <b>ката</b> же <b>жок</b> (текстте айтылган эмес).",nm:true,qs:[{s:"Манасчы бир эле мезгилде актёр жана импровизатор болуп аткарат.",a:"t"},{s:"Саякбай Каралаев улуу манасчы болгон.",a:"t"},{s:"Саякбай Каралаев жыл сайын Ысык-Көлгө барчу.",a:"n"},{s:"Мухтар Ауэзов Каралаевди XX кылымдын Гомери деп атаган.",a:"t"}]},{t:"open",i:"pair",h:"Суроолорго жооп бергиле.",qs:["«Манас» эмне үчүн элдик театр болуп эсептелет?","Сен «Манас» эпосун укканбы же окуганбы?"]}]},
+ {t:"order",i:"write",h:"Чачылган сөздөрдөн сүйлөм түзгүлө.",items:["«Манас» жалаң ыр менен айтылат.","Манасчы бир эле мезгилде актёр болгон.","Каралаев «Манас» айтканда эл кино көргөндөй болгон.","Саякбайды XX кылымдын Гомери деп аташат."]},
+ {t:"match",i:"pair",h:"Макалды анын маанисине жупташтыргыла.",pairs:[["Өнөр алды — кызыл тил.","Сөз өнөрү эң жогору бааланат"],["Ырыс алды — ынтымак.","Бирдиктүүлүк бакытты алып келет"],["Китеп — билимдин булагы.","Китеп окуп билим аласың"]]},
+ {t:"prov",i:"read",h:"Макалдарды окугула.",ids:[2,6,14],order:2},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t7l2",title:"Тилмеч бала жана «Ак кеме»",ky:"Чыңгыз Айтматов жана кыргыз көркөм тасмасы",
+ gram:"<b>Бышыктооч + баяндооч</b>: <b>качан? кантип? канчалык?</b> — <i>көптөн бери күткөн, жакында келди, кайра окуду, укмуш сүйлөдү</i>.",
+ lex:"тилмеч, кырсык, асыл тукум, сөзмө-сөз, таң калуу, суктануу, укмуш, көптөн бери, жакында, кайра, премьера, гран-при",
+ tasks:[
+ {t:"vocab",i:"think",h:"Текстке керектүү сөздөр.",w:[["тилмеч","переводчик","","🗣️"],["которот","переводит","","🔁"],["аксакал","аксакал","","👴"],["боз үй","юрта","","⛺"],["жылкычы","конюх","","🐎"],["айгыр","жеребец","","🐴"],["уулуу чөп","ядовитая трава","","🌿"],["сөзмө-сөз","слово в слово","","📝"],["суктануу менен","с восхищением","","😍"],["кубанычы койнуна батпай","не в себе от радости","","🎉"],["таң калат","удивляется","","😲"],["укмуш","удивительный","","🤯"],["көптөн бери","уже давно","","⏳"],["жакында","скоро, недавно","","🔜"],["кайра","снова","","🔄"],["алыс","далеко","","🧭"]]},
+ {t:"read",i:"read",h:"Чыңгыз Айтматовдун эскерүүсүнөн (кыскартылган). Тыным менен окугула.",title:"«Биринчи жолу тилмеч болгонумда 5 жашта элем» (Ч. Айтматов)",text:["Бир жайында жайлоодо кырсык болду: колхоз сатып алган асыл тукум айгыр кокустан өлдү. Эртеси бир киши келди — узун бойлуу, жээрде сакалчан, көк көздүү, кара булгаары кемселчен. Ал кыргызча бир ооз сөз билбейт, биздикилер да орусча түшүнбөйт. Жылкычылар: «Бала, сен тилмеч бол», — дешти.","Кичинекей Чыңгыз уялып, коркуп, чоң энесинин жанына боз үйгө кире качты. Чоң энеси: «Сен орусча сүйлөгөндөн уяласыңбы, же өз тилиңден уялып жатасыңбы? Тилди Кудай берген, бар, кой», — деп колунан жетелеп, боз үйгө алып барды.","Боз үйдүн ичинде аксакалдар отуруп, ветеринар да жанында эле. Бала сөздөрдү сөзмө-сөз которуп берди. Көрсө, айгыр уулуу чөпкө ууланып калган экен. Келген киши баланы мактады, аксакалдар аны этке тойгузушту. Балдар аны суктануу менен карашты: «Сен орусчаны суудай билет экенсиң!»"],qs:[{t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"Асыл тукум айгыр эмнеден өлдү?",o:["Уулуу чөптөн ууланып","Ачкачылыктан","Жолдо кыйроодон","Карыганда"],a:0},{q:"Кичинекей Чыңгыз эмне кылды?",o:["Тилмеч болууга уялып, коркту","Айгырды жоготкондон","Дарыгерден","Мектептен"],a:0},{q:"Чоң эне эмне деди?",o:["«Эне тилден уялба, тилди Кудай берген»","«Барба»","«Үйдө отур»","«Орусча билбейсиң»"],a:0},{q:"Кичинекей Чыңгыз мындан кийин:",o:["Тилмеч болуп, аксакалдарга жардам берди","Үйгө кетти","Эч нерсе кылган жок","Ыйлады"],a:0}]},{t:"open",i:"pair",h:"Талкуулагыла.",qs:["Бала тилмечпи? «Ооба» же «жок» деп жооп бер жана үч себепти айт.","Сен жеке турмушуңда тилмеч болуп көрдүңбү?","Эне тилден уялуу керекпи? Эмне үчүн?"]}]},
+ {t:"match",i:"pair",h:"Сөз айкаштарынын маанисин тапкыла.",pairs:[["көп ойлонбостон","не долго думая"],["бир ооз сөз билбейт","не знает ни слова"],["боз үйдөн атып чыкты","выскочил из юрты"],["кубанычы койнуна батпай","не в себе от радости"],["суудай билет","знает свободно, как воду пьёт"]]},
+ {t:"read",i:"read",h:"Кыргыз көркөм тасмасы жөнүндө маалымат.",title:"«Ак кеме» тасмасы",text:["«Ак кеме» көркөм тасмасы 1975-жылы тартылган. Тасманын режиссёру — Болот Шамшиев. Ал Чыңгыз Айтматовдун «Ак кеме» повести боюнча тартылган.","Тасманын премьерасы Бүткүл союздук кинофестивалда болгон. Тасма Гран-при сыйлыгын жеңип алган. Көпчүлүк адамдар аны көрүп жатып ыйлаган. Тасма «Кыргыз керемети» деп да аталган."],qs:[{t:"tf",i:"pair",h:"<b>Туура</b> же <b>ката</b>.",qs:[{s:"«Ак кеме» тасмасынын режиссёру — Болот Шамшиев.",a:true},{s:"Тасма Ч. Айтматовдун повести боюнча тартылган.",a:true},{s:"Тасма 2005-жылы тартылган.",a:false,fix:"1975-жылы тартылган."},{s:"Тасма Гран-при сыйлыгын жеңип алган.",a:true}]}]},
+ {t:"gap",i:"write",h:"Бышыктоочту толуктагыла.",items:["Мен бул тасманы [көптөн] бери күтүп жүрөм.","Ал [жакында] келди.","Мен бул китепти [кайра] окудум.","Ал укмуш [сүйлөдү].","Биз [алыс] жолго чыктык."]},
+ {t:"write",i:"write",h:"Кино же китеп боюнча сереп жазгыла (5 сүйлөм).",prompt:"Үлгү: <i>Мен ... деген тасманы көрдүм. Ал ... жөнүндө. Башкы каарман — ... Мага ... жакты, анткени ... Мен бул тасманы ... сунуштайм.</i>",min:30,sample:"Мен «Ак кеме» тасмасын көрдүм. Ал кичинекей бала жана анын чоң атасы Момун жөнүндө. Мага тасма абдан жакты, анткени ал адамкерчиликти жана жаратылышты сүйүүнү үйрөтөт. Мен бул тасманы бардык досторума сунуштайм."},
+ {t:"diary",i:"write",h:"Күндөлүк: «Мен Чыңгыз Айтматов жөнүндө эмнелерди билем?»",cols:["Билем","Билгим келет","Билдим"]},
+ {t:"light",h:"Светофор аркылуу баала."}]},
+
+{id:"t7l3",title:"Кайталоо: Менин кызыгууларым",ky:"Салыштыруу жана бышыктооч",review:true,
+ gram:"Кайталоо: <b>-раак</b>, <b>караганда</b>, бышыктооч (качан? кантип?).",
+ tasks:[
+ {t:"mc",i:"think",h:"Туура жоопту тандагыла.",qs:[{q:"«Манас» айтуучу адам:",o:["манасчы","жазуучу","сатуучу","мугалим"],a:0},{q:"Манасчыны эмне үчүн элдик театр дейбиз?",o:["Ал бир эле мезгилде актёр, режиссёр, импровизатор","Ал театрда иштейт","Ал кино тартат","Ал музыкант"],a:0},{q:"Чыңгыз Айтматовдун повести боюнча тартылган тасма:",o:["«Ак кеме»","«Манас»","«Жамийла»","«Шумкар»"],a:0},{q:"«Жеңилирээк» деген сөз эмнени билдирет?",o:["Салыштырууну","Санды","Мезгилди","Орунду"],a:0}]},
+ {t:"gap",i:"write",h:"Сүйлөмдөрдү толуктагыла.",items:["Мен кино көрүүгө [кызыгам].","Бул тасма ошол тасмага [караганда] кызыктуураак.","Саякбай Каралаев — улуу [манасчы].","Тасманын режиссёру тасманы [тарткан].","«Ак кеме» повестин [Айтматов] жазган."]},
+ {t:"sort",i:"think",h:"Сөздөрдү бөлгүлө: кино же китеп.",cols:["Кино","Китеп"],items:[["режиссёр",0],["премьера",0],["актёр",0],["сахна",0],["автор",1],["повесть",1],["барак",1],["ыр жыйнагы",1]]},
+ {t:"game",i:"game",h:"Оюндарды ойногула!",theme:7,gs:["tug","chuko","quiz"]},
+ {t:"act",i:"group",h:"Долбоор: «Класстык кино фестивалы» (топ менен)",html:"<ol><li>Кыска сценарий жазгыла (3 көрүнүш).</li><li>Плакат жасагыла: аталышы, актёрлору, режиссёру.</li><li>Класска көрсөтүп, «Кайсысы кызыктуураак?» деп талкуулагыла.</li></ol>"},
+ {t:"light",h:"Светофор аркылуу теманы баала."}]}
+],
+pool:[
+{c:"v",q:"Тасманын башкы ролун аткарган адам:",o:["актёр","режиссёр","сатуучу","жылкычы"]},
+{c:"v",q:"Тасманы тарткан жана жетектеген адам:",o:["режиссёр","актёр","жазуучу","акын"]},
+{c:"v",q:"«Тилмеч» деген сөздүн синоними:",o:["котормочу","дарыгер","жылкычы","мугалим"]},
+{c:"v",q:"«Укмуш» деген сөздүн орусча котормосу:",o:["удивительно","скучно","далеко","быстро"]},
+{c:"v",q:"«Көптөн бери» деген сөздүн орусча котормосу:",o:["давно","недавно","завтра","рано"]},
+{c:"g",q:"Бул тасма башкасына ____ кызыктуураак.",o:["караганда","менен","үчүн","боюнча"]},
+{c:"g",q:"Бул тасма ошол тасмага караганда ____. (жеңил)",o:["жеңилирээк","жеңили","жеңилдик","жеңилдейт"]},
+{c:"g",q:"Мен тасманы ____ күтүп жүрөм.",o:["көптөн бери","көптөн","көптү","көптөй"]},
+{c:"g",q:"Ал ____ келди. (недавно)",o:["жакында","эмес","кайра","алыс"]},
+{c:"g",q:"Мен кино көрүүгө ____.",o:["кызыгам","кызыгат","кызыккан","кызыктуу"]},
+{c:"c",q:"Улуу манасчы Саякбай Каралаевди Мухтар Ауэзов кимге салыштырган?",o:["Гомерге","Пушкинге","Аристотелге","Шекспирге"]},
+{c:"c",q:"«Ак кеме» тасмасынын режиссёру:",o:["Болот Шамшиев","Тологон Океев","Эльдар Рязанов","Чыңгыз Айтматов"]},
+{c:"c",q:"«Ак кеме» повестинин автору:",o:["Чыңгыз Айтматов","Алыкул Осмонов","Тоголок Молдо","Касымалы Жантөшов"]},
+{c:"c",q:"«Өнөр алды — ____ тил» макалы:",o:["кызыл","көк","ак","кара"]},
+{c:"c",q:"Манас эпосу кыргыз элинин:",o:["улуу эпосу","жазуучусу","шаары","дарыясы"]}
+],
+speak:["Эмнеге кызыгарың жөнүндө айтып бер.","Жактырган тасмаң жөнүндө айтып бер.","«Манас» эпосу жөнүндө не билесиң?","Чыңгыз Айтматов жөнүндө айтып бер.","Эки китепти же эки тасманы салыштыр.","Эне тилдин мааниси жөнүндө айтып бер."],
+riddles:[
+{q:"Мен сахнада сүйлөйм, башка адамдын ролун ойнойм, бирок ал адам эмесмин. Мен ким?",a:"Актёр",ky:"Тасмада же театрда ойнойт."},
+{q:"Мен эки тилде сүйлөйм, бирөөнүн сөзүн башка тилде айтам. Мен ким?",a:"Тилмеч (котормочу)",ky:"Тилди которот."},
+{q:"Мен кагаздан турам, ичимде окуялар бар, мени окуйсуң. Мен эмнемин?",a:"Китеп",ky:"Билимдин булагы."}
+]});
+
+BOOK.themes.sort(function(a,b){return a.n-b.n});
+</script>
+<script>/* ===== Кыргыз тили 8 — engine ===== */
+(function(){
+"use strict";
+var B=window.BOOK;
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function pick(a,n){return shuf(a).slice(0,n)}
+function el(html){var d=document.createElement("div");d.innerHTML=html.trim();return d.firstChild}
+function norm(s){return String(s).toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g," ").replace(/[.!?,;]+$/,"").trim()}
+
+/* ---------- state ---------- */
+var S={done:{},notes:{},light:{},best:{},quiz:{},big:0};
+try{var raw=localStorage.getItem("ky8_v1");if(raw)S=Object.assign(S,JSON.parse(raw))}catch(e){}
+function save(){try{localStorage.setItem("ky8_v1",JSON.stringify(S))}catch(e){}}
+function toast(t){var x=$("#toast");x.textContent=t;x.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){x.classList.remove("on")},2000)}
+if(S.big)document.documentElement.classList.add("big");
+
+/* ---------- speech ---------- */
+var VOICE=null,VLANG="ky-KG",warned=false;
+function pickVoice(){if(!("speechSynthesis" in window))return;var v=speechSynthesis.getVoices();if(!v.length)return;
+  var f=function(re){return v.filter(function(x){return re.test(x.lang)})[0]};
+  VOICE=f(/^ky/i)||f(/^kk/i)||f(/^ru/i)||null;VLANG=VOICE?VOICE.lang:"ru-RU"}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function speak(t,cb){
+  if(!("speechSynthesis" in window)){toast("Бул түзмөктө үн жок");cb&&cb();return}
+  try{if(!warned&&VOICE&&!/^ky/i.test(VOICE.lang)){warned=true;toast("Кыргыз үнү жок: "+(/^kk/i.test(VOICE.lang)?"казак":"орус")+" үнү колдонулууда")}
+  speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(String(t).replace(/\s+/g," "));u.lang=VLANG;u.rate=.85;if(VOICE)u.voice=VOICE;u.onend=function(){cb&&cb()};u.onerror=function(){cb&&cb()};speechSynthesis.speak(u)}catch(e){cb&&cb()}
+}
+function stopSpeak(){try{speechSynthesis.cancel()}catch(e){}}
+
+/* ---------- dictionary ---------- */
+var DICT={},DLIST=[];
+function addWord(en,ky,ru,em,src){var k=norm(en);if(!k||DICT[k])return;DICT[k]={en:en,ky:ky,ru:ru,em:em||"",src:src};DLIST.push(DICT[k])}
+B.themes.forEach(function(t){
+  t.lessons.forEach(function(l){(l.tasks||[]).forEach(function(k){if(k.t==="vocab")k.w.forEach(function(w){addWord(w[0],w[1],w[2],w[3],t.n)})})});
+  (t.gloss||[]).forEach(function(w){addWord(w[0],w[1],w[2]||"","",t.n)});
+});
+(B.gloss||[]).forEach(function(w){addWord(w[0],w[1],w[2]||"","",0)});
+var SUF="лардын,лердин,лордун,лөрдүн,дардын,дердин,тардын,тердин,ларга,лерге,ларды,лерди,лардан,лерден,дарга,дерге,дарды,дерди,дардан,дерден,тарга,терге,тарды,терди,тардан,терден,ларда,лерде,дарда,дерде,тарда,терде,ларын,лерин,лар,лер,лор,лөр,дар,дер,дор,дөр,тар,тер,тор,төр,нын,нин,нун,нүн,дын,дин,дун,дүн,тын,тин,тун,түн,дан,ден,дон,дөн,тан,тен,тон,төн,нан,нен,нон,нөн,мын,мин,мун,мүн,быз,биз,буз,бүз,ыңыз,иңиз,уңуз,үңүз,ыбыз,ибиз,убуз,үбүз,ган,ген,гон,гөн,кан,кен,кон,көн,чы,чи,чу,чү,луу,лүү,лык,лик,лук,лүк,дык,дик,дук,дүк,тык,тик,тук,түк,дай,дей,дой,дөй,тай,тей,той,төй,сыз,сиз,суз,сүз,бы,би,бу,бү,га,ге,го,гө,ка,ке,ко,кө,да,де,до,дө,та,те,то,тө,ды,ди,ду,дү,ты,ти,ту,ты,ны,ни,ну,нү,ын,ин,ун,үн,сы,си,су,сү,ым,им,ум,үм,ың,иң,уң,үң,ы,и,у,ү,м,ң,н,с,т,д,п,к".split(",").sort(function(a,b){return b.length-a.length});
+var VSUF="ат,ет,от,өт,ыт,ит,ут,үт,ып,ип,уп,үп,ат,ды,ди,ду,дү,ты,ти,ту,түү,ган,ген,гон,гөн,кан,кен,кон,көн,ууда,үүдө,ыш,иш,уш,үш,ыр,ир,ур,үр,ар,ер,ор,өр,ба,бе,бо,бө,па,пе,по,пө,мак,мек,мок,мөк,маа,мей,май".split(",");
+function lookup(w){
+  var lc=norm(w);if(DICT[lc])return DICT[lc];
+  var seen={},q=[lc],n=0;
+  while(q.length&&n++<80){var x=q.shift();if(seen[x])continue;seen[x]=1;if(DICT[x])return DICT[x];
+    if(DICT[x+"-"])return DICT[x+"-"];
+    for(var i=0;i<SUF.length;i++){var sf=SUF[i];if(x.length>sf.length+1&&x.slice(-sf.length)===sf){var y=x.slice(0,-sf.length);if(!seen[y])q.push(y)}}
+    if(x.length>3){var z=x.replace(/(.)\1$/,"$1");if(z!==x&&!seen[z])q.push(z)}}
+  /* prefix match: word starts with a dictionary stem of >=4 letters */
+  for(var L=lc.length-1;L>=4;L--){var p=lc.slice(0,L);if(DICT[p])return DICT[p];if(DICT[p+"-"])return DICT[p+"-"]}
+  return null}
+function wrap(text){
+  return esc(text).replace(/([А-Яа-яЁёҢңӨөҮү][А-Яа-яЁёҢңӨөҮү'’-]*)/g,function(m){var d=lookup(m);return d?'<span class="w k" data-w="'+esc(m)+'">'+m+'</span>':m});
+}
+var tip=null;
+function showTip(span){
+  var d=lookup(span.dataset.w);if(!d)return;
+  if(!tip){tip=el('<div id="tip"></div>');document.body.appendChild(tip)}
+  tip.innerHTML='<b>'+esc(d.en)+'</b> — '+esc(d.ky)+(d.ru?' · '+esc(d.ru):"")+' <button aria-label="listen">🔊</button>';
+  tip.style.display="block";var r=span.getBoundingClientRect();
+  tip.style.left=Math.max(8,Math.min(innerWidth-tip.offsetWidth-8,r.left))+"px";tip.style.top=(r.bottom+8+tip.offsetHeight>innerHeight?r.top-tip.offsetHeight-8:r.bottom+8)+"px";
+  $("button",tip).onclick=function(e){e.stopPropagation();speak(d.en)};
+}
+document.addEventListener("click",function(e){var s=e.target.closest(".w.k");if(s){e.stopPropagation();showTip(s);return}if(tip&&!e.target.closest("#tip"))tip.style.display="none"});
+
+/* ---------- icons ---------- */
+var IC={
+ pair:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M2 20c0-4 3-6 6-6s6 2 6 6M12 20c0-3 2-5 5-5s5 2 5 5"/></svg>',
+ write:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-5L16 4l4 4L9 19l-5 1Z"/><path d="M14 6l4 4"/></svg>',
+ group:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="6" r="2.6"/><circle cx="5" cy="9" r="2.2"/><circle cx="19" cy="9" r="2.2"/><path d="M7 20c0-4 2-6 5-6s5 2 5 6M1 18c0-3 1.5-4.500 4-4.500M23 18c0-3-1.500-4.500-4-4.500"/></svg>',
+ think:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.600 2.600 0 1 1 3.700 2.300c-.7.400-1.200.9-1.200 1.800M12 17h.01"/></svg>',
+ read:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5c3-1 6-1 9 1 3-2 6-2 9-1v14c-3-1-6-1-9 1-3-2-6-2-9-1Z"/><path d="M12 6v14"/></svg>',
+ listen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.500 8.500a5 5 0 0 1 0 7M18.500 5.500a9 9 0 0 1 0 13"/></svg>',
+ game:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.700 5.600 6.100.9-4.400 4.300 1 6.100L12 17l-5.400 2.900 1-6.100L3.200 9.500l6.100-.9Z"/></svg>'
+};
+var TUNDUK='<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="10"/><path d="M50 10v80M10 50h80M22 22l56 56M78 22 22 78"/></svg>';
+
+/* ---------- progress helpers ---------- */
+function lessonTasks(l){return (l.tasks||[]).map(function(t,i){return{t:t,id:l.id+"."+i}}).filter(function(x){return x.t.t!=="box"&&x.t.t!=="game"})}
+function lessonProg(l){var a=lessonTasks(l),d=a.filter(function(x){return S.done[x.id]!=null}).length;return a.length?d/a.length:0}
+function themeProg(t){var a=0,n=0;t.lessons.forEach(function(l){var k=lessonTasks(l);n+=k.length;a+=k.filter(function(x){return S.done[x.id]!=null}).length});return n?a/n:0}
+function markDone(id,sc,card){S.done[id]=sc==null?1:sc;save();if(card)card.classList.add("done")}
+
+/* ---------- task renderers ---------- */
+function head(t,i,n){
+  return '<div class="th"><div class="ic '+esc(t.i||"think")+'">'+(IC[t.i||"think"]||IC.think)+'</div><h3>'+(n?'<b>'+n+'.</b>':"")+t.h+'</h3></div>';
+}
+function result(card,ok,total){
+  var r=$(".res",card);if(!r)return;var f=total?ok/total:0;r.textContent=ok+" / "+total;r.className="res "+(f>=.99?"good":f>=.6?"mid":"bad");
+}
+function doneBtn(card,id,label){
+  var b=el('<button class="btn g s">'+(label||"Аткарылды ✓")+'</button>');
+  b.onclick=function(){markDone(id,1,card);toast("Жакшы!")};return b;
+}
+var R={};
+R.vocab=function(t,id,card){
+  var h='<div class="vgrid">'+t.w.map(function(w,i){return '<button class="vc" data-i="'+i+'"><span class="e">'+(w[3]||"")+'</span><b>'+esc(w[0])+'</b><i>'+esc(w[1])+'</i><s>'+esc(w[2]||"")+'</s></button>'}).join("")+'</div><div class="btns"><button class="btn s" data-a="all">Бардыгын көрсөт</button><button class="btn g s" data-a="play">🔊 Бардыгын угуу</button></div>';
+  card.insertAdjacentHTML("beforeend",h);
+  var seen={};
+  card.addEventListener("click",function(e){var c=e.target.closest(".vc");if(c){c.classList.toggle("on");speak(t.w[+c.dataset.i][0]);seen[c.dataset.i]=1;if(Object.keys(seen).length>=t.w.length)markDone(id,1,card);return}
+    var b=e.target.closest("[data-a]");if(!b)return;
+    if(b.dataset.a==="all"){var on=!$(".vc.on",card)||$$(".vc:not(.on)",card).length;$$(".vc",card).forEach(function(x){x.classList.toggle("on",on)});markDone(id,1,card)}
+    if(b.dataset.a==="play"){var i=0;(function nx(){if(i>=t.w.length)return;var c=$$(".vc",card)[i];c.classList.add("on");speak(t.w[i][0],function(){i++;setTimeout(nx,350)})})();markDone(id,1,card)}});
+};
+R.box=function(t,id,card){card.insertAdjacentHTML("beforeend",'<div class="box '+(t.c||"")+'">'+t.html+'</div>')};
+R.act=function(t,id,card){
+  card.insertAdjacentHTML("beforeend",'<div class="box y">'+t.html+'</div>');var b=el('<div class="btns"></div>');b.appendChild(doneBtn(card,id));card.appendChild(b)};
+R.dialogue=function(t,id,card){
+  var h='<div class="dl">'+t.lines.map(function(l,i){return '<div class="line '+(i%2?"B":"A")+'" data-i="'+i+'"><div class="sp">'+esc(l[0]).charAt(0)+'</div><div class="tx">'+(l[0].length>2?'<small style="display:block;font-weight:700;color:#7a6a60;margin-bottom:2px">'+esc(l[0])+'</small>':"")+wrap(l[1])+'</div><button class="say" aria-label="listen">🔊</button></div>'}).join("")+'</div><div class="btns"><button class="btn s" data-a="play">🔊 Угуу</button><button class="btn g s" data-m="">Бардыгы</button><button class="btn g s" data-m="A">Мен — 1-ролдо</button><button class="btn g s" data-m="B">Мен — 2-ролдо</button></div>';
+  card.insertAdjacentHTML("beforeend",h);
+  card.addEventListener("click",function(e){
+    var s=e.target.closest(".say");if(s){speak(t.lines[+s.parentNode.dataset.i][1]);markDone(id,1,card);return}
+    var l=e.target.closest(".line.hid");if(l&&!e.target.closest(".w")){l.classList.remove("hid");return}
+    var m=e.target.closest("[data-m]");if(m){var who=m.dataset.m;$$(".line",card).forEach(function(x){x.classList.toggle("hid",!!who&&x.classList.contains(who))});markDone(id,1,card);return}
+    var p=e.target.closest('[data-a="play"]');if(p){var i=0;(function nx(){if(i>=t.lines.length)return;var ln=$$(".line",card)[i];ln.classList.remove("hid");ln.scrollIntoView({block:"center",behavior:"smooth"});speak(t.lines[i][1],function(){i++;setTimeout(nx,300)})})();markDone(id,1,card)}});
+};
+function parseGap(txt){
+  var parts=[],re=/\[([^\]]*)\]/g,last=0,m;
+  while((m=re.exec(txt))){parts.push({s:txt.slice(last,m.index)});parts.push({g:m[1]});last=re.lastIndex}
+  parts.push({s:txt.slice(last)});return parts}
+R.gap=function(t,id,card){
+  var items=t.items||[t.text],blanks=[];
+  var h=items.map(function(tx,ii){
+    return '<div class="gp">'+parseGap(tx).map(function(p){
+      if(p.s!=null)return esc(p.s).replace(/\n/g,"<br>");
+      var g=p.g;if(g.indexOf("|")>=0){var o=g.split("|"),ci=0;o=o.map(function(x,i){if(x.slice(-1)==="*"){ci=i;return x.slice(0,-1)}return x});blanks.push({sel:1,a:[o[ci]]});
+        return '<select data-b="'+(blanks.length-1)+'"><option value="">…</option>'+o.map(function(x){return '<option>'+esc(x)+'</option>'}).join("")+'</select>'}
+      blanks.push({a:g.split("/")});return '<input data-b="'+(blanks.length-1)+'" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:'+Math.max(70,Math.max.apply(null,g.split("/").map(function(x){return x.length}))*11)+'px">'}).join("")+'</div>'}).join("");
+  card.insertAdjacentHTML("beforeend",h+'<div class="btns"><button class="btn" data-a="chk">Текшерүү</button><button class="btn g" data-a="show">Жоопторду көрсөтүү</button><button class="btn g" data-a="rst">Кайра</button><span class="res"></span></div>');
+  function ctl(i){return $('[data-b="'+i+'"]',card)}
+  card.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a;
+    if(a==="chk"){var ok=0;blanks.forEach(function(bl,i){var c=ctl(i),v=norm(c.value),good=bl.a.some(function(x){return norm(x)===v});c.classList.toggle("ok",good);c.classList.toggle("no",!good&&v!=="");if(good)ok++});result(card,ok,blanks.length);markDone(id,ok/blanks.length,card)}
+    if(a==="show"){blanks.forEach(function(bl,i){var c=ctl(i);c.value=bl.a[0];c.classList.add("ok");c.classList.remove("no")});result(card,blanks.length,blanks.length)}
+    if(a==="rst"){blanks.forEach(function(bl,i){var c=ctl(i);c.value="";c.classList.remove("ok","no")});$(".res",card).textContent=""}});
+};
+R.mc=function(t,id,card){
+  var h=t.qs.map(function(q,i){return '<div class="q" data-i="'+i+'"><p>'+(t.qs.length>1?(i+1)+") ":"")+wrap(q.q)+'</p><div class="opts">'+q.o.map(function(o,j){return '<button class="o" data-j="'+j+'">'+esc(o)+'</button>'}).join("")+'</div></div>'}).join("");
+  card.insertAdjacentHTML("beforeend",h+'<div class="btns"><button class="btn" data-a="chk">Текшерүү</button><button class="btn g" data-a="show">Жоопторду көрсөтүү</button><span class="res"></span></div>');
+  var sel={};
+  card.addEventListener("click",function(e){var o=e.target.closest(".o");if(o){var q=o.closest(".q"),i=q.dataset.i;$$(".o",q).forEach(function(x){x.classList.remove("sel","ok","no")});o.classList.add("sel");sel[i]=+o.dataset.j;return}
+    var b=e.target.closest("[data-a]");if(!b)return;
+    if(b.dataset.a==="chk"){var ok=0;t.qs.forEach(function(q,i){var qe=$('.q[data-i="'+i+'"]',card);$$(".o",qe).forEach(function(x,j){x.classList.remove("ok","no");if(sel[i]===j)x.classList.add(j===q.a?"ok":"no")});if(sel[i]===q.a)ok++});result(card,ok,t.qs.length);markDone(id,ok/t.qs.length,card)}
+    if(b.dataset.a==="show"){t.qs.forEach(function(q,i){var qe=$('.q[data-i="'+i+'"]',card);$$(".o",qe).forEach(function(x,j){x.classList.remove("ok","no");if(j===q.a)x.classList.add("ok")})})}});
+};
+R.tf=function(t,id,card){
+  var nm=t.nm;
+  var h=t.qs.map(function(q,i){return '<div class="q" data-i="'+i+'"><p>'+(i+1)+") "+wrap(q.s)+'</p><div class="tfb"><button class="o" data-v="t">Туура ✓</button><button class="o" data-v="f">Ката ✗</button>'+(nm?'<button class="o" data-v="n">Жок ?</button>':"")+'</div>'+(q.fix?'<div class="fx">→ '+esc(q.fix)+'</div>':"")+'</div>'}).join("");
+  card.insertAdjacentHTML("beforeend",h+'<div class="btns"><button class="btn" data-a="chk">Текшерүү</button><button class="btn g" data-a="show">Жоопторду көрсөтүү</button><span class="res"></span></div>');
+  var sel={};
+  card.addEventListener("click",function(e){var o=e.target.closest(".o");if(o){var q=o.closest(".q");$$(".o",q).forEach(function(x){x.classList.remove("sel","ok","no")});o.classList.add("sel");sel[q.dataset.i]=o.dataset.v;return}
+    var b=e.target.closest("[data-a]");if(!b)return;
+    function mark(show){var ok=0;t.qs.forEach(function(q,i){var qe=$('.q[data-i="'+i+'"]',card),ans=q.a===true?"t":q.a===false?"f":q.a;$$(".o",qe).forEach(function(x){x.classList.remove("ok","no");if(show){if(x.dataset.v===ans)x.classList.add("ok")}else if(sel[i]===x.dataset.v)x.classList.add(x.dataset.v===ans?"ok":"no")});if(sel[i]===ans)ok++;if(show||sel[i]!==ans&&sel[i])qe.classList.add("show")});return ok}
+    if(b.dataset.a==="chk"){var ok=mark(false);result(card,ok,t.qs.length);markDone(id,ok/t.qs.length,card)}
+    if(b.dataset.a==="show")mark(true)});
+};
+R.match=function(t,id,card){
+  var L=t.pairs.map(function(p,i){return{i:i,x:p[0]}}),Rr=shuf(t.pairs.map(function(p,i){return{i:i,x:p[1]}}));
+  card.insertAdjacentHTML("beforeend",'<div class="mt"><div class="ml">'+L.map(function(o,k){return '<button class="o" data-s="l" data-k="'+k+'">'+wrap(o.x)+'</button>'}).join("")+'</div><div class="mr">'+Rr.map(function(o,k){return '<button class="o" data-s="r" data-k="'+k+'">'+wrap(o.x)+'</button>'}).join("")+'</div></div><div class="btns"><button class="btn" data-a="chk">Текшерүү</button><button class="btn g" data-a="rst">Кайра</button><span class="res"></span></div>');
+  var pairs={},selL=null,n=0;
+  function paint(){$$(".o",card).forEach(function(x){x.removeAttribute("data-p");x.classList.remove("sel","ok","no")});var c=0;Object.keys(pairs).forEach(function(l){c++;$('[data-s="l"][data-k="'+l+'"]',card).setAttribute("data-p",c);$('[data-s="r"][data-k="'+pairs[l]+'"]',card).setAttribute("data-p",c)});if(selL!=null)$('[data-s="l"][data-k="'+selL+'"]',card).classList.add("sel")}
+  card.addEventListener("click",function(e){var o=e.target.closest(".o");
+    if(o){var k=o.dataset.k;if(o.dataset.s==="l"){if(pairs[k]!=null){delete pairs[k];selL=null}else selL=(selL==k?null:k)}else{var ex=Object.keys(pairs).filter(function(l){return pairs[l]==k})[0];if(ex!=null)delete pairs[ex];else if(selL!=null){pairs[selL]=k;selL=null}}paint();return}
+    var b=e.target.closest("[data-a]");if(!b)return;
+    if(b.dataset.a==="rst"){pairs={};selL=null;paint();$(".res",card).textContent=""}
+    if(b.dataset.a==="chk"){var ok=0;Object.keys(pairs).forEach(function(l){var good=L[l].i===Rr[pairs[l]].i;$('[data-s="l"][data-k="'+l+'"]',card).classList.add(good?"ok":"no");$('[data-s="r"][data-k="'+pairs[l]+'"]',card).classList.add(good?"ok":"no");if(good)ok++});result(card,ok,t.pairs.length);markDone(id,ok/t.pairs.length,card)}});
+};
+R.order=function(t,id,card){
+  var h=t.items.map(function(it,i){var s=typeof it==="string"?it:it[0],ky=typeof it==="string"?"":it[1];var w=s.split(" ");
+    return '<div class="q" data-i="'+i+'">'+(ky?'<p>'+esc(ky)+'</p>':"")+'<div class="ansline"></div><div class="wch">'+shuf(w.map(function(x,k){return{x:x,k:k}})).map(function(o){return '<button class="wc" data-k="'+o.k+'">'+esc(o.x)+'</button>'}).join("")+'</div></div>'}).join("");
+  card.insertAdjacentHTML("beforeend",h+'<div class="btns"><button class="btn" data-a="chk">Текшерүү</button><button class="btn g" data-a="show">Жоопторду көрсөтүү</button><button class="btn g" data-a="rst">Кайра</button><span class="res"></span></div>');
+  card.addEventListener("click",function(e){var w=e.target.closest(".wc");
+    if(w){var q=w.closest(".q"),al=$(".ansline",q),pool=$(".wch",q);if(w.parentNode===pool)al.appendChild(w);else pool.appendChild(w);al.classList.remove("ok","no");return}
+    var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a;
+    if(a==="rst"){$$(".q",card).forEach(function(q){var pool=$(".wch",q);$$(".ansline .wc",q).forEach(function(x){pool.appendChild(x)});$(".ansline",q).classList.remove("ok","no")});$(".res",card).textContent=""}
+    if(a==="show"){$$(".q",card).forEach(function(q,i){var s=typeof t.items[i]==="string"?t.items[i]:t.items[i][0],w=s.split(" "),al=$(".ansline",q),pool=$(".wch",q);$$(".wc",q).forEach(function(x){pool.appendChild(x)});w.forEach(function(_,k){al.appendChild($('.wc[data-k="'+k+'"]',q))});al.classList.add("ok")})}
+    if(a==="chk"){var ok=0;$$(".q",card).forEach(function(q,i){var s=typeof t.items[i]==="string"?t.items[i]:t.items[i][0],al=$(".ansline",q),got=$$(".wc",al).map(function(x){return x.textContent}).join(" "),good=norm(got)===norm(s)||(t.alt&&t.alt[i]&&t.alt[i].some(function(z){return norm(z)===norm(got)}));al.classList.toggle("ok",good);al.classList.toggle("no",!good);if(good)ok++});result(card,ok,t.items.length);markDone(id,ok/t.items.length,card)}});
+};
+R.sort=function(t,id,card){
+  var items=shuf(t.items.map(function(x,i){return{x:x[0],c:x[1],i:i}}));
+  card.insertAdjacentHTML("beforeend",'<div class="wch pool">'+items.map(function(o){return '<button class="wc" data-i="'+o.i+'">'+esc(o.x)+'</button>'}).join("")+'</div><div class="cols">'+t.cols.map(function(c,i){return '<div class="col" data-c="'+i+'"><h4>'+esc(c)+'</h4><div class="wch"></div></div>'}).join("")+'</div><div class="btns"><button class="btn" data-a="chk">Текшерүү</button><button class="btn g" data-a="rst">Кайра</button><span class="res"></span></div>');
+  var cur=null;
+  card.addEventListener("click",function(e){var w=e.target.closest(".wc");
+    if(w){if(w.closest(".col")){$(".pool",card).appendChild(w);w.classList.remove("sel");return}$$(".wc.sel",card).forEach(function(x){x.classList.remove("sel")});w.classList.add("sel");cur=w;$$(".col",card).forEach(function(c){c.classList.add("can")});return}
+    var c=e.target.closest(".col");if(c&&cur){$(".wch",c).appendChild(cur);cur.classList.remove("sel");cur=null;$$(".col",card).forEach(function(x){x.classList.remove("can")});return}
+    var b=e.target.closest("[data-a]");if(!b)return;
+    if(b.dataset.a==="rst"){$$(".col .wc",card).forEach(function(x){$(".pool",card).appendChild(x)});$$(".wc",card).forEach(function(x){x.style.borderColor="";x.style.background=""});$(".res",card).textContent=""}
+    if(b.dataset.a==="chk"){var ok=0;$$(".col",card).forEach(function(c){$$(".wc",c).forEach(function(x){var good=t.items[+x.dataset.i][1]==+c.dataset.c;x.style.borderColor=good?"#1f9d55":"#d62839";x.style.background=good?"#e3f6ea":"#fde9ec";if(good)ok++})});result(card,ok,t.items.length);markDone(id,ok/t.items.length,card)}});
+};
+R.open=function(t,id,card){
+  card.insertAdjacentHTML("beforeend",t.qs.map(function(q,i){var k=id+"."+i;return '<div class="q"><p>'+(t.qs.length>1?(i+1)+") ":"")+wrap(q)+'</p><textarea rows="'+(t.rows||2)+'" data-k="'+k+'" placeholder="Жообуңарды жазгыла...">'+esc(S.notes[k]||"")+'</textarea></div>'}).join("")+(t.ex?'<div class="box y"><b>Үлгү:</b> '+wrap(t.ex)+'</div>':""));
+  card.addEventListener("input",function(e){var k=e.target.dataset.k;if(!k)return;S.notes[k]=e.target.value;save();if(e.target.value.length>3)markDone(id,1,card)});
+};
+R.cluster=function(t,id,card){
+  var n=t.slots,seed=t.seed||[];var cells="";for(var i=0;i<n;i++){var k=id+".c"+i,sd=seed[i];cells+=sd?'<input disabled value="'+esc(sd)+'">':'<input data-k="'+k+'" placeholder="?" value="'+esc(S.notes[k]||"")+'">'}
+  card.insertAdjacentHTML("beforeend",'<div class="cluster"><div class="cc">'+esc(t.center)+'</div><div class="cb">'+cells+'</div></div>');
+  card.addEventListener("input",function(e){var k=e.target.dataset.k;if(!k)return;S.notes[k]=e.target.value;save();markDone(id,1,card)});
+};
+R.write=function(t,id,card){
+  var k=id+".w";
+  card.insertAdjacentHTML("beforeend",(t.prompt?'<div class="box y">'+t.prompt+'</div>':"")+'<textarea rows="'+(t.rows||6)+'" data-k="'+k+'" placeholder="'+esc(t.ph||"Бул жерге жазгыла...")+'">'+esc(S.notes[k]||"")+'</textarea><div class="btns"><span class="cnt" style="color:#7a6a60"></span>'+(t.sample?'<button class="btn g s" data-a="ex">Үлгүнү көрсөтүү</button>':"")+'<button class="btn g s" data-a="say">🔊 Окуп берүү</button></div>'+(t.sample?'<div class="box" style="display:none">'+wrap(t.sample)+'</div>':""));
+  var ta=$("textarea",card),cn=$(".cnt",card);function upd(){var w=ta.value.trim()?ta.value.trim().split(/\s+/).length:0;cn.textContent=w+" сөз"+(t.min?" / "+t.min:"")}upd();
+  ta.addEventListener("input",function(){S.notes[k]=ta.value;save();upd();if(t.min?ta.value.trim().split(/\s+/).length>=t.min:ta.value.length>10)markDone(id,1,card)});
+  card.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;if(b.dataset.a==="ex"){var bx=$(".box:last-child",card);bx.style.display=bx.style.display==="none"?"block":"none"}if(b.dataset.a==="say"&&ta.value.trim())speak(ta.value)});
+};
+R.diary=function(t,id,card){
+  card.insertAdjacentHTML("beforeend",'<table class="dt"><tr>'+t.cols.map(function(c){return '<th>'+esc(c)+'</th>'}).join("")+'</tr><tr>'+t.cols.map(function(c,i){var k=id+".d"+i;return '<td><textarea data-k="'+k+'">'+esc(S.notes[k]||"")+'</textarea></td>'}).join("")+'</tr></table>');
+  card.addEventListener("input",function(e){var k=e.target.dataset.k;if(!k)return;S.notes[k]=e.target.value;save();markDone(id,1,card)});
+};
+R.read=function(t,id,card){
+  var sents=[];
+  var h='<div class="txt box" style="background:#f0f8f3;border-color:#8fcbb0">'+(t.title?'<h3 style="margin-bottom:6px">'+esc(t.title)+'</h3>':"")+t.text.map(function(p,pi){return '<p data-p="'+pi+'">'+wrap(p)+'</p>'}).join("")+(t.by?'<p style="text-align:right;color:#2d8a6e;font-weight:700">'+esc(t.by)+'</p>':"")+'</div><div class="btns"><button class="btn s" data-a="play">🔊 Бүтүндөй окуп берүү</button><button class="btn g s" data-a="stop">■ Токтотуу</button></div>';
+  card.insertAdjacentHTML("beforeend",h);
+  card.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;
+    if(b.dataset.a==="stop"){stopSpeak();$$(".hl",card).forEach(function(x){x.classList.remove("hl")});return}
+    if(b.dataset.a==="play"){var ps=$$(".txt p[data-p]",card),i=0;stopSpeak();(function nx(){$$(".hl",card).forEach(function(x){x.classList.remove("hl")});if(i>=ps.length){return}var p=ps[i];p.classList.add("hl");speak(t.text[+p.dataset.p],function(){i++;setTimeout(nx,250)})})()}});
+  (t.qs||[]).forEach(function(q,i){var sid=id+".s"+i,sub=el('<div class="sub"><div class="th"><div class="ic '+esc(q.i||"think")+'">'+(IC[q.i||"think"])+'</div><h3><b>'+(i+1)+'.</b>'+(q.h||"")+'</h3></div></div>');card.appendChild(sub);(R[q.t]||function(){})(q,sid,sub)});
+  if(!(t.qs||[]).length)card.appendChild(doneBtn(card,id));
+};
+R.poem=function(t,id,card){
+  card.insertAdjacentHTML("beforeend",'<div class="txt box y" style="text-align:center">'+(t.title?'<h3>'+esc(t.title)+'</h3>':"")+t.lines.map(function(l){return wrap(l)+"<br>"}).join("")+'</div><div class="btns"><button class="btn s" data-a="play">🔊 Окуп берүү</button></div>');
+  card.addEventListener("click",function(e){if(e.target.closest("[data-a]")){speak(t.lines.join(". "));markDone(id,1,card)}});
+};
+R.prov=function(t,id,card){
+  card.insertAdjacentHTML("beforeend",t.ids.map(function(i){var p=B.proverbs[i];return '<div class="prov" data-i="'+i+'"><b>'+esc(p.ky)+'</b><span>'+esc(p.m)+' <button class="say" data-say="'+i+'">🔊</button></span></div>'}).join("")+'<div class="btns"></div>');
+  card.addEventListener("click",function(e){var s=e.target.closest("[data-say]");if(s){e.stopPropagation();speak(B.proverbs[+s.dataset.say].ky);return}var p=e.target.closest(".prov");if(p){p.classList.toggle("on");markDone(id,1,card)}});
+  if(t.order){var sub=el('<div class="sub"><div class="th"><div class="ic think">'+IC.think+'</div><h3>Макалдын сөздөрүн туура тартипке койгула.</h3></div></div>');card.appendChild(sub);R.order({items:t.ids.slice(0,t.order).map(function(i){return [B.proverbs[i].ky,B.proverbs[i].m]})},id+".o",sub)}
+};
+R.light=function(t,id,card){
+  card.insertAdjacentHTML("beforeend",'<div class="lights"><button class="lt" data-v="3">🟢</button><button class="lt" data-v="2">🟡</button><button class="lt" data-v="1">🔴</button></div><div class="cap">🟢 Жакшы түшүндүм · 🟡 Жарым-жартылай · 🔴 Кайра кайталайм</div>');
+  var cur=S.light[id];if(cur)$('.lt[data-v="'+cur+'"]',card).classList.add("sel");
+  card.addEventListener("click",function(e){var b=e.target.closest(".lt");if(!b)return;$$(".lt",card).forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");S.light[id]=+b.dataset.v;markDone(id,1,card);toast(["","Кайра кайталайбыз","Жакшы жол!","Азаматсыз!"][+b.dataset.v])});
+};
+R.game=function(t,id,card){
+  card.insertAdjacentHTML("beforeend",'<div class="tiles">'+t.gs.map(function(g){return '<a class="tile" href="#/game/'+g+'/'+t.theme+'"><em>'+GAMES[g].em+'</em>'+GAMES[g].n+'<small>'+GAMES[g].s+'</small></a>'}).join("")+'</div>');
+};
+function renderTask(t,id,num){
+  var card=el('<div class="task" id="task-'+id.replace(/\./g,"-")+'">'+(t.t==="box"&&!t.h?"":head(t,id,num))+'</div>');
+  if(S.done[id]!=null&&t.t!=="box"&&t.t!=="game")card.classList.add("done");
+  (R[t.t]||function(){})(t,id,card);return card;
+}
+
+/* ---------- pages ---------- */
+var app=$("#app");
+function setNav(k){$$("#bn a").forEach(function(a){a.classList.toggle("on",a.dataset.k===k)})}
+function themeBy(n){return B.themes.filter(function(t){return t.n==n})[0]}
+function pageHome(){
+  setNav("home");
+  var tot=0,dn=0;B.themes.forEach(function(t){t.lessons.forEach(function(l){var k=lessonTasks(l);tot+=k.length;dn+=k.filter(function(x){return S.done[x.id]!=null}).length})});
+  app.innerHTML='<div class="hero">'+TUNDUK.replace("<svg",'<svg class="tn"')+'<h2>Кыргыз тили · 8-класс</h2><p>Интерактивдүү окуу китеби: диалог, текст, ыр, макал-лакап, табышмак жана улуттук оюндар (аркан тартыш, чүкө) менен.</p><div class="row"><span class="chip">7 тема</span><span class="chip">21 сабак</span><span class="chip w">Прогресс: '+Math.round(100*dn/(tot||1))+'%</span></div></div><h2 class="sec" style="margin-top:0">Темалар</h2><div class="grid">'+B.themes.map(function(t){return '<a class="tcard" href="#/t/'+t.n+'" style="--c:'+t.color+'"><div class="band">'+t.n+'<span>'+t.em+'</span></div><div class="bd"><h3>'+esc(t.en)+'</h3><small>'+esc(t.ky)+'</small><div class="bar"><i style="width:'+Math.round(100*themeProg(t))+'%"></i></div></div></a>'}).join("")+'</div><h2 class="sec">Оюндар жана кошумча</h2><div class="tiles"><a class="tile" href="#/game/tug/all"><em>🪢</em>Аркан тартыш<small>Команда менен оюн</small></a><a class="tile" href="#/game/chuko/all"><em>🦴</em>Чүкө оюну<small>Сөз, грамматика, маданият</small></a><a class="tile" href="#/proverbs"><em>📜</em>Макал-лакап<small>Мааниси менен</small></a><a class="tile" href="#/riddles"><em>🧩</em>Табышмак<small>Ойлонуп көр</small></a><a class="tile" href="#/dict"><em>📖</em>Сөздүк<small>'+DLIST.length+' сөз</small></a></div>';
+}
+function pageTheme(n){
+  var t=themeBy(n);if(!t)return pageHome();setNav("home");
+  var q=S.quiz[t.n];
+  app.innerHTML='<div class="crumb"><a href="#/">Башкы</a> › <span>'+t.n+'-тема</span></div><div class="lhead" style="--c:'+t.color+'"><div class="num">'+t.n+'-тема</div><h2>'+esc(t.en)+'</h2><div class="sub">'+esc(t.ky)+'</div>'+(t.intro?'<p style="margin:10px 0 0;opacity:.95">'+esc(t.intro)+'</p>':"")+'</div>'+t.lessons.map(function(l,i){return '<a class="tcard" style="margin-bottom:12px" href="#/t/'+t.n+'/'+(i+1)+'"><div class="bd" style="padding:14px 16px"><small>'+(i+1)+'-сабак'+(l.review?' · Кайталоо':"")+'</small><h3>'+esc(l.title)+'</h3><small>'+esc(l.ky)+'</small><div class="bar"><i style="width:'+Math.round(100*lessonProg(l))+'%"></i></div></div></a>'}).join("")+'<h2 class="sec">Тема боюнча оюндар</h2><div class="tiles"><a class="tile" href="#/game/tug/'+t.n+'"><em>🪢</em>Аркан тартыш</a><a class="tile" href="#/game/chuko/'+t.n+'"><em>🦴</em>Чүкө оюну</a><a class="tile" href="#/game/quiz/'+t.n+'"><em>✅</em>Тема тести<small>'+(q!=null?"Мыкты: "+q+"/100":"10 суроо")+'</small></a><a class="tile" href="#/riddles/'+t.n+'"><em>🧩</em>Табышмак</a></div>';
+}
+function pageLesson(n,li){
+  var t=themeBy(n),l=t&&t.lessons[li-1];if(!l)return pageHome();setNav("home");
+  stopSpeak();
+  app.innerHTML='<div class="crumb"><a href="#/">Башкы</a> › <a href="#/t/'+t.n+'">'+t.n+'-тема</a> › <span>'+li+'-сабак</span></div><div class="lhead" style="--c:'+t.color+'"><div class="num">'+t.n+'-тема · '+li+'-сабак'+(l.review?' · Кайталоо':"")+'</div><h2>'+esc(l.title)+'</h2><div class="sub">'+esc(l.ky)+'</div></div>'+(l.gram?'<div class="gram"><b>Грамматика:</b> '+l.gram+'</div>':"")+(l.lex?'<div class="gram" style="border-color:var(--blue2)"><b>Активдүү лексика:</b> '+esc(l.lex)+'</div>':"");
+  var num=0;
+  l.tasks.forEach(function(k,i){if(k.t!=="box"&&k.t!=="light")num++;app.appendChild(renderTask(k,l.id+"."+i,(k.t==="box"||k.t==="light")?0:num))});
+  var nav=el('<div class="btns" style="justify-content:space-between;margin-top:20px"></div>');
+  var prev=li>1?'#/t/'+n+'/'+(li-1):'#/t/'+n,next=li<t.lessons.length?'#/t/'+n+'/'+(li+1):'#/t/'+n;
+  nav.innerHTML='<a class="btn g" href="'+prev+'" style="text-decoration:none">← Артка</a><a class="btn" href="'+next+'" style="text-decoration:none">'+(li<t.lessons.length?'Кийинки сабак →':'Теманы жабуу ✓')+'</a>';
+  app.appendChild(nav);
+}
+function pageDict(){
+  setNav("dict");
+  app.innerHTML='<h2 class="sec" style="margin-top:0">Сөздүк</h2><input class="srch" id="dq" placeholder="Издөө: кыргызча же орусча..."><div id="dl"></div>';
+  var list=DLIST.slice().sort(function(a,b){return a.en.localeCompare(b.en,'ru')});
+  function draw(q){q=norm(q);var r=list.filter(function(d){return !q||norm(d.en).indexOf(q)>=0||norm(d.ky).indexOf(q)>=0||norm(d.ru||"").indexOf(q)>=0}).slice(0,200);
+    $("#dl").innerHTML=r.map(function(d,i){return '<div class="dr"><b>'+esc(d.en)+'</b><span>'+esc(d.ky)+(d.ru?' <small>· '+esc(d.ru)+'</small>':"")+'</span><button class="say" data-w="'+esc(d.en)+'">🔊</button></div>'}).join("")||'<p>Табылган жок</p>'}
+  draw("");$("#dq").oninput=function(){draw(this.value)};
+  $("#dl").onclick=function(e){var b=e.target.closest("[data-w]");if(b)speak(b.dataset.w)};
+}
+function pageMe(){
+  setNav("me");
+  var h='<h2 class="sec" style="margin-top:0">Менин жыйынтыгым</h2>'+B.themes.map(function(t){var q=S.quiz[t.n];return '<div class="gwrap"><b>'+t.n+'. '+esc(t.en)+'</b><div class="bar"><i style="width:'+Math.round(100*themeProg(t))+'%"></i></div><small style="color:#7a6a60">Тапшырмалар: '+Math.round(100*themeProg(t))+'% · Тест: '+(q!=null?q+"/100":"—")+'</small></div>'}).join("");
+  h+='<div class="gwrap"><b>Оюндардын рекорду</b><p style="margin:6px 0">Чүкө: '+(S.best.chuko||0)+' упай · Аркан тартыш: '+(S.best.tug||0)+' жеңиш</p></div><div class="btns"><button class="btn g" id="bigb">'+(S.big?"Кичине тамга":"Чоң тамга (смарт-такта)")+'</button><button class="btn r" id="rst">Баарын тазалоо</button></div>';
+  app.innerHTML=h;
+  $("#bigb").onclick=function(){S.big=S.big?0:1;save();document.documentElement.classList.toggle("big",!!S.big);pageMe()};
+  $("#rst").onclick=function(){if(confirm("Бардык жыйынтык өчүрүлсүнбү?")){S.done={};S.notes={};S.light={};S.best={};S.quiz={};save();pageMe()}};
+}
+
+/* ---------- games ---------- */
+var GAMES={
+  tug:{n:"Аркан тартыш",em:"🪢",s:"Команда менен"},
+  chuko:{n:"Чүкө оюну",em:"🦴",s:"Сөз, грамматика, маданият"},
+  quiz:{n:"Тема тести",em:"✅",s:"10 суроо"}
+};
+function poolFor(sel){
+  var ts=sel==="all"?B.themes:[themeBy(sel)];var p=[];ts.forEach(function(t){(t.pool||[]).forEach(function(q){p.push(q)})});return p}
+function speakFor(sel){var ts=sel==="all"?B.themes:[themeBy(sel)];var p=[];ts.forEach(function(t){(t.speak||[]).forEach(function(q){p.push(q)})});return p}
+function mkQ(q){var o=shuf(q.o.map(function(x,i){return{x:x,c:i===0}}));return{q:q.q,o:o,c:q.c}}
+function askBox(q,tc,onAns){
+  var b=el('<div class="qbox" style="--tc:'+tc+'"><h3>'+wrap(q.q)+'</h3><div class="opts">'+q.o.map(function(o,i){return '<button class="o" data-i="'+i+'">'+esc(o.x)+'</button>'}).join("")+'</div></div>');
+  b.addEventListener("click",function(e){var o=e.target.closest(".o");if(!o||b.dataset.l)return;b.dataset.l=1;var good=q.o[+o.dataset.i].c;o.classList.add(good?"ok":"no");if(!good)$$(".o",b).forEach(function(x,i){if(q.o[i].c)x.classList.add("ok")});setTimeout(function(){onAns(good)},900)});
+  return b;
+}
+function setupScreen(title,sel,opts,start){
+  app.innerHTML='<div class="crumb"><a href="#/">Башкы</a> › <span>'+title+'</span></div><div class="gwrap setup"><h2>'+title+'</h2><label>Тема</label><div class="seg" id="sg-t"></div>'+opts.map(function(o){return '<label>'+o.l+'</label><div class="seg" id="sg-'+o.k+'"></div>'}).join("")+'<div class="btns"><button class="btn r" id="go">Баштоо</button></div></div>';
+  var cfg={t:String(sel)};opts.forEach(function(o){cfg[o.k]=o.d});
+  function seg(id,items,key){var d=$("#"+id);d.innerHTML=items.map(function(it){return '<button data-v="'+it[0]+'" class="'+(String(cfg[key])===String(it[0])?"on":"")+'">'+it[1]+'</button>'}).join("");d.onclick=function(e){var b=e.target.closest("button");if(!b)return;cfg[key]=b.dataset.v;seg(id,items,key)}}
+  seg("sg-t",[["all","Бардыгы"]].concat(B.themes.map(function(t){return [t.n,t.n+". "+t.en]})),"t");
+  opts.forEach(function(o){seg("sg-"+o.k,o.items,o.k)});
+  $("#go").onclick=function(){start(cfg)};
+}
+function gameTug(sel){
+  setNav("games");
+  setupScreen("Аркан тартыш",sel,[{l:"Оюнчулар",k:"m",d:"2",items:[["2","Команда vs команда"],["1","Мен vs компьютер"]]},{l:"Жеңүү үчүн тартуу",k:"n",d:"5",items:[["3","3"],["5","5"],["7","7"]]}],function(cfg){
+    var pool=shuf(poolFor(cfg.t)),pi=0,pos=0,turn=0,N=+cfg.n,solo=cfg.m==="1";
+    var names=["Көк команда","Кызыл команда"],cols=["#14507a","#d62839"];
+    if(solo)names=["Мен","Компьютер"];
+    function team(x,c){var s="";for(var i=0;i<3;i++)s+='<g transform="translate('+(x+i*(c==="L"?-26:26))+',112)"><circle cx="0" cy="-34" r="10" fill="'+(c==="L"?cols[0]:cols[1])+'"/><path d="M0-24 L'+(c==="L"?-14:14)+' 8 M0-24 L0 6 M0-6 L'+(c==="L"?10:-10)+'-14 M0 6 L-8 30 M0 6 L9 30" stroke="'+(c==="L"?cols[0]:cols[1])+'" stroke-width="7" stroke-linecap="round" fill="none"/></g>';return s}
+    function draw(){
+      app.innerHTML='<div class="crumb"><a href="#/">Башкы</a> › <a href="#/game/tug/'+cfg.t+'">Аркан тартыш</a></div><div class="arena"><svg viewBox="0 0 360 190"><g class="rope" style="transform:translateX('+(pos*(120/N))+'px)"><line x1="-40" y1="108" x2="400" y2="108" stroke="#8b5a2b" stroke-width="6"/><path d="M176 98h8v20h-8z" fill="#ffd100"/>'+team(80,"L")+team(280,"R")+'</g><line x1="180" y1="70" x2="180" y2="140" stroke="#222" stroke-dasharray="4 4"/><rect x="150" y="150" width="60" height="6" fill="#6b4a2a" opacity=".4"/></svg></div><div class="score"><span class="a">'+names[0]+': '+Math.max(0,-pos)+'</span><span class="b">'+names[1]+': '+Math.max(0,pos)+'</span></div><div id="q"></div>';
+    }
+    function ask(){
+      draw();
+      if(Math.abs(pos)>=N){var w=pos<0?0:1;S.best.tug=(S.best.tug||0)+(w===0||!solo?1:0);save();$("#q").innerHTML='<div class="win"><h2>🏆 '+names[w]+' жеңди!</h2><p>Аркан тартыш аяктады.</p><div class="btns" style="justify-content:center"><button class="btn r" onclick="location.reload()">Кайра ойноо</button><a class="btn g" href="#/" style="text-decoration:none">Башкы бет</a></div></div>';return}
+      if(pi>=pool.length){pool=shuf(pool);pi=0}
+      var q=mkQ(pool[pi++]),tc=cols[turn];
+      var box=$("#q");box.innerHTML='<span class="turn" style="background:'+tc+'">'+names[turn]+' — суроо</span>';
+      if(solo&&turn===1){var good=Math.random()<.55;var b=askBox(q,tc,function(){});b.dataset.l=1;$$(".o",b).forEach(function(x,i){if(q.o[i].c)x.classList.add(good?"ok":"")});box.appendChild(b);setTimeout(function(){after(good)},1300);return}
+      box.appendChild(askBox(q,tc,after));
+    }
+    function after(good){if(good)pos+=turn===0?-1:1;turn=1-turn;ask()}
+    ask();
+  });
+}
+var BONE='<svg class="bone" viewBox="0 0 120 120"><g id="bg"><path d="M30 34c-10-2-14-14-6-20s18 0 18 8c6 0 12 0 18 0 0-8 12-14 18-8s4 18-6 20c4 14 4 34 0 52 10 2 14 14 6 20s-18 0-18-8c-6 0-12 0-18 0 0 8-12 14-18 8s-4-18 6-20c-4-18-4-38 0-52Z" fill="#f4e4c1" stroke="#8b5a2b" stroke-width="3"/><path d="M44 40q16 6 32 0M44 80q16-6 32 0" stroke="#c9a56a" stroke-width="3" fill="none"/></g></svg>';
+function gameChuko(sel){
+  setNav("games");
+  setupScreen("Чүкө оюну",sel,[{l:"Оюнчулар",k:"m",d:"1",items:[["1","1 оюнчу"],["2","2 оюнчу"]]},{l:"Ыргытуу саны",k:"n",d:"8",items:[["6","6"],["8","8"],["12","12"]]}],function(cfg){
+    var pool=poolFor(cfg.t),spk=speakFor(cfg.t),N=+cfg.n,P=+cfg.m,k=0,sc=[0,0],used=[];
+    var F=[{n:"Алчы",d:"Сөз (1 упай)",c:"v",p:1},{n:"Бүк",d:"Грамматика (2 упай)",c:"g",p:2},{n:"Чик",d:"Маданият (3 упай)",c:"c",p:3},{n:"Тай",d:"Сүйлө! (2 упай)",c:"s",p:2}];
+    function view(face,extra){
+      app.innerHTML='<div class="crumb"><a href="#/">Башкы</a> › <a href="#/game/chuko/'+cfg.t+'">Чүкө</a></div><div class="gwrap"><div class="score"><span class="a">'+(P===2?"1-оюнчу: ":"Упай: ")+sc[0]+'</span>'+(P===2?'<span class="b">2-оюнчу: '+sc[1]+'</span>':'')+'<span>'+Math.min(k+1,N)+' / '+N+'</span></div>'+BONE+'<div class="faces">'+F.map(function(f,i){return '<div class="'+(face===i?"on":"")+'"><b>'+f.n+'</b>'+f.d+'</div>'}).join("")+'</div><div id="q"></div></div>';
+      if(extra)extra()}
+    function end(){var w=sc[0]>sc[1]?1:sc[1]>sc[0]?2:0;if(P===1&&sc[0]>(S.best.chuko||0)){S.best.chuko=sc[0];save()}
+      app.innerHTML='<div class="gwrap win"><h2>'+(P===2?(w?w+"-оюнчу жеңди!":"Тең чыкты!"):"Жыйынтык: "+sc[0]+" упай")+'</h2><p>Азаматсыздар! Чүкө оюну аяктады.</p><div class="btns" style="justify-content:center"><button class="btn r" onclick="location.reload()">Кайра ойноо</button><a class="btn g" href="#/" style="text-decoration:none">Башкы бет</a></div></div>'}
+    function turn(){
+      if(k>=N)return end();
+      view(-1,function(){$("#q").innerHTML='<div class="btns" style="justify-content:center"><button class="btn r" id="th">🦴 Чүкөнү ыргыт'+(P===2?" ("+(k%2+1)+"-оюнчу)":"")+'</button></div>';
+        $("#th").onclick=function(){var fi=Math.floor(Math.random()*4);$("#th").disabled=true;var g=$("#bg");g.style.transformOrigin="60px 60px";g.style.transition="transform 1s";g.style.transform="rotate("+(720+fi*90)+"deg)";setTimeout(function(){view(fi,function(){ask(fi)})},1050)}})}
+    function ask(fi){
+      var f=F[fi],who=P===2?k%2:0,box=$("#q");
+      function next(ok){if(ok)sc[who]+=f.p;k++;turn()}
+      if(f.c==="s"){var s=spk.length?spk[Math.floor(Math.random()*spk.length)]:"Үй-бүлөң жөнүндө эки сүйлөм айт.";
+        box.innerHTML='<div class="qbox" style="--tc:#7b4fd1"><h3>🎤 '+esc(s)+'</h3><p style="color:#7a6a60;margin:0 0 8px">Кыргызча 2–3 сүйлөм айт. Мугалим же дос баалайт.</p><div class="btns"><button class="btn ok" id="y">Аткардым ✓ (+'+f.p+')</button><button class="btn g" id="n">Кийинки</button></div></div>';$("#y").onclick=function(){next(true)};$("#n").onclick=function(){next(false)};return}
+      var cand=pool.filter(function(q){return q.c===f.c&&used.indexOf(q)<0});if(!cand.length)cand=pool.filter(function(q){return used.indexOf(q)<0});if(!cand.length){used=[];cand=pool}
+      var raw=cand[Math.floor(Math.random()*cand.length)];used.push(raw);
+      box.appendChild(askBox(mkQ(raw),"#d62839",next));
+    }
+    turn();
+  });
+}
+function gameQuiz(sel){
+  setNav("games");var t=themeBy(sel);if(!t){location.hash="#/";return}
+  var Q=pick(t.pool||[],10).map(mkQ),i=0,sc=0;
+  function nx(){
+    if(i>=Q.length){var pts=Math.round(100*sc/Q.length);if(S.quiz[t.n]==null||pts>S.quiz[t.n]){S.quiz[t.n]=pts;save()}
+      app.innerHTML='<div class="gwrap win"><h2>'+pts+' / 100</h2><p>'+(pts>=80?"Эң мыкты!":pts>=50?"Жакшы, дагы машыгалы!":"Кайра аракет кылалы!")+'</p><div class="btns" style="justify-content:center"><a class="btn r" href="#/game/quiz/'+t.n+'" onclick="setTimeout(function(){location.reload()},10)" style="text-decoration:none">Кайра</a><a class="btn g" href="#/t/'+t.n+'" style="text-decoration:none">Темага кайтуу</a></div></div>';return}
+    app.innerHTML='<div class="crumb"><a href="#/t/'+t.n+'">'+t.n+'-тема</a> › <span>Тест</span></div><div class="gwrap"><div class="score"><span class="a">'+(i+1)+' / '+Q.length+'</span><span class="b">Упай: '+sc+'</span></div><div id="q"></div></div>';
+    $("#q").appendChild(askBox(Q[i],t.color,function(g){if(g)sc++;i++;nx()}));
+  }
+  nx();
+}
+function pageRiddles(sel){
+  setNav("games");
+  var ts=sel&&sel!=="all"?[themeBy(sel)]:B.themes,items=[];ts.forEach(function(t){(t.riddles||[]).forEach(function(r){items.push(r)})});
+  app.innerHTML='<div class="crumb"><a href="#/">Башкы</a> › <span>Табышмак</span></div><h2 class="sec" style="margin-top:0">Табышмак</h2><p style="color:#7a6a60">Ойлонуп көр, андан кийин жоопту ач. Кыргыз тилиндеги кеңеш түшүнүүгө жардам берет.</p>'+items.map(function(r,i){return '<div class="rid" data-i="'+i+'"><p style="margin:0 0 6px;font-weight:600">'+wrap(r.q)+' <button class="say" data-s="'+i+'">🔊</button></p>'+(r.ky?'<small style="color:#7a6a60">💡 '+esc(r.ky)+'</small>':"")+'<div class="btns"><button class="btn s" data-a="1">Жообу</button></div><div class="ans">'+esc(r.a)+'</div></div>'}).join("");
+  app.onclick=function(e){var s=e.target.closest("[data-s]");if(s){speak(items[+s.dataset.s].q);return}var b=e.target.closest("[data-a]");if(b)b.closest(".rid").classList.toggle("on")};
+}
+function pageProverbs(){
+  setNav("games");
+  app.innerHTML='<div class="crumb"><a href="#/">Башкы</a> › <span>Макал-лакап</span></div><h2 class="sec" style="margin-top:0">Макал-лакап</h2><div class="seg" id="pt"><button data-v="learn" class="on">Үйрөн</button><button data-v="match">Жупташтыр</button><button data-v="build">Сөз тиз</button></div><div id="pb" style="margin-top:14px"></div>';
+  function show(v){$$("#pt button").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});var pb=$("#pb");pb.innerHTML="";
+    if(v==="learn"){pb.innerHTML='<p style="color:#7a6a60">Макалды басканда мааниси чыгат.</p>'+B.proverbs.map(function(p,i){return '<div class="prov" data-i="'+i+'"><b>'+esc(p.ky)+'</b><span>'+esc(p.m)+' <button class="say" data-say="'+i+'">🔊</button></span></div>'}).join("");pb.onclick=function(e){var s=e.target.closest("[data-say]");if(s){e.stopPropagation();speak(B.proverbs[+s.dataset.say].ky);return}var p=e.target.closest(".prov");if(p)p.classList.toggle("on")}}
+    if(v==="match"){var sub=pick(B.proverbs,6);var c=el('<div class="task"><div class="th"><div class="ic game">'+IC.game+'</div><h3>Макалды анын маанисине жупташтыр.</h3></div></div>');pb.appendChild(c);R.match({pairs:sub.map(function(p){return [p.ky,p.m]})},"pm",c)}
+    if(v==="build"){var sub2=pick(B.proverbs,5);var c2=el('<div class="task"><div class="th"><div class="ic game">'+IC.game+'</div><h3>Сөздөрдү туура тартипке койгула.</h3></div></div>');pb.appendChild(c2);R.order({items:sub2.map(function(p){return [p.ky,p.m]})},"pbld",c2)}}
+  $("#pt").onclick=function(e){var b=e.target.closest("button");if(b)show(b.dataset.v)};show("learn");
+}
+
+/* ---------- router ---------- */
+function route(){
+  var h=location.hash.replace(/^#\/?/,"").split("/");stopSpeak();app.onclick=null;
+  var k=h[0];
+  if(k==="t"&&h[2])pageLesson(h[1],+h[2]);
+  else if(k==="t")pageTheme(h[1]);
+  else if(k==="dict")pageDict();
+  else if(k==="me")pageMe();
+  else if(k==="proverbs")pageProverbs();
+  else if(k==="riddles")pageRiddles(h[1]);
+  else if(k==="games"){setNav("games");app.innerHTML='<h2 class="sec" style="margin-top:0">Оюндар</h2><div class="tiles"><a class="tile" href="#/game/tug/all"><em>🪢</em>Аркан тартыш<small>Команда менен</small></a><a class="tile" href="#/game/chuko/all"><em>🦴</em>Чүкө оюну<small>Сөз, грамматика, маданият</small></a><a class="tile" href="#/proverbs"><em>📜</em>Макал-лакап</a><a class="tile" href="#/riddles"><em>🧩</em>Табышмак</a></div><h2 class="sec">Тема тесттери</h2><div class="tiles">'+B.themes.map(function(t){return '<a class="tile" href="#/game/quiz/'+t.n+'"><em>'+t.em+'</em>'+t.n+'. '+esc(t.en)+'<small>'+(S.quiz[t.n]!=null?S.quiz[t.n]+"/100":"тест")+'</small></a>'}).join("")+'</div>'}
+  else if(k==="game"){var g=h[1],s=h[2]||"all";if(g==="tug")gameTug(s);else if(g==="chuko")gameChuko(s);else if(g==="quiz")gameQuiz(s);else pageHome()}
+  else pageHome();
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+$("#bign").onclick=function(){S.big=S.big?0:1;save();document.documentElement.classList.toggle("big",!!S.big)};
+route();
+})();
+</script>
+</body></html>

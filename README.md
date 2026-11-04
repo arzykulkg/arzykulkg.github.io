@@ -1,6 +1,6 @@
 # Арзыкуловтордун санжырасы
 
-Site root = family tree. `education/` = class hub (Global English 7–10 interactive Learner’s/Coursebook + Workbook in `books/`, Grammar Steps A1–A2, Essential Grammar in Use (4th ed.), English Grammar in Use (5th ed., `grammar-in-use-5/`, same Global-style engine as Essential Grammar in Use: book view, Designer Book, flip-book, 145 dialogues, flashcards, game zone, live class), Live Class); not linked from the family tree. Student builds only – no answer keys.
+Site root = small hub (cards: `sanjyra/` family tree, `islam/` Islam site; `education/` is not linked, direct URL only). Old links `/#id` forward to `/sanjyra/#id`; `/family/` redirects to `/sanjyra/`. `education/` = class hub (Global English 7–10 interactive Learner’s/Coursebook + Workbook in `books/`, Grammar Steps A1–A2, Essential Grammar in Use (4th ed.), English Grammar in Use (5th ed., `grammar-in-use-5/`, same Global-style engine as Essential Grammar in Use: book view, Designer Book, flip-book, 145 dialogues, flashcards, game zone, live class), Live Class); not linked from the family tree. Student builds only – no answer keys.
 
 ## Features (v11)
 - Kyrgyz style (gold-green palette, ornament borders), light/dark, classic style switch (menu).
@@ -10,9 +10,9 @@ Site root = family tree. `education/` = class hub (Global English 7–10 interac
 - Privacy for book/exhibition (default ON): living people show birth year only; under-18s and people marked "жеке" are hidden (dates, photo, bio).
 
 ## Data files
-- `index.html` — tree data + app (single file).
-- `data/bios.js` — bios for everyone (`window.BIOS`) and historical maps for the book (`window.BOOKMAPS`, images in `media/maps/`).
-  Family members add bios in the app (saved on their device) → menu "Өмүр баяндарды экспорттоо (bios.js)" → send file → replace `data/bios.js` in this repo.
+- `sanjyra/index.html` — tree data + app (single file).
+- `sanjyra/data/bios.js` — bios for everyone (`window.BIOS`) and historical maps for the book (`window.BOOKMAPS`, images in `media/maps/`).
+  Family members add bios in the app (saved on their device) → menu "Өмүр баяндарды экспорттоо (bios.js)" → send file → replace `sanjyra/data/bios.js` in this repo.
 
 ## Backup (long-term)
 1. GitHub keeps full history of this repo (the main copy).
@@ -20,4 +20,4 @@ Site root = family tree. `education/` = class hub (Global English 7–10 interac
 3. Print the book to PDF once a year and keep a paper copy.
 
 ## Mobile UI (v11.1)
-Bottom nav (Дарак · Издөө · Бутактар · Кошуу · Меню), smart search (ө/о, ү/у, ң/н ignored; "Камалидин Карим" finds by father's name; recent searches), branches list, and a safe "Маалымат кошуу / ката билдирүү" form that prepares a WhatsApp message for the admin (nothing is written to the public tree). Optional: set `window.ADMIN_WA="996XXXXXXXXX"` in `data/bios.js` to send suggestions straight to one WhatsApp number.
+Bottom nav (Дарак · Издөө · Бутактар · Кошуу · Меню), smart search (ө/о, ү/у, ң/н ignored; "Камалидин Карим" finds by father's name; recent searches), branches list, and a safe "Маалымат кошуу / ката билдирүү" form that prepares a WhatsApp message for the admin (nothing is written to the public tree). Optional: set `window.ADMIN_WA="996XXXXXXXXX"` in `sanjyra/data/bios.js` to send suggestions straight to one WhatsApp number.

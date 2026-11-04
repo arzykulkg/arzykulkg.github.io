@@ -1,8 +1,4 @@
-var C="tukum-v39";
-self.addEventListener("install",function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(["./","index.html","map.html","manifest.webmanifest","icon-192.png","icon-512.png"])}).then(function(){return self.skipWaiting()}))});
-self.addEventListener("activate",function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==C}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});
-self.addEventListener("fetch",function(e){
-  if(e.request.method!=="GET")return;if(new URL(e.request.url).pathname.indexOf("/education/")===0)return;
-  e.respondWith(caches.open(C).then(function(c){return c.match(e.request,{ignoreSearch:true}).then(function(hit){
-    var net=fetch(e.request).then(function(r){if(r&&(r.ok||r.type==="opaque"))c.put(e.request,r.clone());return r}).catch(function(){return hit});
-    return hit||net})}))});
+/* Old root service worker (family tree moved to /sanjyra/). Clears old caches and removes itself. */
+self.addEventListener("install",function(){self.skipWaiting()});
+self.addEventListener("activate",function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x.indexOf("tukum-")===0}).map(function(x){return caches.delete(x)}))}).then(function(){return self.registration.unregister()}).then(function(){return self.clients.matchAll({type:"window"})}).then(function(cs){cs.forEach(function(c){c.navigate(c.url)})}))});
+self.addEventListener("fetch",function(){});

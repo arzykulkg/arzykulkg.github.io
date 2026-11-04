@@ -207,7 +207,7 @@ function gkuran(){page('Куран','Күндөлүк окулуучу сүрө�
     c.append(el('div','ar sm',s[2]),el('h3',null,s[1]+' сүрөсү'),el('p',null,s[3]));app.append(c)})}
 
 /* ---------- Сүрө: бир баракта, угуу менен ---------- */
-var YTID={36:'pliYejp0qh8',48:'u0NBO0z0h9o',56:'34HfE-zMefM',67:'-2PCPx7ZISE',75:'JQFfEp6BtlU'},NAME={18:'Кахф',36:'Ясин',48:'Фатх',56:'Вакиа',67:'Мулк',75:'Кыяамат'};
+var YTID={36:'pliYejp0qh8',48:'u0NBO0z0h9o',56:'34HfE-zMefM',67:'-2PCPx7ZISE',75:'XXOof4Zot1U',18:'Zqnz9jGg0kk'},NAME={18:'Кахф',36:'Ясин',48:'Фатх',56:'Вакиа',67:'Мулк',75:'Кыяамат'};
 var curAud=null,curYT=null,ytReady=null;
 function stopAll(){if(curAud){curAud.pause();curAud=null}if(curYT&&curYT.pauseVideo){try{curYT.pauseVideo()}catch(e){}}}
 function ytApi(){if(ytReady)return ytReady;ytReady=new Promise(function(ok){if(window.YT&&YT.Player)return ok();var t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.append(t);window.onYouTubeIframeAPIReady=ok});return ytReady}

@@ -63,6 +63,15 @@ function vSt(){
  var bulk=el('details','card');bulk.innerHTML='<summary><b>📋 Бир нече окуучуну бир ирет кошуу</b></summary>';
  var ta=el('textarea');ta.placeholder='Ар бир сапка бирден:\nАты-жөнү, ата-эне, телефон, туулган күн\nАйгүл Асанова, Асан, 0555123456, 12.03.2012';bulk.append(ta);
  var bb=el('button','b','Кошуу');bb.onclick=function(){var n=0;ta.value.split('\n').forEach(function(l){var p=l.split(',').map(function(x){return x.trim()});if(!p[0])return;D.students.push({id:uid(),name:p[0],parent:p[1]||'',phone:p[2]||'',bd:normDate(p[3]),note:''});n++});save();draw();toast(n+' окуучу кошулду')};bulk.append(bb);app.append(bulk);
+ var im=el('details','card');im.innerHTML='<summary><b>📱 Телефондун контактынан алуу</b></summary>';
+ im.append(el('p','mut','Контакттарыңыз ушул браузерде гана ачылат, ким тандаганыңызды сайт эч кимге жөнөтпөйт. Кошкондон кийин ✏️ менен окуучунун атын, ата-энесин оңдоп алыңыз.'));
+ var pb=el('button','b','📇 Контакттан тандоо (Android Chrome)');pb.onclick=function(){
+  if(!(navigator.contacts&&navigator.contacts.select))return toast('Бул браузерде жок. Төмөнкү .vcf файлын колдонуңуз');
+  navigator.contacts.select(['name','tel'],{multiple:true}).then(function(r){var n=0;r.forEach(function(c){var nm=(c.name&&c.name[0]||'').trim(),tl=(c.tel&&c.tel[0]||'').trim();if(!nm&&!tl)return;if(D.students.some(function(s){return s.phone&&s.phone.replace(/\D/g,'')===tl.replace(/\D/g,'')&&tl}))return;D.students.push({id:uid(),name:nm||tl,parent:'',phone:tl,bd:'',note:''});n++});save();draw();toast(n+' контакт кошулду')}).catch(function(){})};
+ im.append(pb);
+ im.append(el('p','mut','Же контакттарды .vcf файл кылып чыгарып, мында жүктөңүз (Контакттар → Экспорт; WhatsApp тобунан да Контакттар аркылуу сактаса болот):'));
+ var vf=el('input');vf.type='file';vf.accept='.vcf,text/vcard,text/x-vcard';vf.onchange=function(){var f=vf.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var n=0;String(rd.result).split(/BEGIN:VCARD/i).forEach(function(blk){var nm=(blk.match(/^FN[^:]*:(.*)$/im)||[])[1],tl=(blk.match(/^TEL[^:]*:(.*)$/im)||[])[1];nm=(nm||'').trim();tl=(tl||'').trim();if(!nm&&!tl)return;D.students.push({id:uid(),name:nm||tl,parent:'',phone:tl,bd:'',note:''});n++});save();draw();toast(n+' контакт кошулду')};rd.readAsText(f)};
+ im.append(vf);app.append(im);
  if(!D.students.length)app.append(el('p','mut','Азырынча окуучу жок. Жогору жактан кошуңуз.'));
  D.students.slice().sort(byName).forEach(function(s,i){var c=el('div','card'),r=el('div','row');
   r.append(el('span','num',(i+1)+'.'),Object.assign(el('b','grow'),{textContent:s.name}));

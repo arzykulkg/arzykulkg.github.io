@@ -1,0 +1,121 @@
+<!doctype html><html lang="ky"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Жумуртка секирет</title><meta name="theme-color" content="#7ec8f0"><link rel="icon" href="../icon-192.png">
+<style>
+html,body{margin:0;height:100%;background:#bfe6fa;overflow:hidden;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+#c{display:block;margin:0 auto;width:100%;max-width:460px;height:100dvh;background:#9fd8f5}
+#back{position:fixed;top:10px;left:10px;z-index:3;color:#12506b;text-decoration:none;font:700 15px system-ui;background:#ffffffcc;border-radius:999px;padding:6px 12px}
+</style></head><body><a id="back" href="../">‹ Башкы бет</a><canvas id="c"></canvas>
+<script>
+(function(){
+var cv=document.getElementById('c'),cx=cv.getContext('2d');
+var W=360,VH=640,S=1,DPR=Math.min(window.devicePixelRatio||1,2);
+function size(){var r=cv.getBoundingClientRect();cv.width=r.width*DPR;cv.height=r.height*DPR;S=r.width/W;VH=r.height/S}
+addEventListener('resize',size);size();
+var GOAL=12,GAP=130,T=0.5;
+var best=0;try{best=+localStorage.getItem('jm_best')||0}catch(e){}
+var nests,cur,state,egg,t,camY,msg,squash,shake,fall,time=0,wins=0,confetti=[];
+function build(){
+ nests=[];
+ for(var i=0;i<=GOAL;i++){
+  var w=i==0?130:Math.max(72,100-i*3);
+  nests.push({x:W/2,w:w,v:i==0?0:(i%2?1:-1)*(42+i*8),i:i,y:-i*GAP});
+  if(i>0)nests[i].x=40+Math.random()*(W-80);
+ }
+ cur=0;state='ready';egg={x:W/2,y:0,off:0};camY=0;squash=0;shake=0;fall=null;t=0;
+}
+build();
+function nestTop(n){return n.y-4}
+function update(dt){
+ time+=dt;
+ nests.forEach(function(n){
+  if(!n.v)return;
+  n.x+=n.v*dt;var lo=n.w/2+8,hi=W-n.w/2-8;
+  if(n.x<lo){n.x=lo;n.v=Math.abs(n.v)}if(n.x>hi){n.x=hi;n.v=-Math.abs(n.v)}
+ });
+ if(squash>0)squash=Math.max(0,squash-dt*4);
+ if(shake>0)shake=Math.max(0,shake-dt*3);
+ var n=nests[cur];
+ if(state=='ready'||state=='ride'){egg.x=n.x+egg.off;egg.y=nestTop(n)}
+ else if(state=='jump'){
+  t+=dt/T;var nx=nests[cur+1],p=Math.min(t,1);
+  egg.y=nestTop(n)+(nestTop(nx)-nestTop(n))*p-90*Math.sin(Math.PI*p);
+  if(t>=1){
+   var d=egg.x-nx.x;
+   if(Math.abs(d)<=nx.w/2+4){
+    cur++;egg.off=Math.max(-nx.w/2+10,Math.min(nx.w/2-10,d));egg.y=nestTop(nx);squash=1;
+    if(cur>best){best=cur;try{localStorage.setItem('jm_best',best)}catch(e){}}
+    if(cur==GOAL){state='win';wins++;for(var k=0;k<80;k++)confetti.push({x:W/2,y:nestTop(nx)-20,vx:(Math.random()-.5)*300,vy:-Math.random()*360-80,c:['#ff5d73','#ffd23f','#3ec1d3','#7bd389','#fff'][k%5],r:Math.random()*6})}
+    else state='ride';
+   }else{state='fall';fall={vy:-120,x:egg.x,y:egg.y,rot:0};shake=1}
+  }
+ }else if(state=='fall'){
+  fall.vy+=1500*dt;fall.y+=fall.vy*dt;fall.rot+=dt*5;
+  if(fall.y>nestTop(nests[cur])+420)state='over';
+ }
+ confetti.forEach(function(c){c.vy+=500*dt;c.x+=c.vx*dt;c.y+=c.vy*dt});
+ var target=nests[cur].y-(VH*0.72);camY+=(target-camY)*Math.min(1,dt*6);
+}
+function nestDraw(n,gold){
+ var x=n.x,y=n.y,w=n.w/2;
+ cx.save();
+ cx.fillStyle=gold?'#c99a2e':'#8a5a2b';
+ cx.beginPath();cx.ellipse(x,y+8,w,15,0,0,Math.PI*2);cx.fill();
+ cx.strokeStyle=gold?'#ffe08a':'#c28a4a';cx.lineWidth=2;
+ for(var k=-w+8;k<w-4;k+=9){cx.beginPath();cx.moveTo(x+k,y+4);cx.lineTo(x+k+8,y+16);cx.stroke()}
+ cx.fillStyle=gold?'#e6b94a':'#a9733a';
+ cx.beginPath();cx.ellipse(x,y+2,w,9,0,0,Math.PI*2);cx.fill();
+ cx.strokeStyle=gold?'#fff1b8':'#d9a465';
+ cx.beginPath();cx.ellipse(x,y+2,w-6,5,0,0,Math.PI*2);cx.stroke();
+ cx.restore();
+}
+function eggDraw(x,y,sy,rot,crack){
+ cx.save();cx.translate(x,y);if(rot)cx.rotate(rot);cx.scale(2-sy>1?1+(1-sy)*.0:1,sy);
+ cx.scale(1+(1-sy)*.8,1);
+ cx.fillStyle='#fff6df';cx.strokeStyle='#d8c69a';cx.lineWidth=2;
+ cx.beginPath();cx.ellipse(0,-17,13,17,0,0,Math.PI*2);cx.fill();cx.stroke();
+ cx.fillStyle='#f0c987';[[-5,-24,2.4],[5,-12,2.2],[-6,-10,1.8],[4,-27,1.8]].forEach(function(s){cx.beginPath();cx.arc(s[0],s[1],s[2],0,7);cx.fill()});
+ cx.fillStyle='#3a2a1a';
+ if(crack){cx.lineWidth=2;cx.strokeStyle='#3a2a1a';cx.beginPath();cx.moveTo(-5,-20);cx.lineTo(-2,-16);cx.moveTo(-2,-20);cx.lineTo(-5,-16);cx.moveTo(3,-20);cx.lineTo(6,-16);cx.moveTo(6,-20);cx.lineTo(3,-16);cx.stroke()}
+ else{cx.beginPath();cx.arc(-4,-18,2,0,7);cx.arc(5,-18,2,0,7);cx.fill();cx.beginPath();cx.arc(0,-13,3,0.2,Math.PI-0.2);cx.stroke()}
+ cx.restore();
+}
+function cloud(x,y,s){cx.fillStyle='#ffffffcc';cx.beginPath();cx.arc(x,y,16*s,0,7);cx.arc(x+18*s,y+4*s,13*s,0,7);cx.arc(x-18*s,y+5*s,12*s,0,7);cx.fill()}
+function txt(s,x,y,sz,col,al){cx.font='800 '+sz+'px system-ui,sans-serif';cx.textAlign=al||'center';cx.fillStyle=col||'#fff';cx.strokeStyle='#0d4d6b';cx.lineWidth=4;cx.lineJoin='round';cx.strokeText(s,x,y);cx.fillText(s,x,y)}
+function draw(){
+ cx.setTransform(S*DPR,0,0,S*DPR,0,0);
+ var g=cx.createLinearGradient(0,0,0,VH);g.addColorStop(0,'#5db8ec');g.addColorStop(1,'#d7f1fb');cx.fillStyle=g;cx.fillRect(0,0,W,VH);
+ for(var i=0;i<6;i++)cloud(((i*97+time*8)%(W+120))-40,((i*131)%VH),0.8+i%3*.3);
+ var sx=shake?Math.sin(time*60)*5*shake:0;
+ cx.save();cx.translate(sx,-camY);
+ nests.forEach(function(n,i){
+  if(n.y-camY<-60||n.y-camY>VH+60)return;
+  nestDraw(n,i==GOAL);
+  if(i==GOAL){cx.strokeStyle='#5a3b1a';cx.lineWidth=3;cx.beginPath();cx.moveTo(n.x+n.w/2-12,n.y);cx.lineTo(n.x+n.w/2-12,n.y-56);cx.stroke();cx.fillStyle='#e83e5a';cx.beginPath();cx.moveTo(n.x+n.w/2-12,n.y-56);cx.lineTo(n.x+n.w/2+14,n.y-47);cx.lineTo(n.x+n.w/2-12,n.y-38);cx.fill()}
+ });
+ if(state=='fall'||state=='over'){if(fall)eggDraw(fall.x,fall.y,1,fall.rot,true)}
+ else{
+  var sq=squash>0?1-0.25*Math.sin(squash*Math.PI):1;
+  var sy=state=='jump'?1.08:sq;
+  eggDraw(egg.x,egg.y,sy,0,false);
+ }
+ confetti.forEach(function(c){cx.fillStyle=c.c;cx.fillRect(c.x,c.y,c.r+2,c.r+2)});
+ cx.restore();
+ txt(cur+' / '+GOAL,W/2,44,30);
+ txt('Рекорд: '+best,W-14,28,14,'#fff','right');
+ if(state=='ready'){txt('Жумуртка секирет',W/2,VH*0.25,32);txt('Уя жогору турганда',W/2,VH*0.25+34,17);txt('экранды бас!',W/2,VH*0.25+56,17);txt('Баштоо үчүн бас',W/2,VH*0.25+98,20,'#ffe08a')}
+ if(state=='over'){txt('Жумуртка сынды 🍳',W/2,VH*0.35,30);txt('Деңгээл: '+cur,W/2,VH*0.35+34,20);txt('Кайра башта — бас',W/2,VH*0.35+72,20,'#ffe08a')}
+ if(state=='win'){txt('Жеңдиңиз! 🏆',W/2,VH*0.3,34,'#ffe08a');txt('Финишке жеттиң',W/2,VH*0.3+36,20);txt('Кайра ойноо — бас',W/2,VH*0.3+74,20,'#ffe08a')}
+}
+function tap(){
+ if(state=='ready'){state='ride';return}
+ if(state=='ride'){state='jump';t=0;return}
+ if((state=='over'&&time>0)||state=='win'){var d=0;build();confetti=[];state='ride'}
+}
+cv.addEventListener('pointerdown',function(e){e.preventDefault();tap()});
+addEventListener('keydown',function(e){if(e.code=='Space'||e.code=='Enter'){e.preventDefault();tap()}});
+var last=performance.now();
+function loop(now){var dt=Math.min(.05,(now-last)/1000);last=now;update(dt);draw();requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+window.G={get s(){return state},get cur(){return cur},get nests(){return nests},get egg(){return egg},tap:tap,get best(){return best},T:T};
+})();
+</script></body></html>

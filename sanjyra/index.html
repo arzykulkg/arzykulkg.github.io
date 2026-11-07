@@ -1069,7 +1069,7 @@ if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){navigato
     var W=pad*2+groups.length*CW+6,H=Math.max(mx-mn+PH+56,avail+60);
     M.style.width=W+"px";M.style.height=H+"px";S.style.height=(H+110)+"px";
     LY={w:W,h:H,edges:edges};lines();
-    var cx=X(path.length-1);S.scrollTo({left:Math.max(0,cx-S.clientWidth*.28),behavior:anim?"smooth":"auto"});
+    var cx=X(path.length-1);S.scrollTo({left:Math.max(0,cx-Math.min(40,S.clientWidth*.1)),behavior:anim?"smooth":"auto"});
     var fr=fcEl.getBoundingClientRect(),sy=scrollY,top=fr.top+sy+fr.height/2-innerHeight/2;
     window.scrollTo({top:Math.max(0,top),behavior:"smooth"});
   }

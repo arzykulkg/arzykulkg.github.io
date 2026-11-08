@@ -34,13 +34,17 @@ body.dk .zone{filter:brightness(.38) saturate(.8)}
 .card .cd{position:absolute;right:18px;bottom:16px;background:var(--gold);color:#fff;border-radius:999px;font:700 12px system-ui;padding:4px 10px}
 .card .cd.past{background:var(--mut)}
 .card .no{position:absolute;left:22px;top:-2px;font:700 11px system-ui;color:var(--mut)}
+#modes{position:fixed;left:0;right:0;top:calc(52px + env(safe-area-inset-top));z-index:5;display:flex;gap:6px;padding:0 12px 6px;overflow-x:auto;scrollbar-width:none}
+#modes button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:700 13px system-ui;cursor:pointer}
+#modes button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+#views{position:fixed;inset:0;z-index:1}
 #top{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;background:linear-gradient(var(--bg) 60%,transparent);pointer-events:none}
 #top>*{pointer-events:auto}
 #top a,#top button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;height:36px;min-width:36px;padding:0 12px;font:600 14px system-ui;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 #top h1{margin:0;font:800 17px system-ui;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #nx{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;background:var(--acc);color:#fff;border-radius:999px;padding:9px 16px;font:700 14px system-ui;box-shadow:0 6px 18px rgba(0,0,0,.25);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100vw - 24px);font-size:13px;border:0;cursor:pointer}
 body.open #nx{display:none}
-#sheet{position:fixed;left:0;right:0;bottom:0;height:64vh;max-width:760px;margin:0 auto;z-index:6;background:var(--sh);border-radius:24px 24px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.28);transform:translateY(105%);transition:transform .6s cubic-bezier(.65,.05,.25,1);display:flex;flex-direction:column}
+#sheet{position:fixed;left:0;right:0;bottom:0;height:62vh;max-width:760px;margin:0 auto;z-index:6;background:var(--sh);border-radius:24px 24px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.28);transform:translateY(105%);transition:transform .6s cubic-bezier(.65,.05,.25,1);display:flex;flex-direction:column}
 body.open #sheet{transform:none}
 #sh-h{display:flex;align-items:center;gap:8px;padding:14px 14px 6px 18px}
 #sh-h .t{flex:1;min-width:0}
@@ -63,6 +67,8 @@ ul.li li::before{content:"✦";position:absolute;left:14px;top:11px;color:var(--
 </style></head>
 <body>
 <div id="top"><a href="../" aria-label="Башкы бет">‹</a><h1>🌙 Үч айлар</h1><button id="ov" title="Жалпы көрүнүш">🗺</button><button id="dk" title="Караңгы режим">🌓</button></div>
+<div id="modes"></div>
+<div id="views"></div>
 <div id="vp"><div id="st"></div></div>
 <button id="nx"></button>
 <div id="sheet" role="dialog" aria-modal="true">
@@ -75,7 +81,7 @@ ul.li li::before{content:"✦";position:absolute;left:14px;top:11px;color:var(--
 var MON={'Январь':0,'Февраль':1,'Март':2,'Апрель':3,'Май':4,'Июнь':5,'Июль':6,'Август':7,'Сентябрь':8,'Октябрь':9,'Ноябрь':10,'Декабрь':11};
 var CW=400,CH=210,STEP=270,Y0=140,H=Y0+TOP.length*STEP+60;
 var vp=document.getElementById('vp'),st=document.getElementById('st'),sheet=document.getElementById('sheet');
-var cur=-1,tab=0,cams=[];
+var cur=-1,tab=0,cams=[],MODE='prezi';
 var TABS=[['ayat','📖 Аят'],['hadis','📜 Хадис'],['fiqh','⚖️ Фикх'],['oku','🕌 Окуя'],['amal','🤲 Амал']];
 function E(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 try{if(localStorage.getItem('ua-dk')==='1')document.body.classList.add('dk')}catch(e){}
@@ -102,23 +108,24 @@ html='<svg id="paths" width="1000" height="'+H+'"><path d="'+d+'" fill="none" st
 st.innerHTML=html;st.style.height=H+'px';
 
 // camera
-var S0=1,TX=0,TY=0,ovTY=56;
+var S0=1,TX=0,TY=0,ovTY=96;
 function vw(){return window.innerWidth}function vh(){return window.innerHeight}
 function apply(s,tx,ty){st.style.transform='translate('+tx+'px,'+ty+'px) scale('+s+')'}
-function clampOv(){var s=S0,minY=Math.min(56,vh()-H*s-90);ovTY=Math.max(minY,Math.min(56,ovTY))}
+function clampOv(){var s=S0,minY=Math.min(96,vh()-H*s-90);ovTY=Math.max(minY,Math.min(96,ovTY))}
 function overview(){S0=Math.min(vw()/1000,0.9);clampOv();var tx=(vw()-1000*S0)/2;apply(S0,tx,ovTY);S0tx=tx}
 var S0tx=0;
 function focus(i){var c=cams[i],s=Math.min(vw()*.9/CW,1.4);
- var tx=vw()/2-(c.x+CW/2)*s,ty=70-c.y*s;apply(s,tx,ty)}
+ var tx=vw()/2-(c.x+CW/2)*s,ty=104-c.y*s;apply(s,tx,ty)}
 function show(i,keepTab){
  if(i<0||i>=TOP.length)return;
  cur=i;if(!keepTab)tab=0;
  document.body.classList.add('open');
  [].forEach.call(st.querySelectorAll('.card'),function(c,k){c.classList.toggle('on',k===i)});
- focus(i);render();
+ if(MODE==='prezi')focus(i);render();if(UA.onShow)UA.onShow(i);
  history.replaceState(null,'','#'+i);
 }
-function close(){cur=-1;document.body.classList.remove('open');[].forEach.call(st.querySelectorAll('.card.on'),function(c){c.classList.remove('on')});overview();history.replaceState(null,'',location.pathname)}
+var UA=window.UA={TOP:TOP,ZONES:ZONES,E:E,daysTo:daysTo,cdText:cdText,show:function(i){show(i)},close:function(){close()},prezi:{vp:vp,overview:overview,focus:function(){}},setMode:function(m){MODE=m;if(m==='prezi'){vp.style.display='';overview()}else vp.style.display='none';document.getElementById('nx').style.visibility=m==='prezi'?'':'hidden'},get cur(){return cur}};
+function close(){cur=-1;document.body.classList.remove('open');[].forEach.call(st.querySelectorAll('.card.on'),function(c){c.classList.remove('on')});if(MODE==='prezi')overview();history.replaceState(null,'',location.pathname);if(UA.onShow)UA.onShow(-1)}
 function render(){
  var t=TOP[cur];
  document.getElementById('sh-t').textContent=t.title;
@@ -163,10 +170,11 @@ st.querySelectorAll('.card').forEach(function(c){c.addEventListener('keydown',fu
 st.classList.add('nodrag');
 // initial: scroll overview to next date
 S0=Math.min(vw()/1000,0.9);
-if(nxI>0){ovTY=56-(cams[nxI].y-60)*S0}
+if(nxI>0){ovTY=96-(cams[nxI].y-60)*S0}
 overview();
 requestAnimationFrame(function(){st.classList.remove('nodrag')});
 var hh=parseInt((location.hash||'').slice(1),10);if(!isNaN(hh)&&hh>=0&&hh<TOP.length)show(hh);
 })();
 </script>
+<script src="views.js"></script>
 </body></html>

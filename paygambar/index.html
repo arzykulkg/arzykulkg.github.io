@@ -30,14 +30,49 @@ linear-gradient(180deg,var(--paper),var(--paper2) 55%,#c9dbd3);padding:0 10px 36
 .m.b b{font-size:clamp(11px,3.3vw,15px)}.m.b{background:radial-gradient(circle at 35% 30%,#c39448,#7b5320)}
 .note{margin:26px 0 0;background:#ffffffb8;border:1px solid #d9caa0;border-radius:14px;padding:12px 14px;font-size:.84rem;color:#4a5a54}
 .note b{color:var(--teal)}
+
+#grid span,.top span{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#grid span:active,.top span:active{background:#0f4c4a22;border-radius:8px}
+.m{cursor:pointer;transition:transform .15s}.m:active{transform:scale(.94)}
+.hint{text-align:center;color:#5c6b64;font-size:.8rem;margin:0 0 10px}
+h2.sec{font:700 1.2rem Georgia,serif;color:var(--teal);margin:34px 0 6px}
+.sub2{color:#5c6b64;font-size:.85rem;margin:0 0 14px}
+.dt ul{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid #c9a24a88}
+.dt>ul{padding-left:0;border:0}
+.dt li{margin:7px 0}
+.dn{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font:600 .95rem system-ui;border:1px solid #d9caa0;background:#ffffffcc;color:var(--ink);border-radius:12px;padding:9px 12px;cursor:pointer}
+.dn:active{background:#fff}
+.dn .nm{flex:1}.dn .rl{display:block;font-weight:500;font-size:.75rem;color:#6b7a73}
+.dn .ch{color:var(--teal2);transition:transform .2s;font-size:1.1rem}
+.dn.o .ch{transform:rotate(90deg)}
+.dn .i{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--gold);color:#8a6a22;font:700 .8rem/22px Georgia;text-align:center;flex:none}
+.dn.root{background:linear-gradient(135deg,var(--teal),#124f56);color:#fff;border-color:var(--gold)}
+.dn.root .rl{color:#cfe6e0}
+.dt li>ul{display:none;margin-top:6px;margin-left:10px}
+.dt li.o>ul{display:block}
+#bk{position:fixed;inset:0;background:#0008;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+#sh{position:fixed;left:0;right:0;bottom:0;z-index:21;max-width:520px;margin:0 auto;background:#fffaf0;border-radius:22px 22px 0 0;padding:20px 18px 28px;max-height:78vh;overflow:auto;transform:translateY(105%);transition:transform .25s;box-shadow:0 -10px 40px #0005;border-top:3px solid var(--gold)}
+body.sh #bk{opacity:1;pointer-events:auto}body.sh #sh{transform:none}
+#sh h3{margin:0 34px 2px 0;font:700 1.3rem Georgia,serif;color:var(--teal)}
+#sh .r{color:#8a6a22;font-size:.85rem;margin-bottom:10px}
+#sh p{margin:0 0 12px;line-height:1.55}
+#sh .x{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;border:0;background:#0f4c4a14;color:var(--teal);font-size:1.3rem;cursor:pointer}
+#sh .cp{display:flex;flex-wrap:wrap;gap:8px}
+#sh .cp b{width:100%;font-size:.78rem;color:#6b7a73;font-weight:600;margin-top:4px}
+#sh .cp button{border:1px solid var(--gold);background:#fff;color:var(--ink);border-radius:999px;padding:6px 12px;font:600 .85rem system-ui;cursor:pointer}
 </style></head><body><div class="w">
 <a class="back" href="../">‹ Башкы бет</a>
 <div class="ttl"><h1>Пайгамбарыбыз Мухаммед<br>алейхиссалам санжырасы</h1><p>Төрт халифанын санжырасы менен кесилиши</p></div>
 <div class="top" id="top"></div>
 <div id="tree"><svg id="lines"></svg><div id="grid"></div></div>
 <div class="med" id="med"></div>
-<div class="note"><b>Эскертүү.</b> Санжыра Аднандан башталат. Адандан жогорку ата-бабалар тууралуу илимпоздордун ою ар түрдүү. Кесилиш Ка'б бабада болот: Умар ал бабанын Ади уулунан, Абу Бакр Мурра уулунун Тайм тукумунан. Пайгамбарыбыз, Али жана Усман Абд Манафтан бөлүнөт.</div>
+<p class="hint">Ар бир ысымды басыңыз, маалымат ачылат</p>
+<h2 class="sec">Пайгамбарыбыздан тараган тукумдар</h2>
+<p class="sub2">Балдары, неберелери жана чөбөрөлөрү. Ысымды басканда ичиндегилери ачылат, «i» басса маалымат чыгат.</p>
+<div class="dt" id="dt"></div>
+<div class="note"><b>Булактар.</b> Маалымат Ибн Саад («ат-Табакат»), Ибн Хишам («ас-Сира») сыяктуу классикалык китептерге таянат. Тарыхый риваяттарда айырмачылыктар болушу мүмкүн.<br><br><b>Эскертүү.</b> Санжыра Аднандан башталат. Адандан жогорку ата-бабалар тууралуу илимпоздордун ою ар түрдүү. Кесилиш Ка'б бабада болот: Умар ал бабанын Ади уулунан, Абу Бакр Мурра уулунун Тайм тукумунан. Пайгамбарыбыз, Али жана Усман Абд Манафтан бөлүнөт.</div>
 </div>
+<div id="bk"></div><div id="sh"><button class="x" id="x" aria-label="Жабуу">×</button><h3 id="s1"></h3><div class="r" id="s2"></div><div id="s3"></div><div class="cp" id="s4"></div></div>
 <script>
 var TOPN=["Аднан","Маад","Низар","Мудар","Ильяс","Мудрика","Хузайма","Кинана","ан-Надр","Малик","Фихр","Галиб","Луай","Ка'б"];
 document.getElementById('top').innerHTML=TOPN.map(function(n){return '<span>'+n+'</span>'}).join('');
@@ -90,5 +125,100 @@ function draw(){
  h+='</g>';
  sv.innerHTML=h;
 }
+
+// ---------- Маалымат терезеси ----------
+var $=function(i){return document.getElementById(i)};
+function openSh(t,r,txt,chips){$('s1').textContent=t;$('s2').textContent=r||'';$('s3').innerHTML=(txt||'').split('\n').map(function(x){return '<p>'+x+'</p>'}).join('');
+ var c=$('s4');c.innerHTML='';if(chips&&chips.length){var b=document.createElement('b');b.textContent=chips[0];c.appendChild(b);chips.slice(1).forEach(function(k){var e=document.createElement('button');e.textContent=k[0];e.onclick=function(){k[1]()};c.appendChild(e)})}
+ document.body.classList.add('sh')}
+function closeSh(){document.body.classList.remove('sh')}
+$('x').onclick=closeSh;$('bk').onclick=closeSh;addEventListener('keydown',function(e){if(e.key=='Escape')closeSh()});
+var BIO={"Аднан":"Аднан — Исмайыл алейхиссаламдын тукумунан деп эсептелген, араптардын «Адна́ния» бутагынын ата-бабасы. Андан жогорку ата-бабалар тууралуу ойлор ар түрдүү.",
+"Мурра":"Курайштын ата-бабаларынын бири, анын тукумунан Пайгамбарыбыз, Абу Бакр жана башка сахабалар чыккан.",
+"Кусай":"Курайш уруусун Меккеде бириктирген, Каабанын кызматын жана шаардын башкарылышын колуна алган.",
+"Абд Манаф":"Хашимдин, Абд Шамстын жана башка уулдарынын атасы. Пайгамбарыбыз жана Али Хашим бутагынан, Усман Абд Шамс бутагынан.",
+"Хашим":"Курайштын соода жана конок тосуу иштерин жетектеген. Хашимиттердин (Хашим уруусунун) ата-бабасы.",
+"Абд аль-Мутталиб":"Пайгамбарыбыздын чоң атасы. Земзем кудугун кайра ачкан, Каабага келгендерге суу берүү кызматын аткарган. Пайгамбарыбызды атасы өлгөндөн кийин багып алган.",
+"Абдуллах":"Пайгамбарыбыздын атасы. Көпчүлүк риваяттар боюнча Пайгамбарыбыз төрөлө электе Мединеде көз жумган. Апасы — Амина.",
+"Абу Талиб":"Пайгамбарыбыздын агасы, Али ибн Абу Талибдин атасы. Меккедеги кыйын жылдарда Пайгамбарыбызды коргогон.",
+"Абд Шамс":"Абд Манафтын уулу, Умайянын атасы. Усман ибн Аффандын ата-бабасы.",
+"Умайя":"Умайя уулдарынын (Омейяддардын) ата-бабасы, Усман ибн Аффандын ата-бабасы.",
+"Аффан":"Усман ибн Аффандын атасы.",
+"аль-Хаттаб":"Умар ибн аль-Хаттабдын атасы.",
+"Тайм":"Курайштын Тайм уруусунун ата-бабасы. Абу Бакр ушул уруудан.",
+"Ка'б":"Курайштын көрүнүктүү ата-бабасы. Ал Жума күнү (ал-Аруба) элди жыйып сөз сүйлөгөнү айтылат. Анын Ади жана Мурра аттуу уулдарынан Умар менен Пайгамбарыбыздын тукумдары бөлүнөт."};
+var PL=["Абдуллах","Абд аль-Мутталиб","Хашим","Абд Манаф","Кусай","Килаб","Мурра","Ка'б","Луай","Галиб","Фихр","Малик","ан-Надр","Кинана","Хузайма","Мудрика","Ильяс","Мудар","Низар","Маад","Аднан"];
+var NUM=function(n){return n==1?'Пайгамбарыбыздын атасы':n==2?'Пайгамбарыбыздын чоң атасы':'Пайгамбарыбыздан '+n+' муун жогору ('+n+'-ата-бабасы)'};
+function showAnc(name,n){openSh(name,NUM(n),BIO[name]||(name+' — Пайгамбарыбыздын ата-бабасы. Бул киши тууралуу кеңири маалымат аз, ал санжыранын ырааттуулугун көрсөтөт.'))}
+function showLine(name,who,n,extra){openSh(name.replace(/ <small>.*$/,''),who+' ('+n+'-ата-бабасы)',(BIO[name.replace(/ <small>.*$/,'')]||'')+(extra?'\n'+extra:''))}
+// жогорку тизме
+[].forEach.call(document.querySelectorAll('.top span'),function(e,i){var n=21-i;e.onclick=function(){showAnc(TOPN[i],n)}});
+// торчо
+var CL={1:["Умар ибн аль-Хаттаб",{"Ади":8,"Разах":7,"Курт":6,"Абдуллах":5,"Рийах":4,"Абд аль-Уззо":3,"Нуфайл":2,"аль-Хаттаб":1}],
+ 4:["Усман ибн Аффан",{"Абд Шамс":4,"Умайя":3,"Аби аль-Ас":2,"Аффан":1}],
+ 5:["Абу Бакр ас-Сиддик",{"Тайм":6,"Са'д":5,"Ка'б":4,"Амр":3,"Амир":2,"Усман <small>(Абу Кухафа)</small>":1}]};
+var P3={"Мурра":7,"Килаб":6,"Кусай":5,"Абд Манаф":4,"Хашим":3,"Абд аль-Мутталиб":2,"Абдуллах":1};
+[].forEach.call(document.querySelectorAll('#grid span'),function(e,idx){var c=C[idx],col=c[1],nm=c[2];
+ e.onclick=function(){
+  if(col==3){showAnc(nm,P3[nm]);return}
+  if(col==2){openSh('Абу Талиб','Пайгамбарыбыздын агасы',BIO["Абу Талиб"]+'\nАбд аль-Мутталибдин уулу. Алинин атасы.');return}
+  var L=CL[col];showLine(nm,L[0],L[1][nm]);
+ }});
+// медальдар
+var MB=[
+["Умар ибн аль-Хаттаб","2-халифа (634–644)","Ади бутагынан. «Аль-Фарук» (акыйкатты жалганнан ажыраткан) лакабын алган. Он жыл мусулман мамлекетин башкарган. Кызы Хафса — Пайгамбарыбыздын жубайы."],
+["Али ибн Абу Талиб","4-халифа (656–661)","Пайгамбарыбыздын агасынын уулу жана күйөө баласы (Фатимага үйлөнгөн). Хасан менен Хусейндин атасы."],
+["Мухаммед алейхиссалам","Акыркы пайгамбар","Меккеде Пил жылы төрөлгөн, 632-жылы Мединеде көз жумган. Атасы Абдуллах, апасы Амина. Санжырасы Аднан аркылуу Исмайыл алейхиссаламга барып такалат деп айтылат."],
+["Усман ибн Аффан","3-халифа (644–656)","Абд Шамс бутагынан. Пайгамбарыбыздын эки кызына (Рукайя, андан кийин Умму Гулсум) үйлөнгөндүктөн «Зуннурайн» (эки нурдун ээси) деп аталган. Куранды бир мусхафка чогулткан."],
+["Абу Бакр ас-Сиддик","1-халифа (632–634)","Тайм бутагынан. «Ас-Сиддик» (чындыкты тастыктоочу). Хижрада Пайгамбарыбыздын жолдошу болгон. Кызы Айша — Пайгамбарыбыздын жубайы."]];
+[].forEach.call(document.querySelectorAll('.m'),function(e,i){e.onclick=function(){openSh(MB[i][0],MB[i][1],MB[i][2])}});
+// ---------- Тукумдар ----------
+var D={n:"Мухаммед алейхиссалам",r:"Акыркы пайгамбар",t:"Меккеде төрөлгөн, Мединеде көз жумган. Балдары: Хадичадан Касим, Зайнаб, Рукайя, Умму Гулсум, Фатима жана Абдуллах; Мария аль-Кибтиядан Ибрахим.",k:[
+{n:"Касим",r:"Уулу · Хадичадан",t:"Пайгамбарыбыздын биринчи баласы. Кичине кезинде Меккеде каза болгон. «Абу аль-Касим» деген куня ушундан."},
+{n:"Зайнаб",r:"Кызы · Хадичадан",t:"Күйөөсү — Абу аль-Ас ибн ар-Рабиъ. Мединеге хижра кылган.",k:[
+ {n:"Али",r:"Зайнабдын уулу",t:"Жаш кезинде каза болгон."},
+ {n:"Умама",r:"Зайнабдын кызы",t:"Пайгамбарыбыз аны көтөрүп намаз окуганы риваят кылынат. Фатима каза болгондон кийин Али ибн Абу Талибге турмушка чыккан."}]},
+{n:"Рукайя",r:"Кызы · Хадичадан",t:"Күйөөсү — Усман ибн Аффан. Хабашка жана Мединеге хижра кылган. Бадр салгылашуусунун тушунда оорудан каза болгон.",k:[
+ {n:"Абдуллах",r:"Рукайянын уулу",t:"Бала кезинде каза болгон."}]},
+{n:"Умму Гулсум",r:"Кызы · Хадичадан",t:"Рукайядан кийин Усман ибн Аффанга турмушка чыккан. Бала калтырган эмес."},
+{n:"Фатима аз-Захра",r:"Кызы · Хадичадан",t:"Жаннат аялдарынын башчыларынан. Күйөөсү — Али ибн Абу Талиб. Пайгамбарыбыз көз жумгандан кийин болжол менен алты айдан кийин каза болгон. Пайгамбарыбыздын тукуму ушул кызы аркылуу улантылган.",k:[
+ {n:"Хасан",r:"Фатиманын уулу",t:"Хижранын 3-жылы Мединеде төрөлгөн. Пайгамбарыбыз эки небересин «Жаннат жаштарынын башчылары» деп атаган.",k:[
+  {n:"Хасан аль-Мусанна",r:"Хасандын уулу",t:"Абдуллах аль-Махздын атасы. Анын тукуму кеңири тараган."},
+  {n:"Зайд",r:"Хасандын уулу",t:"Хасан ибн Алинин уулдарынын бири."},
+  {n:"Касим",r:"Хасандын уулу",t:"Хасандын уулдарынын бири."},
+  {n:"Абу Бакр",r:"Хасандын уулу",t:"Хасандын уулдарынын бири."},
+  {n:"Абдуллах",r:"Хасандын уулу",t:"Хасандын уулдарынын бири."},
+  {n:"Талха",r:"Хасандын уулу",t:"Хасандын уулдарынын бири."}]},
+ {n:"Хусейн",r:"Фатиманын уулу",t:"Хижранын 4-жылы Мединеде төрөлгөн. Пайгамбарыбыздын тукуму Хусейндин уулу Али Зайн аль-Абидин аркылуу тарап кеткен.",k:[
+  {n:"Али Зайн аль-Абидин",r:"Хусейндин уулу",t:"«Ас-Саджжад», «Зайн аль-Абидин» (ибадат кылуучулардын кооздугу) деп аталган. Хусейндин тукуму ал аркылуу улантылган."},
+  {n:"Али аль-Акбар",r:"Хусейндин уулу",t:"Кербела окуясында шейит болгон."},
+  {n:"Абдуллах (Али аль-Асгар)",r:"Хусейндин уулу",t:"Кербела окуясында кичинекей кезинде шейит болгон."},
+  {n:"Сукайна",r:"Хусейндин кызы",t:"Хусейндин кызы, өз заманынын таанымал аялдарынан."},
+  {n:"Фатима",r:"Хусейндин кызы",t:"Хусейндин кызы."}]},
+ {n:"Зайнаб аль-Кубра",r:"Фатиманын кызы",t:"Күйөөсү — Абдуллах ибн Жафар ибн Абу Талиб. Кербела окуясына катышкан."},
+ {n:"Умму Гулсум аль-Кубра",r:"Фатиманын кызы",t:"Сунни булактарында Умар ибн аль-Хаттабга турмушка чыккан деп айтылат."}]},
+{n:"Абдуллах (ат-Тайиб)",r:"Уулу · Хадичадан",t:"Нубуваттан кийин төрөлгөн, «ат-Тайиб», «ат-Тахир» деп да аталган. Бала кезинде каза болгон."},
+{n:"Ибрахим",r:"Уулу · Мария аль-Кибтиядан",t:"Мединеде төрөлгөн, эки жашка жетпей каза болгон."}
+]};
+var NODES=[];
+function lab(n,p){n._i=NODES.length;n._p=p;NODES.push(n);(n.k||[]).forEach(function(c){lab(c,n)})}lab(D,null);
+function showD(n){var ch=[];if(n._p)ch=ch.concat([['Ата-энеси:'],[n._p.n.replace(/ алейхиссалам/,''),function(){showD(n._p)}]]);
+ if(n.k&&n.k.length){ch.push(['Балдары:']);n.k.forEach(function(c){ch.push([c.n,function(){showD(c)}])})}
+ var arr=[];if(ch.length){var cur=[],out=[];ch.forEach(function(x){if(x.length==1){if(cur.length)out.push(cur);cur=[x[0]]}else cur.push(x)});out.push(cur);
+  var T=n._p?out[0]:null;
+ }
+ // жөнөкөй: бардык чиптерди бириктирүү
+ var chips=[];ch.forEach(function(x){chips.push(x)});
+ openSh(n.n,n.r,n.t,chips.length?['Байланыштар']:null);
+ var c=$('s4');c.innerHTML='';ch.forEach(function(x){if(x.length==1){var b=document.createElement('b');b.textContent=x[0];c.appendChild(b)}else{var e=document.createElement('button');e.textContent=x[0];e.onclick=x[1];c.appendChild(e)}})}
+function mk(n,root){var li=document.createElement('li');var b=document.createElement('button');b.className='dn'+(root?' root':'');
+ var has=n.k&&n.k.length;
+ b.innerHTML='<span class="nm">'+n.n+'<span class="rl">'+n.r+'</span></span>'+(has?'<span class="ch">›</span>':'')+'<span class="i" role="button" aria-label="Маалымат">i</span>';
+ b.onclick=function(ev){if(ev.target.classList.contains('i')){showD(n);return}if(has){li.classList.toggle('o');b.classList.toggle('o')}else showD(n)};
+ li.appendChild(b);
+ if(has){var ul=document.createElement('ul');n.k.forEach(function(c){ul.appendChild(mk(c))});li.appendChild(ul)}
+ return li}
+var rootUl=document.createElement('ul');var rl=mk(D,true);rl.classList.add('o');rl.firstChild.classList.add('o');rootUl.appendChild(rl);$('dt').appendChild(rootUl);
+
 addEventListener('load',draw);addEventListener('resize',draw);setTimeout(draw,200);
 </script></body></html>

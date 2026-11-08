@@ -1,5 +1,5 @@
 <!doctype html><html lang="ky"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Пайгамбарыбыздын санжырасы</title><meta name="description" content="Пайгамбарыбыз Мухаммед алейхиссалам санжырасы жана төрт халифанын, Абу Бакр, Умар, Усман, Алинин санжыралары менен кесилиши."><meta name="theme-color" content="#0f4c4a"><link rel="icon" href="../icon-192.png">
+<title>Пайгамбарыбыздын санжырасы</title><meta name="description" content="Пайгамбарыбыз Мухаммед алейхиссалам санжырасы жана төрт халифанын, Абу Бакр, Умар, Усман, Алинин санжыралары менен кесилиши."><meta name="theme-color" content="#0f4c4a"><link rel="icon" href="../icon-192.png"><link rel="stylesheet" href="ext.css">
 <style>
 :root{--teal:#0f4c4a;--teal2:#1d6b68;--ink:#143a3a;--gold:#c9a24a;--paper:#f6efdc;--paper2:#e9dfc2}
 *{box-sizing:border-box}
@@ -64,6 +64,9 @@ body.sh #bk{opacity:1;pointer-events:auto}body.sh #sh{transform:none}
 </style></head><body><div class="w">
 <a class="back" href="../">‹ Башкы бет</a>
 <div class="ttl"><h1>Пайгамбарыбыз Мухаммед<br>алейхиссалам санжырасы</h1><p>Төрт халифанын санжырасы менен кесилиши</p></div>
+<div id="srch"><div class="sbar"><input id="si" type="search" placeholder="Ысым издөө…" autocomplete="off"><button id="dk" aria-label="Караңгы режим">☾</button></div><div id="sr"></div></div>
+<div class="nav" id="nav"></div>
+<section class="view on" id="v-main">
 <div class="top" id="top"></div>
 <div id="tree"><svg id="lines"></svg><div id="grid"></div></div>
 <div class="med" id="med"></div>
@@ -73,8 +76,11 @@ body.sh #bk{opacity:1;pointer-events:auto}body.sh #sh{transform:none}
 <div class="tabs" id="tabs"></div>
 <div class="dt" id="dt"></div>
 <div class="note"><b>Булактар.</b> Маалымат Ибн Саад («ат-Табакат»), Ибн Хишам («ас-Сира») сыяктуу классикалык китептерге таянат. Тарыхый риваяттарда айырмачылыктар болушу мүмкүн.<br><br><b>Эскертүү.</b> Санжыра Аднандан башталат. Адандан жогорку ата-бабалар тууралуу илимпоздордун ою ар түрдүү. Кесилиш Ка'б бабада болот: Умар ал бабанын Ади уулунан, Абу Бакр Мурра уулунун Тайм тукумунан. Пайгамбарыбыз, Али жана Усман Абд Манафтан бөлүнөт.</div>
+</section>
+<section class="view" id="v-br"></section><section class="view" id="v-map"></section><section class="view" id="v-wives"></section><section class="view" id="v-sah"></section><section class="view" id="v-rel"></section><section class="view" id="v-spr"></section><section class="view" id="v-tl"></section>
 </div>
 <div id="bk"></div><div id="sh"><button class="x" id="x" aria-label="Жабуу">×</button><h3 id="s1"></h3><div class="r" id="s2"></div><div id="s3"></div><div class="cp" id="s4"></div></div>
+<script src="data.js"></script>
 <script>
 var TOPN=["Аднан","Маад","Низар","Мудар","Ильяс","Мудрика","Хузайма","Кинана","ан-Надр","Малик","Фихр","Галиб","Луай","Ка'б"];
 document.getElementById('top').innerHTML=TOPN.map(function(n){return '<span>'+n+'</span>'}).join('');
@@ -277,4 +283,4 @@ function openFam(k,noScroll){closeSh();[].forEach.call(document.querySelectorAll
 TABS.forEach(function(t){var b=document.createElement('button');b.className='tab';b.dataset.k=t[0];b.textContent=t[1];b.onclick=function(){openFam(t[0],true)};$('tabs').appendChild(b)});
 openFam('muh',true);
 addEventListener('load',draw);addEventListener('resize',draw);setTimeout(draw,200);
-</script></body></html>
+</script><script src="ext.js"></script></body></html>

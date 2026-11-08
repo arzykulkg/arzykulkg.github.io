@@ -177,5 +177,6 @@ document.addEventListener('click',function(e){if(!e.target.closest('#srch'))sr.c
 function setDk(on){document.body.classList.toggle('dk',on);$('dk').textContent=on?'☀':'☾';var m=document.querySelector('meta[name=theme-color]');if(m)m.content=on?'#0b1f1e':'#0f4c4a';try{localStorage.setItem('pg_dk',on?'1':'0')}catch(e){}}
 var sv=null;try{sv=localStorage.getItem('pg_dk')}catch(e){}
 setDk(sv=='1');$('dk').onclick=function(){setDk(!document.body.classList.contains('dk'))};
+window.VX={VIEWS:VIEWS,INIT:INIT,showView:showView,E:E,$:$};
 showView('main');
 })();

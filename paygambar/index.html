@@ -1,0 +1,94 @@
+<!doctype html><html lang="ky"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Пайгамбарыбыздын санжырасы</title><meta name="description" content="Пайгамбарыбыз Мухаммед алейхиссалам санжырасы жана төрт халифанын, Абу Бакр, Умар, Усман, Алинин санжыралары менен кесилиши."><meta name="theme-color" content="#0f4c4a"><link rel="icon" href="../icon-192.png">
+<style>
+:root{--teal:#0f4c4a;--teal2:#1d6b68;--ink:#143a3a;--gold:#c9a24a;--paper:#f6efdc;--paper2:#e9dfc2}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;background:
+radial-gradient(900px 420px at 50% 0,#fffaf0,transparent),
+linear-gradient(180deg,var(--paper),var(--paper2) 55%,#c9dbd3);padding:0 10px 36px;min-height:100vh}
+.w{max-width:520px;margin:0 auto}
+.back{display:inline-block;margin:12px 0 4px;color:var(--teal2);text-decoration:none;font-size:.9rem}
+.ttl{margin:6px 0 24px;background:linear-gradient(135deg,var(--teal),#124f56);color:#fff;text-align:center;border-radius:60px;padding:14px 22px;box-shadow:0 8px 22px rgba(15,76,74,.28),inset 0 0 0 2px rgba(201,162,74,.6)}
+.ttl h1{margin:0;font:700 clamp(1.05rem,4.6vw,1.35rem)/1.25 Georgia,"Times New Roman",serif}
+.ttl p{margin:5px 0 0;font-size:.82rem;opacity:.85}
+.top{display:flex;flex-direction:column;align-items:center;margin-bottom:0}
+.top span{font-weight:700;line-height:1.7;font-size:clamp(12px,3.5vw,15px)}
+.top svg{margin-bottom:6px}
+#tree{position:relative;padding-top:20px}
+#grid{display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;column-gap:2px;position:relative;z-index:1}
+#grid span{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:600;font-size:clamp(9.5px,2.75vw,13px);line-height:1.2;padding:5px 1px;min-height:30px}
+#grid span.k{color:var(--teal)}
+#grid span small{display:block;font-size:.78em;font-weight:500;opacity:.75}
+#lines{overflow:visible;position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.med{margin:18px 0 0;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;column-gap:2px;position:relative;z-index:1}
+.m{aspect-ratio:1;width:92%;max-width:104px;margin:0 auto;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:4px;box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--gold),0 8px 18px rgba(0,0,0,.28)}
+.m b{font:700 clamp(12px,3.7vw,17px) Georgia,serif;line-height:1.1}.m i{font-style:normal;font-size:clamp(6.5px,1.8vw,8.5px);opacity:.92;margin-top:4px;line-height:1.2}
+.m.u{background:radial-gradient(circle at 35% 30%,#b5484a,#7d1f22)}
+.m.a{background:radial-gradient(circle at 35% 30%,#2b8b8a,#0d4b52)}
+.m.h{background:radial-gradient(circle at 35% 30%,#2a8052,#0b4a2d);width:100%;max-width:118px}
+.m.s{background:radial-gradient(circle at 35% 30%,#2f6bb0,#12315f)}
+.m.b b{font-size:clamp(11px,3.3vw,15px)}.m.b{background:radial-gradient(circle at 35% 30%,#c39448,#7b5320)}
+.note{margin:26px 0 0;background:#ffffffb8;border:1px solid #d9caa0;border-radius:14px;padding:12px 14px;font-size:.84rem;color:#4a5a54}
+.note b{color:var(--teal)}
+</style></head><body><div class="w">
+<a class="back" href="../">‹ Башкы бет</a>
+<div class="ttl"><h1>Пайгамбарыбыз Мухаммед<br>алейхиссалам санжырасы</h1><p>Төрт халифанын санжырасы менен кесилиши</p></div>
+<div class="top" id="top"></div>
+<div id="tree"><svg id="lines"></svg><div id="grid"></div></div>
+<div class="med" id="med"></div>
+<div class="note"><b>Эскертүү.</b> Санжыра Аднандан башталат. Адандан жогорку ата-бабалар тууралуу илимпоздордун ою ар түрдүү. Кесилиш Ка'б бабада болот: Умар ал бабанын Ади уулунан, Абу Бакр Мурра уулунун Тайм тукумунан. Пайгамбарыбыз, Али жана Усман Абд Манафтан бөлүнөт.</div>
+</div>
+<script>
+var TOPN=["Аднан","Маад","Низар","Мудар","Ильяс","Мудрика","Хузайма","Кинана","ан-Надр","Малик","Фихр","Галиб","Луай","Ка'б"];
+document.getElementById('top').innerHTML=TOPN.map(function(n){return '<span>'+n+'</span>'}).join('');
+// cells: [row,col,text,id]
+var C=[
+[1,1,"Ади","adi"],[2,1,"Разах"],[3,1,"Курт"],[4,1,"Абдуллах"],[5,1,"Рийах"],[6,1,"Абд аль-Уззо"],[7,1,"Нуфайл"],[8,1,"аль-Хаттаб","u_last"],
+[7,2,"Абу Талиб","at"],
+[1,3,"Мурра","mur"],[2,3,"Килаб"],[3,3,"Кусай"],[4,3,"Абд Манаф","am"],[5,3,"Хашим"],[6,3,"Абд аль-Мутталиб","amu"],[7,3,"Абдуллах","h_last"],
+[5,4,"Абд Шамс","as"],[6,4,"Умайя"],[7,4,"Аби аль-Ас"],[8,4,"Аффан","s_last"],
+[2,5,"Тайм","taym"],[3,5,"Са'д"],[4,5,"Ка'б"],[5,5,"Амр"],[6,5,"Амир"],[7,5,"Усман <small>(Абу Кухафа)</small>","b_last"]
+];
+var g=document.getElementById('grid');
+C.forEach(function(c){var s=document.createElement('span');s.style.gridRow=c[0];s.style.gridColumn=c[1];s.innerHTML=c[2];if(c[3])s.id=c[3];g.appendChild(s)});
+document.getElementById('med').innerHTML=
+'<div><div class="m u"><b>Умар</b><i>Аллах ыраазы болсун</i></div></div>'+
+'<div><div class="m a"><b>Али</b><i>Аллах ыраазы болсун</i></div></div>'+
+'<div><div class="m h"><b>Мухаммед</b><i>Аллахтын салам-салаваты болсун</i></div></div>'+
+'<div><div class="m s"><b>Усман</b><i>Аллах ыраазы болсун</i></div></div>'+
+'<div><div class="m b"><b>Абу Бакр</b><i>Аллах ыраазы болсун</i></div></div>';
+function draw(){
+ var tr=document.getElementById('tree'),R=tr.getBoundingClientRect(),sv=document.getElementById('lines');
+ var med=[].slice.call(document.querySelectorAll('.m'));
+ sv.setAttribute('viewBox','0 0 '+R.width+' '+(R.height+150));sv.style.height=(R.height+150)+'px';
+ function box(el){var b=el.getBoundingClientRect();return{l:b.left-R.left,r:b.right-R.left,t:b.top-R.top,b:b.bottom-R.top,cx:(b.left+b.right)/2-R.left,cy:(b.top+b.bottom)/2-R.top}}
+ var p=[];
+ var k=document.querySelector('#top span:last-child').getBoundingClientRect(),kx=k.left+k.width/2-R.left,ky=k.bottom-R.top;
+ var adi=box(document.getElementById('adi')),mur=box(document.getElementById('mur'));
+ // Ka'b stub down then left rail to Adi, and to Murra
+ var railY=adi.t-8;p.push('M'+kx+' -2 V'+(mur.t+1));
+ p.push('M'+kx+' '+railY+' H'+adi.cx+' V'+(adi.t+2));
+ // Murra -> Taym
+ var taym=box(document.getElementById('taym'));
+ p.push('M'+mur.r+' '+mur.cy+' H'+taym.cx+' V'+(taym.t+2));
+ // Abd Manaf -> Abd Shams
+ var am=box(document.getElementById('am')),as=box(document.getElementById('as'));
+ p.push('M'+am.r+' '+am.cy+' H'+as.cx+' V'+(as.t+2));
+ // Abd al-Muttalib -> Abu Talib
+ var amu=box(document.getElementById('amu')),at=box(document.getElementById('at'));
+ p.push('M'+amu.l+' '+amu.cy+' H'+at.cx+' V'+(at.t+2));
+ // last names -> medals
+ [['u_last',0],['at',1],['h_last',2],['s_last',3],['b_last',4]].forEach(function(a){
+  var e=box(document.getElementById(a[0])),m=med[a[1]].getBoundingClientRect();
+  var my=m.top-R.top,mx=m.left+m.width/2-R.left;
+  p.push('M'+mx+' '+(e.b-2)+' V'+(my-6));
+ });
+ var h='<g fill="none" stroke="#1d6b68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".85">';
+ p.forEach(function(d){h+='<path d="'+d+'"/>'});
+ h+='</g><g fill="#1d6b68">';
+ [['u_last',0],['at',1],['h_last',2],['s_last',3],['b_last',4]].forEach(function(a){var m=med[a[1]].getBoundingClientRect(),mx=m.left+m.width/2-R.left,my=m.top-R.top-6;h+='<path d="M'+(mx-5)+' '+(my-5)+' L'+mx+' '+(my+3)+' L'+(mx+5)+' '+(my-5)+'z"/>'});
+ h+='</g>';
+ sv.innerHTML=h;
+}
+addEventListener('load',draw);addEventListener('resize',draw);setTimeout(draw,200);
+</script></body></html>

@@ -136,7 +136,7 @@ function render(){
  if(key==='ayat')t.ayat.forEach(function(a){h+='<div class="blk">'+(a.ar?'<p class="ar">'+E(a.ar)+'</p>':'')+'<p class="ky">'+E(a.ky)+'</p><span class="rf">'+E(a.ref)+'</span></div>'});
  else if(key==='hadis')t.hadis.forEach(function(a){h+='<div class="blk"><p class="ky">'+E(a.ky)+'</p>'+(a.src?'<span class="rf">'+E(a.src)+'</span>':'')+(a.note?'<div class="note">'+E(a.note)+'</div>':'')+'</div>'});
  else{h='<ul class="li">';t[key].forEach(function(a){h+='<li>'+E(a)+'</li>'});h+='</ul>'}
- h+='<p class="foot">Даталар Диянет (Түркия) календарына ылайык. Кыргызстан Муфтияты бир күнгө айырмалашы мүмкүн. Текст эстеликтен жазылган — китептен текшериңиз.</p>';
+ h+='<p class="foot">Рамазан (8-февраль), Кадыр түнү (5→6-март) жана Орозо айт (9-март) Кыргызстан Муфтияты алдын ала жарыялаган даталарга дал келет, акыркы дата жакын арада бекитилет. Ражаб, Мирадж, Шаабан жана Бараат даталарын Муфтият жарыялай элек, алар Диянет календарына ылайык. Текст эстеликтен жазылган — китептен текшериңиз.</p>';
  var B=document.getElementById('body');B.innerHTML=h;B.scrollTop=0;
  var on=T.querySelector('.on');if(on&&on.scrollIntoView)T.scrollLeft=on.offsetLeft-20;
 }

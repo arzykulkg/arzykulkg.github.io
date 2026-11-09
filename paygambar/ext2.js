@@ -2,7 +2,7 @@
 (function(){
 var VIEWS=VX.VIEWS,INIT=VX.INIT,showView=VX.showView,E=VX.E,$=VX.$;
 var KEYS=['g15','g14','g13','g12','g11','g10','g9'];for(var i=13;i>=0;i--)KEYS.push('t'+i);
-var st=document.createElement('style');st.textContent=
+var st=document.createElement('style');st.textContent='@media(min-width:760px){body.wide .w{max-width:1000px}body.wide .bpg{max-width:820px;min-height:560px;padding:44px 56px}body.wide .bpg h2{font-size:46px}body.wide .bpg p{font-size:19px;line-height:1.8}body.wide .bpg .g{font-size:14px}body.wide .rdw svg{min-width:0;width:100%!important;max-width:900px}body.wide .rdz{display:none}body.wide .rdn text{font-size:13.5px}}'+
 '.rdw{overflow:auto;border-radius:18px;background:radial-gradient(circle at 50% 50%,#fff8e6,#efe2bd);border:1px solid #d9c58a;touch-action:pan-x pan-y}body.dk .rdw{background:radial-gradient(circle at 50% 50%,#2c2a45,#161428);border-color:#3b3566}'+
 '.rdw svg{display:block;margin:0 auto;width:100%;min-width:340px}.rdn{cursor:pointer}.rdn rect{stroke-width:1.5}.rdn text{font:600 14px system-ui;text-anchor:middle;dominant-baseline:central;pointer-events:none}'+
 '.rdz{display:flex;gap:8px;justify-content:flex-end;margin:0 0 8px}.rdz button{border:1px solid #c9a24a;background:#fff;color:#2b2740;border-radius:999px;width:38px;height:34px;font:700 17px system-ui;cursor:pointer}'+
@@ -12,7 +12,7 @@ var st=document.createElement('style');st.textContent=
 '.bpg .g{font:700 12px system-ui;color:#8a6a1c;letter-spacing:.08em;text-transform:uppercase}.bpg h2{font:800 30px/1.1 Georgia,serif;margin:8px 0 4px}.bpg .num{font:800 70px/1 Georgia,serif;color:#b99035;opacity:.55;position:absolute;right:22px;top:18px}'+
 '.bpg p{font-size:15px;line-height:1.65;margin:10px 0}.bpg .orn{text-align:center;color:#b99035;letter-spacing:.5em;margin:6px 0}.bpg .sw{margin-top:auto;font-size:12.5px;opacity:.7;text-align:center}'+
 '.bnv{display:flex;align-items:center;gap:14px;margin-top:12px;font:700 13px system-ui}.bnv button{width:42px;height:42px;border-radius:50%;border:1px solid #c9a24a;background:#fff;color:#2b2740;font-size:18px;cursor:pointer}';
-document.head.appendChild(st);
+st.textContent+="";document.head.appendChild(st);
 function sec(id){var s=E('section','view');s.id='v-'+id;var last=document.getElementById('v-tl')||document.querySelector('.view:last-of-type');last.parentNode.insertBefore(s,last.nextSibling);return s}
 function g(k){return LG[k]}
 function nm(k){return (g(k)&&g(k).n)||k}
@@ -57,6 +57,8 @@ INIT.bk2=function(){
  var sx=null;pg.addEventListener('pointerdown',function(e){sx=e.clientX});pg.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>50)go(pi+(dx<0?1:-1));else go(pi+1)})};
 
 sec('rad');sec('bk2');
+function wideChk(){document.body.classList.toggle('wide',$('v-rad').classList.contains('on')||$('v-bk2').classList.contains('on'))}
+['v-rad','v-bk2'].forEach(function(id){new MutationObserver(wideChk).observe($(id),{attributes:true,attributeFilter:['class']})});
 var add=[['rad','Спираль'],['bk2','Китеп']];
 var nav=$('nav'),anchor=[].filter.call(nav.children,function(b){return b.dataset.v==='wives'})[0];
 add.forEach(function(v){VIEWS.push(v);var b=E('button','vt',v[1]);b.dataset.v=v[0];b.onclick=function(){showView(v[0])};nav.insertBefore(b,anchor)});

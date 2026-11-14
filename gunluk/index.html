@@ -629,7 +629,10 @@ route();
 (function(){
 var PR=[['fj','Багымдат намазы','🌅'],['zh','Бешим намазы','☀️'],['as','Аср намазы','🌤️'],['mg','Шам намазы','🌇'],['is','Ыша намазы','🌙']];
 var SU=[[36,'Ясин сүрөсү'],[48,'Фатх сүрөсү'],[56,'Вакиа сүрөсү'],[67,'Мүлк сүрөсү']];
-var TOT=PR.length+SU.length+1,DN=['Жк','Дш','Шш','Шр','Бш','Жм','Иш'],MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+var NF=[['th','Тахажжуд намазы','🌌']],ZL=[['lel',100],['g1',33],['hql',100],['sal',100],['g2',100],['g7',100],['g8',100],['g12',3]],calOff=0;
+Object.assign(L.kg.z,{lel:'Ла илаха иллаллах',g1:'Субханаллахи ва бихамдихи, Субханаллахил азийм',hql:'Ла хавла ва ла куввата илла биллах',sal:'Салават (Мухаммед алейхиссаламга)',g8:'Рабби игфир ли ва туб алайя'});
+function nm(id){return (L.kg.z&&L.kg.z[id])||id}
+var TOT=PR.length+NF.length+SU.length+ZL.length,DN=['Жк','Дш','Шш','Шр','Бш','Жм','Иш'],MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
 function dk(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function P(s){var a=s.split('-');return new Date(+a[0],+a[1]-1,+a[2])}
 function K(){return ls('gkd')||{}}
@@ -639,7 +642,7 @@ window.GKDAY=function(n,i,rm){var m=ls('gkdv')||{},t=dk();m[t]=m[t]||{};var a=m[
 function zkToday(d){try{var z=ls('zk2'),n=0;if(z&&z.days&&z.days[d])for(var k in z.days[d])n+=z.days[d][k];return n}catch(e){return 0}}
 function status(d,cnt){var K0=K()[d]||{},done=(K0.done||[]).slice(),dv=(ls('gkdv')||{})[d]||{},info={};
  SU.forEach(function(s){var n=(dv[s[0]]||[]).length;info[s[0]]=n;if(cnt&&cnt.n&&n>=cnt.n[s[0]-1]&&done.indexOf('s'+s[0])<0)done.push('s'+s[0])});
- var z=zkToday(d);if(z>0&&done.indexOf('zk')<0)done.push('zk');info.zk=z;return{done:done,info:info,rest:!!K0.rest}}
+ var zz=ls('zk2'),zd=(zz&&zz.days&&zz.days[d])||{};ZL.forEach(function(q){var c=zd[q[0]]||0;info['z_'+q[0]]=c;if(c>=q[1]&&done.indexOf('z_'+q[0])<0)done.push('z_'+q[0])});return{done:done,info:info,rest:!!K0.rest}}
 function ring(p,sz){var r=sz/2-7,c=2*Math.PI*r;return '<svg width="'+sz+'" height="'+sz+'" style="flex:none"><circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="none" stroke="var(--sage)" stroke-width="7"/><circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="none" stroke="var(--g)" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+c*(1-p)+'" transform="rotate(-90 '+sz/2+' '+sz/2+')"/><text x="'+sz/2+'" y="'+(sz/2+7)+'" text-anchor="middle" font-size="20" font-weight="800" fill="var(--g)">'+Math.round(p*100)+'%</text></svg>'}
 function topbar(t,s,back){return h('div',{style:'display:flex;gap:14px;align-items:center;background:var(--sage);margin:-16px -16px 14px;padding:22px 16px 16px;border-radius:0 0 22px 22px'},[h('a',{href:back||'#/',style:'width:46px;height:46px;border-radius:14px;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--g);flex:none;font-size:22px;text-decoration:none'},'←'),h('div',null,[h('div',{style:'font:800 28px Inter;color:var(--g)'},t),h('div',{style:'color:var(--mut)'},s)])])}
 function avatar(g,sz){return h('div',{style:'width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:var(--sage);display:flex;align-items:center;justify-content:center;font-size:'+sz*.55+'px;flex:none;border:3px solid var(--bg);box-shadow:0 0 0 2px var(--g)'},g==='f'?'🧕':'🧔')}
@@ -661,14 +664,20 @@ function draw(sel,cnt){app.innerHTML='';var pf=prof(),now=dk(),d=K(),st=status(s
  PR.forEach(function(q,i){c1.append(row(q[0],q[2],q[1],'',i===PR.length-1,tog(q[0])))});
  var c2=h('div',{class:'card',style:'padding:2px 16px;border-radius:24px;margin-top:14px'});
  SU.forEach(function(s,i){var n=st.info[s[0]],tot=cnt&&cnt.n?cnt.n[s[0]-1]:0;c2.append(row('s'+s[0],'📖',s[1],(n?n+(tot?' / '+tot:'')+' аят окулду':(tot?tot+' аят':'')),false,tog('s'+s[0]),['#/gsure/'+s[0],'Окуу']))});
- c2.append(row('zk','📿','Зикир',st.info.zk?st.info.zk+' жолу айтылды':'Зикирматиктен автоматтык',true,function(){location.hash='#/gzikirmatik'}));
- app.append(c1,c2);
+ NF.forEach(function(q){c1.append(row(q[0],q[2],q[1],'нафил',true,tog(q[0])))});
+ var c3=h('div',{class:'card',style:'padding:2px 16px;border-radius:24px;margin-top:14px'});
+ ZL.forEach(function(q,i){var c=st.info['z_'+q[0]]||0;c3.append(row('z_'+q[0],'📿',nm(q[0]),c+' / '+q[1],i===ZL.length-1,tog('z_'+q[0]),['#/gzikirmatik/'+q[0],'Санап']))});
+ app.append(c1,c2,c3);
  var ch=h('div',{class:'card',style:'padding:18px;border-radius:24px;margin-top:14px'}),bars=h('div',{style:'display:flex;align-items:flex-end;justify-content:space-between;height:100px;gap:6px'}),tot=0;
  for(var i=6;i>=0;i--){(function(i){var dt=new Date(Date.now()-i*864e5),k=dk(dt),n=status(k,cnt).done.length;tot+=n;bars.append(h('div',{style:'flex:1;text-align:center;cursor:pointer',onclick:function(){kundoluk(k)}},[h('div',{style:'height:'+Math.max(8,n/TOT*80)+'px;width:26px;margin:0 auto 6px;border-radius:10px;background:'+(k===sel?'var(--g)':'var(--sage)')}),h('div',{style:'font-size:14px;color:var(--mut);'+(k===sel?'font-weight:800;color:var(--ink)':'')},DN[dt.getDay()])]))})(i)}
  ch.append(h('div',{style:'display:flex;justify-content:space-between;font:800 19px Inter;color:var(--g);margin-bottom:10px'},[h('span',null,'Сиздин аптаңыз'),h('span',null,String(tot))]),bars);app.append(ch);
- var hm=h('div',{class:'card',style:'padding:18px;border-radius:24px;margin-top:14px'}),gr=h('div',{style:'display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px'});
- for(var i=27;i>=0;i--){var dt=new Date(Date.now()-i*864e5),k=dk(dt),n=status(k,cnt).done.length,a=n/TOT;gr.append(h('div',{style:'aspect-ratio:1;border-radius:8px;background:'+(n?'rgba(42,74,60,'+(.25+a*.75)+')':'var(--sage)')+';cursor:pointer',onclick:function(k){return function(){kundoluk(k)}}(k)}))}
- hm.append(h('div',{style:'font:800 19px Inter;color:var(--g)'},'Акыркы 28 күн'),gr);app.append(hm)}
+ var cm=new Date(new Date().getFullYear(),new Date().getMonth()+calOff,1),hm=h('div',{class:'card',style:'padding:18px;border-radius:24px;margin-top:14px'});
+ hm.append(h('div',{style:'display:flex;align-items:center;justify-content:space-between'},[h('button',{class:'btn o',style:'padding:6px 12px',onclick:function(){calOff--;draw(sel,cnt)}},'‹'),h('b',{style:'font:800 19px Inter;color:var(--g)'},MN[cm.getMonth()][0].toUpperCase()+MN[cm.getMonth()].slice(1)+' '+cm.getFullYear()),h('button',{class:'btn o',style:'padding:6px 12px;'+(calOff>=0?'opacity:.35':''),onclick:function(){if(calOff<0){calOff++;draw(sel,cnt)}}},'›')]));
+ var gr=h('div',{style:'display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px'});['Дш','Шш','Шр','Бш','Жм','Иш','Жк'].forEach(function(n){gr.append(h('div',{style:'text-align:center;font-size:12px;color:var(--mut)'},n))});
+ var lead=(cm.getDay()+6)%7,dim=new Date(cm.getFullYear(),cm.getMonth()+1,0).getDate();for(var i=0;i<lead;i++)gr.append(h('div'));
+ var sum=0,full5=0;for(var i=1;i<=dim;i++){(function(i){var dt=new Date(cm.getFullYear(),cm.getMonth(),i),k=dk(dt),fut=dt>new Date(),s=fut?{done:[]}:status(k,cnt),n=s.done.length,a=n/TOT;sum+=n;if(PR.every(function(q){return s.done.indexOf(q[0])>-1}))full5++;
+  gr.append(h('div',{style:'aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;background:'+(n?'rgba(42,74,60,'+(.2+a*.8)+')':'var(--sage)')+';color:'+(a>.5?'#fff':'var(--ink)')+';'+(k===sel?'outline:3px solid #c9a24a;':k===dk()?'outline:2px solid var(--g);':'')+(fut?'opacity:.4':''),onclick:function(){if(!fut)kundoluk(k)}},String(i)))})(i)}
+ hm.append(gr,h('div',{style:'margin-top:12px;color:var(--mut);font-size:14px'},'5 намаз толук окулган күн: '+full5+' · аткарылган ибадат: '+sum));app.append(hm)}
 R.gkundoluk=kundoluk;
 /* ---- Профиль ---- */
 function profil(){app.innerHTML='';var pf=prof();app.append(topbar('Профиль','Атыңыз жана жынысыңыз','#/'));

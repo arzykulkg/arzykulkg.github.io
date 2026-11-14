@@ -560,7 +560,7 @@ function navOn(){var r=location.hash.replace(/^#\/?/,'').split('/')[0]||'gunluk'
 function dk(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 /* ---- аят окуу эсеби ---- */
 function RD(){return ls('gkrd')||{}}
-function markRead(n,i){var r=RD(),k=n+':'+i;if(r[k])return;r[k]=1;ls('gkrd',r);var dd=ls('gkrdd')||{};dd[dk()]=(dd[dk()]||0)+1;ls('gkrdd',dd);ls('gklast',[n,i]);var e=document.getElementById('v'+i);if(e&&curN===n){e.classList.add('rd');var c=e.querySelector('.rdc');if(c)c.classList.add('on');updProg()}}
+function markRead(n,i){window.GKDAY&&GKDAY(n,i);var r=RD(),k=n+':'+i;if(r[k])return;r[k]=1;ls('gkrd',r);var dd=ls('gkrdd')||{};dd[dk()]=(dd[dk()]||0)+1;ls('gkrdd',dd);ls('gklast',[n,i]);var e=document.getElementById('v'+i);if(e&&curN===n){e.classList.add('rd');var c=e.querySelector('.rdc');if(c)c.classList.add('on');updProg()}}
 var curN=0,SD=null,CNT=0;function updProg(){var p=document.getElementById('gp');if(!p||!CNT)return;var r=RD(),c=0;for(var i=1;i<=CNT;i++)if(r[curN+':'+i])c++;p.firstChild.style.width=(c/CNT*100)+'%';document.getElementById('gpt').textContent=c+' / '+CNT+' аят окулду'}
 /* ---- башкы бет ---- */
 var SV={book:'<svg viewBox="0 0 160 96"><rect width="160" height="96" rx="0" fill="none"/><path d="M80 24c-14-12-36-14-58-8v58c22-6 44-4 58 8 14-12 36-14 58-8V16c-22-6-44-4-58 8z" fill="#f6f1e4" stroke="#2a4a3c" stroke-width="3"/><path d="M80 24v58" stroke="#2a4a3c" stroke-width="3"/><g stroke="#b8944a" stroke-width="3" stroke-linecap="round"><path d="M34 38c10-2 20 0 30 4M34 50c10-2 20 0 30 4M96 42c10-4 20-6 30-4M96 54c10-4 20-6 30-4"/></g><circle cx="80" cy="12" r="6" fill="#b8944a"/></svg>',
@@ -613,7 +613,7 @@ var _gs=gsure;R.gsure=function(){
     v.innerHTML='<div class="top"><span class="vn">'+(i+1)+'</span><span style="display:flex;gap:6px"><button class="chip pl1">▶</button><button class="chip rdc'+(r[n+':'+(i+1)]?' on':'')+'">✓</button></span></div><p class="ar"></p><p class="kg"></p>';
     v.querySelector('.ar').textContent=t;v.querySelector('.kg').textContent=d.kg[i];
     v.querySelector('.pl1').onclick=function(){window.__gkPlay(i+1)};
-    v.querySelector('.rdc').onclick=function(){var rr=RD(),k=n+':'+(i+1),dd=ls('gkrdd')||{};if(rr[k]){delete rr[k];dd[dk()]=Math.max(0,(dd[dk()]||0)-1);v.classList.remove('rd');this.classList.remove('on')}else{rr[k]=1;dd[dk()]=(dd[dk()]||0)+1;v.classList.add('rd');this.classList.add('on');ls('gklast',[n,i+1])}ls('gkrd',rr);ls('gkrdd',dd);updProg()};
+    v.querySelector('.rdc').onclick=function(){var rr=RD(),k=n+':'+(i+1),dd=ls('gkrdd')||{};if(rr[k]){delete rr[k];window.GKDAY&&GKDAY(n,i+1,1);dd[dk()]=Math.max(0,(dd[dk()]||0)-1);v.classList.remove('rd');this.classList.remove('on')}else{rr[k]=1;dd[dk()]=(dd[dk()]||0)+1;window.GKDAY&&GKDAY(n,i+1);v.classList.add('rd');this.classList.add('on');ls('gklast',[n,i+1])}ls('gkrd',rr);ls('gkrdd',dd);updProg()};
     app.append(v)});
    updProg();
    io=new IntersectionObserver(function(es){es.forEach(function(e){var i=+e.target.id.slice(1);if(e.isIntersecting){if(!timers[i])timers[i]=setTimeout(function(){markRead(n,i)},3500)}else{clearTimeout(timers[i]);timers[i]=0}})},{rootMargin:'-30% 0px -35% 0px',threshold:.3});
@@ -622,6 +622,82 @@ var _gs=gsure;R.gsure=function(){
 /* ---- route ---- */
 var _rt=route;route=function(){if(io&&!/gsure/.test(location.hash)){io.disconnect();io=null}_rt();navOn()};
 removeEventListener('hashchange',_rt);addEventListener('hashchange',route);
+route();
+})();
+
+/* ====== Күндөлүк (Ислам сыяктуу) + Профиль ====== */
+(function(){
+var PR=[['fj','Багымдат намазы','🌅'],['zh','Бешим намазы','☀️'],['as','Аср намазы','🌤️'],['mg','Шам намазы','🌇'],['is','Ыша намазы','🌙']];
+var SU=[[36,'Ясин сүрөсү'],[48,'Фатх сүрөсү'],[56,'Вакиа сүрөсү'],[67,'Мүлк сүрөсү']];
+var TOT=PR.length+SU.length+1,DN=['Жк','Дш','Шш','Шр','Бш','Жм','Иш'],MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+function dk(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function P(s){var a=s.split('-');return new Date(+a[0],+a[1]-1,+a[2])}
+function K(){return ls('gkd')||{}}
+function prof(){return ls('gkprof')||{}}
+var IDX=null;function idx(){return IDX?Promise.resolve(IDX):fetch('/islam/data/quran/index.json').then(function(r){return r.json()}).then(function(d){return IDX=d})}
+window.GKDAY=function(n,i,rm){var m=ls('gkdv')||{},t=dk();m[t]=m[t]||{};var a=m[t][n]=m[t][n]||[],j=a.indexOf(i);if(rm){if(j>-1)a.splice(j,1)}else if(j<0)a.push(i);ls('gkdv',m)};
+function zkToday(d){try{var z=ls('zk2'),n=0;if(z&&z.days&&z.days[d])for(var k in z.days[d])n+=z.days[d][k];return n}catch(e){return 0}}
+function status(d,cnt){var K0=K()[d]||{},done=(K0.done||[]).slice(),dv=(ls('gkdv')||{})[d]||{},info={};
+ SU.forEach(function(s){var n=(dv[s[0]]||[]).length;info[s[0]]=n;if(cnt&&cnt.n&&n>=cnt.n[s[0]-1]&&done.indexOf('s'+s[0])<0)done.push('s'+s[0])});
+ var z=zkToday(d);if(z>0&&done.indexOf('zk')<0)done.push('zk');info.zk=z;return{done:done,info:info,rest:!!K0.rest}}
+function ring(p,sz){var r=sz/2-7,c=2*Math.PI*r;return '<svg width="'+sz+'" height="'+sz+'" style="flex:none"><circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="none" stroke="var(--sage)" stroke-width="7"/><circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="none" stroke="var(--g)" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+c*(1-p)+'" transform="rotate(-90 '+sz/2+' '+sz/2+')"/><text x="'+sz/2+'" y="'+(sz/2+7)+'" text-anchor="middle" font-size="20" font-weight="800" fill="var(--g)">'+Math.round(p*100)+'%</text></svg>'}
+function topbar(t,s,back){return h('div',{style:'display:flex;gap:14px;align-items:center;background:var(--sage);margin:-16px -16px 14px;padding:22px 16px 16px;border-radius:0 0 22px 22px'},[h('a',{href:back||'#/',style:'width:46px;height:46px;border-radius:14px;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--g);flex:none;font-size:22px;text-decoration:none'},'←'),h('div',null,[h('div',{style:'font:800 28px Inter;color:var(--g)'},t),h('div',{style:'color:var(--mut)'},s)])])}
+function avatar(g,sz){return h('div',{style:'width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:var(--sage);display:flex;align-items:center;justify-content:center;font-size:'+sz*.55+'px;flex:none;border:3px solid var(--bg);box-shadow:0 0 0 2px var(--g)'},g==='f'?'🧕':'🧔')}
+/* ---- Күндөлүк ---- */
+function kundoluk(sel){sel=sel||dk();app.innerHTML='';idx().then(function(cnt){draw(sel,cnt)}).catch(function(){draw(sel,null)})}
+function draw(sel,cnt){app.innerHTML='';var pf=prof(),now=dk(),d=K(),st=status(sel,cnt),done=st.done,sd=P(sel),prev=dk(new Date(sd.getTime()-864e5)),next=dk(new Date(sd.getTime()+864e5)),fem=pf.g==='f';
+ app.append(topbar('Күндөлүк',(pf.name?pf.name+' · ':'')+'ар күндүн ибадат эсеби','#/'));
+ app.append(h('div',{style:'display:flex;align-items:center;justify-content:space-between;margin-bottom:12px'},[h('button',{class:'btn o',style:'padding:8px 14px',onclick:function(){kundoluk(prev)}},'‹'),h('b',{style:'font-size:18px;color:var(--g)'},(sel===now?'Бүгүн · ':'')+sd.getDate()+' '+MN[sd.getMonth()]+' '+sd.getFullYear()),h('button',{class:'btn o',style:'padding:8px 14px;'+(sel>=now?'opacity:.35':''),onclick:function(){if(sel<now)kundoluk(next)}},'›')]));
+ var np=PR.filter(function(x){return done.indexOf(x[0])>-1}).length,streak=0,x=new Date();
+ function full(k,cn){var s=status(k,cn);return s.rest||PR.every(function(p){return s.done.indexOf(p[0])>-1})}
+ if(!full(dk(x),cnt))x=new Date(x.getTime()-864e5);while(full(dk(x),cnt)&&streak<999){if(!(status(dk(x),cnt).rest))streak++;x=new Date(x.getTime()-864e5)}
+ var p=done.length/TOT;
+ app.append(h('div',{class:'card',style:'display:flex;align-items:center;gap:16px;padding:16px;border-radius:24px'},[h('div',{html:ring(p,86)}),h('div',null,[h('div',{style:'font:800 19px Inter;color:var(--g)'},done.length+' / '+TOT+' аткарылды'),h('div',{style:'color:var(--mut);margin-top:4px'},'🕌 Намаз: '+np+' / 5'),h('div',{style:'color:var(--mut)'},'🔥 '+streak+' күн катары менен 5 намаз')])]));
+ if(fem)app.append(h('button',{class:'btn o',style:'margin-top:12px;width:100%;'+(st.rest?'background:var(--sage)':''),onclick:function(){var dd=K();dd[sel]=dd[sel]||{};dd[sel].rest=!dd[sel].rest;ls('gkd',dd);draw(sel,cnt)}},(st.rest?'✓ ':'')+'Эс алуу күнү (намаз окулбайт) — катар үзүлбөйт'));
+ function row(id,ico,name,sub,last,fn,link){var on=done.indexOf(id)>-1,dis=st.rest&&PR.some(function(q){return q[0]===id});
+  var b=h('div',{style:'display:flex;align-items:center;gap:12px;padding:15px 0;'+(last?'':'border-bottom:1px solid var(--line);')+(dis?'opacity:.45':'')},[h('span',{style:'font-size:22px'},ico),h('div',{style:'flex:1;cursor:pointer;min-width:0',onclick:function(){if(dis)return;fn()}},[h('div',{style:'font:600 17px Inter;'+(on?'color:var(--g)':'')},name),sub?h('div',{style:'font-size:13px;color:var(--mut)'},sub):'']),link?h('a',{href:link[0],style:'color:var(--g);font-weight:700;font-size:14px;text-decoration:none;padding:6px 8px'},link[1]+' ›'):'',h('span',{style:'width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;cursor:pointer;'+(on?'background:var(--g);color:#fff':'border:2px solid var(--line)'),onclick:function(){if(dis)return;fn()}},on?'✓':'')]);return b}
+ function tog(id){return function(){var dd=K();dd[sel]=dd[sel]||{};var a=dd[sel].done=dd[sel].done||[],j=a.indexOf(id);if(j>-1)a.splice(j,1);else a.push(id);ls('gkd',dd);draw(sel,cnt)}}
+ var c1=h('div',{class:'card',style:'padding:2px 16px;border-radius:24px;margin-top:14px'});
+ PR.forEach(function(q,i){c1.append(row(q[0],q[2],q[1],'',i===PR.length-1,tog(q[0])))});
+ var c2=h('div',{class:'card',style:'padding:2px 16px;border-radius:24px;margin-top:14px'});
+ SU.forEach(function(s,i){var n=st.info[s[0]],tot=cnt&&cnt.n?cnt.n[s[0]-1]:0;c2.append(row('s'+s[0],'📖',s[1],(n?n+(tot?' / '+tot:'')+' аят окулду':(tot?tot+' аят':'')),false,tog('s'+s[0]),['#/gsure/'+s[0],'Окуу']))});
+ c2.append(row('zk','📿','Зикир',st.info.zk?st.info.zk+' жолу айтылды':'Зикирматиктен автоматтык',true,function(){location.hash='#/gzikirmatik'}));
+ app.append(c1,c2);
+ var ch=h('div',{class:'card',style:'padding:18px;border-radius:24px;margin-top:14px'}),bars=h('div',{style:'display:flex;align-items:flex-end;justify-content:space-between;height:100px;gap:6px'}),tot=0;
+ for(var i=6;i>=0;i--){(function(i){var dt=new Date(Date.now()-i*864e5),k=dk(dt),n=status(k,cnt).done.length;tot+=n;bars.append(h('div',{style:'flex:1;text-align:center;cursor:pointer',onclick:function(){kundoluk(k)}},[h('div',{style:'height:'+Math.max(8,n/TOT*80)+'px;width:26px;margin:0 auto 6px;border-radius:10px;background:'+(k===sel?'var(--g)':'var(--sage)')}),h('div',{style:'font-size:14px;color:var(--mut);'+(k===sel?'font-weight:800;color:var(--ink)':'')},DN[dt.getDay()])]))})(i)}
+ ch.append(h('div',{style:'display:flex;justify-content:space-between;font:800 19px Inter;color:var(--g);margin-bottom:10px'},[h('span',null,'Сиздин аптаңыз'),h('span',null,String(tot))]),bars);app.append(ch);
+ var hm=h('div',{class:'card',style:'padding:18px;border-radius:24px;margin-top:14px'}),gr=h('div',{style:'display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px'});
+ for(var i=27;i>=0;i--){var dt=new Date(Date.now()-i*864e5),k=dk(dt),n=status(k,cnt).done.length,a=n/TOT;gr.append(h('div',{style:'aspect-ratio:1;border-radius:8px;background:'+(n?'rgba(42,74,60,'+(.25+a*.75)+')':'var(--sage)')+';cursor:pointer',onclick:function(k){return function(){kundoluk(k)}}(k)}))}
+ hm.append(h('div',{style:'font:800 19px Inter;color:var(--g)'},'Акыркы 28 күн'),gr);app.append(hm)}
+R.gkundoluk=kundoluk;
+/* ---- Профиль ---- */
+function profil(){app.innerHTML='';var pf=prof();app.append(topbar('Профиль','Атыңыз жана жынысыңыз','#/'));
+ var top=h('div',{class:'card',style:'display:flex;align-items:center;gap:14px;padding:16px;border-radius:24px'}),av=h('div'),nm=h('div',null);
+ function paint(){var q=prof();av.innerHTML='';av.append(avatar(q.g,64));nm.innerHTML='';nm.append(h('div',{style:'font:800 22px Inter;color:var(--g)'},q.name||'Атыңызды жазыңыз'),h('div',{style:'color:var(--mut)'},q.g==='f'?'Аял':q.g==='m'?'Эркек':'Жынысыңызды тандаңыз'))}
+ top.append(av,nm);paint();app.append(top);
+ var f=h('div',{class:'card',style:'padding:16px;border-radius:24px;margin-top:14px'});
+ f.append(h('div',{style:'font-weight:700;color:var(--g);margin-bottom:8px'},'Атыңыз'));
+ var inp=h('input',{type:'text',value:pf.name||'',placeholder:'Мисалы: Камалидин',style:'width:100%;box-sizing:border-box;padding:14px;border-radius:14px;border:2px solid var(--line);background:var(--sage);font:600 17px Inter;color:var(--ink)'});
+ inp.oninput=function(){var q=prof();q.name=inp.value.trim();ls('gkprof',q);paint()};f.append(inp,h('div',{style:'font-weight:700;color:var(--g);margin:16px 0 8px'},'Жынысыңыз'));
+ var gb=h('div',{style:'display:flex;gap:10px'});
+ [['m','🧔','Эркек'],['f','🧕','Аял']].forEach(function(x){var b=h('button',{style:'flex:1;border-radius:18px;padding:16px 8px;font:700 17px Inter;cursor:pointer;border:2px solid '+(pf.g===x[0]?'var(--g)':'var(--line)')+';background:'+(pf.g===x[0]?'var(--g)':'var(--sage)')+';color:'+(pf.g===x[0]?'#fff':'var(--ink)'),onclick:function(){var q=prof();q.g=x[0];ls('gkprof',q);profil()}},[h('div',{style:'font-size:30px'},x[2]==='Аял'?'🧕':'🧔'),x[2]]);gb.append(b)});
+ f.append(gb);app.append(f);
+ var ay=Object.keys(ls('gkrd')||{}).length,dd=K(),days=0;for(var k in dd)if((dd[k].done||[]).length)days++;var zt=0;try{var z=ls('zk2');if(z&&z.days)for(var a in z.days)for(var b in z.days[a])zt+=z.days[a][b]}catch(e){}
+ var g=h('div',{class:'tiles',style:'margin-top:14px'});[['📖',ay,'окулган аят'],['📿',zt,'зикир саны'],['📅',days,'белгиленген күн']].forEach(function(x){g.append(h('div',{class:'tl',style:'text-align:center'},[h('div',{style:'font-size:28px'},x[0]),h('b',{style:'font-size:26px'},String(x[1])),h('span',null,x[2])]))});app.append(g);
+ app.append(h('a',{class:'btn',href:'#/gkundoluk',style:'display:block;text-align:center;margin-top:14px'},'Күндөлүккө өтүү'),h('a',{class:'btn o',href:'/',style:'display:block;text-align:center;margin-top:10px'},'⌂ Арзыкул.kg башкы бети'))}
+R.gprofil=profil;
+/* ---- навигация ---- */
+function I(d){return '<svg viewBox="0 0 24 24">'+d+'</svg>'}
+var NV=[['','Башкы','<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>','gunluk'],['gkuran','Куран','<path d="M12 6c-2-2-5-2.5-8-2v14c3-.5 6 0 8 2 2-2 5-2.5 8-2V4c-3-.5-6 0-8 2zM12 6v14"/>','gkuran gsure'],['gzikirmatik','Зикир','<circle cx="6" cy="14" r="2"/><circle cx="10" cy="9" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="19" cy="10" r="2"/><circle cx="16" cy="15" r="2"/><path d="M5 20l2-4"/>','gzikirmatik gzikir'],['gkundoluk','Күндөлүк','<rect x="4" y="4" width="16" height="17" rx="3"/><path d="M8 2v4M16 2v4M8 12l2.5 2.5L16 9"/>','gkundoluk'],['gprofil','Профиль','<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>','gprofil']];
+document.getElementById('nav').innerHTML=NV.map(function(n){return '<a href="#/'+n[0]+'" data-r="'+n[3]+'">'+I(n[2])+'<em>'+n[1]+'</em></a>'}).join('');
+/* ---- башкы бет: ат, Күндөлүк ---- */
+var H0=R[''];function home(){H0();var pf=prof(),he=app.querySelector('.hello'),big=app.querySelector('.big');
+ if(he&&pf.name)he.textContent='Ассаламу алейкум, '+pf.name+'!';
+ var tl=[].slice.call(app.querySelectorAll('a.tl')).filter(function(a){return a.getAttribute('href')==='#/gcetele'})[0];if(tl){tl.href='#/gkundoluk';tl.querySelector('b').textContent='Күндөлүк';tl.querySelector('span').textContent='Намаз, сүрөлөр, зикир'}
+ var st=status(dk(),null),tx2=app.querySelector('.hero .tx');if(tx2){var sm=document.createElement('div');sm.style.cssText='color:var(--g);font-weight:700;margin-bottom:6px';sm.textContent='Күндөлүк: '+st.done.length+' / '+TOT;tx2.insertBefore(sm,tx2.querySelector('a.btn'))}
+ if(!pf.name||!pf.g){var c=document.createElement('a');c.href='#/gprofil';c.className='card';c.style.cssText='display:block;text-decoration:none;color:var(--ink);margin:12px 0;border-radius:20px';c.innerHTML='<b style="color:var(--g)">👤 Профилди толтуруңуз</b><div style="color:var(--mut)">Атыңызды жазып, эркек/аял тандаңыз ›</div>';app.insertBefore(c,app.children[1])}}
+R['']=home;R.gunluk=home;
+var _r5=route;route=function(){_r5()};
 route();
 })();
 

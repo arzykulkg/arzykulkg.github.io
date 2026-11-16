@@ -153,6 +153,13 @@ function qpct(r){var t=+r.t||0,f=+r.f||0;return t+f?Math.round(t/(t+f)*100):0}
 function qmark(p){return p>=80?5:p>=60?4:p>=40?3:2}
 var QC={5:'#3fa66b',4:'#8fc060',3:'#e8a33d',2:'#e0605a'};
 function qcsv(rows){return 'Name,Surname,Class,True,False,Percentage,Mark\n'+rows.map(function(r){var p=qpct(r);return [r.name,r.surname,r.cls,r.t,r.f,p+'%',qmark(p)].join(',')}).join('\n')}
+function qchart(rows){
+ var gs={};rows.forEach(function(r){(gs[r.cls||'Класс жок']=gs[r.cls||'Класс жок']||[]).push(r)});
+ Object.keys(gs).sort().forEach(function(k){var g=gs[k].slice().sort(function(a,b){return qpct(b)-qpct(a)});
+  var c=el('div','card'),h='<b>📈 '+k+' — график</b><div style="margin-top:8px">';
+  g.forEach(function(r){var p=qpct(r),m=qmark(p);
+   h+='<div style="display:flex;align-items:center;gap:6px;margin:5px 0;font-size:.82rem"><div style="width:96px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(r.surname||'')+' '+(r.name||'')+'</div><div style="flex:1;background:rgba(128,128,128,.15);border-radius:6px;height:22px;position:relative"><div style="width:'+Math.max(p,2)+'%;height:100%;border-radius:6px;background:'+QC[m]+'"></div></div><div style="flex:none;width:118px;text-align:right;white-space:nowrap">✓'+r.t+' ✗'+r.f+' · <b>'+p+'%</b> · <b style="color:'+QC[m]+'">'+m+'</b></div></div>'});
+  c.innerHTML=h+'</div>';app.append(c)})}
 function vIq(){
  var hd=el('div','card');hd.innerHTML='<b>📊 IQA</b> <span class="mut">— Indigo Quarter Assessment</span>';
  var tt=el('input');tt.value=Q.title;tt.onchange=function(){Q.title=tt.value.trim()||'Quarter 1';qsave()};hd.append(tt);
@@ -179,6 +186,7 @@ function vIq(){
  if(rows.length){var ps=rows.map(qpct),avg=Math.round(ps.reduce(function(a,b){return a+b},0)/ps.length),cn={5:0,4:0,3:0,2:0};ps.forEach(function(p){cn[qmark(p)]++});
   var sm=el('div','card');sm.innerHTML='<b>Жыйынтык: '+rows.length+' окуучу · орточо '+avg+'%</b><div class="row" style="margin-top:6px">'+[5,4,3,2].map(function(m){return '<span class="chip" style="background:'+QC[m]+';color:#fff;font-weight:700">'+m+' → '+cn[m]+'</span>'}).join('')+'</div>';app.append(sm)}
  else app.append(el('p','mut','Азырынча окуучу жок. Жогору жактан кошуңуз же төмөндөн импорттоңуз.'));
+ if(rows.length)qchart(rows);
  rows.slice().sort(function(a,b){return (a.cls||'').localeCompare(b.cls||'')||(a.surname||'').localeCompare(b.surname||'','ky')}).forEach(function(r,i,arr){var p=qpct(r),m=qmark(p),c=el('div','card'),top=el('div','row');if(!Q.cls&&(i===0||arr[i-1].cls!==r.cls)){var grp=arr.filter(function(x){return x.cls===r.cls}),ga=Math.round(grp.reduce(function(a,x){return a+qpct(x)},0)/grp.length);app.append(el('h2',null,(r.cls||'Класс жок')+' — '+grp.length+' окуучу · орточо '+ga+'%'))}
   var nm=el('div','grow');nm.append(el('b',null,(arr.slice(0,i).filter(function(x){return x.cls===r.cls}).length+1)+'. '+r.surname+' '+r.name),el('div','mut',r.cls+' · ✓ '+r.t+' · ✗ '+r.f+' · '+p+'%'));
   var bd=el('div','num',String(m));bd.style.cssText='width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;background:'+QC[m];

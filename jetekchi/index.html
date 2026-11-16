@@ -24,7 +24,7 @@ button.b.s{background:#26382e;color:var(--tx)}button.b.d{background:#4a2020;colo
 .num{font-weight:700;color:var(--g)}
 details summary{cursor:pointer;padding:4px 0}
 #toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#000c;color:#fff;padding:9px 16px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:9;font-size:.85rem}#toast.on{opacity:1}
-</style></head><body>
+@media print{header,nav,#toast,details,button,fieldset{display:none!important}body{background:#fff;color:#000}.card{border:1px solid #999;background:#fff}}</style></head><body>
 <header><a href="../" aria-label="Башкы бет">‹</a><h1 id="ttl">Класс жетекчи<small id="sub"></small></h1><button class="b s" id="cfg">⚙</button></header>
 <main id="app"></main>
 <nav id="nav"></nav><div id="toast"></div>
@@ -47,11 +47,11 @@ function waLink(phone,text){var d=(phone||'').replace(/\D/g,'');if(!d)return '';
 function copy(t){if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){toast('Көчүрүлдү')},function(){toast('Көчүрүлгөн жок')});else toast('Көчүрүү мүмкүн эмес')}
 function byName(a,b){return a.name.localeCompare(b.name,'ky')}
 var tab='st',app=$('#app');
-var TABS=[['st','👥','Окуучулар'],['at','✅','Катышуу'],['ms','💬','Билдирүү'],['mt','📝','Жыйын'],['bk','💾','Резерв']];
+var TABS=[['st','👥','Окуучулар'],['at','✅','Катышуу'],['ms','💬','Билдирүү'],['mt','📝','Жыйын'],['iq','📊','IQA'],['bk','💾','Резерв']];
 var nav=$('#nav');TABS.forEach(function(t){var b=el('button');b.innerHTML='<b>'+t[1]+'</b>'+t[2];b.dataset.t=t[0];b.onclick=function(){tab=t[0];draw()};nav.append(b)});
 function draw(){[].forEach.call(nav.children,function(b){b.classList.toggle('on',b.dataset.t===tab)});
  $('#ttl').firstChild.nodeValue=D.cls+' класс жетекчиси';$('#sub').textContent=D.year+' · '+D.students.length+' окуучу';app.innerHTML='';
- ({st:vSt,at:vAt,ms:vMs,mt:vMt,bk:vBk})[tab]()}
+ ({st:vSt,at:vAt,ms:vMs,mt:vMt,iq:vIq,bk:vBk})[tab]()}
 $('#cfg').onclick=function(){var c=prompt('Класстын аты:',D.cls);if(c==null)return;var y=prompt('Окуу жылы:',D.year);D.cls=c.trim()||D.cls;if(y!=null)D.year=y.trim()||D.year;save();draw()};
 
 /* ---------- Окуучулар ---------- */
@@ -143,6 +143,45 @@ function vMt(){
  if(!D.meet.length)app.append(el('p','mut','Азырынча жазуу жок.'));
  D.meet.forEach(function(m){var c=el('div','card');var r=el('div','row');r.append(Object.assign(el('b','grow'),{textContent:fmtD(m.date)+' — '+m.title}));var cp=el('button','b s','📋'),del=el('button','b d','🗑');
   cp.onclick=function(){copy(fmtD(m.date)+' — '+m.title+'\n'+m.text)};del.onclick=function(){if(confirm('Өчүрүлсүнбү?')){D.meet=D.meet.filter(function(z){return z.id!==m.id});save();draw()}};r.append(cp,del);c.append(r,el('div','mut',m.text));app.append(c)})}
+
+/* ---------- IQA ---------- */
+var KQ='cj_iqa_v1',Q;
+function qload(){try{Q=JSON.parse(localStorage.getItem(KQ)||'null')}catch(e){Q=null}if(!Q||!Q.rows)Q={title:'Quarter 1',rows:[],cls:''}}
+function qsave(){try{localStorage.setItem(KQ,JSON.stringify(Q))}catch(e){toast('Сактоо мүмкүн болгон жок')}}
+qload();
+function qpct(r){var t=+r.t||0,f=+r.f||0;return t+f?Math.round(t/(t+f)*100):0}
+function qmark(p){return p>=80?5:p>=60?4:p>=40?3:2}
+var QC={5:'#3fa66b',4:'#8fc060',3:'#e8a33d',2:'#e0605a'};
+function qcsv(rows){return 'Name,Surname,Class,True,False,Percentage,Mark\n'+rows.map(function(r){var p=qpct(r);return [r.name,r.surname,r.cls,r.t,r.f,p+'%',qmark(p)].join(',')}).join('\n')}
+function vIq(){
+ var hd=el('div','card');hd.innerHTML='<b>📊 IQA</b> <span class="mut">— Indigo Quarter Assessment</span>';
+ var tt=el('input');tt.value=Q.title;tt.onchange=function(){Q.title=tt.value.trim()||'Quarter 1';qsave()};hd.append(tt);
+ hd.append(el('div','mut','Баа: 1–39% → 2 · 40–59% → 3 · 60–79% → 4 · 80–100% → 5. Пайыз = True ÷ (True + False), бүтүнгө тегеректелет.'));
+ hd.append(el('div','mut','Маалымат ушул браузерде гана сакталат (сайтка ачык чыкпайт).'));app.append(hd);
+ var cl=[];Q.rows.forEach(function(r){if(r.cls&&cl.indexOf(r.cls)<0)cl.push(r.cls)});cl.sort();
+ var fb=el('div','row');fb.style.margin='6px 0';[''].concat(cl).forEach(function(c){var b=el('button','b'+((Q.cls||'')===c?'':' s'),c||'Баары');b.onclick=function(){Q.cls=c;qsave();draw()};fb.append(b)});app.append(fb);
+ var rows=Q.rows.filter(function(r){return !Q.cls||r.cls===Q.cls});
+ var add=el('details','card');add.innerHTML='<summary><b>＋ Окуучу кошуу</b></summary>';
+ var f={};[['name','Аты'],['surname','Фамилиясы'],['cls','Класс (мис. 8-A)'],['t','True (туура)'],['f','False (ката)']].forEach(function(x){var i=el('input');i.placeholder=x[1];if(x[0]==='t'||x[0]==='f'){i.type='number';i.min=0;i.inputMode='numeric'}if(x[0]==='cls')i.value=Q.cls||'';f[x[0]]=i;add.append(i)});
+ var sv=el('button','b','Кошуу');sv.onclick=function(){if(!f.name.value.trim()&&!f.surname.value.trim())return toast('Аты же фамилиясын жазыңыз');Q.rows.push({id:uid(),name:f.name.value.trim(),surname:f.surname.value.trim(),cls:f.cls.value.trim().toUpperCase().replace('А','A').replace('В','B'),t:+f.t.value||0,f:+f.f.value||0});qsave();draw()};add.append(sv);app.append(add);
+ if(rows.length){var ps=rows.map(qpct),avg=Math.round(ps.reduce(function(a,b){return a+b},0)/ps.length),cn={5:0,4:0,3:0,2:0};ps.forEach(function(p){cn[qmark(p)]++});
+  var sm=el('div','card');sm.innerHTML='<b>Жыйынтык: '+rows.length+' окуучу · орточо '+avg+'%</b><div class="row" style="margin-top:6px">'+[5,4,3,2].map(function(m){return '<span class="chip" style="background:'+QC[m]+';color:#fff;font-weight:700">'+m+' → '+cn[m]+'</span>'}).join('')+'</div>';app.append(sm)}
+ else app.append(el('p','mut','Азырынча окуучу жок. Жогору жактан кошуңуз же төмөндөн импорттоңуз.'));
+ rows.slice().sort(function(a,b){return (a.cls||'').localeCompare(b.cls||'')||(a.surname||'').localeCompare(b.surname||'','ky')}).forEach(function(r,i){var p=qpct(r),m=qmark(p),c=el('div','card'),top=el('div','row');
+  var nm=el('div','grow');nm.append(el('b',null,(i+1)+'. '+r.surname+' '+r.name),el('div','mut',r.cls+' · ✓ '+r.t+' · ✗ '+r.f+' · '+p+'%'));
+  var bd=el('div','num',String(m));bd.style.cssText='width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;background:'+QC[m];
+  top.append(nm,bd);c.append(top);
+  var ed=el('details');ed.innerHTML='<summary class="mut">өзгөртүү</summary>';var g={};[['name','Аты'],['surname','Фамилиясы'],['cls','Класс'],['t','True'],['f','False']].forEach(function(x){var i=el('input');i.value=r[x[0]];if(x[0]==='t'||x[0]==='f'){i.type='number';i.min=0}g[x[0]]=i;ed.append(i)});
+  var s2=el('button','b','Сактоо');s2.onclick=function(){r.name=g.name.value.trim();r.surname=g.surname.value.trim();r.cls=g.cls.value.trim();r.t=+g.t.value||0;r.f=+g.f.value||0;qsave();draw()};
+  var d2=el('button','b d','Өчүрүү');d2.style.marginLeft='8px';d2.onclick=function(){if(confirm('Өчүрүлсүнбү?')){Q.rows=Q.rows.filter(function(x){return x!==r});qsave();draw()}};ed.append(s2,d2);c.append(ed);app.append(c)});
+ var io=el('details','card');io.innerHTML='<summary><b>⇅ Импорт / экспорт</b></summary>';
+ io.append(el('p','mut','Импорт: ар сапка «Аты,Фамилиясы,Класс,True,False» (CSV) же JSON.'));
+ var ta=el('textarea');ta.placeholder='Aigerim,Asanova,8-A,18,7';io.append(ta);
+ var im=el('button','b','Импорттоо');im.onclick=function(){var t=ta.value.trim(),n=0;if(!t)return;try{if(t[0]==='['||t[0]==='{'){var j=JSON.parse(t);if(!Array.isArray(j))j=j.rows||[];j.forEach(function(r){Q.rows.push({id:uid(),name:r.name||'',surname:r.surname||'',cls:r.cls||'',t:+r.t||0,f:+r.f||0});n++})}else t.split('\n').forEach(function(l){var p=l.split(',').map(function(x){return x.trim()});if(p.length<5||/^name$/i.test(p[0]))return;Q.rows.push({id:uid(),name:p[0],surname:p[1],cls:p[2],t:+p[3]||0,f:+p[4]||0});n++});qsave();toast(n+' окуучу кошулду');draw()}catch(e){toast('Формат туура эмес')}};
+ var ex=el('button','b s','CSV көчүрүү');ex.style.marginLeft='8px';ex.onclick=function(){copy(qcsv(Q.rows))};
+ var dl=el('button','b s','CSV жүктөө');dl.style.marginLeft='8px';dl.onclick=function(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+qcsv(Q.rows)],{type:'text/csv'}));a.download='IQA-'+Q.title.replace(/\s+/g,'-')+'.csv';a.click()};
+ var pr=el('button','b s','🖨 Басып чыгаруу');pr.style.marginTop='8px';pr.onclick=function(){window.print()};
+ io.append(im,ex,dl,el('br'),pr);app.append(io)}
 
 /* ---------- Резерв ---------- */
 function vBk(){

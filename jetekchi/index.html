@@ -157,7 +157,19 @@ function vIq(){
  var hd=el('div','card');hd.innerHTML='<b>📊 IQA</b> <span class="mut">— Indigo Quarter Assessment</span>';
  var tt=el('input');tt.value=Q.title;tt.onchange=function(){Q.title=tt.value.trim()||'Quarter 1';qsave()};hd.append(tt);
  hd.append(el('div','mut','Баа: 1–39% → 2 · 40–59% → 3 · 60–79% → 4 · 80–100% → 5. Пайыз = True ÷ (True + False), бүтүнгө тегеректелет.'));
- hd.append(el('div','mut','Маалымат ушул браузерде гана сакталат (сайтка ачык чыкпайт).'));app.append(hd);
+ hd.append(el('div','mut','Маалымат ушул браузерде гана сакталат (сайтка ачык чыкпайт).'));
+ var ld=el('button','b s','🔓 Load published results (encrypted)');ld.style.marginTop='8px';
+ ld.onclick=function(){var pw=prompt('Passphrase');if(!pw)return;
+  fetch('iqa-q1.enc.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(o){
+   var b=function(x){return Uint8Array.from(atob(x),function(c){return c.charCodeAt(0)})};
+   return crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']).then(function(k){
+    return crypto.subtle.deriveKey({name:'PBKDF2',salt:b(o.salt),iterations:200000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['decrypt'])}).then(function(k){
+    return crypto.subtle.decrypt({name:'AES-GCM',iv:b(o.iv)},k,b(o.ct))})}).then(function(buf){
+   var j=JSON.parse(new TextDecoder().decode(buf));
+   if(Q.rows.length&&!confirm('Replace the current IQA list with the published results?'))return;
+   Q.title=j.title;Q.rows=j.rows.map(function(r){return{id:uid(),name:r.name,surname:r.surname,cls:r.cls,t:r.t,f:r.f}});Q.cls='';qsave();draw();toast('Loaded '+Q.rows.length+' students')
+  }).catch(function(){toast('Wrong passphrase or file not found')})};
+ hd.append(ld);app.append(hd);
  var cl=[];Q.rows.forEach(function(r){if(r.cls&&cl.indexOf(r.cls)<0)cl.push(r.cls)});cl.sort();
  var fb=el('div','row');fb.style.margin='6px 0';[''].concat(cl).forEach(function(c){var b=el('button','b'+((Q.cls||'')===c?'':' s'),c||'Баары');b.onclick=function(){Q.cls=c;qsave();draw()};fb.append(b)});app.append(fb);
  var rows=Q.rows.filter(function(r){return !Q.cls||r.cls===Q.cls});

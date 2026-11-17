@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ky"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0f5c4a"><title>Үй-бүлө Күндөлүгү</title>
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Үй-бүлө">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-180.png">
+<style>
+:root{--bg:#f6f1e4;--card:#fffdf7;--ink:#1d2b26;--mut:#66706a;--g:#0f5c4a;--g2:#167a62;--gold:#b8892b;--gold2:#f2d27a;--line:#e5dcc3;--red:#c0392b;--sh:0 6px 22px rgba(15,60,48,.10)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:84px}
+header{position:sticky;top:0;z-index:20;background:var(--g);color:#fff;padding:env(safe-area-inset-top) 14px 0}
+.hd{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px;height:56px}
+.hd b{font:700 19px Georgia,serif}.sp{flex:1}
+.who{background:rgba(255,255,255,.16);border:0;color:#fff;border-radius:12px;padding:6px 10px;font:600 14px inherit;cursor:pointer}
+main{max-width:760px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--sh);margin-bottom:12px}
+h2{font:700 20px Georgia,serif;margin:6px 0 10px}h3{margin:0 0 6px;font-size:16px}
+.mut{color:var(--mut);font-size:14px}
+.btn{border:0;background:var(--g);color:#fff;border-radius:12px;padding:11px 16px;font:600 15px inherit;cursor:pointer}
+.btn.o{background:transparent;color:var(--g);border:1.5px solid var(--g)}.btn.s{padding:7px 12px;font-size:14px}
+.btn.r{background:var(--red)}
+input,select{font:inherit;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:#fff;width:100%}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 3px}
+nav.bn{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 0 calc(6px + env(safe-area-inset-bottom));z-index:30}
+nav.bn a{flex:1;text-align:center;text-decoration:none;color:var(--mut);font-size:12px;font-weight:600}
+nav.bn a em{display:block;font-style:normal;font-size:22px}nav.bn a.on{color:var(--g)}
+.mem{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.mc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center;cursor:pointer;box-shadow:var(--sh)}
+.mc .av{font-size:40px;line-height:1.1}.mc b{display:block;margin-top:2px}
+.ring{--p:0;width:64px;height:64px;border-radius:50%;margin:8px auto 4px;background:conic-gradient(var(--g) calc(var(--p)*1%),#e9e2cd 0);display:grid;place-items:center}
+.ring span{background:var(--card);width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px}
+.lv{display:inline-block;background:#fdf3d6;color:#7a5a12;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700;margin-top:4px}
+.str{font-size:13px;color:#b5541c;font-weight:600}
+.dnav{display:flex;align-items:center;gap:8px;margin-bottom:10px}.dnav b{flex:1;text-align:center}
+.dnav button{border:1px solid var(--line);background:var(--card);border-radius:10px;width:40px;height:40px;font-size:18px;cursor:pointer}
+.grp{margin-bottom:12px}.grp h4{margin:4px 0 8px;color:var(--g);font-size:14px;text-transform:uppercase;letter-spacing:.04em}
+.it{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid var(--line)}
+.it:last-child{border-bottom:0}.it .e{font-size:22px;width:30px;text-align:center}.it .n{flex:1}.it .n small{display:block;color:var(--mut);font-size:12px}
+.chk{width:34px;height:34px;border-radius:10px;border:2px solid var(--line);background:#fff;font-size:20px;cursor:pointer;display:grid;place-items:center;color:#fff}
+.chk.on{background:var(--g);border-color:var(--g)}
+.num{display:flex;align-items:center;gap:4px}.num button{width:32px;height:32px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:18px;cursor:pointer}
+.num span{min-width:34px;text-align:center;font-weight:700}
+.kid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.kt{border:3px solid var(--line);border-radius:22px;background:#fff;padding:14px 8px;text-align:center;cursor:pointer;font-weight:700;font-size:16px;transition:transform .12s}
+.kt .e{font-size:52px;display:block}.kt.on{border-color:var(--gold);background:#fff6d8}.kt.on::after{content:"⭐";display:block;font-size:26px}
+.kt:active{transform:scale(.96)}
+.bar{height:12px;background:#ece5cf;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--g2),var(--g))}
+.rk{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.rk:last-child{border:0}
+.rk .p{width:28px;font-weight:800;color:var(--gold);font-size:18px;text-align:center}.rk .e{font-size:26px}.rk .x{flex:1}.rk .v{font-weight:700;min-width:48px;text-align:right}
+.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button{flex:1;border:1.5px solid var(--g);background:transparent;color:var(--g);border-radius:12px;padding:8px;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--g);color:#fff}
+.medals{display:flex;flex-wrap:wrap;gap:6px}.md{background:#fdf3d6;border-radius:12px;padding:5px 9px;font-size:13px;font-weight:600}
+.md.off{opacity:.35;filter:grayscale(1)}
+.gate{min-height:100vh;display:grid;place-items:center;padding:20px}
+.gate .card{max-width:380px;width:100%;text-align:center}
+.pin{display:flex;gap:10px;justify-content:center;margin:10px 0}.pin i{width:16px;height:16px;border-radius:50%;border:2px solid var(--g)}.pin i.f{background:var(--g)}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:280px;margin:0 auto}.kp button{height:60px;border-radius:16px;border:1px solid var(--line);background:#fff;font-size:24px;font-weight:600;cursor:pointer}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#1d2b26;color:#fff;padding:9px 16px;border-radius:12px;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:50}
+#toast.on{opacity:1}
+.sync{font-size:12px;opacity:.85}
+table.t{width:100%;border-collapse:collapse;font-size:14px}table.t th,table.t td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:center}table.t th:first-child,table.t td:first-child{text-align:left}
+.big{font-size:44px;text-align:center}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ed{display:flex;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}.ed input{padding:7px 9px}
+</style></head><body>
+<div id="root"></div><div id="toast"></div>
+<script>
+(function(){
+"use strict";
+/* ===== үй-бүлөлүк сырсөз (SHA-256) ===== */
+var GATE="132acf4afbc2da5d7c34d4be1e9b00bdbc85af9f4784f9d3b98c0e8ca6f0ed0f";
+var K="ub_v1";
+function $(s,r){return (r||document).querySelector(s)}
+function h(t,a,c){var e=document.createElement(t);if(a)for(var k in a){if(k==="class")e.className=a[k];else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),a[k]);else if(k==="html")e.innerHTML=a[k];else e.setAttribute(k,a[k])}(c||[]).forEach(function(x){if(x!=null)e.appendChild(typeof x==="string"?document.createTextNode(x):x)});return e}
+function toast(t){var x=$("#toast");x.textContent=t;x.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){x.classList.remove("on")},1800)}
+function hm(){var d=new Date();return pad(d.getHours())+":"+pad(d.getMinutes())}
+function pad(n){return (n<10?"0":"")+n}
+function ds(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function today(){return ds(new Date())}
+function addD(s,n){var p=s.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]);d.setDate(d.getDate()+n);return ds(d)}
+var WD=["Жекшемби","Дүйшөмбү","Шейшемби","Шаршемби","Бейшемби","Жума","Ишемби"],MN=["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
+function nice(s){var p=s.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]);return WD[d.getDay()]+", "+(+p[2])+"-"+MN[+p[1]-1]}
+function sha(t){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")})}
+
+/* ===== тапшырмалар (жаш курагына жараша) ===== */
+var NAMAZ=[["bagymdat","Багымдат"],["beshim","Бешим"],["asr","Аср"],["sham","Шам"],["kuptan","Куптан"]];
+var SETS={
+ adult:[
+  {g:"Намаз",items:NAMAZ.map(function(n){return {id:"n_"+n[0],e:"🕌",t:n[1],k:"c",p:3}}).concat([{id:"jamaat",e:"🤝",t:"Жамаат менен (жок дегенде 1 убак)",k:"c",p:2},{id:"nafil",e:"🌙",t:"Нафил / тахажжуд / духа",k:"c",p:2}])},
+  {g:"Куран",items:[{id:"quran",e:"📖",t:"Куран окуу",s:"бет",k:"n",p:1,max:10},{id:"yasin",e:"📗",t:"Сүрө (Ясин, Мулк, Вакиа…)",k:"c",p:2}]},
+  {g:"Зикир жана дуа",items:[{id:"tasbihat",e:"📿",t:"Тасбихат (намаздан кийин)",k:"c",p:2},{id:"salavat",e:"💚",t:"Салават",s:"×100",k:"n",p:1,max:5},{id:"istigfar",e:"🤲",t:"Истигфар",s:"×100",k:"n",p:1,max:5},{id:"dua_m",e:"🌅",t:"Эртең мененки дуалар",k:"c",p:2},{id:"dua_e",e:"🌇",t:"Кечки дуалар",k:"c",p:2}]},
+  {g:"Жакшы иштер",items:[{id:"sadaka",e:"🎁",t:"Садака / жакшылык",k:"c",p:2},{id:"book",e:"📚",t:"Диний китеп окуу",k:"c",p:2},{id:"family",e:"👨‍👩‍👧‍👦",t:"Үй-бүлө менен сабак/сухбат",k:"c",p:2}]}
+ ],
+ teen:[
+  {g:"Намаз",items:NAMAZ.map(function(n){return {id:"n_"+n[0],e:"🕌",t:n[1],k:"c",p:3}})},
+  {g:"Куран жана дуа",items:[{id:"quran",e:"📖",t:"Куран окуу",s:"бет",k:"n",p:2,max:5},{id:"sura",e:"🧠",t:"Жаңы аят/сүрө жаттоо",k:"c",p:3},{id:"zikir",e:"📿",t:"Зикир (33 Субханаллах, Алхамдулиллах, Аллаху акбар)",k:"c",p:2},{id:"dua_m",e:"🌅",t:"Эртең мененки дуа",k:"c",p:1},{id:"dua_e",e:"🌙",t:"Уктаар алдындагы дуа",k:"c",p:1}]},
+  {g:"Жакшы иштер",items:[{id:"help",e:"🧹",t:"Ата-энеге жардам бердим",k:"c",p:2},{id:"lesson",e:"✏️",t:"Үй тапшырманы аткардым",k:"c",p:2},{id:"read",e:"📚",t:"Китеп окудум (20 мүн.)",k:"c",p:2},{id:"kind",e:"😊",t:"Сылык сүйлөдүм, урушкан жокмун",k:"c",p:2},{id:"phone",e:"📵",t:"Телефонду чектедим",k:"c",p:1}]}
+ ],
+ child:[
+  {g:"Бүгүн мен",items:[
+   {id:"k_namaz",e:"🕌",t:"Намазга кошулдум",k:"c",p:3},
+   {id:"k_bism",e:"🌟",t:"«Бисмиллах» айттым",k:"c",p:2},
+   {id:"k_dua",e:"🤲",t:"Дуа окудум",k:"c",p:2},
+   {id:"k_sura",e:"📖",t:"Сүрө жаттадым",k:"c",p:3},
+   {id:"k_help",e:"🧺",t:"Апама жардам бердим",k:"c",p:2},
+   {id:"k_toys",e:"🧸",t:"Оюнчукту жыйнадым",k:"c",p:2},
+   {id:"k_teeth",e:"🪥",t:"Тишимди жудум",k:"c",p:1},
+   {id:"k_good",e:"💖",t:"Жакшы бала болдум",k:"c",p:2}]}
+ ]};
+var ROLES={adult:"Чоң киши",teen:"Өспүрүм",child:"Кичинекей"};
+var LEVELS=[[0,"🌱 Шакирт"],[150,"🌿 Тырышчаак"],[450,"🌳 Жигердүү"],[1000,"⭐ Үлгүлүү"],[2000,"🏅 Устат"],[4000,"👑 Нурдуу"]];
+var DEFAULT={members:[
+ {id:"kamalidin",name:"Камалидин",emoji:"👨",role:"adult",pin:"1111",admin:true},
+ {id:"orozgul",name:"Орозгүл",emoji:"👩",role:"adult",pin:"2222"},
+ {id:"fatima",name:"Фатима",emoji:"👧",role:"teen",pin:"3333"},
+ {id:"salih",name:"Мухаммедсалих",emoji:"👦",role:"teen",pin:"4444"},
+ {id:"malika",name:"Малика",emoji:"🧒",role:"child",pin:"5555",byParent:true}],sync:{url:"",key:""}};
+
+/* ===== абал ===== */
+var S;try{S=JSON.parse(localStorage.getItem(K)||"null")}catch(e){}
+if(!S)S={cfg:JSON.parse(JSON.stringify(DEFAULT)),log:{},me:null,ok:false,cfgTs:0};
+S.log=S.log||{};
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function mem(id){return S.cfg.members.filter(function(m){return m.id===id})[0]}
+function items(m){var o=[];SETS[m.role].forEach(function(g){g.items.forEach(function(i){o.push(i)})});return o}
+function dayRec(mid,d){return ((S.log[mid]||{})[d]||{v:{},ts:0})}
+function maxPts(m){return items(m).reduce(function(a,i){return a+i.p*(i.k==="n"?i.max:1)},0)}
+function pts(m,d){var r=dayRec(m.id,d).v;return items(m).reduce(function(a,i){var v=r[i.id]||0;return a+(i.k==="n"?Math.min(v,i.max)*i.p:(v?i.p:0))},0)}
+function pct(m,d){return Math.round(100*pts(m,d)/maxPts(m))}
+function rangePct(m,from,n){var s=0,c=0;for(var i=0;i<n;i++){var d=addD(from,i);if(d>today())break;s+=pct(m,d);c++}return c?Math.round(s/c):0}
+function rangePts(m,from,n){var s=0;for(var i=0;i<n;i++){var d=addD(from,i);if(d>today())break;s+=pts(m,d)}return s}
+function total(m){var t=0,l=S.log[m.id]||{};for(var d in l)t+=pts(m,d);return t}
+function level(t){var L=LEVELS[0],nx=null;for(var i=0;i<LEVELS.length;i++){if(t>=LEVELS[i][0]){L=LEVELS[i];nx=LEVELS[i+1]||null}}return{name:L[1],next:nx,cur:L[0]}}
+function streak(m){var n=0,d=today();if(pct(m,d)<60)d=addD(d,-1);while(pct(m,d)>=60&&n<400){n++;d=addD(d,-1)}return n}
+function weekStart(s){var p=s.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]),w=(d.getDay()+6)%7;d.setDate(d.getDate()-w);return ds(d)}
+function monthStart(s){return s.slice(0,8)+"01"}
+function monthLen(s){var p=s.split("-");return new Date(+p[0],+p[1],0).getDate()}
+function medals(m){
+ var l=S.log[m.id]||{},st=streak(m),days=Object.keys(l).filter(function(d){return pct(m,d)>0}).length,out=[];
+ var full=0;Object.keys(l).forEach(function(d){if(pct(m,d)===100)full++});
+ var q=0;Object.keys(l).forEach(function(d){q+=(l[d].v.quran||0)});
+ var nm=0;Object.keys(l).forEach(function(d){var v=l[d].v;if(NAMAZ.every(function(n){return v["n_"+n[0]]}))nm++});
+ out.push([st>=3,"🔥 3 күн удаа"],[st>=7,"🔥 7 күн удаа"],[st>=30,"🏆 30 күн удаа"],[days>=10,"📅 10 күн белгиледи"],[full>=1,"💯 Толук күн"],[full>=7,"🌟 7 толук күн"]);
+ if(m.role!=="child")out.push([nm>=7,"🕌 7 күн 5 убак"],[nm>=30,"🕌 30 күн 5 убак"],[q>=30,"📖 30 бет Куран"],[q>=604,"📖 Хатм (бүт Куран)"]);
+ return out}
+
+/* ===== синхрон (Google Sheet / Apps Script) ===== */
+var dirty={},syncing=false,lastSync="";
+function mark(mid,d){dirty[mid+"|"+d]=1;clearTimeout(mark.t);mark.t=setTimeout(push,1500)}
+function api(body){var s=S.cfg.sync||{};if(!s.url)return Promise.resolve(null);body.key=s.key;return fetch(s.url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)}).then(function(r){return r.json()})}
+function push(){var s=S.cfg.sync||{};if(!s.url)return;var rows=Object.keys(dirty).map(function(k){var p=k.split("|"),r=dayRec(p[0],p[1]);return [p[0],p[1],JSON.stringify(r.v),r.ts]});if(!rows.length)return;dirty={};
+ api({a:"put",rows:rows}).then(function(r){if(!r||!r.ok)throw 0;setSync("✓ "+hm())}).catch(function(){rows.forEach(function(x){dirty[x[0]+"|"+x[1]]=1});setSync("⚠ офлайн")})}
+function pull(){var s=S.cfg.sync||{};if(!s.url||syncing)return Promise.resolve();syncing=true;setSync("⟳");
+ return api({a:"get"}).then(function(r){syncing=false;if(!r||!r.ok){setSync(r&&r.error==="key"?"⚠ ачкыч туура эмес":"⚠ ката");return}
+  (r.rows||[]).forEach(function(x){var mid=x[0],d=x[1],v,ts=+x[3]||0;try{v=JSON.parse(x[2])}catch(e){return}S.log[mid]=S.log[mid]||{};var cur=S.log[mid][d];if(!cur||cur.ts<ts)S.log[mid][d]={v:v,ts:ts};else if(cur.ts>ts)dirty[mid+"|"+d]=1});
+  if(r.cfg&&r.cfgTs>(S.cfgTs||0)){try{var c=JSON.parse(r.cfg);c.sync=S.cfg.sync;S.cfg=c;S.cfgTs=r.cfgTs}catch(e){}}
+  save();setSync("✓ "+hm());if(Object.keys(dirty).length)push();route()}).catch(function(){syncing=false;setSync("⚠ офлайн")})}
+function pushCfg(){var c=JSON.parse(JSON.stringify(S.cfg));delete c.sync;S.cfgTs=Date.now();save();return api({a:"cfg",cfg:JSON.stringify(c),ts:S.cfgTs})}
+function setSync(t){lastSync=t;var e=$(".sync");if(e)e.textContent=(S.cfg.sync&&S.cfg.sync.url)?t:"📱 ушул телефондо"}
+
+/* ===== экрандар ===== */
+var root=$("#root");
+function gate(){root.innerHTML="";var inp=h("input",{type:"password",placeholder:"Үй-бүлөлүк сырсөз",autocomplete:"current-password"}),err=h("p",{class:"mut"});
+ function go(){sha(inp.value.trim()).then(function(x){if(x===GATE){S.ok=true;save();start()}else{err.textContent="Сырсөз туура эмес";inp.value=""}})}
+ inp.addEventListener("keydown",function(e){if(e.key==="Enter")go()});
+ root.appendChild(h("div",{class:"gate"},[h("div",{class:"card"},[h("div",{class:"big"},["🏡"]),h("h2",null,["Үй-бүлө Күндөлүгү"]),h("p",{class:"mut"},["Бул бөлүм бир үй-бүлөгө гана арналган."]),inp,h("div",{style:"height:10px"}),h("button",{class:"btn",onclick:go,style:"width:100%"},["Кирүү"]),err])]));inp.focus()}
+function pickMember(){root.innerHTML="";var grid=h("div",{class:"mem"});
+ S.cfg.members.forEach(function(m){grid.appendChild(h("div",{class:"mc",onclick:function(){pinPad(m)}},[h("div",{class:"av"},[m.emoji]),h("b",null,[m.name]),h("div",{class:"mut"},[ROLES[m.role]])]))});
+ root.appendChild(h("main",null,[h("h2",{style:"text-align:center;margin-top:30px"},["Сиз кимсиз?"]),grid]))}
+function pinPad(m,cb){root.innerHTML="";var v="",dots=h("div",{class:"pin"}),err=h("p",{class:"mut",style:"text-align:center"});
+ function draw(){dots.innerHTML="";for(var i=0;i<4;i++)dots.appendChild(h("i",{class:i<v.length?"f":""}))}draw();
+ var kp=h("div",{class:"kp"});"1 2 3 4 5 6 7 8 9 ← 0 ✕".split(" ").forEach(function(k){kp.appendChild(h("button",{onclick:function(){if(k==="←")v=v.slice(0,-1);else if(k==="✕"){cb?cb(false):pickMember();return}else if(v.length<4)v+=k;draw();if(v.length===4){if(v===m.pin){if(cb)cb(true);else{S.me=m.id;save();start()}}else{err.textContent="PIN туура эмес";v="";setTimeout(draw,200)}}}},[k]))});
+ root.appendChild(h("main",null,[h("div",{class:"big",style:"margin-top:30px"},[m.emoji]),h("h2",{style:"text-align:center"},[m.name+" — PIN"]),dots,kp,err]))}
+function shell(){root.innerHTML="";var me=mem(S.me);
+ root.appendChild(h("header",null,[h("div",{class:"hd"},[h("b",null,["🏡 Үй-бүлө"]),h("span",{class:"sp"}),h("span",{class:"sync"},[""]),h("button",{class:"who",onclick:function(){S.me=null;save();pickMember()}},[me.emoji+" "+me.name])])]));
+ root.appendChild(h("main",{id:"m"}));
+ var nav=h("nav",{class:"bn"});[["#/","🏠","Үй-бүлө"],["#/day","✅","Менин күнүм"],["#/rep","📊","Отчёт"],["#/set","⚙️","Жөндөө"]].forEach(function(x){nav.appendChild(h("a",{href:x[0],"data-h":x[0]},[h("em",null,[x[1]]),x[2]]))});
+ root.appendChild(nav);setSync(lastSync)}
+function nav(hh){document.querySelectorAll("nav.bn a").forEach(function(a){a.classList.toggle("on",a.dataset.h===hh)})}
+
+function home(){var m=$("#m");nav("#/");m.innerHTML="";var t=today();
+ m.appendChild(h("h2",null,["Бүгүн · "+nice(t)]));
+ var grid=h("div",{class:"mem"});
+ S.cfg.members.forEach(function(x){var p=pct(x,t),tot=total(x),L=level(tot),st=streak(x);
+  grid.appendChild(h("div",{class:"mc",onclick:function(){location.hash="#/day/"+x.id}},[h("div",{class:"av"},[x.emoji]),h("b",null,[x.name]),h("div",{class:"ring",style:"--p:"+p},[h("span",null,[p+"%"])]),h("div",{class:"lv"},[L.name]),h("div",{class:"str"},[st?"🔥 "+st+" күн":" "])]))});
+ m.appendChild(grid);
+ var fam=0;S.cfg.members.forEach(function(x){fam+=rangePct(x,weekStart(t),7)});fam=Math.round(fam/S.cfg.members.length);
+ m.appendChild(h("div",{class:"card"},[h("h3",null,["👨‍👩‍👧‍👦 Үй-бүлөнүн ушул жумасы: "+fam+"%"]),h("div",{class:"bar"},[h("i",{style:"width:"+fam+"%"})]),h("p",{class:"mut"},[fam>=80?"Машаллах! Абдан жакшы жума.":fam>=50?"Жакшы, дагы бир аз аракет!":"Баарыбыз бирге аракет кылалы 💪"])]));
+ rankCard(m,"Ушул жуманын рейтинги",function(x){return rangePct(x,weekStart(t),7)},"%");
+}
+function rankCard(m,title,f,suf){var arr=S.cfg.members.map(function(x){return{x:x,v:f(x)}}).sort(function(a,b){return b.v-a.v});
+ var c=h("div",{class:"card"},[h("h3",null,["🏆 "+title])]);
+ arr.forEach(function(o,i){c.appendChild(h("div",{class:"rk"},[h("div",{class:"p"},[["🥇","🥈","🥉"][i]||String(i+1)]),h("div",{class:"e"},[o.x.emoji]),h("div",{class:"x"},[h("b",null,[o.x.name]),h("div",{class:"bar",style:"margin-top:4px"},[h("i",{style:"width:"+Math.min(100,suf==="%"?o.v:0)+"%"})])]),h("div",{class:"v"},[o.v+suf])]))});m.appendChild(c)}
+
+var curDay=null;
+function day(mid){var m=$("#m");nav("#/day");m.innerHTML="";var me=mem(S.me),who=mem(mid||S.me);if(!who)who=me;
+ var can=who.id===me.id||me.admin||(who.byParent&&me.role==="adult");
+ var d=curDay||today();
+ var dn=h("div",{class:"dnav"},[h("button",{onclick:function(){curDay=addD(d,-1);day(who.id)}},["‹"]),h("b",null,[nice(d)]),h("button",{onclick:function(){if(d<today()){curDay=addD(d,1);day(who.id)}}},["›"])]);
+ m.appendChild(h("div",{class:"row",style:"justify-content:space-between"},[h("h2",null,[who.emoji+" "+who.name]),h("span",{class:"lv"},[pct(who,d)+"% · "+pts(who,d)+" упай"])]));
+ m.appendChild(dn);
+ if(!can)m.appendChild(h("p",{class:"mut"},["Бул "+who.name+"дин барагы — көрүү гана."]));
+ if(d<addD(today(),-7)&&!me.admin)can=false;
+ var rec=JSON.parse(JSON.stringify(dayRec(who.id,d)));
+ function set(id,val){rec.v[id]=val;rec.ts=Date.now();S.log[who.id]=S.log[who.id]||{};S.log[who.id][d]=rec;save();mark(who.id,d);day(who.id)}
+ if(who.role==="child"){var g=h("div",{class:"kid"});items(who).forEach(function(it){var on=!!rec.v[it.id];g.appendChild(h("div",{class:"kt"+(on?" on":""),onclick:function(){if(!can)return;set(it.id,on?0:1);if(!on)toast("Барекелди! ⭐")}},[h("span",{class:"e"},[it.e]),it.t]))});m.appendChild(g);return}
+ SETS[who.role].forEach(function(grp){var c=h("div",{class:"card grp"},[h("h4",null,[grp.g])]);
+  grp.items.forEach(function(it){var v=rec.v[it.id]||0,ctl;
+   if(it.k==="c")ctl=h("button",{class:"chk"+(v?" on":""),onclick:function(){if(can)set(it.id,v?0:1)}},[v?"✓":""]);
+   else ctl=h("div",{class:"num"},[h("button",{onclick:function(){if(can&&v>0)set(it.id,v-1)}},["−"]),h("span",null,[String(v)]),h("button",{onclick:function(){if(can)set(it.id,v+1)}},["+"])]);
+   c.appendChild(h("div",{class:"it"},[h("span",{class:"e"},[it.e]),h("div",{class:"n"},[it.t,it.s?h("small",null,[it.s+(it.max?" (макс. "+it.max+" упайга чейин)":"")]):null]),ctl]))});
+  m.appendChild(c)});
+ var all=items(who).filter(function(i){return i.k==="c"}).every(function(i){return rec.v[i.id]});if(all)m.appendChild(h("div",{class:"card",style:"text-align:center"},["🎉 Бүгүнкү бардык белгилер толук! Машаллах!"]));
+}
+
+var repTab="w";
+function rep(){var m=$("#m");nav("#/rep");m.innerHTML="";var t=today();
+ var tabs=h("div",{class:"tabs"});[["d","Күндүк"],["w","Жумалык"],["m","Айлык"],["a","Жалпы"]].forEach(function(x){tabs.appendChild(h("button",{class:repTab===x[0]?"on":"",onclick:function(){repTab=x[0];rep()}},[x[1]]))});
+ m.appendChild(h("h2",null,["📊 Отчёт"]));m.appendChild(tabs);
+ var from,n,title;
+ if(repTab==="d"){from=t;n=1;title="Бүгүн"}
+ else if(repTab==="w"){from=weekStart(t);n=7;var to=addD(from,6);title="Ушул жума ("+from.slice(8)+"."+from.slice(5,7)+"–"+to.slice(8)+"."+to.slice(5,7)+")"}
+ else if(repTab==="m"){from=monthStart(t);n=monthLen(t);title=MN[+t.slice(5,7)-1]+" айы"}
+ if(repTab!=="a"){
+  rankCard(m,title+" — орточо пайыз",function(x){return rangePct(x,from,n)},"%");
+  rankCard(m,title+" — упай",function(x){return rangePts(x,from,n)}," уп");
+  if(repTab!=="d"){var tb=h("table",{class:"t"}),hr=h("tr",null,[h("th",null,["Күн"])]);S.cfg.members.forEach(function(x){hr.appendChild(h("th",null,[x.emoji]))});tb.appendChild(hr);
+   for(var i=0;i<n;i++){var d=addD(from,i);if(d>t)break;var tr=h("tr",null,[h("td",null,[(+d.slice(8))+"."+d.slice(5,7)])]);S.cfg.members.forEach(function(x){var p=pct(x,d);tr.appendChild(h("td",{style:"color:"+(p>=80?"#0f5c4a":p>=50?"#b8892b":p>0?"#c0392b":"#bbb")+";font-weight:600"},[p?p+"":"–"]))});tb.appendChild(tr)}
+   m.appendChild(h("div",{class:"card"},[h("h3",null,["Күн боюнча (%)"]),tb]))}
+  if(repTab!=="d")namazCard(m,from,n);
+ }else{
+  rankCard(m,"Жалпы упай (бардык убакыт)",function(x){return total(x)}," уп");
+  S.cfg.members.forEach(function(x){var tot=total(x),L=level(tot),c=h("div",{class:"card"},[h("h3",null,[x.emoji+" "+x.name+" · "+L.name]),h("p",{class:"mut"},[tot+" упай"+(L.next?" · кийинки даража «"+L.next[1]+"»: дагы "+(L.next[0]-tot)+" упай":" · эң жогорку даража!")]),h("div",{class:"bar"},[h("i",{style:"width:"+(L.next?Math.round(100*(tot-L.cur)/(L.next[0]-L.cur)):100)+"%"})]),h("p",{class:"str"},["🔥 Удаа: "+streak(x)+" күн"])]);
+   var md=h("div",{class:"medals"});medals(x).forEach(function(q){md.appendChild(h("span",{class:"md"+(q[0]?"":" off")},[q[1]]))});c.appendChild(md);m.appendChild(c)});
+  m.appendChild(h("div",{class:"card"},[h("h3",null,["Даражалар"]),h("p",{class:"mut"},[LEVELS.map(function(l){return l[1]+" ("+l[0]+"+)"}).join(" · ")])]));
+ }
+}
+function namazCard(m,from,n){var c=h("div",{class:"card"},[h("h3",null,["🕌 Намаз (окулган убак / бардыгы)"])]);var t=today();
+ S.cfg.members.forEach(function(x){if(x.role==="child")return;var got=0,all=0;for(var i=0;i<n;i++){var d=addD(from,i);if(d>t)break;var v=dayRec(x.id,d).v;NAMAZ.forEach(function(q){all++;if(v["n_"+q[0]])got++})}var p=all?Math.round(100*got/all):0;
+  c.appendChild(h("div",{class:"rk"},[h("div",{class:"e"},[x.emoji]),h("div",{class:"x"},[h("b",null,[x.name]),h("div",{class:"bar",style:"margin-top:4px"},[h("i",{style:"width:"+p+"%"})])]),h("div",{class:"v"},[got+"/"+all])]))});m.appendChild(c)}
+
+function settings(){var m=$("#m");nav("#/set");m.innerHTML="";var me=mem(S.me);
+ var c=h("div",{class:"card"},[h("h3",null,["👤 Менин PIN-кодум"])]);var p1=h("input",{type:"tel",maxlength:"4",placeholder:"Жаңы 4 сан"});
+ c.appendChild(p1);c.appendChild(h("div",{style:"height:8px"}));c.appendChild(h("button",{class:"btn s",onclick:function(){if(!/^\d{4}$/.test(p1.value)){toast("4 сан жазыңыз");return}me.pin=p1.value;save();pushCfg();toast("PIN өзгөрдү")}},["Сактоо"]));m.appendChild(c);
+ if(me.admin){
+  var mc=h("div",{class:"card"},[h("h3",null,["👨‍👩‍👧‍👦 Мүчөлөр (атасы гана)"])]);
+  S.cfg.members.forEach(function(x){var n=h("input",{value:x.name}),e=h("input",{value:x.emoji,style:"width:56px"}),pn=h("input",{value:x.pin,style:"width:72px",maxlength:"4",type:"tel"}),r=h("select",null,Object.keys(ROLES).map(function(k){var o=h("option",{value:k},[ROLES[k]]);if(k===x.role)o.selected=true;return o}));
+   function up(){x.name=n.value;x.emoji=e.value;if(/^\d{4}$/.test(pn.value))x.pin=pn.value;x.role=r.value;save()}[n,e,pn,r].forEach(function(z){z.addEventListener("change",function(){up();pushCfg()})});
+   mc.appendChild(h("div",{class:"ed"},[e,n,r,pn]))});
+  mc.appendChild(h("p",{class:"mut"},["Белгиси · аты · деңгээли · PIN. Өзгөртүү дароо сакталат."]));m.appendChild(mc);
+  var s=S.cfg.sync||(S.cfg.sync={url:"",key:""});var u=h("input",{value:s.url,placeholder:"https://script.google.com/macros/s/…/exec"}),k=h("input",{value:s.key,placeholder:"Ачкыч сөз (Apps Script'теги KEY)"});
+  m.appendChild(h("div",{class:"card"},[h("h3",null,["☁️ Синхрон (Google Sheet)"]),h("p",{class:"mut"},["Бош калса, маалымат ушул телефондо гана сакталат. Туташтырсаңыз, бардык телефондор бир Google Sheet'ке жазат."]),h("label",null,["Apps Script URL"]),u,h("label",null,["Ачкыч"]),k,h("div",{style:"height:8px"}),
+   h("div",{class:"row"},[h("button",{class:"btn s",onclick:function(){s.url=u.value.trim();s.key=k.value.trim();save();Object.keys(S.log).forEach(function(mid){Object.keys(S.log[mid]).forEach(function(d){dirty[mid+"|"+d]=1})});pull().then(function(){push();pushCfg()});toast("Текшерилүүдө…")}},["Сактоо жана текшерүү"]),h("button",{class:"btn s o",onclick:shareLink},["🔗 Башка телефонго шилтеме"])])]));
+ }
+ m.appendChild(h("div",{class:"card"},[h("h3",null,["💾 Камдык көчүрмө"]),h("div",{class:"row"},[h("button",{class:"btn s o",onclick:exportJson},["Жүктөп алуу (.json)"]),h("button",{class:"btn s o",onclick:importJson},["Файлдан калыбына келтирүү"])])]));
+ m.appendChild(h("div",{class:"card"},[h("h3",null,["📲 Телефонго орнотуу"]),h("p",{class:"mut",html:"<b>iPhone:</b> Safari'де ачып → «Бөлүшүү» ⬆️ → «На экран Домой».<br><b>Android:</b> Chrome'до ⋮ → «Добавить на главный экран»."})]));
+ m.appendChild(h("button",{class:"btn r s",onclick:function(){if(confirm("Ушул телефондон чыгасызбы?")){S.ok=false;S.me=null;save();gate()}}},["Чыгуу"]));
+}
+function shareLink(){var s=S.cfg.sync||{};if(!s.url){toast("Адегенде URL жазыңыз");return}var l=location.origin+location.pathname+"#sync="+btoa(unescape(encodeURIComponent(JSON.stringify(s))));
+ if(navigator.share)navigator.share({title:"Үй-бүлө Күндөлүгү",url:l}).catch(function(){});else{navigator.clipboard&&navigator.clipboard.writeText(l);toast("Шилтеме көчүрүлдү")}}
+function exportJson(){var b=new Blob([JSON.stringify({cfg:S.cfg,log:S.log},null,1)],{type:"application/json"}),a=h("a",{href:URL.createObjectURL(b),download:"uy-bulo-"+today()+".json"});document.body.appendChild(a);a.click();a.remove()}
+function importJson(){var i=h("input",{type:"file",accept:".json"});i.onchange=function(){var f=i.files[0];if(!f)return;f.text().then(function(t){var o=JSON.parse(t);if(!o.log)throw 0;Object.keys(o.log).forEach(function(mid){S.log[mid]=S.log[mid]||{};Object.keys(o.log[mid]).forEach(function(d){var c=S.log[mid][d],n=o.log[mid][d];if(!c||c.ts<n.ts)S.log[mid][d]=n})});if(o.cfg&&o.cfg.members)S.cfg.members=o.cfg.members;save();toast("Калыбына келтирилди");route()}).catch(function(){toast("Файл туура эмес")})};i.click()}
+
+function route(){if(!S.ok)return gate();if(!S.me||!mem(S.me))return pickMember();if(!$("#m"))shell();var hh=location.hash||"#/";
+ if(hh.indexOf("#/day")===0){var id=hh.split("/")[2];day(id)}else if(hh==="#/rep")rep();else if(hh==="#/set")settings();else{curDay=null;home()}window.scrollTo(0,0)}
+function start(){root.innerHTML="";route();pull()}
+function syncLink(){var mm=location.hash.match(/^#sync=(.+)$/);if(!mm)return false;try{var o=JSON.parse(decodeURIComponent(escape(atob(mm[1]))));S.cfg.sync=o;save();toast("☁️ Синхрон туташты")}catch(e){}history.replaceState(null,"",location.pathname);return true}
+window.addEventListener("hashchange",function(){if(syncLink()){route();pull();return}if(location.hash.indexOf("#/day")!==0)curDay=null;route()});
+document.addEventListener("visibilitychange",function(){if(!document.hidden)pull()});
+syncLink();
+start();
+})();
+</script>
+</body></html>

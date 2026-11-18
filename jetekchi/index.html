@@ -24,7 +24,7 @@ button.b.s{background:#26382e;color:var(--tx)}button.b.d{background:#4a2020;colo
 .num{font-weight:700;color:var(--g)}
 details summary{cursor:pointer;padding:4px 0}
 #toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#000c;color:#fff;padding:9px 16px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:9;font-size:.85rem}#toast.on{opacity:1}
-@media print{header,nav,#toast,details,button,fieldset{display:none!important}body{background:#fff;color:#000}.card{border:1px solid #999;background:#fff}}</style></head><body>
+@media print{.ekgrid{display:grid;grid-template-columns:1fr 1fr;gap:0}.card.ek{border:1px dashed #666!important;border-radius:0;margin:0;break-inside:avoid;padding:10px 14px}header,nav,#toast,details,button,fieldset{display:none!important}body{background:#fff;color:#000}.card{border:1px solid #999;background:#fff}}</style></head><body>
 <header><a href="../" aria-label="Башкы бет">‹</a><h1 id="ttl">Класс жетекчи<small id="sub"></small></h1><button class="b s" id="cfg">⚙</button></header>
 <main id="app"></main>
 <nav id="nav"></nav><div id="toast"></div>
@@ -47,11 +47,11 @@ function waLink(phone,text){var d=(phone||'').replace(/\D/g,'');if(!d)return '';
 function copy(t){if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){toast('Көчүрүлдү')},function(){toast('Көчүрүлгөн жок')});else toast('Көчүрүү мүмкүн эмес')}
 function byName(a,b){return a.name.localeCompare(b.name,'ky')}
 var tab='st',app=$('#app');
-var TABS=[['st','👥','Окуучулар'],['at','✅','Катышуу'],['ms','💬','Билдирүү'],['mt','📝','Жыйын'],['iq','📊','IQA'],['bk','💾','Резерв']];
+var TABS=[['st','👥','Окуучулар'],['at','✅','Катышуу'],['ms','💬','Билдирүү'],['mt','📝','Жыйын'],['iq','📊','IQA'],['ek','🔑','Логин'],['bk','💾','Резерв']];
 var nav=$('#nav');TABS.forEach(function(t){var b=el('button');b.innerHTML='<b>'+t[1]+'</b>'+t[2];b.dataset.t=t[0];b.onclick=function(){tab=t[0];draw()};nav.append(b)});
 function draw(){[].forEach.call(nav.children,function(b){b.classList.toggle('on',b.dataset.t===tab)});
  $('#ttl').firstChild.nodeValue=D.cls+' класс жетекчиси';$('#sub').textContent=D.year+' · '+D.students.length+' окуучу';app.innerHTML='';
- ({st:vSt,at:vAt,ms:vMs,mt:vMt,iq:vIq,bk:vBk})[tab]()}
+ ({st:vSt,at:vAt,ms:vMs,mt:vMt,iq:vIq,ek:vEk,bk:vBk})[tab]()}
 $('#cfg').onclick=function(){var c=prompt('Класстын аты:',D.cls);if(c==null)return;var y=prompt('Окуу жылы:',D.year);D.cls=c.trim()||D.cls;if(y!=null)D.year=y.trim()||D.year;save();draw()};
 
 /* ---------- Окуучулар ---------- */
@@ -204,6 +204,36 @@ function vIq(){
  io.append(im,ex,dl,el('br'),pr);app.append(io)}
 
 /* ---------- Резерв ---------- */
+
+/* ---------- Э-Күндөлүк логиндери (шифрленген) ---------- */
+var EK=null;
+function vEk(){
+ var hd=el('div','card');hd.innerHTML='<b>🔑 Э-Күндөлүк логиндери</b>';
+ hd.append(el('div','mut','kundoluk.edu.gov.kg · Логин = ПИН (толук) · Пароль = +ПИНдин акыркы 5 цифрасы+'));
+ hd.append(el('div','mut','Тизме сайтта шифрленген. Ачуу үчүн сырсөз керек; ачылган тизме эч жерде сакталбайт.'));
+ var r=el('div','row');r.style.marginTop='8px';
+ var ld=el('button','b'+(EK?' s':''),EK?'🔒 Жабуу':'🔓 Тизмени ачуу');
+ ld.onclick=function(){if(EK){EK=null;draw();return}var pw=prompt('Сырсөз');if(!pw)return;
+  fetch('ekun-8a.enc.json',{cache:'no-store'}).then(function(x){return x.json()}).then(function(o){
+   var b=function(x){return Uint8Array.from(atob(x),function(c){return c.charCodeAt(0)})};
+   return crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']).then(function(k){
+    return crypto.subtle.deriveKey({name:'PBKDF2',salt:b(o.salt),iterations:200000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['decrypt'])}).then(function(k){
+    return crypto.subtle.decrypt({name:'AES-GCM',iv:b(o.iv)},k,b(o.ct))})}).then(function(buf){
+   EK=JSON.parse(new TextDecoder().decode(buf));draw();toast(EK.rows.length+' окуучу ачылды')
+  }).catch(function(){toast('Сырсөз туура эмес же файл табылган жок')})};
+ r.append(ld);
+ if(EK){var pr=el('button','b','🖨 Басып чыгаруу');pr.onclick=function(){window.print()};r.append(pr)}
+ hd.append(r);app.append(hd);
+ if(!EK)return;
+ var g=el('div');g.className='ekgrid';
+ EK.rows.forEach(function(s,i){var pw='+'+s.pin.slice(-5)+'+',c=el('div','card ek');
+  c.innerHTML='<div class="mut" style="font-size:.7rem">'+(EK.cls||D.cls)+' класс · Э-Күндөлүк · kundoluk.edu.gov.kg</div>';
+  c.append(el('b',null,(i+1)+'. '+s.name));
+  [['Логин (ПИН)',s.pin],['Пароль',pw]].forEach(function(x){var l=el('div','row');l.style.alignItems='center';l.style.marginTop='4px';
+   var t=el('div','grow');t.innerHTML='<span class="mut">'+x[0]+':</span> <b style="font-size:1.05rem;letter-spacing:.5px">'+x[1]+'</b>';
+   var cb=el('button','b s','⧉');cb.title='Көчүрүү';cb.onclick=function(){copy(x[1])};l.append(t,cb);c.append(l)});
+  g.append(c)});
+ app.append(g)}
 function vBk(){
  var c=el('div','card');c.append(el('b',null,'🔒 Купуялык'),el('p','mut','Бардык маалымат (окуучулар, телефон, катышуу) ушул телефондун/компьютердин браузеринде гана сакталат. Сайтка же интернетке жөнөтүлбөйт. Ошондуктан браузердин берилиштерин тазаласаңыз же телефонду алмаштырсаңыз, жоголот. Төмөнкү баскыч менен резерв алып коюңуз.'));app.append(c);
  var e=el('button','b','💾 Резервди жүктөп алуу (JSON)');e.onclick=function(){var bl=new Blob([JSON.stringify(D,null,1)],{type:'application/json'}),u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download='sinif-rezerv-'+ymd(new Date())+'.json';document.body.append(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},3000)};app.append(e);

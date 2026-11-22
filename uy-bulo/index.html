@@ -183,8 +183,8 @@ function setSync(t){lastSync=t;var e=$(".sync");if(e)e.textContent=(S.cfg.sync&&
 
 /* ===== ичине кирип аткаруу: дуа, зикирматик, Куран ===== */
 function act(m,id){var A=window.UBACT||{};return (A[m.role]||{})[id]||null}
-function closeOv(){var o=$(".ov");if(o)o.remove();var f=$(".ovf");if(f)f.remove();document.body.style.overflow=""}
-function ov(title,foot){closeOv();document.body.style.overflow="hidden";var b=h("div",{class:"ovb"}),o=h("div",{class:"ov"},[h("div",{class:"ovh"},[h("b",null,[title]),h("button",{onclick:closeOv},["✕ Жабуу"])]),b]);document.body.appendChild(o);if(foot)document.body.appendChild(h("div",{class:"ovf"},foot));return b}
+function closeOv(re){var had=false;document.querySelectorAll(".ov,.ovf").forEach(function(x){x.remove();had=true});document.body.style.overflow="";if(had&&re!==false&&typeof route==="function"&&S.ok&&S.me)setTimeout(route,0)}
+function ov(title,foot){closeOv(false);document.body.style.overflow="hidden";var b=h("div",{class:"ovb"}),o=h("div",{class:"ov"},[h("div",{class:"ovh"},[h("b",null,[title]),h("button",{onclick:closeOv},["✕ Жабуу"])]),b]);document.body.appendChild(o);if(foot)document.body.appendChild(h("div",{class:"ovf"},foot));return b}
 function vib(p){try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
 function entry(x,onAll){var c=h("div",{class:"card"},[x.title?h("h3",null,[x.title]):null,x.ar?h("div",{class:"ar"},[x.ar]):null,x.tr&&x.tr!==x.title?h("div",{class:"trn"},[x.tr]):null,x.kg?h("div",null,[x.kg]):null,x.src?h("div",{class:"src"},["📚 "+x.src]):null,x.virtue?h("div",{class:"vir"},["✨ "+x.virtue]):null]);
  var n=x.n||1,k=0,b=h("button",null,[n>1?"0 / "+n:"Окудум"]),w=h("div",{class:"cnt"},[b]);
@@ -242,6 +242,7 @@ function shell(){root.innerHTML="";var me=mem(S.me);
 function nav(hh){document.querySelectorAll("nav.bn a").forEach(function(a){a.classList.toggle("on",a.dataset.h===hh)})}
 
 function home(){var m=$("#m");nav("#/");m.innerHTML="";var t=today();
+ if(!(S.cfg.sync&&S.cfg.sync.url))m.appendChild(h("div",{class:"card",style:"border-color:#e0a03a;background:#fff7e6"},[h("b",null,["⚠️ Бул телефон Google Sheet'ке туташкан эмес"]),h("p",{class:"mut",style:"margin:4px 0 0"},["Белгилер ушул телефондо гана сакталат, үй-бүлө көрбөйт. Атаңыз жөнөткөн узун шилтемени ушул телефондо бир жолу ачыңыз."])]));
  m.appendChild(h("h2",null,["Бүгүн · "+nice(t)]));
  var grid=h("div",{class:"mem"});
  S.cfg.members.forEach(function(x){var p=pct(x,t),tot=total(x),L=level(tot),st=streak(x);
@@ -269,8 +270,8 @@ function day(mid){var m=$("#m");nav("#/day");m.innerHTML="";var me=mem(S.me),who
  if(who.role==="child"){var g=h("div",{class:"kid"});items(who).forEach(function(it){var on=!!rec.v[it.id];g.appendChild(h("div",{class:"kt"+(on?" on":""),onclick:function(){if(act(who,it.id)&&!on){openAct(who,it,rec,set,can);return}if(!can)return;set(it.id,on?0:1);if(!on)toast("Барекелди! ⭐")}},[h("span",{class:"e"},[it.e]),it.t]))});m.appendChild(g);return}
  SETS[who.role].forEach(function(grp){var c=h("div",{class:"card grp"},[h("h4",null,[grp.g])]);
   grp.items.forEach(function(it){var v=rec.v[it.id]||0,ctl;
-   if(it.k==="c")ctl=h("button",{class:"chk"+(v?" on":""),onclick:function(){if(can)set(it.id,v?0:1)}},[v?"✓":""]);
-   else ctl=h("div",{class:"num"},[h("button",{onclick:function(){if(can&&v>0)set(it.id,v-1)}},["−"]),h("span",null,[String(v)]),h("button",{onclick:function(){if(can)set(it.id,v+1)}},["+"])]);
+   if(it.k==="c")ctl=h("button",{class:"chk"+(v?" on":""),"aria-label":it.t,onclick:function(){if(!can){toast("Бул барагты өзгөртө албайсыз");return}set(it.id,v?0:1);if(!v)toast("✓ Белгиленди")}},[v?"✓":""]);
+   else ctl=h("div",{class:"num"},[h("button",{onclick:function(){if(!can){toast("Бул барагты өзгөртө албайсыз");return}if(v>0)set(it.id,v-1)}},["−"]),h("span",null,[String(v)]),h("button",{onclick:function(){if(!can){toast("Бул барагты өзгөртө албайсыз");return}set(it.id,v+1)}},["+"])]);
    var hasA=!!act(who,it.id);c.appendChild(h("div",{class:"it"},[h("span",{class:"e"},[it.e]),h("div",{class:"n",style:hasA?"cursor:pointer":"",onclick:function(){if(hasA)openAct(who,it,rec,set,can)}},[it.t,it.s?h("small",null,[it.s+(it.max?" (макс. "+it.max+" упайга чейин)":"")]):null]),hasA?h("button",{class:"opn",onclick:function(){openAct(who,it,rec,set,can)}},[it.k==="n"&&it.id!=="quran"?"📿 Ачуу":"📖 Ачуу"]):null,ctl]))});
   m.appendChild(c)});
  var all=items(who).filter(function(i){return i.k==="c"}).every(function(i){return rec.v[i.id]});if(all)m.appendChild(h("div",{class:"card",style:"text-align:center"},["🎉 Бүгүнкү бардык белгилер толук! Машаллах!"]));
@@ -324,7 +325,7 @@ function shareLink(){var s=S.cfg.sync||{};if(!s.url){toast("Адегенде URL
 function exportJson(){var b=new Blob([JSON.stringify({cfg:S.cfg,log:S.log},null,1)],{type:"application/json"}),a=h("a",{href:URL.createObjectURL(b),download:"uy-bulo-"+today()+".json"});document.body.appendChild(a);a.click();a.remove()}
 function importJson(){var i=h("input",{type:"file",accept:".json"});i.onchange=function(){var f=i.files[0];if(!f)return;f.text().then(function(t){var o=JSON.parse(t);if(!o.log)throw 0;Object.keys(o.log).forEach(function(mid){S.log[mid]=S.log[mid]||{};Object.keys(o.log[mid]).forEach(function(d){var c=S.log[mid][d],n=o.log[mid][d];if(!c||c.ts<n.ts)S.log[mid][d]=n})});if(o.cfg&&o.cfg.members)S.cfg.members=o.cfg.members;save();toast("Калыбына келтирилди");route()}).catch(function(){toast("Файл туура эмес")})};i.click()}
 
-function route(){closeOv();if(!S.ok)return gate();if(!S.me||!mem(S.me))return pickMember();if(!$("#m"))shell();var hh=location.hash||"#/";
+function route(){closeOv(false);if(!S.ok)return gate();if(!S.me||!mem(S.me))return pickMember();if(!$("#m"))shell();var hh=location.hash||"#/";
  if(hh.indexOf("#/day")===0){var id=hh.split("/")[2];day(id)}else if(hh==="#/rep")rep();else if(hh==="#/set")settings();else{curDay=null;home()}window.scrollTo(0,0)}
 function start(){root.innerHTML="";route();pull()}
 function syncLink(){var mm=location.hash.match(/^#sync=(.+)$/);if(!mm)return false;try{var o=JSON.parse(decodeURIComponent(escape(atob(mm[1]))));S.cfg.sync=o;save();toast("☁️ Синхрон туташты")}catch(e){}history.replaceState(null,"",location.pathname);return true}

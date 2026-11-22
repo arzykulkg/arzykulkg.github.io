@@ -263,15 +263,15 @@ function day(mid){var m=$("#m");nav("#/day");m.innerHTML="";var me=mem(S.me),who
  var dn=h("div",{class:"dnav"},[h("button",{onclick:function(){curDay=addD(d,-1);day(who.id)}},["‹"]),h("b",null,[nice(d)]),h("button",{onclick:function(){if(d<today()){curDay=addD(d,1);day(who.id)}}},["›"])]);
  m.appendChild(h("div",{class:"row",style:"justify-content:space-between"},[h("h2",null,[who.emoji+" "+who.name]),h("span",{class:"lv"},[pct(who,d)+"% · "+pts(who,d)+" упай"])]));
  m.appendChild(dn);
- if(!can)m.appendChild(h("p",{class:"mut"},["Бул "+who.name+"дин барагы — көрүү гана."]));
+ if(!can)m.appendChild(h("div",{class:"card",style:"border-color:#e0a03a;background:#fff7e6"},[h("b",null,["👁 Бул "+who.name+"дин барагы — көрүү гана"]),h("p",{class:"mut",style:"margin:4px 0 8px"},["Азыр бул телефондо «"+me.name+"» болуп кирилген."]),h("button",{class:"btn s",onclick:function(){S.me=null;save();pickMember()}},["🔄 "+who.name+" болуп кирүү"])]));
  if(d<addD(today(),-7)&&!me.admin)can=false;
  var rec=JSON.parse(JSON.stringify(dayRec(who.id,d)));
  function set(id,val,keep){rec.v[id]=val;rec.ts=Date.now();S.log[who.id]=S.log[who.id]||{};S.log[who.id][d]=rec;save();mark(who.id,d);if(!keep||!$(".ov"))day(who.id);else{clearTimeout(set.t);set.t=setTimeout(function(){if(!$(".ov"))day(who.id)},300)}}
  if(who.role==="child"){var g=h("div",{class:"kid"});items(who).forEach(function(it){var on=!!rec.v[it.id];g.appendChild(h("div",{class:"kt"+(on?" on":""),onclick:function(){if(act(who,it.id)&&!on){openAct(who,it,rec,set,can);return}if(!can)return;set(it.id,on?0:1);if(!on)toast("Барекелди! ⭐")}},[h("span",{class:"e"},[it.e]),it.t]))});m.appendChild(g);return}
  SETS[who.role].forEach(function(grp){var c=h("div",{class:"card grp"},[h("h4",null,[grp.g])]);
   grp.items.forEach(function(it){var v=rec.v[it.id]||0,ctl;
-   if(it.k==="c")ctl=h("button",{class:"chk"+(v?" on":""),"aria-label":it.t,onclick:function(){if(!can){toast("Бул барагты өзгөртө албайсыз");return}set(it.id,v?0:1);if(!v)toast("✓ Белгиленди")}},[v?"✓":""]);
-   else ctl=h("div",{class:"num"},[h("button",{onclick:function(){if(!can){toast("Бул барагты өзгөртө албайсыз");return}if(v>0)set(it.id,v-1)}},["−"]),h("span",null,[String(v)]),h("button",{onclick:function(){if(!can){toast("Бул барагты өзгөртө албайсыз");return}set(it.id,v+1)}},["+"])]);
+   if(it.k==="c")ctl=h("button",{class:"chk"+(v?" on":""),"aria-label":it.t,onclick:function(){if(!can){toast("Сиз «"+me.name+"» болуп кирдиңиз. Жогорудагы атты басып, өзүңүздү тандаңыз");return}set(it.id,v?0:1);if(!v)toast("✓ Белгиленди")}},[v?"✓":""]);
+   else ctl=h("div",{class:"num"},[h("button",{onclick:function(){if(!can){toast("Сиз «"+me.name+"» болуп кирдиңиз. Жогорудагы атты басып, өзүңүздү тандаңыз");return}if(v>0)set(it.id,v-1)}},["−"]),h("span",null,[String(v)]),h("button",{onclick:function(){if(!can){toast("Сиз «"+me.name+"» болуп кирдиңиз. Жогорудагы атты басып, өзүңүздү тандаңыз");return}set(it.id,v+1)}},["+"])]);
    var hasA=!!act(who,it.id);c.appendChild(h("div",{class:"it"},[h("span",{class:"e"},[it.e]),h("div",{class:"n",style:hasA?"cursor:pointer":"",onclick:function(){if(hasA)openAct(who,it,rec,set,can)}},[it.t,it.s?h("small",null,[it.s+(it.max?" (макс. "+it.max+" упайга чейин)":"")]):null]),hasA?h("button",{class:"opn",onclick:function(){openAct(who,it,rec,set,can)}},[it.k==="n"&&it.id!=="quran"?"📿 Ачуу":"📖 Ачуу"]):null,ctl]))});
   m.appendChild(c)});
  var all=items(who).filter(function(i){return i.k==="c"}).every(function(i){return rec.v[i.id]});if(all)m.appendChild(h("div",{class:"card",style:"text-align:center"},["🎉 Бүгүнкү бардык белгилер толук! Машаллах!"]));
